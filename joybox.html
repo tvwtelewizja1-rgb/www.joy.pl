@@ -680,49 +680,55 @@
             { num: 160, name: "Co w Telewizji?", type: "VOD", isJoy: false }
         ];
 
-        // Pełna, ścisła rozpiska ramówki ułożona chronologicznie
+        // Pełna, oficjalna ramówka z przejście od 06:00 rano do 05:59 rano dnia następnego
         const schedule = [
-            { time: "00:00", title: "Seksmisja", desc: "Seksmisja", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "01:40", title: "Miś Uszatek", desc: "Miś Uszatek", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "06:00", title: "Poranek z uśmiechem", desc: "Poranek z uśmiechem — nowy program śniadaniowy", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
-            { time: "06:30", title: "Muminki", desc: "Muminki", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "06:55", title: "Muminki", desc: "Muminki", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "07:20", title: "Mały odkrywca", desc: "Mały odkrywca — nowy program edukacyjny", zap: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900&auto=format&fit=crop&q=80" },
-            { time: "07:40", title: "Kuchnia na start", desc: "Kuchnia na start — nowy program kulinarny", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
-            { time: "08:10", title: "Teleranek Jaruzelskiego", desc: "Teleranek Jaruzelskiego", zap: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
-            { time: "08:20", title: "Muzyczna pobudka", desc: "Muzyczna pobudka — teledyski i hity", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
-            { time: "09:00", title: "Hity XX wieku", desc: "Hity XX wieku", zap: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=900&auto=format&fit=crop&q=80" },
-            { time: "09:25", title: "Podróże bez biletu", desc: "Podróże bez biletu — magazyn podróżniczy", zap: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" },
-            { time: "10:00", title: "Czterdziestolatek", desc: "Czterdziestolatek", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
-            { time: "10:50", title: "Stare, ale jare", desc: "Stare, ale jare", zap: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&auto=format&fit=crop&q=80" },
-            { time: "11:10", title: "Świat zwierząt", desc: "Świat zwierząt — film przyrodniczy", zap: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=900&auto=format&fit=crop&q=80" },
-            { time: "11:40", title: "Dziecięce Hity", desc: "Dziecięce Hity", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
-            { time: "12:00", title: "Muminki", desc: "Muminki", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "12:25", title: "Dziecięce Hity", desc: "Dziecięce Hity", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
-            { time: "12:45", title: "Bajkowa kraina", desc: "Bajkowa kraina — nowe pasmo animacji", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "13:10", title: "Prawda czy Fałsz", desc: "Prawda czy Fałsz", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
-            { time: "13:45", title: "Rodzinka.pl", desc: "Rodzinka.pl — 2 odcinki", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "14:35", title: "Sami Swoi", desc: "Sami Swoi", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:00", title: "Informacje", desc: "Informacje", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:15", title: "Moda na sukces", desc: "Moda na sukces", zap: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:45", title: "Plebania", desc: "Plebania", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
-            { time: "16:30", title: "M jak Miłość", desc: "M jak Miłość", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
-            { time: "17:20", title: "Trudne Sprawy", desc: "Trudne Sprawy", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
-            { time: "18:10", title: "Ukryta prawda", desc: "Ukryta prawda", zap: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&auto=format&fit=crop&q=80" },
-            { time: "19:00", title: "Wydarzenia dnia", desc: "Wydarzenia dnia — główny serwis informacyjny", zap: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
-            { time: "19:25", title: "Trudne Sprawy", desc: "Trudne Sprawy", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:15", title: "Kiler", desc: "Kiler", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
-            { time: "22:00", title: "Rejs", desc: "Rejs", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "23:15", title: "997", desc: "997", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" }
+            { time: "06:00", title: "Poranek z uśmiechem — nowy program śniadaniowy", desc: "Poranek z uśmiechem na dobry początek dnia.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:30", title: "Muminki", desc: "Kultowe przygody w Dolinie Muminków.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:55", title: "Muminki", desc: "Kultowe przygody w Dolinie Muminków.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:20", title: "Mały odkrywca — nowy program edukacyjny", desc: "Program edukacyjny dla dzieci.", zap: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:40", title: "Kuchnia na start — nowy program kulinarny", desc: "Pyszne poranne przepisy.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:10", title: "Teleranek Jaruzelskiego", desc: "Pasmo publicystyczne.", zap: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:20", title: "Muzyczna pobudka — teledyski i hity", desc: "Najlepsze teledyski na poranek.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:00", title: "Hity XX wieku", desc: "Muzyczny powrót do ubiegłego wieku.", zap: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:25", title: "Podróże bez biletu — magazyn podróżniczy", desc: "Magazyn pełen wypraw.", zap: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" },
+            { time: "10:00", title: "Czterdziestolatek", desc: "Kultowy polski serial.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
+            { time: "10:50", title: "Stare, ale jare", desc: "Archiwalne materiały rozrywkowe.", zap: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:10", title: "Świat zwierząt — film przyrodniczy", desc: "Niezwykła przyroda w obiektywie.", zap: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:40", title: "Dziecięce Hity", desc: "Blok z bajkami.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:00", title: "Muminki", desc: "Dolina Muminków zaprasza.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:25", title: "Dziecięce Hity", desc: "Ulubione utwory i animacje.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:45", title: "Bajkowa kraina — nowe pasmo animacji", desc: "Nowe kreskówki.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:10", title: "Prawda czy Fałsz", desc: "Teleturniej sprawdzający wiedzę.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:45", title: "Rodzinka.pl — 2 odcinki", desc: "Serial komediowy.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "14:35", title: "Sami Swoi", desc: "Kultowy film komediowy.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:00", title: "Informacje", desc: "Serwis informacyjny.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:15", title: "Moda na sukces", desc: "Słynny serial obyczajowy.", zap: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:45", title: "Plebania", desc: "Polski serial obyczajowy.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
+            { time: "16:30", title: "M jak Miłość", desc: "Obyczajowy serial TVP.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:20", title: "Trudne Sprawy", desc: "Docu-crime i perypetie życiowe.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:10", title: "Ukryta prawda", desc: "Ludzkie historie i tajemnice.", zap: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:00", title: "Wydarzenia dnia — główny serwis informacyjny", desc: "Najważniejsze wiadomości.", zap: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:25", title: "Trudne Sprawy", desc: "Wieczorny odcinek serialu.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:15", title: "Kiler", desc: "Superkomedia Juliusza Machulskiego.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:00", title: "Rejs", desc: "Klasyka polskiego kina.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "23:15", title: "997", desc: "Magazyn kryminalny.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
+            { time: "00:00", title: "Seksmisja", desc: "Kina nocne — kultowa komedia.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:40", title: "Miś Uszatek", desc: "Nocne pasmo dla najwytrwalszych.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" }
         ];
 
-        // Przeliczenie stringa "HH:MM" na liczbę minut od północy
-        function timeToMinutes(t) {
-            const parts = t.split(":");
-            return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+        // Przelicza czas "HH:MM" na minuty w dociągnięciu do doby rozpoczynającej się o 06:00
+        function getTvDayMinutes(timeStr) {
+            const parts = timeStr.split(":");
+            let h = parseInt(parts[0], 10);
+            let m = parseInt(parts[1], 10);
+            let total = h * 60 + m;
+            // Doba telewizyjna startuje o 06:00 (360 minut od północy)
+            if (total < 360) {
+                total += 1440; // Przesunięcie po północy (00:00 do 05:59 staje się końcówką doby)
+            }
+            return total;
         }
 
-        // Pobieranie aktualnego czasu w strefie czassowej Warszawa
         function getWarsawTimeString() {
             const now = new Date();
             const formatter = new Intl.DateTimeFormat('pl-PL', {
@@ -735,14 +741,14 @@
         }
 
         function getCurrentJoyProgram() {
-            const timeStr = getWarsawTimeString();
-            const currentMins = timeToMinutes(timeStr);
+            const nowTimeStr = getWarsawTimeString();
+            const currentTvMins = getTvDayMinutes(nowTimeStr);
 
-            let activeProg = schedule[schedule.length - 1];
+            let activeProg = schedule[0];
 
             for (let i = 0; i < schedule.length; i++) {
-                const progMins = timeToMinutes(schedule[i].time);
-                if (currentMins >= progMins) {
+                const progTvMins = getTvDayMinutes(schedule[i].time);
+                if (currentTvMins >= progTvMins) {
                     activeProg = schedule[i];
                 } else {
                     break;
