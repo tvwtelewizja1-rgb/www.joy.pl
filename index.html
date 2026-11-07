@@ -243,7 +243,7 @@
         .section-title { font-size: 2rem; margin-bottom: 2rem; font-weight: 700; display: flex; align-items: center; gap: 1rem; }
         .section-title i { color: #ffeb3b; }
 
-        /* Widget Pogodowy IMGW z Własną Mapą Telewizyjną */
+        /* Widget Pogodowy IMGW z Poprawioną Mapą Geograficzną Polski */
         .weather-section {
             margin-bottom: 4rem;
         }
@@ -372,12 +372,12 @@
             color: #ffeb3b;
         }
 
-        /* Generowana Telewizyjna Mapa IMGW-PIB */
+        /* Poprawiona Telewizyjna Mapa IMGW z Konturem Polski */
         .weather-map-container {
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
-            background: rgba(10, 15, 30, 0.7);
+            background: rgba(10, 15, 30, 0.85);
             padding: 1rem;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -391,33 +391,43 @@
         }
         .tv-map-screen {
             position: relative;
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            background: radial-gradient(circle at center, #1b2a4a 0%, #0b1329 100%);
             border-radius: 8px;
-            height: 250px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 270px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
+        
+        /* Wektorowy obrys terytorium Polski w tle mapy */
+        .poland-outline {
+            position: absolute;
+            top: 15%;
+            left: 12%;
+            width: 76%;
+            height: 72%;
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
         .map-station-node {
             position: absolute;
-            background: rgba(13, 71, 161, 0.9);
+            background: rgba(13, 71, 161, 0.95);
             border: 2px solid #ffeb3b;
             color: white;
-            padding: 3px 8px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 2px 7px;
+            border-radius: 16px;
+            font-size: 0.7rem;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.6);
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
+            transition: transform 0.2s, background-color 0.2s, z-index 0.2s;
+            transform: translate(-50%, -50%);
         }
         .map-station-node:hover {
-            transform: scale(1.15);
+            transform: translate(-50%, -50%) scale(1.15);
             background: #ffeb3b;
             color: #0d47a1;
-            z-index: 10;
+            z-index: 20;
         }
         .map-legend {
             display: flex;
@@ -594,7 +604,7 @@
             </div>
         </div>
 
-        <!-- Serwis Pogodowy IMGW-PIB z Autorską Mapą Telewizyjną -->
+        <!-- Serwis Pogodowy IMGW-PIB z Geograficzną Mapą Polski -->
         <section class="weather-section">
             <h2 class="section-title"><i class="fa-solid fa-cloud-sun"></i> Serwis Pogodowy IMGW-PIB dla Województw</h2>
             <div class="weather-box">
@@ -655,28 +665,33 @@
                         </div>
                     </div>
 
-                    <!-- Generowana Telewizyjna Mapa IMGW (Własne bąbelki danych) -->
+                    <!-- Poprawiona Mapa TV z Konturem Polski i poprawnymi współrzędnymi miast -->
                     <div class="weather-map-container">
                         <div class="tv-map-header">
                             <span><i class="fa-solid fa-map-location-dot"></i> Synoptyczna Mapa Polski IMGW</span>
                             <span style="font-size: 0.75rem; color: #90caf9;">Wizualizacja TV Joy</span>
                         </div>
                         <div class="tv-map-screen">
-                            <!-- Interaktywne stacje IMGW rozmieszczone na mapie Polski w CSS -->
-                            <div class="map-station-node" style="top: 22%; left: 75%;" onclick="changeWeather('podlaskie', document.querySelectorAll('.weather-tab')[13])">Białystok 3°C</div>
-                            <div class="map-station-node" style="top: 18%; left: 62%;" onclick="changeWeather('elk', document.querySelectorAll('.weather-tab')[0])">Ełk 4°C</div>
-                            <div class="map-station-node" style="top: 15%; left: 32%;" onclick="changeWeather('pomorskie', document.querySelectorAll('.weather-tab')[7])">Gdańsk 8°C</div>
-                            <div class="map-station-node" style="top: 48%; left: 78%;" onclick="changeWeather('lubelskie', document.querySelectorAll('.weather-tab')[11])">Lublin 4°C</div>
-                            <div class="map-station-node" style="top: 55%; left: 38%;" onclick="changeWeather('lodzkie', document.querySelectorAll('.weather-tab')[9])">Łódź 6°C</div>
-                            <div class="map-station-node" style="top: 72%; left: 52%;" onclick="changeWeather('malopolskie', document.querySelectorAll('.weather-tab')[3])">Kraków 5°C</div>
-                            <div class="map-station-node" style="top: 40%; left: 58%;" onclick="changeWeather('mazowieckie', document.querySelectorAll('.weather-tab')[2])">Warszawa 6°C</div>
-                            <div class="map-station-node" style="top: 45%; left: 22%;" onclick="changeWeather('wielkopolskie', document.querySelectorAll('.weather-tab')[6])">Poznań 7°C</div>
-                            <div class="map-station-node" style="top: 25%; left: 18%;" onclick="changeWeather('zachodniopomorskie', document.querySelectorAll('.weather-tab')[8])">Szczecin 9°C</div>
-                            <div class="map-station-node" style="top: 60%; left: 24%;" onclick="changeWeather('dolnoslaskie', document.querySelectorAll('.weather-tab')[5])">Wrocław 8°C</div>
+                            <!-- Wektorowy obrys terytorium Polski -->
+                            <svg class="poland-outline" viewBox="0 0 500 450" fill="none" stroke="rgba(255, 255, 255, 0.4)" stroke-width="3" stroke-dasharray="6,6">
+                                <path d="M120,40 C180,30 220,15 280,25 C340,35 390,70 410,120 C440,150 480,210 440,260 C400,310 430,370 380,410 C330,450 260,430 220,400 C180,410 130,440 90,410 C50,380 70,330 40,300 C10,270 30,210 50,170 C70,130 90,80 120,40 Z"></path>
+                            </svg>
+
+                            <!-- Stacje IMGW rozmieszczone poprawnie pod kątem geograficznym -->
+                            <div class="map-station-node" style="top: 22%; left: 22%;" onclick="changeWeather('zachodniopomorskie', document.querySelectorAll('.weather-tab')[8])">Szczecin 9°C</div>
+                            <div class="map-station-node" style="top: 16%; left: 42%;" onclick="changeWeather('pomorskie', document.querySelectorAll('.weather-tab')[7])">Gdańsk 8°C</div>
+                            <div class="map-station-node" style="top: 32%; left: 74%;" onclick="changeWeather('elk', document.querySelectorAll('.weather-tab')[0])">Ełk 4°C</div>
+                            <div class="map-station-node" style="top: 36%; left: 85%;" onclick="changeWeather('podlaskie', document.querySelectorAll('.weather-tab')[13])">Białystok 3°C</div>
+                            <div class="map-station-node" style="top: 42%; left: 30%;" onclick="changeWeather('wielkopolskie', document.querySelectorAll('.weather-tab')[6])">Poznań 7°C</div>
+                            <div class="map-station-node" style="top: 50%; left: 52%;" onclick="changeWeather('mazowieckie', document.querySelectorAll('.weather-tab')[2])">Warszawa 6°C</div>
+                            <div class="map-station-node" style="top: 56%; left: 44%;" onclick="changeWeather('lodzkie', document.querySelectorAll('.weather-tab')[9])">Łódź 6°C</div>
+                            <div class="map-station-node" style="top: 60%; left: 78%;" onclick="changeWeather('lubelskie', document.querySelectorAll('.weather-tab')[11])">Lublin 4°C</div>
+                            <div class="map-station-node" style="top: 64%; left: 28%;" onclick="changeWeather('dolnoslaskie', document.querySelectorAll('.weather-tab')[5])">Wrocław 8°C</div>
+                            <div class="map-station-node" style="top: 78%; left: 58%;" onclick="changeWeather('malopolskie', document.querySelectorAll('.weather-tab')[3])">Kraków 5°C</div>
                         </div>
                         <div class="map-legend">
                             <span>Kliknij miasto na mapie, aby wczytać dane</span>
-                            <span style="color: #ffeb3b;"><i class="fa-solid fa-circle-dot">* Dane IMGW-PIB</i></span>
+                            <span style="color: #ffeb3b;"><i class="fa-solid fa-circle-dot"></i> Dane IMGW-PIB</span>
                         </div>
                     </div>
                 </div>
