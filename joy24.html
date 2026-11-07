@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --card-bg: rgba(15, 23, 42, 0.88);
+            --card-bg: rgba(15, 23, 42, 0.9);
             --text-color: #ffffff;
             --text-muted: #cbd5e1;
         }
@@ -19,9 +19,9 @@
             font-weight: 700;
         }
         body {
-            /* Pełne tło z nowego czerwonego gradientu */
-            background: url('gradient-bg.jpg') no-repeat center center fixed;
-            background-size: cover;
+            /* Bezpośredni czerwony gradient zakodowany w CSS – zadziała natychmiast! */
+            background: linear-gradient(135deg, #ff0000 0%, #b30000 50%, #660000 100%);
+            background-attachment: fixed;
             color: var(--text-color);
             min-height: 100vh;
             display: flex;
@@ -29,7 +29,7 @@
         }
 
         header {
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.35);
             backdrop-filter: blur(8px);
             padding: 1rem 2rem;
             position: sticky;
@@ -136,7 +136,7 @@
         }
 
         footer { 
-            background-color: rgba(0, 0, 0, 0.3); 
+            background-color: rgba(0, 0, 0, 0.35); 
             backdrop-filter: blur(8px); 
             text-align: center; 
             padding: 2rem; 
