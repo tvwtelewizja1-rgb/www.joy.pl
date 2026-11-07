@@ -153,13 +153,104 @@
             display: flex;
             flex-direction: column;
             gap: 0.3rem;
-            transition: transform 0.2s;
+            transition: transform 0.2s, border-color 0.2s;
         }
-        .channel-card:hover { transform: translateY(-2px); border-color: #ffeb3b; }
+        .channel-card.clickable {
+            cursor: pointer;
+        }
+        .channel-card.clickable:hover {
+            transform: translateY(-3px);
+            border-color: #ffeb3b;
+            background: rgba(255, 235, 59, 0.08);
+        }
         .channel-title { font-size: 1rem; color: #ffeb3b; display: flex; justify-content: space-between; align-items: center; }
         .channel-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: rgba(30,136,229,0.4); color: #90caf9; }
         .channel-status { font-size: 0.8rem; color: #4caf50; display: flex; align-items: center; gap: 0.4rem; }
         .channel-now { font-size: 0.85rem; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 0.3rem 0.5rem; border-radius: 6px; }
+
+        /* Okno odtwarzacza dla kanału Joy */
+        .player-modal {
+            display: none;
+            background: rgba(5, 10, 20, 0.95);
+            border: 2px solid #ffeb3b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            position: relative;
+        }
+        .player-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .player-modal-title {
+            font-size: 1.2rem;
+            color: #ffeb3b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .close-player {
+            background: #b71c1c;
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tv-screen-box {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .tv-screen-content {
+            padding: 1.5rem;
+            z-index: 2;
+        }
+        .tv-screen-content i {
+            font-size: 3.5rem;
+            color: #ffeb3b;
+            margin-bottom: 1rem;
+        }
+        .tv-screen-content h4 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .tv-screen-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .live-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #d32f2f;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
 
         /* Pakiety Joy Box */
         .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 0.8rem; }
@@ -297,20 +388,38 @@
                 </div>
             </div>
 
-            <!-- Panel po zalogowaniu z listą kanałów z synchronizacją ramówki -->
+            <!-- Panel po zalogowaniu z listą kanałów i odtwarzaczem -->
             <div class="user-dashboard" id="dashboard-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
                     <div>
                         <h2>Witaj, <span id="user-display-name" style="color: #ffeb3b;"></span>! 🎉</h2>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane pomyślnie. Oto Twoje kanały JoyBoxGO na żywo:</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane pomyślnie. Kliknij na kanał <strong>100. Joy</strong>, aby uruchomić podgląd programu!</p>
                     </div>
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
                         <i class="fa-solid fa-right-from-bracket"></i> Wyloguj
                     </button>
                 </div>
 
+                <!-- Okno odtwarzacza dla kanału Joy -->
+                <div class="player-modal" id="joy-player-modal">
+                    <div class="player-modal-header">
+                        <div class="player-modal-title">
+                            <i class="fa-solid fa-tv"></i> Odtwarzacz TV Joy (Kanał 100)
+                        </div>
+                        <button class="close-player" onclick="closeJoyPlayer()">&times;</button>
+                    </div>
+                    <div class="tv-screen-box">
+                        <div class="live-badge"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> NA ŻYWO</div>
+                        <div class="tv-screen-content">
+                            <i id="modal-show-icon" class="fa-solid fa-clapperboard"></i>
+                            <h4 id="modal-show-title">Ładowanie programu...</h4>
+                            <p id="modal-show-desc">Trwa transmisja z anteny głównej TV Joy zgodnie z aktualnym harmonogramem.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-satellite-dish" style="color: #ffeb3b;"></i> Stacje Telewizyjne Online</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100 (Joy) pobiera dane bezpośrednio z aktualnej ramówki TV Joy!</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100 (Joy) jest w pełni interaktywny. Kliknij go, aby włączyć transmisję!</p>
 
                 <div class="channels-grid" id="channels-list-container">
                     <!-- Kanały generowane przez JS -->
@@ -569,32 +678,59 @@
             { num: 160, name: "Co w Telewizji?", type: "VOD", isJoy: false }
         ];
 
-        function getSimulatedJoyShow() {
+        // Dokładna synchronizacja z całodobową ramówką TV Joy
+        function getCurrentJoyProgram() {
             const now = new Date();
             const currentMinutes = now.getHours() * 60 + now.getMinutes();
-            if (currentMinutes >= 360 && currentMinutes < 390) return "Poranek z uśmiechem";
-            if (currentMinutes >= 390 && currentMinutes < 440) return "Muminki";
-            if (currentMinutes >= 440 && currentMinutes < 490) return "Mały odkrywca";
-            if (currentMinutes >= 490 && currentMinutes < 540) return "Kuchnia na start";
-            if (currentMinutes >= 540 && currentMinutes < 900) return "Czterdziestolatek";
-            if (currentMinutes >= 900 && currentMinutes < 1020) return "Sami Swoi & Moda na sukces";
-            if (currentMinutes >= 1020 && currentMinutes < 1140) return "Trudne Sprawy & Ukryta prawda";
-            if (currentMinutes >= 1140 && currentMinutes < 1215) return "Wydarzenia dnia";
-            if (currentMinutes >= 1215) return "Kiler / Rejs";
-            return "Miś Uszatek (Noc)";
+
+            if (currentMinutes >= 360 && currentMinutes < 390) return { title: "Poranek z uśmiechem", icon: "fa-mug-hot", desc: "Nowy program śniadaniowy na dobry początek dnia." };
+            if (currentMinutes >= 390 && currentMinutes < 440) return { title: "Muminki", icon: "fa-book-open", desc: "Kultowe przygody w Dolinie Muminków." };
+            if (currentMinutes >= 440 && currentMinutes < 460) return { title: "Mały odkrywca", icon: "fa-graduation-cap", desc: "Program edukacyjny dla dzieci i młodzieży." };
+            if (currentMinutes >= 460 && currentMinutes < 490) return { title: "Kuchnia na start", icon: "fa-utensils", desc: "Kulinarny poranek z prostymi przepisami." };
+            if (currentMinutes >= 490 && currentMinutes < 500) return { title: "Teleranek Jaruzelskiego", icon: "fa-tv", desc: "Historyczne pasmo publicystyczne." };
+            if (currentMinutes >= 500 && currentMinutes < 540) return { title: "Muzyczna pobudka", icon: "fa-music", desc: "Teledyski i energetyczne hity." };
+            if (currentMinutes >= 540 && currentMinutes < 565) return { title: "Hity XX wieku", icon: "fa-compact-disc", desc: "Największe przeboje minionych dekad." };
+            if (currentMinutes >= 565 && currentMinutes < 600) return { title: "Podróże bez biletu", icon: "fa-plane", desc: "Magazyn podróżniczy po najciekawszych zakątkach." };
+            if (currentMinutes >= 600 && currentMinutes < 650) return { title: "Czterdziestolatek", icon: "fa-user-tie", desc: "Kultowy polski serial obyczajowy." };
+            if (currentMinutes >= 650 && currentMinutes < 670) return { title: "Stare, ale jare", icon: "fa-star", desc: "Przegląd archiwalnych perełek telewizyjnych." };
+            if (currentMinutes >= 670 && currentMinutes < 700) return { title: "Świat zwierząt", icon: "fa-paw", desc: "Film przyrodniczy o faunie i florze." };
+            if (currentMinutes >= 700 && currentMinutes < 720) return { title: "Dziecięce Hity", icon: "fa-child", desc: "Ulubione bajki i piosenki dla najmłodszych." };
+            if (currentMinutes >= 720 && currentMinutes < 745) return { title: "Muminki", icon: "fa-book-open", desc: "Popołudniowe pasmo animacji." };
+            if (currentMinutes >= 745 && currentMinutes < 765) return { title: "Dziecięce Hity", icon: "fa-child", desc: "Blok programowy dla dzieci." };
+            if (currentMinutes >= 765 && currentMinutes < 790) return { title: "Bajkowa kraina", icon: "fa-wand-magic-sparkles", desc: "Nowe pasmo animacji i fantastyki." };
+            if (currentMinutes >= 790 && currentMinutes < 825) return { title: "Prawda czy Fałsz", icon: "fa-circle-question", desc: "Teleturniej pełen niespodzianek." };
+            if (currentMinutes >= 825 && currentMinutes < 875) return { title: "Rodzinka.pl", icon: "fa-house", desc: "Codzienne przygody rodzinki Boskich." };
+            if (currentMinutes >= 875 && currentMinutes < 900) return { title: "Sami Swoi", icon: "fa-film", desc: "Klasyka polskiej komedii filmowej." };
+            if (currentMinutes >= 900 && currentMinutes < 915) return { title: "Informacje", icon: "fa-newspaper", desc: "Skrót najważniejszych wiadomości dnia." };
+            if (currentMinutes >= 915 && currentMinutes < 945) return { title: "Moda na sukces", icon: "fa-masks-theater", desc: "Dalsze perypetie bohaterów w Los Angeles." };
+            if (currentMinutes >= 945 && currentMinutes < 990) return { title: "Plebania", icon: "fa-church", desc: "Kultowy serial obyczajowy z Hrubieszowa." };
+            if (currentMinutes >= 990 && currentMinutes < 1040) return { title: "M jak Miłość", icon: "fa-heart", desc: "Rozterki rodzinne w Grabinie." };
+            if (currentMinutes >= 1040 && currentMinutes < 1090) return { title: "Trudne Sprawy", icon: "fa-triangle-exclamation", desc: "Emocjonujące historie z życia wzięte." };
+            if (currentMinutes >= 1090 && currentMinutes < 1140) return { title: "Ukryta prawda", icon: "fa-magnifying-glass", desc: "Dramatyczne zwroty akcji i sekrety." };
+            if (currentMinutes >= 1140 && currentMinutes < 1165) return { title: "Wydarzenia dnia", icon: "fa-globe", desc: "Główny wieczorny serwis informacyjny." };
+            if (currentMinutes >= 1165 && currentMinutes < 1215) return { title: "Trudne Sprawy", icon: "fa-triangle-exclamation", desc: "Wieczorne pasmo powtórkowe." };
+            if (currentMinutes >= 1215 && currentMinutes < 1320) return { title: "Kiler", icon: "fa-clapperboard", desc: "Komedia sensacyjna w reżyserii O. Machulskiego." };
+            if (currentMinutes >= 1320 && currentMinutes < 1395) return { title: "Rejs", icon: "fa-ship", desc: "Kultowy polski film w reżyserii M. Piwowskiego." };
+            if (currentMinutes >= 1395 && currentMinutes < 1440) return { title: "Magazyn 997", icon: "fa-shield-halved", desc: "Archiwalne śledztwa i rekonstrukcje." };
+            if (currentMinutes >= 0 && currentMinutes < 100) return { title: "Seksmisja", icon: "fa-moon", desc: "Kultowa komedia Stanisława Bareji / Juliusza Machulskiego." };
+            return { title: "Miś Uszatek", icon: "fa-bed", desc: "Dobranoc dla najwytrwalszych widzów." };
         }
 
-        function renderChannelsList(currentShowName) {
+        function renderChannelsList() {
             const container = document.getElementById('channels-list-container');
             if(!container) return;
 
+            const currentJoyProg = getCurrentJoyProgram();
+
             let html = '';
             userChannels.forEach(ch => {
-                let nowShowing = ch.isJoy ? currentShowName : "Transmisja ciągła (" + ch.type + ")";
+                let nowShowing = ch.isJoy ? currentJoyProg.title : "Transmisja ciągła (" + ch.type + ")";
                 if(ch.type === "Offline") nowShowing = "Brak sygnału";
                 
+                let clickAttr = ch.isJoy ? `onclick="openJoyPlayer()"` : `onclick="alert('Kanał ${ch.num}. ${ch.name} jest w pełni gotowy do odbioru!')"`;
+                
                 html += `
-                    <div class="channel-card">
+                    <div class="channel-card clickable" ${clickAttr}>
                         <div class="channel-title">
                             <span><strong>${ch.num}.</strong> ${ch.name}</span>
                             <span class="channel-badge">${ch.type}</span>
@@ -607,13 +743,29 @@
             container.innerHTML = html;
         }
 
+        function openJoyPlayer() {
+            const modal = document.getElementById('joy-player-modal');
+            const currentProg = getCurrentJoyProgram();
+            
+            document.getElementById('modal-show-title').innerText = currentProg.title;
+            document.getElementById('modal-show-desc').innerText = currentProg.desc;
+            document.getElementById('modal-show-icon').className = `fa-solid ${currentProg.icon}`;
+            
+            modal.style.display = 'block';
+            modal.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeJoyPlayer() {
+            document.getElementById('joy-player-modal').style.display = 'none';
+        }
+
         function checkAuthSession() {
             const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
             if (activeUser) {
                 document.getElementById('auth-container').style.display = 'none';
                 document.getElementById('dashboard-container').style.display = 'block';
                 document.getElementById('user-display-name').innerText = activeUser.username;
-                renderChannelsList(getSimulatedJoyShow());
+                renderChannelsList();
             } else {
                 document.getElementById('auth-container').style.display = 'block';
                 document.getElementById('dashboard-container').style.display = 'none';
@@ -626,7 +778,15 @@
             showAlert('Wylogowano pomyślnie z JoyBoxGO.', 'success');
         }
 
-        window.addEventListener('DOMContentLoaded', checkAuthSession);
+        window.addEventListener('DOMContentLoaded', () => {
+            checkAuthSession();
+            // Odświeżaj listę co 30 sekund, żeby ramówka idealnie nadążała za czasem
+            setInterval(() => {
+                if(localStorage.getItem('tvJoyActiveUser')) {
+                    renderChannelsList();
+                }
+            }, 30000);
+        });
     </script>
 </body>
 </html>
