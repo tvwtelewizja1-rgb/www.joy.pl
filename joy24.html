@@ -58,56 +58,6 @@
         .content-box h1 { font-size: 3rem; margin-bottom: 1.5rem; color: #ffeb3b; }
         .content-box p { font-size: 2rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); }
         
-        /* Sekcja Spotify Polecajki */
-        .spotify-section {
-            margin-top: 4rem;
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-            text-align: left;
-        }
-        .spotify-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .spotify-title {
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            color: #1db954;
-        }
-        .spotify-btn {
-            background-color: #1db954;
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-        .spotify-btn:hover {
-            background-color: #1ed760;
-            transform: scale(1.03);
-        }
-        .spotify-player-wrapper {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
         footer { background-color: rgba(183, 28, 28, 0.9); text-align: center; padding: 2rem; color: var(--text-muted); }
     </style>
 </head>
@@ -131,57 +81,11 @@
             <h1>Joy 24</h1>
             <p>Wkrótce</p>
         </div>
-
-        <!-- Polecajka muzyczna Spotify na dole strony -->
-        <section class="spotify-section">
-            <div class="spotify-header">
-                <h3 class="spotify-title"><i class="fa-brands fa-spotify"></i> Muzyczna Polecajka Dnia TV Joy</h3>
-                <button class="spotify-btn" onclick="randomizeSpotifyTrack()">
-                    <i class="fa-solid fa-shuffle"></i> Wylosuj inny utwór
-                </button>
-            </div>
-            <div class="spotify-player-wrapper">
-                <iframe id="spotify-player" style="border-radius:12px" src="" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div>
-        </section>
     </div>
 
     <footer>
         <p>&copy; 2026 TV Joy – Twoja Uśmiechnięta TV. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
-    <script>
-        // Lista ID zweryfikowanych utworów Spotify (bez wulgaryzmów)
-        const safeSpotifyTracks = [
-            '0VjeePi8mRGlx0KYrE2t2M', // Coldplay - Viva La Vida
-            '4uLU6hMCjMI75M1A2tKUQC', // Queen - Don't Stop Me Now
-            '0b90gQ8GjKGj6vR616jW9d', // Dawid Podsiadło - Małomiasteczkowy
-            '2TAK21z2WmZSp27eaF5zch', // Sanah - Szampan
-            '1BxfuMiLl4Wtx2y2x7j70u', // Michael Jackson - Billie Jean
-            '3u1S1E8yP0vR1j3i3bUq3E', // ABBA - Dancing Queen
-            '0c489yWenHGlDFf4yebvYQ', // A-ha - Take on Me
-            '60nZcImufyMA1MKQY3dcCH', // Pharrell Williams - Happy
-            '6w899j7S3l048p0p2GfN0L', // Sanah, Dawid Podsiadło - Ostatnia nadzieja
-            '3yTkoTuiKRz1g2pPq0Y16i'  // Dua Lipa - Levitating
-        ];
-
-        let currentTrackIndex = -1;
-
-        function randomizeSpotifyTrack() {
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * safeSpotifyTracks.length);
-            } while (randomIndex === currentTrackIndex && safeSpotifyTracks.length > 1);
-
-            currentTrackIndex = randomIndex;
-            const trackId = safeSpotifyTracks[randomIndex];
-            const playerIframe = document.getElementById('spotify-player');
-            
-            playerIframe.src = `https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0&t=${Date.now()}`;
-        }
-
-        // Inicjalne losowanie utworu przy wczytaniu strony
-        randomizeSpotifyTrack();
-    </script>
 </body>
 </html>
