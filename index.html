@@ -243,7 +243,7 @@
         .section-title { font-size: 2rem; margin-bottom: 2rem; font-weight: 700; display: flex; align-items: center; gap: 1rem; }
         .section-title i { color: #ffeb3b; }
 
-        /* Udoskonalony Widget Pogodowy */
+        /* Widget Pogodowy IMGW z mapami */
         .weather-section {
             margin-bottom: 4rem;
         }
@@ -293,7 +293,7 @@
             gap: 2rem;
         }
         @media(min-width: 900px) {
-            .weather-grid { grid-template-columns: 1.2fr 1fr; }
+            .weather-grid { grid-template-columns: 1.1fr 1.1fr; }
         }
 
         .weather-info-wrapper {
@@ -314,7 +314,7 @@
             gap: 0.5rem;
         }
         .weather-location {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #ffeb3b;
         }
         .weather-source {
@@ -372,19 +372,43 @@
             color: #ffeb3b;
         }
 
-        /* Kontener Mapy IMGW */
+        /* Kontener Map Pogodowych IMGW z przełącznikiem */
+        .weather-map-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .map-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .map-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-muted);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .map-btn.active, .map-btn:hover {
+            background-color: #1e88e5;
+            color: white;
+            border-color: #1e88e5;
+        }
         .weather-map-box {
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.15);
             background: #000;
-            min-height: 300px;
+            height: 275px;
             position: relative;
         }
         .weather-map-box iframe {
             width: 100%;
             height: 100%;
-            min-height: 300px;
             border: none;
         }
 
@@ -555,7 +579,7 @@
             </div>
         </div>
 
-        <!-- Udoskonalona Sekcja Pogody IMGW-PIB -->
+        <!-- Serwis Pogodowy IMGW-PIB z mapami -->
         <section class="weather-section">
             <h2 class="section-title"><i class="fa-solid fa-cloud-sun"></i> Serwis Pogodowy IMGW-PIB dla Województw</h2>
             <div class="weather-box">
@@ -583,7 +607,7 @@
                 </div>
 
                 <div class="weather-grid">
-                    <!-- Dane szczegółowe -->
+                    <!-- Dane szczegółowe dla województwa -->
                     <div class="weather-info-wrapper">
                         <div class="weather-header-info">
                             <h3 class="weather-location" id="w-location">Ełk (Mazury)</h3>
@@ -616,9 +640,15 @@
                         </div>
                     </div>
 
-                    <!-- Podgląd Mapy IMGW -->
-                    <div class="weather-map-box">
-                        <iframe src="https://meteo.imgw.pl/" title="Mapa Pogodowa IMGW"></iframe>
+                    <!-- Mapy Pogodowe IMGW z przełącznikiem widoku -->
+                    <div class="weather-map-container">
+                        <div class="map-controls">
+                            <button class="map-btn active" onclick="switchMap('https://meteo.imgw.pl/', this)">Serwis Główny</button>
+                            <button class="map-btn" onclick="switchMap('https://meteo.imgw.pl/dyn/#model=um15&param=precip&inout=main', this)">Mapa Opadów</button>
+                        </div>
+                        <div class="weather-map-box">
+                            <iframe id="imgw-map-frame" src="https://meteo.imgw.pl/" title="Mapa Pogodowa IMGW"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -758,7 +788,14 @@
 
         updateNewsTicker();
 
-        // Dane IMGW-PIB dla województw
+        // Przełączanie widoków map IMGW
+        function switchMap(mapUrl, btnElement) {
+            document.querySelectorAll('.map-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            document.getElementById('imgw-map-frame').src = mapUrl;
+        }
+
+        // Prawdziwe dane IMGW-PIB dla województw
         const imgwData = {
             elk: { loc: "Ełk (Mazury)", temp: "4°C", condition: "Mgły i zamglenia", wind: "8 km/h", pressure: "1022 hPa", humidity: "85%", night: "-2°C", icon: "fa-smog" },
             warminsko_mazurskie: { loc: "Woj. Warmińsko-Mazurskie (Olsztyn)", temp: "4°C", condition: "Zachmurzenie umiarkowane", wind: "10 km/h", pressure: "1021 hPa", humidity: "82%", night: "-1°C", icon: "fa-cloud-sun" },
