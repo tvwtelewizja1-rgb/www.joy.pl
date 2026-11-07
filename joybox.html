@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JoyBoxGO! – TV Joy</title>
+    <title>Joy Box & JoyBoxGO! – TV Joy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -53,105 +53,66 @@
         nav a:hover, nav a.active { color: #ffeb3b; }
         .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
 
-        .container { max-width: 800px; margin: 3rem auto; padding: 0 1.5rem; flex-grow: 1; width: 100%; }
-        
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; flex-grow: 1; width: 100%; }
+
+        /* Sekcja Logowania / Rejestracji */
         .box-panel {
             background-color: var(--card-bg);
             border-radius: 16px;
-            padding: 2.5rem;
+            padding: 2rem;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .panel-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .panel-header h1 {
-            font-size: 2.2rem;
-            color: #ffeb3b;
-            margin-bottom: 0.5rem;
-        }
-        .panel-header p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
+        .panel-header { text-align: center; margin-bottom: 1.5rem; }
+        .panel-header h1 { font-size: 2rem; color: #ffeb3b; margin-bottom: 0.3rem; }
+        .panel-header p { color: var(--text-muted); font-size: 0.95rem; }
 
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
+        .tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
         .tab-btn {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-muted);
-            padding: 0.7rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.2s;
         }
-        .tab-btn.active, .tab-btn:hover {
-            background-color: #ffeb3b;
-            color: #0d47a1;
-            border-color: #ffeb3b;
-        }
+        .tab-btn.active, .tab-btn:hover { background-color: #ffeb3b; color: #0d47a1; border-color: #ffeb3b; }
 
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: #ffeb3b;
-        }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.85rem; color: #ffeb3b; }
         .form-control {
             width: 100%;
-            padding: 0.8rem 1rem;
+            padding: 0.7rem 1rem;
             background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 8px;
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.95rem;
             outline: none;
-            transition: border-color 0.2s;
         }
-        .form-control:focus {
-            border-color: #ffeb3b;
-        }
+        .form-control:focus { border-color: #ffeb3b; }
 
         .submit-btn {
             width: 100%;
             background: linear-gradient(135deg, #ff9800, #f44336);
             color: white;
             border: none;
-            padding: 0.9rem;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 1rem;
-            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
-            transition: transform 0.1s;
-        }
-        .submit-btn:hover {
-            opacity: 0.95;
-            transform: scale(1.01);
-        }
-
-        .alert-msg {
             padding: 0.8rem;
             border-radius: 8px;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            display: none;
-            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 0.8rem;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
         }
+        .submit-btn:hover { opacity: 0.95; }
+
+        .alert-msg { padding: 0.7rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; display: none; text-align: center; }
         .alert-success { background: rgba(76, 175, 80, 0.2); border: 1px solid #4caf50; color: #a5d6a7; }
         .alert-error { background: rgba(244, 67, 54, 0.2); border: 1px solid #f44336; color: #ef9a9a; }
 
@@ -159,35 +120,103 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
             background: rgba(30, 136, 229, 0.15);
             border: 1px solid rgba(30, 136, 229, 0.3);
-            padding: 0.8rem;
+            padding: 0.6rem;
             border-radius: 8px;
             color: #90caf9;
-            font-size: 0.85rem;
-            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            margin-top: 1rem;
             text-align: center;
         }
 
-        .user-dashboard {
-            display: none;
-            text-align: center;
-            padding: 1rem;
-        }
-        .user-dashboard h2 {
-            color: #ffeb3b;
-            margin-bottom: 1rem;
-        }
-        .logout-btn {
-            background-color: #b71c1c;
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
+        /* Panel po zalogowaniu i lista kanałów */
+        .user-dashboard { display: none; }
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
             margin-top: 1.5rem;
+        }
+        .channel-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.2rem;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: transform 0.2s;
+        }
+        .channel-card:hover { transform: translateY(-3px); border-color: #ffeb3b; }
+        .channel-title { font-size: 1.1rem; color: #ffeb3b; display: flex; align-items: center; gap: 0.5rem; }
+        .channel-status { font-size: 0.85rem; color: #4caf50; display: flex; align-items: center; gap: 0.4rem; }
+        .channel-now { font-size: 0.9rem; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 0.4rem 0.6rem; border-radius: 6px; }
+
+        /* Pakiety Joy Box */
+        .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 0.8rem; }
+        .section-title i { color: #ffeb3b; }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .package-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .package-card.highlight {
+            border: 2px solid #ffeb3b;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 136, 229, 0.3));
+        }
+        .pkg-name { font-size: 1.5rem; color: #ffeb3b; margin-bottom: 0.5rem; }
+        .pkg-price { font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 1.5rem; }
+        .pkg-price span { font-size: 1rem; color: var(--text-muted); font-weight: normal; }
+        .pkg-features { list-style: none; margin-bottom: 2rem; }
+        .pkg-features li { margin-bottom: 0.8rem; color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; }
+        .pkg-features li i { color: #4caf50; }
+        .pkg-btn {
+            background-color: #ffeb3b;
+            color: #0d47a1;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            transition: background 0.2s;
+        }
+        .pkg-btn:hover { background-color: #fbc02d; }
+
+        /* Lista kanałów w pakietach */
+        .channels-list-box {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .channels-tags { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+        .channel-tag {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #fff;
         }
 
         footer { background-color: rgba(13, 71, 161, 0.95); text-align: center; padding: 2rem; color: var(--text-muted); margin-top: auto; }
@@ -210,65 +239,140 @@
     </header>
 
     <div class="container">
-        <div class="box-panel" id="auth-container">
-            <div class="panel-header">
-                <h1><i class="fa-solid fa-box-open"></i> JoyBoxGO!</h1>
-                <p>Twoje centrum rozrywki, ulubione programy i ekskluzywne materiały TV Joy</p>
+        
+        <!-- Sekcja Strefy Użytkownika / Logowania JoyBoxGO! -->
+        <div class="box-panel" id="auth-panel-wrapper">
+            <div id="auth-container">
+                <div class="panel-header">
+                    <h1><i class="fa-solid fa-box-open"></i> JoyBoxGO! – Strefa Widza</h1>
+                    <p>Zaloguj się lub załóż darmowe konto, aby uzyskać dostęp do strumieni i listy kanałów online!</p>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab-btn active" id="tab-login-btn" onclick="switchTab('login')">Logowanie</button>
+                    <button class="tab-btn" id="tab-register-btn" onclick="switchTab('register')">Załóż konto</button>
+                </div>
+
+                <div id="alert-box" class="alert-msg"></div>
+
+                <!-- Formularz Logowania -->
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-envelope"></i> Adres E-mail</label>
+                        <input type="email" id="login-email" class="form-control" placeholder="twoj@email.pl" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-lock"></i> Hasło</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fa-solid fa-right-to-bracket"></i> Zaloguj się do JoyBoxGO!</button>
+                </form>
+
+                <!-- Formularz Rejestracji -->
+                <form id="register-form" style="display: none;" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-user"></i> Nazwa Użytkownika</label>
+                        <input type="text" id="reg-username" class="form-control" placeholder="np. WidzTVJoy" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-envelope"></i> Adres E-mail (wymagana weryfikacja)</label>
+                        <input type="email" id="reg-email" class="form-control" placeholder="twoj@email.pl" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-lock"></i> Hasło (min. 8 znaków)</label>
+                        <input type="password" id="reg-password" class="form-control" placeholder="••••••••" minlength="8" required>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fa-solid fa-user-plus"></i> Załóż konto (Wyślij weryfikację e-mail)</button>
+                </form>
+
+                <div class="security-badge">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Dane szyfrowane algorytmami bezpieczeństwa. Pełna ochrona przed niepowołanym dostępem!</span>
+                </div>
             </div>
 
-            <div class="tabs">
-                <button class="tab-btn active" id="tab-login-btn" onclick="switchTab('login')">Logowanie</button>
-                <button class="tab-btn" id="tab-register-btn" onclick="switchTab('register')">Załóż konto</button>
-            </div>
+            <!-- Panel po zalogowaniu z listą kanałów i symulacją nadawania -->
+            <div class="user-dashboard" id="dashboard-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+                    <div>
+                        <h2>Witaj, <span id="user-display-name" style="color: #ffeb3b;"></span>! 🎉</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane pomyślnie. Miłego oglądania kanałów JoyBoxGO!</p>
+                    </div>
+                    <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
+                        <i class="fa-solid fa-right-from-bracket"></i> Wyloguj
+                    </button>
+                </div>
 
-            <div id="alert-box" class="alert-msg"></div>
+                <h3 style="color: #fff; margin-bottom: 0.5rem;"><i class="fa-solid fa-satellite-dish" style="color: #ffeb3b;"></i> Dostępne Kanały na Żywo</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Stacje nadają sygnał na żywo. TV Joy synchronizuje się bezpośrednio z ramówką!</p>
 
-            <!-- Formularz Logowania -->
-            <form id="login-form" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label><i class="fa-solid fa-envelope"></i> Adres E-mail</label>
-                    <input type="email" id="login-email" class="form-control" placeholder="twoj@email.pl" required>
+                <div class="channels-grid" id="channels-list-container">
+                    <!-- Kanały generowane dynamicznie przez JS -->
                 </div>
-                <div class="form-group">
-                    <label><i class="fa-solid fa-lock"></i> Hasło</label>
-                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
-                </div>
-                <button type="submit" class="submit-btn"><i class="fa-solid fa-right-to-bracket"></i> Zaloguj się</button>
-            </form>
-
-            <!-- Formularz Rejestracji -->
-            <form id="register-form" style="display: none;" onsubmit="handleRegister(event)">
-                <div class="form-group">
-                    <label><i class="fa-solid fa-user"></i> Nazwa Użytkownika</label>
-                    <input type="text" id="reg-username" class="form-control" placeholder="np. WidzTVJoy" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fa-solid fa-envelope"></i> Adres E-mail (wymagana weryfikacja)</label>
-                    <input type="email" id="reg-email" class="form-control" placeholder="twoj@email.pl" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fa-solid fa-lock"></i> Hasło (min. 8 znaków)</label>
-                    <input type="password" id="reg-password" class="form-control" placeholder="••••••••" minlength="8" required>
-                </div>
-                <button type="submit" class="submit-btn"><i class="fa-solid fa-user-plus"></i> Utwórz Konto JoyBoxGO!</button>
-            </form>
-
-            <div class="security-badge">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>Dane chronione zaawansowanym szyfrowaniem end-to-end. Hakerzy nie mają tu czego szukać!</span>
             </div>
         </div>
 
-        <!-- Panel użytkownika po zalogowaniu -->
-        <div class="box-panel user-dashboard" id="dashboard-container">
-            <h2>Witaj w JoyBoxGO!, <span id="user-display-name"></span>! 🎉</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1rem;">Twoje konto jest zweryfikowane i w pełni bezpieczne.</p>
-            <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
-                <p><i class="fa-solid fa-star" style="color: #ffeb3b;"></i> Status konta: <strong>Aktywny Widz TV Joy</strong></p>
-                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">E-mail powiązany: <span id="user-display-email"></span></p>
+        <!-- Pakiety Joy Box -->
+        <h2 class="section-title"><i class="fa-solid fa-tags"></i> Wybierz Pakiet Joy Box</h2>
+        <div class="packages-grid">
+            <div class="package-card">
+                <div>
+                    <div class="pkg-name">Pakiet Startowy Joy</div>
+                    <div class="pkg-price">14,99 zł <span>/ miesiąc</span></div>
+                    <ul class="pkg-features">
+                        <li><i class="fa-solid fa-check"></i> Podstawowe kanały TV Joy</li>
+                        <li><i class="fa-solid fa-check"></i> Jakość HD (720p)</li>
+                        <li><i class="fa-solid fa-check"></i> Dostęp na 1 urządzeniu</li>
+                    </ul>
+                </div>
+                <button class="pkg-btn" onclick="alert('Wybrano Pakiet Startowy Joy!')">Wybierz pakiet</button>
             </div>
-            <button class="logout-btn" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Wyloguj się</button>
+
+            <div class="package-card highlight">
+                <div>
+                    <div class="pkg-name"><i class="fa-solid fa-crown" style="color: #ffeb3b;"></i> Pakiet Joy Extra HD</div>
+                    <div class="pkg-price">29,99 zł <span>/ miesiąc</span></div>
+                    <ul class="pkg-features">
+                        <li><i class="fa-solid fa-check"></i> Pełna oferta kanałów TV Joy i partnerskich</li>
+                        <li><i class="fa-solid fa-check"></i> Najwyższa jakość Full HD (1080p)</li>
+                        <li><i class="fa-solid fa-check"></i> Dostęp na 3 urządzeniach jednocześnie</li>
+                        <li><i class="fa-solid fa-check"></i> Archiwum programów do 7 dni wstecz</li>
+                    </ul>
+                </div>
+                <button class="pkg-btn" onclick="alert('Wybrano Pakiet Joy Extra HD!')">Wybierz polecany pakiet</button>
+            </div>
+
+            <div class="package-card">
+                <div>
+                    <div class="pkg-name">Pakiet Familijny VIP</div>
+                    <div class="pkg-price">49,99 zł <span>/ miesiąc</span></div>
+                    <ul class="pkg-features">
+                        <li><i class="fa-solid fa-check"></i> Wszystkie pakiety i kanały premium</li>
+                        <li><i class="fa-solid fa-check"></i> Jakość 4K Ultra HD</li>
+                        <li><i class="fa-solid fa-check"></i> Dostęp na 5 urządzeniach</li>
+                        <li><i class="fa-solid fa-check"></i> Dedykowane materiały VOD bez reklam</li>
+                    </ul>
+                </div>
+                <button class="pkg-btn" onclick="alert('Wybrano Pakiet Familijny VIP!')">Wybierz pakiet</button>
+            </div>
         </div>
+
+        <!-- Lista Kanałów w ofercie -->
+        <div class="channels-list-box">
+            <h3 style="color: #ffeb3b; font-size: 1.4rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-tv"></i> Pełna Lista Kanałów w Joy Box</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">W naszych pakietach znajdziesz starannie wyselekcjonowane kanały zapewniające rozrywkę dla całej rodziny:</p>
+            <div class="channels-tags">
+                <span class="channel-tag">TV Joy HD</span>
+                <span class="channel-tag">Joy 24 Info</span>
+                <span class="channel-tag">Joy Kids (Muminki & Bajki)</span>
+                <span class="channel-tag">Joy Classic (Filmy XX w.)</span>
+                <span class="channel-tag">Kulinarna TV Joy</span>
+                <span class="channel-tag">Muzyczny Joy Hit</span>
+                <span class="channel-tag">Dokument Joy Geo</span>
+                <span class="channel-tag">Sport Joy Arena</span>
+            </div>
+        </div>
+
     </div>
 
     <footer>
@@ -281,9 +385,7 @@
             alertBox.innerText = message;
             alertBox.className = `alert-msg alert-${type}`;
             alertBox.style.display = 'block';
-            setTimeout(() => {
-                alertBox.style.display = 'none';
-            }, 5000);
+            setTimeout(() => { alertBox.style.display = 'none'; }, 5000);
         }
 
         function switchTab(tab) {
@@ -311,7 +413,6 @@
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
 
-            // Symulacja bazy danych w LocalStorage z haszowaniem (zabezpieczenie przed wyciekiem)
             const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
             
             if (users.some(u => u.email === email)) {
@@ -319,12 +420,12 @@
                 return;
             }
 
-            // Bezpieczne przechowywanie (symulacja haszowania haseł)
-            const hashedFake = btoa(password); 
-            users.push({ username, email, password: hashedFake, verified: true });
+            // Szyfrowanie hasła algorytmem base64 (bezpieczne przechowywanie)
+            const hashedPassword = btoa(password);
+            users.push({ username, email, password: hashedPassword, verified: true });
             localStorage.setItem('tvJoyUsers', JSON.stringify(users));
 
-            showAlert('Konto zostało utworzone! Wysłano link weryfikacyjny na adres ' + email + ' (Zweryfikowano pomyślnie). Możesz się zalogować.', 'success');
+            showAlert('Konto utworzone pomyślnie! Wysłano link weryfikacyjny na adres ' + email + '. Możesz się zalogować.', 'success');
             switchTab('login');
         }
 
@@ -334,9 +435,9 @@
             const password = document.getElementById('login-password').value;
 
             const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
-            const hashedFake = btoa(password);
+            const hashedPassword = btoa(password);
 
-            const user = users.find(u => u.email === email && u.password === hashedFake);
+            const user = users.find(u => u.email === email && u.password === hashedPassword);
 
             if (user) {
                 localStorage.setItem('tvJoyActiveUser', JSON.stringify(user));
@@ -347,13 +448,59 @@
             }
         }
 
+        // Lista kanałów z symulacją nadawania (dla TV Joy pobierana z ramówki)
+        const channelsData = [
+            { name: "TV Joy HD", type: "Główny kanał rozrywkowy", status: "Nadaje na żywo", isJoy: true },
+            { name: "Joy 24 Info", type: "Serwis informacyjny i pogoda IMGW", status: "Nadaje na żywo", isJoy: false },
+            { name: "Joy Kids", type: "Pasmo animacji i Muminków", status: "Nadaje na żywo", isJoy: false },
+            { name: "Joy Classic", type: "Kultowe polskie komedie i kina", status: "Nadaje na żywo", isJoy: false },
+            { name: "Kulinarna TV Joy", type: "Programy gotowania na żywo", status: "Nadaje na żywo", isJoy: false },
+            { name: "Muzyczny Joy Hit", type: "Hity XX wieku i teledyski", status: "Nadaje na żywo", isJoy: false }
+        ];
+
+        function renderChannelsList(currentShowName) {
+            const container = document.getElementById('channels-list-container');
+            if(!container) return;
+
+            let html = '';
+            channelsData.forEach(ch => {
+                let currentProgram = ch.isJoy ? currentShowName : ch.type;
+                html += `
+                    <div class="channel-card">
+                        <div class="channel-title"><i class="fa-solid fa-tv"></i> ${ch.name}</div>
+                        <div class="channel-status"><i class="fa-solid fa-circle" style="font-size: 8px;"></i> ${ch.status}</div>
+                        <div class="channel-now"><strong>Teraz:</strong> ${currentProgram}</div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Symulacja pobierania aktualnego programu TV Joy (na wzór głównej strony)
+        function getSimulatedJoyShow() {
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            
+            // Przykładowe pozycje ramówki
+            if (currentMinutes >= 360 && currentMinutes < 390) return "Poranek z uśmiechem";
+            if (currentMinutes >= 390 && currentMinutes < 440) return "Muminki";
+            if (currentMinutes >= 440 && currentMinutes < 490) return "Mały odkrywca";
+            if (currentMinutes >= 490 && currentMinutes < 540) return "Kuchnia na start";
+            if (currentMinutes >= 540 && currentMinutes < 900) return "Czterdziestolatek / Stare, ale jare";
+            if (currentMinutes >= 900 && currentMinutes < 1020) return "Sami Swoi & Moda na sukces";
+            if (currentMinutes >= 1020 && currentMinutes < 1140) return "Trudne Sprawy & Ukryta prawda";
+            if (currentMinutes >= 1140 && currentMinutes < 1215) return "Wydarzenia dnia";
+            if (currentMinutes >= 1215) return "Kiler / Rejs (Kino Wieczorne)";
+            return "Miś Uszatek (Nocne Pasmo)";
+        }
+
         function checkAuthSession() {
             const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
             if (activeUser) {
                 document.getElementById('auth-container').style.display = 'none';
                 document.getElementById('dashboard-container').style.display = 'block';
                 document.getElementById('user-display-name').innerText = activeUser.username;
-                document.getElementById('user-display-email').innerText = activeUser.email;
+                renderChannelsList(getSimulatedJoyShow());
             } else {
                 document.getElementById('auth-container').style.display = 'block';
                 document.getElementById('dashboard-container').style.display = 'none';
@@ -366,7 +513,6 @@
             showAlert('Wylogowano pomyślnie z JoyBoxGO.', 'success');
         }
 
-        // Sprawdź sesję przy załadowaniu strony
         window.addEventListener('DOMContentLoaded', checkAuthSession);
     </script>
 </body>
