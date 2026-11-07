@@ -162,9 +162,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
 
-        .logo-text { font-size: 1.8rem; font-weight: 900; }
-        .logo-text .tv { color: #ffffff; }
-        .logo-text .joy { color: #ffeb3b; }
         nav { display: flex; gap: 1.5rem; align-items: center; }
         nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; }
         nav a:hover, nav a.active { color: #ffeb3b; }
@@ -340,12 +337,10 @@
     <header>
         <a href="index.html" class="logo">
             <img src="PFPjoy10kl.jpg" alt="TV Joy Logo" class="logo-img">
-            <div class="logo-text"><span class="tv">TV</span> <span class="joy">JOY</span></div>
         </a>
         <nav>
-            <a href="index.html" class="active">Na Żywo</a>
+            <a href="index.html" class="active">Home</a>
             <a href="joy24.html">Joy 24</a>
-            <a href="#ramowka">Ramówka</a>
             <a href="https://www.youtube.com/@joy_twoja_u%C5%9Bmiechni%C4%99ta_tv" target="_blank" class="yt-btn">
                 <i class="fa-brands fa-youtube"></i> Subskrybuj
             </a>
@@ -580,7 +575,6 @@
 
         function randomizeSpotifyTrack() {
             let randomIndex;
-            // Gwarantuje wylosowanie innego utworu niż obecnie wyświetlany
             do {
                 randomIndex = Math.floor(Math.random() * safeSpotifyTracks.length);
             } while (randomIndex === currentTrackIndex && safeSpotifyTracks.length > 1);
@@ -589,7 +583,6 @@
             const trackId = safeSpotifyTracks[randomIndex];
             const playerIframe = document.getElementById('spotify-player');
             
-            // Dodanie unikalnego znacznika czasowego unika problemów z blokowaniem odświeżania przez przeglądarkę
             playerIframe.src = `https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0&t=${Date.now()}`;
         }
 
