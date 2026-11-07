@@ -155,9 +155,7 @@
             gap: 0.3rem;
             transition: transform 0.2s, border-color 0.2s;
         }
-        .channel-card.clickable {
-            cursor: pointer;
-        }
+        .channel-card.clickable { cursor: pointer; }
         .channel-card.clickable:hover {
             transform: translateY(-3px);
             border-color: #ffeb3b;
@@ -168,7 +166,7 @@
         .channel-status { font-size: 0.8rem; color: #4caf50; display: flex; align-items: center; gap: 0.4rem; }
         .channel-now { font-size: 0.85rem; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 0.3rem 0.5rem; border-radius: 6px; }
 
-        /* Okno odtwarzacza dla kanału Joy */
+        /* Okno odtwarzacza z ZAPEM */
         .player-modal {
             display: none;
             background: rgba(5, 10, 20, 0.95);
@@ -208,34 +206,50 @@
         .tv-screen-box {
             position: relative;
             width: 100%;
-            height: 280px;
+            height: 320px;
             background: #000;
             border-radius: 8px;
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
+            justify-content: flex-end;
+        }
+        .zap-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.65;
+            filter: contrast(1.1) saturate(1.2);
+        }
+        .zap-overlay-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.3) 60%, transparent 100%);
+            z-index: 1;
         }
         .tv-screen-content {
-            padding: 1.5rem;
+            position: relative;
             z-index: 2;
-        }
-        .tv-screen-content i {
-            font-size: 3.5rem;
-            color: #ffeb3b;
-            margin-bottom: 1rem;
+            padding: 1.5rem;
+            text-align: left;
         }
         .tv-screen-content h4 {
-            font-size: 1.5rem;
-            color: #fff;
-            margin-bottom: 0.5rem;
+            font-size: 1.6rem;
+            color: #ffeb3b;
+            margin-bottom: 0.3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
         .tv-screen-content p {
-            color: var(--text-muted);
+            color: #fff;
             font-size: 0.95rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
         .live-badge {
             position: absolute;
@@ -250,6 +264,8 @@
             display: flex;
             align-items: center;
             gap: 4px;
+            z-index: 3;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
         }
 
         /* Pakiety Joy Box */
@@ -388,38 +404,39 @@
                 </div>
             </div>
 
-            <!-- Panel po zalogowaniu z listą kanałów i odtwarzaczem -->
+            <!-- Panel po zalogowaniu z listą kanałów i odtwarzaczem ZAP -->
             <div class="user-dashboard" id="dashboard-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
                     <div>
                         <h2>Witaj, <span id="user-display-name" style="color: #ffeb3b;"></span>! 🎉</h2>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane pomyślnie. Kliknij na kanał <strong>100. Joy</strong>, aby uruchomić podgląd programu!</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane pomyślnie. Kliknij na kanał <strong>100. Joy</strong>, aby uruchomić podgląd z ZAP-em!</p>
                     </div>
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
                         <i class="fa-solid fa-right-from-bracket"></i> Wyloguj
                     </button>
                 </div>
 
-                <!-- Okno odtwarzacza dla kanału Joy -->
+                <!-- Okno odtwarzacza ZAP dla kanału Joy -->
                 <div class="player-modal" id="joy-player-modal">
                     <div class="player-modal-header">
                         <div class="player-modal-title">
-                            <i class="fa-solid fa-tv"></i> Odtwarzacz TV Joy (Kanał 100)
+                            <i class="fa-solid fa-tv"></i> Odtwarzacz TV Joy (Kanał 100) – Podgląd na żywo
                         </div>
                         <button class="close-player" onclick="closeJoyPlayer()">&times;</button>
                     </div>
                     <div class="tv-screen-box">
                         <div class="live-badge"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> NA ŻYWO</div>
+                        <img id="modal-zap-img" class="zap-image" src="" alt="ZAP z programu">
+                        <div class="zap-overlay-gradient"></div>
                         <div class="tv-screen-content">
-                            <i id="modal-show-icon" class="fa-solid fa-clapperboard"></i>
-                            <h4 id="modal-show-title">Ładowanie programu...</h4>
-                            <p id="modal-show-desc">Trwa transmisja z anteny głównej TV Joy zgodnie z aktualnym harmonogramem.</p>
+                            <h4 id="modal-show-title">Ładowanie...</h4>
+                            <p id="modal-show-desc">Trwa transmisja z anteny głównej TV Joy.</p>
                         </div>
                     </div>
                 </div>
 
                 <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-satellite-dish" style="color: #ffeb3b;"></i> Stacje Telewizyjne Online</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100 (Joy) jest w pełni interaktywny. Kliknij go, aby włączyć transmisję!</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100 (Joy) synchronizuje się z ramówką. Kliknij, aby zobaczyć kadr (ZAP)!</p>
 
                 <div class="channels-grid" id="channels-list-container">
                     <!-- Kanały generowane przez JS -->
@@ -678,42 +695,42 @@
             { num: 160, name: "Co w Telewizji?", type: "VOD", isJoy: false }
         ];
 
-        // Dokładna synchronizacja z całodobową ramówką TV Joy
+        // Dokładna ramówka wraz z dopasowanymi ZAPami (screenami)
         function getCurrentJoyProgram() {
             const now = new Date();
             const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-            if (currentMinutes >= 360 && currentMinutes < 390) return { title: "Poranek z uśmiechem", icon: "fa-mug-hot", desc: "Nowy program śniadaniowy na dobry początek dnia." };
-            if (currentMinutes >= 390 && currentMinutes < 440) return { title: "Muminki", icon: "fa-book-open", desc: "Kultowe przygody w Dolinie Muminków." };
-            if (currentMinutes >= 440 && currentMinutes < 460) return { title: "Mały odkrywca", icon: "fa-graduation-cap", desc: "Program edukacyjny dla dzieci i młodzieży." };
-            if (currentMinutes >= 460 && currentMinutes < 490) return { title: "Kuchnia na start", icon: "fa-utensils", desc: "Kulinarny poranek z prostymi przepisami." };
-            if (currentMinutes >= 490 && currentMinutes < 500) return { title: "Teleranek Jaruzelskiego", icon: "fa-tv", desc: "Historyczne pasmo publicystyczne." };
-            if (currentMinutes >= 500 && currentMinutes < 540) return { title: "Muzyczna pobudka", icon: "fa-music", desc: "Teledyski i energetyczne hity." };
-            if (currentMinutes >= 540 && currentMinutes < 565) return { title: "Hity XX wieku", icon: "fa-compact-disc", desc: "Największe przeboje minionych dekad." };
-            if (currentMinutes >= 565 && currentMinutes < 600) return { title: "Podróże bez biletu", icon: "fa-plane", desc: "Magazyn podróżniczy po najciekawszych zakątkach." };
-            if (currentMinutes >= 600 && currentMinutes < 650) return { title: "Czterdziestolatek", icon: "fa-user-tie", desc: "Kultowy polski serial obyczajowy." };
-            if (currentMinutes >= 650 && currentMinutes < 670) return { title: "Stare, ale jare", icon: "fa-star", desc: "Przegląd archiwalnych perełek telewizyjnych." };
-            if (currentMinutes >= 670 && currentMinutes < 700) return { title: "Świat zwierząt", icon: "fa-paw", desc: "Film przyrodniczy o faunie i florze." };
-            if (currentMinutes >= 700 && currentMinutes < 720) return { title: "Dziecięce Hity", icon: "fa-child", desc: "Ulubione bajki i piosenki dla najmłodszych." };
-            if (currentMinutes >= 720 && currentMinutes < 745) return { title: "Muminki", icon: "fa-book-open", desc: "Popołudniowe pasmo animacji." };
-            if (currentMinutes >= 745 && currentMinutes < 765) return { title: "Dziecięce Hity", icon: "fa-child", desc: "Blok programowy dla dzieci." };
-            if (currentMinutes >= 765 && currentMinutes < 790) return { title: "Bajkowa kraina", icon: "fa-wand-magic-sparkles", desc: "Nowe pasmo animacji i fantastyki." };
-            if (currentMinutes >= 790 && currentMinutes < 825) return { title: "Prawda czy Fałsz", icon: "fa-circle-question", desc: "Teleturniej pełen niespodzianek." };
-            if (currentMinutes >= 825 && currentMinutes < 875) return { title: "Rodzinka.pl", icon: "fa-house", desc: "Codzienne przygody rodzinki Boskich." };
-            if (currentMinutes >= 875 && currentMinutes < 900) return { title: "Sami Swoi", icon: "fa-film", desc: "Klasyka polskiej komedii filmowej." };
-            if (currentMinutes >= 900 && currentMinutes < 915) return { title: "Informacje", icon: "fa-newspaper", desc: "Skrót najważniejszych wiadomości dnia." };
-            if (currentMinutes >= 915 && currentMinutes < 945) return { title: "Moda na sukces", icon: "fa-masks-theater", desc: "Dalsze perypetie bohaterów w Los Angeles." };
-            if (currentMinutes >= 945 && currentMinutes < 990) return { title: "Plebania", icon: "fa-church", desc: "Kultowy serial obyczajowy z Hrubieszowa." };
-            if (currentMinutes >= 990 && currentMinutes < 1040) return { title: "M jak Miłość", icon: "fa-heart", desc: "Rozterki rodzinne w Grabinie." };
-            if (currentMinutes >= 1040 && currentMinutes < 1090) return { title: "Trudne Sprawy", icon: "fa-triangle-exclamation", desc: "Emocjonujące historie z życia wzięte." };
-            if (currentMinutes >= 1090 && currentMinutes < 1140) return { title: "Ukryta prawda", icon: "fa-magnifying-glass", desc: "Dramatyczne zwroty akcji i sekrety." };
-            if (currentMinutes >= 1140 && currentMinutes < 1165) return { title: "Wydarzenia dnia", icon: "fa-globe", desc: "Główny wieczorny serwis informacyjny." };
-            if (currentMinutes >= 1165 && currentMinutes < 1215) return { title: "Trudne Sprawy", icon: "fa-triangle-exclamation", desc: "Wieczorne pasmo powtórkowe." };
-            if (currentMinutes >= 1215 && currentMinutes < 1320) return { title: "Kiler", icon: "fa-clapperboard", desc: "Komedia sensacyjna w reżyserii O. Machulskiego." };
-            if (currentMinutes >= 1320 && currentMinutes < 1395) return { title: "Rejs", icon: "fa-ship", desc: "Kultowy polski film w reżyserii M. Piwowskiego." };
-            if (currentMinutes >= 1395 && currentMinutes < 1440) return { title: "Magazyn 997", icon: "fa-shield-halved", desc: "Archiwalne śledztwa i rekonstrukcje." };
-            if (currentMinutes >= 0 && currentMinutes < 100) return { title: "Seksmisja", icon: "fa-moon", desc: "Kultowa komedia Stanisława Bareji / Juliusza Machulskiego." };
-            return { title: "Miś Uszatek", icon: "fa-bed", desc: "Dobranoc dla najwytrwalszych widzów." };
+            if (currentMinutes >= 360 && currentMinutes < 390) return { title: "Poranek z uśmiechem", desc: "Nowy program śniadaniowy na dobry początek dnia.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 390 && currentMinutes < 440) return { title: "Muminki", desc: "Kultowe przygody w Dolinie Muminków.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 440 && currentMinutes < 460) return { title: "Mały odkrywca", desc: "Program edukacyjny dla dzieci i młodzieży.", zap: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 460 && currentMinutes < 490) return { title: "Kuchnia na start", desc: "Kulinarny poranek z prostymi przepisami.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 490 && currentMinutes < 500) return { title: "Teleranek Jaruzelskiego", desc: "Historyczne pasmo publicystyczne.", zap: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 500 && currentMinutes < 540) return { title: "Muzyczna pobudka", desc: "Teledyski i energetyczne hity.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 540 && currentMinutes < 565) return { title: "Hity XX wieku", desc: "Największe przeboje minionych dekad.", zap: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 565 && currentMinutes < 600) return { title: "Podróże bez biletu", desc: "Magazyn podróżniczy po najciekawszych zakątkach.", zap: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 600 && currentMinutes < 650) return { title: "Czterdziestolatek", desc: "Kultowy polski serial obyczajowy.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 650 && currentMinutes < 670) return { title: "Stare, ale jare", desc: "Przegląd archiwalnych perełek telewizyjnych.", zap: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 670 && currentMinutes < 700) return { title: "Świat zwierząt", desc: "Film przyrodniczy o faunie i florze.", zap: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 700 && currentMinutes < 720) return { title: "Dziecięce Hity", desc: "Ulubione bajki i piosenki dla najmłodszych.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 720 && currentMinutes < 745) return { title: "Muminki", desc: "Popołudniowe pasmo animacji.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 745 && currentMinutes < 765) return { title: "Dziecięce Hity", desc: "Blok programowy dla dzieci.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 765 && currentMinutes < 790) return { title: "Bajkowa kraina", desc: "Nowe pasmo animacji i fantastyki.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 790 && currentMinutes < 825) return { title: "Prawda czy Fałsz", desc: "Teleturniej pełen niespodzianek.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 825 && currentMinutes < 875) return { title: "Rodzinka.pl", desc: "Codzienne przygody rodzinki Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 875 && currentMinutes < 900) return { title: "Sami Swoi", desc: "Klasyka polskiej komedii filmowej.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 900 && currentMinutes < 915) return { title: "Informacje", desc: "Skrót najważniejszych wiadomości dnia.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 915 && currentMinutes < 945) return { title: "Moda na sukces", desc: "Dalsze perypetie bohaterów w Los Angeles.", zap: "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 945 && currentMinutes < 990) return { title: "Plebania", desc: "Kultowy serial obyczajowy.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 990 && currentMinutes < 1040) return { title: "M jak Miłość", desc: "Rozterki rodzinne w Grabinie.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 1040 && currentMinutes < 1090) return { title: "Trudne Sprawy", desc: "Emocjonujące historie z życia wzięte.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 1090 && currentMinutes < 1140) return { title: "Ukryta prawda", desc: "Dramatyczne zwroty akcji i sekrety.", zap: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 1140 && currentMinutes < 1165) return { title: "Wydarzenia dnia", desc: "Główny wieczorny serwis informacyjny.", zap: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 1165 && currentMinutes < 1215) return { title: "Trudne Sprawy", desc: "Wieczorne pasmo powtórkowe.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 1215 && currentMinutes < 1320) return { title: "Kiler", desc: "Komedia sensacyjna w reżyserii O. Machulskiego.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 1320 && currentMinutes < 1395) return { title: "Rejs", desc: "Kultowy polski film w reżyserii M. Piwowskiego.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 1395 && currentMinutes < 1440) return { title: "Magazyn 997", desc: "Archiwalne śledztwa i rekonstrukcje.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?auto=format&fit=crop&w=800&q=80" };
+            if (currentMinutes >= 0 && currentMinutes < 100) return { title: "Seksmisja", desc: "Kultowa komedia w reżyserii Juliusza Machulskiego.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" };
+            return { title: "Miś Uszatek", desc: "Dobranoc dla najwytrwalszych widzów.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" };
         }
 
         function renderChannelsList() {
@@ -749,7 +766,7 @@
             
             document.getElementById('modal-show-title').innerText = currentProg.title;
             document.getElementById('modal-show-desc').innerText = currentProg.desc;
-            document.getElementById('modal-show-icon').className = `fa-solid ${currentProg.icon}`;
+            document.getElementById('modal-zap-img').src = currentProg.zap;
             
             modal.style.display = 'block';
             modal.scrollIntoView({ behavior: 'smooth' });
@@ -780,7 +797,6 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             checkAuthSession();
-            // Odświeżaj listę co 30 sekund, żeby ramówka idealnie nadążała za czasem
             setInterval(() => {
                 if(localStorage.getItem('tvJoyActiveUser')) {
                     renderChannelsList();
