@@ -131,12 +131,14 @@
         }
 
         .user-dashboard { display: none; }
+        
+        /* Rozciągnięta siatka kanałów na pełną szerokość */
         .channels-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
             margin-top: 1.5rem;
-            max-height: 500px;
+            max-height: 600px;
             overflow-y: auto;
             padding-right: 0.5rem;
         }
@@ -146,7 +148,7 @@
         .channel-card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1rem;
+            padding: 1.1rem;
             border-radius: 12px;
             display: flex;
             flex-direction: column;
@@ -159,7 +161,7 @@
             border-color: #ffeb3b;
             background: rgba(255, 235, 59, 0.08);
         }
-        .channel-title { font-size: 1rem; color: #ffeb3b; display: flex; justify-content: space-between; align-items: center; }
+        .channel-title { font-size: 1.05rem; color: #ffeb3b; display: flex; justify-content: space-between; align-items: center; }
         .channel-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: rgba(30,136,229,0.4); color: #90caf9; }
         .channel-status { font-size: 0.8rem; color: #4caf50; display: flex; align-items: center; gap: 0.4rem; }
         .channel-now { font-size: 0.85rem; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 0.3rem 0.5rem; border-radius: 6px; }
@@ -200,10 +202,11 @@
             align-items: center;
             justify-content: center;
         }
+        /* Rozciągnięte okno odtwarzacza TV */
         .tv-screen-box {
             position: relative;
             width: 100%;
-            height: 320px;
+            height: 420px;
             background: #000;
             border-radius: 8px;
             overflow: hidden;
@@ -238,14 +241,14 @@
             text-align: left;
         }
         .tv-screen-content h4 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             color: #ffeb3b;
             margin-bottom: 0.3rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
         .tv-screen-content p {
             color: #fff;
-            font-size: 0.95rem;
+            font-size: 1rem;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
         }
         .live-badge {
@@ -400,7 +403,7 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
                     <div>
                         <h2>Witaj, <span id="user-display-name" style="color: #ffeb3b;"></span>! 🎉</h2>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane pomyślnie. Kliknij na kanał <strong>100. Joy</strong>, aby uruchomić odtwarzacz z ZAP-em!</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane pomyślnie. Kliknij na kanał <strong>100. Joy</strong>, aby uruchomić rozszerzony odtwarzacz!</p>
                     </div>
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
                         <i class="fa-solid fa-right-from-bracket"></i> Wyloguj
@@ -410,7 +413,7 @@
                 <div class="player-modal" id="joy-player-modal">
                     <div class="player-modal-header">
                         <div class="player-modal-title">
-                            <i class="fa-solid fa-tv"></i> Odtwarzacz TV Joy (Kanał 100) – Podgląd na żywo
+                            <i class="fa-solid fa-tv"></i> Odtwarzacz TV Joy (Kanał 100) – Tryb HD
                         </div>
                         <button class="close-player" onclick="closeJoyPlayer()">&times;</button>
                     </div>
@@ -432,51 +435,54 @@
             </div>
         </div>
 
-        <h2 class="section-title"><i class="fa-solid fa-tags"></i> Pakiety i Cennik Joy Box</h2>
-        <div class="packages-grid">
-            <div class="package-card">
-                <div>
-                    <div class="pkg-name">Regio</div>
-                    <div class="pkg-price">1,00 zł <span>/ mies.</span></div>
-                    <div class="pkg-desc">Tylko Stacje Regionalne i lokalne pasma informacyjne.</div>
+        <!-- Sekcja pakietów i cennika ukrywana automatycznie po zalogowaniu -->
+        <div id="pricing-section-wrapper">
+            <h2 class="section-title"><i class="fa-solid fa-tags"></i> Pakiety i Cennik Joy Box</h2>
+            <div class="packages-grid">
+                <div class="package-card">
+                    <div>
+                        <div class="pkg-name">Regio</div>
+                        <div class="pkg-price">1,00 zł <span>/ mies.</span></div>
+                        <div class="pkg-desc">Tylko Stacje Regionalne i lokalne pasma informacyjne.</div>
+                    </div>
+                    <button class="pkg-btn" onclick="alert('Wybrano pakiet Regio!')">Wybierz</button>
                 </div>
-                <button class="pkg-btn" onclick="alert('Wybrano pakiet Regio!')">Wybierz</button>
-            </div>
 
-            <div class="package-card highlight">
-                <div>
-                    <div class="pkg-name">Normal</div>
-                    <div class="pkg-price">2,20 zł <span>/ mies.</span></div>
-                    <div class="pkg-desc">Podstawowy pakiet zawierający większość ulubionych stacji.</div>
+                <div class="package-card highlight">
+                    <div>
+                        <div class="pkg-name">Normal</div>
+                        <div class="pkg-price">2,20 zł <span>/ mies.</span></div>
+                        <div class="pkg-desc">Podstawowy pakiet zawierający większość ulubionych stacji.</div>
+                    </div>
+                    <button class="pkg-btn" onclick="alert('Wybrano pakiet Normal!')">Wybierz</button>
                 </div>
-                <button class="pkg-btn" onclick="alert('Wybrano pakiet Normal!')">Wybierz</button>
-            </div>
 
-            <div class="package-card">
-                <div>
-                    <div class="pkg-name">Mid</div>
-                    <div class="pkg-price">4,50 zł <span>/ mies.</span></div>
-                    <div class="pkg-desc">Rozszerzony pakiet kanałów tematycznych i filmowych.</div>
+                <div class="package-card">
+                    <div>
+                        <div class="pkg-name">Mid</div>
+                        <div class="pkg-price">4,50 zł <span>/ mies.</span></div>
+                        <div class="pkg-desc">Rozszerzony pakiet kanałów tematycznych i filmowych.</div>
+                    </div>
+                    <button class="pkg-btn" onclick="alert('Wybrano pakiet Mid!')">Wybierz</button>
                 </div>
-                <button class="pkg-btn" onclick="alert('Wybrano pakiet Mid!')">Wybierz</button>
-            </div>
 
-            <div class="package-card">
-                <div>
-                    <div class="pkg-name">Extra</div>
-                    <div class="pkg-price">10,99 zł <span>/ mies.</span></div>
-                    <div class="pkg-desc">Wysokiej jakości kanały specjalne oraz unikalne pasma.</div>
+                <div class="package-card">
+                    <div>
+                        <div class="pkg-name">Extra</div>
+                        <div class="pkg-price">10,99 zł <span>/ mies.</span></div>
+                        <div class="pkg-desc">Wysokiej jakości kanały specjalne oraz unikalne pasma.</div>
+                    </div>
+                    <button class="pkg-btn" onclick="alert('Wybrano pakiet Extra!')">Wybierz</button>
                 </div>
-                <button class="pkg-btn" onclick="alert('Wybrano pakiet Extra!')">Wybierz</button>
-            </div>
 
-            <div class="package-card">
-                <div>
-                    <div class="pkg-name">VIP+</div>
-                    <div class="pkg-price">25,99 zł <span>/ mies.</span></div>
-                    <div class="pkg-desc">Pełen pakiet wszechstronnej rozrywki bez żadnych limitów i reklam.</div>
+                <div class="package-card">
+                    <div>
+                        <div class="pkg-name">VIP+</div>
+                        <div class="pkg-price">25,99 zł <span>/ mies.</span></div>
+                        <div class="pkg-desc">Pełen pakiet wszechstronnej rozrywki bez żadnych limitów i reklam.</div>
+                    </div>
+                    <button class="pkg-btn" onclick="alert('Wybrano pakiet VIP+!')">Wybierz</button>
                 </div>
-                <button class="pkg-btn" onclick="alert('Wybrano pakiet VIP+!')">Wybierz</button>
             </div>
         </div>
 
@@ -680,7 +686,6 @@
             { num: 160, name: "Co w Telewizji?", type: "VOD", isJoy: false }
         ];
 
-        // Pełna, oficjalna ramówka z przejście od 06:00 rano do 05:59 rano dnia następnego
         const schedule = [
             { time: "06:00", title: "Poranek z uśmiechem — nowy program śniadaniowy", desc: "Poranek z uśmiechem na dobry początek dnia.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
             { time: "06:30", title: "Muminki", desc: "Kultowe przygody w Dolinie Muminków.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
@@ -716,15 +721,13 @@
             { time: "01:40", title: "Miś Uszatek", desc: "Nocne pasmo dla najwytrwalszych.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" }
         ];
 
-        // Przelicza czas "HH:MM" na minuty w dociągnięciu do doby rozpoczynającej się o 06:00
         function getTvDayMinutes(timeStr) {
             const parts = timeStr.split(":");
             let h = parseInt(parts[0], 10);
             let m = parseInt(parts[1], 10);
             let total = h * 60 + m;
-            // Doba telewizyjna startuje o 06:00 (360 minut od północy)
             if (total < 360) {
-                total += 1440; // Przesunięcie po północy (00:00 do 05:59 staje się końcówką doby)
+                total += 1440;
             }
             return total;
         }
@@ -802,14 +805,23 @@
 
         function checkAuthSession() {
             const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
+            const pricingWrapper = document.getElementById('pricing-section-wrapper');
+
             if (activeUser) {
                 document.getElementById('auth-container').style.display = 'none';
                 document.getElementById('dashboard-container').style.display = 'block';
                 document.getElementById('user-display-name').innerText = activeUser.username;
+                
+                // Ukrycie sekcji cennika po zalogowaniu
+                if (pricingWrapper) pricingWrapper.style.display = 'none';
+
                 renderChannelsList();
             } else {
                 document.getElementById('auth-container').style.display = 'block';
                 document.getElementById('dashboard-container').style.display = 'none';
+                
+                // Przywrócenie sekcji cennika po wylogowaniu
+                if (pricingWrapper) pricingWrapper.style.display = 'block';
             }
         }
 
