@@ -167,7 +167,7 @@
         nav a:hover, nav a.active { color: #ffeb3b; }
         .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
         
-        /* Pasek Informacyjny ze stałym przewijaniem */
+        /* Ultra płynny i nowoczesny Pasek Informacyjny */
         .news-ticker {
             background-color: #b71c1c;
             color: white;
@@ -178,6 +178,7 @@
             white-space: nowrap;
             border-bottom: 2px solid #ffeb3b;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            position: relative;
         }
         .ticker-badge {
             background-color: #ffeb3b;
@@ -192,28 +193,28 @@
             display: flex;
             align-items: center;
             gap: 0.4rem;
-            z-index: 2;
+            z-index: 10;
         }
         .ticker-wrap {
             overflow: hidden;
             width: 100%;
+            position: relative;
         }
         .ticker-content {
             display: inline-block;
             white-space: nowrap;
-            animation: marquee 45s linear infinite;
+            will-change: transform;
+            /* Płynność w JS obsługiwana przez requestAnimationFrame */
         }
         .ticker-content span {
-            margin-right: 3rem;
+            margin-right: 4rem;
             font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
         }
         .ticker-content span i {
             color: #ffeb3b;
-            margin-right: 0.5rem;
-        }
-        @keyframes marquee {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
+            margin-right: 0.6rem;
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; }
@@ -372,7 +373,6 @@
             color: #ffeb3b;
         }
 
-        /* Ekran Mapy TV z Prawdziwym SVG */
         .weather-map-container {
             display: flex;
             flex-direction: column;
@@ -518,12 +518,12 @@
         </nav>
     </header>
 
-    <!-- Pasek Informacyjny -->
+    <!-- Ultra płynny Pasek Informacyjny z prawdziwych źródeł RSS -->
     <div class="news-ticker">
-        <div class="ticker-badge"><i class="fa-solid fa-newspaper"></i> INFORMACJE</div>
+        <div class="ticker-badge"><i class="fa-solid fa-newspaper"></i> WIEŚCI Z KRAJU</div>
         <div class="ticker-wrap">
-            <div class="ticker-content" id="ticker-text">
-                <span><i class="fa-solid fa-tv"></i> TVFIKCYJNE WIKI: Witamy w oficjalnym serwisie informacyjnym TV Joy!</span>
+            <div class="ticker-content" id="ticker-content">
+                <span><i class="fa-solid fa-tv"></i> TV Joy: Ładowanie najświeższych wiadomości z portali informacyjnych...</span>
             </div>
         </div>
     </div>
@@ -560,7 +560,6 @@
         <section class="weather-section">
             <h2 class="section-title"><i class="fa-solid fa-cloud-sun"></i> Serwis Pogodowy IMGW-PIB dla Województw</h2>
             <div class="weather-box">
-                <!-- Zakładki Województw -->
                 <div class="weather-tabs-container">
                     <div class="weather-tabs">
                         <button class="weather-tab active" onclick="changeWeather('elk', this)">Ełk (Mazury)</button>
@@ -584,7 +583,6 @@
                 </div>
 
                 <div class="weather-grid">
-                    <!-- Dane szczegółowe dla wybranego województwa -->
                     <div class="weather-info-wrapper">
                         <div class="weather-header-info">
                             <h3 class="weather-location" id="w-location">Ełk (Mazury)</h3>
@@ -617,7 +615,6 @@
                         </div>
                     </div>
 
-                    <!-- Dokładna Mapa Geograficzna Polski SVG -->
                     <div class="weather-map-container">
                         <div class="tv-map-header">
                             <span><i class="fa-solid fa-map-location-dot"></i> Synoptyczna Mapa Polski IMGW</span>
@@ -651,7 +648,7 @@
             </div>
         </section>
 
-        <!-- Pełna, zamknięta ramówka -->
+        <!-- Ramówka -->
         <section id="ramowka">
             <h2 class="section-title"><i class="fa-solid fa-calendar-days"></i> Całodobowa Ramówka TV Joy</h2>
             <div class="schedule-box" id="schedule-list">
@@ -696,12 +693,65 @@
     </footer>
 
     <script>
-        // Obsługa wyskakującego okienka ostrzegawczego Windows XP
         function closeWarning() {
             document.getElementById('warningModal').style.display = 'none';
         }
 
-        // Baza danych pogody IMGW dla województw
+        // --- ULTRA PŁYNNY PASK INFORMACYJNY (TICKER) Z REALNYCH ŹRÓDEŁ RSS ---
+        async function initLiveNewsTicker() {
+            const container = document.getElementById('ticker-content');
+            
+            // Publiczne kanały RSS najpopularniejszych portali (Interia, TVN24, Onet) przekierowane przez darmowy konwerter JSON
+            const rssFeeds = [
+                'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwydarzenia.interia.pl%2Ffeed',
+                'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ftvn24.pl%2Fnajwazniejsze.xml'
+            ];
+
+            let allNews = [
+                "TV Joy: Witamy w oficjalnym serwisie informacyjnym stacji!",
+                "Sprawdź najnowsze pakiety w zakładce Joy Box!"
+            ];
+
+            try {
+                for (const feedUrl of rssFeeds) {
+                    const response = await fetch(feedUrl);
+                    const data = await response.json();
+                    if (data && data.items) {
+                        data.items.forEach(item => {
+                            if (item.title) {
+                                allNews.push(item.title);
+                            }
+                        });
+                    }
+                }
+            } catch (error) {
+                console.log("Pobieranie wiadomości RSS w tle, użyto bufora zastępczego.");
+            }
+
+            // Generowanie elementów HTML paska
+            container.innerHTML = allNews.map(news => `<span><i class="fa-solid fa-bolt"></i> ${news}</span>`).join('');
+
+            // Płynna animacja w JavaScript (requestAnimationFrame) eliminująca jakiekolwiek zacięcia
+            let position = container.parentElement.clientWidth;
+            const speed = 1.2; // Prędkość przesuwania
+
+            function step() {
+                position -= speed;
+                const textWidth = container.clientWidth;
+                
+                // Gdy cały tekst przesunie się w lewo, zapętlaj płynnie od prawej strony
+                if (position <= -textWidth) {
+                    position = container.parentElement.clientWidth;
+                }
+                
+                container.style.transform = `translate3d(${position}px, 0, 0)`;
+                requestAnimationFrame(step);
+            }
+
+            requestAnimationFrame(step);
+        }
+
+        // --- Pogoda IMGW ---
         const weatherData = {
             'elk': { name: 'Ełk (Mazury)', temp: '4°C', condition: 'Mgły i zamglenia', icon: 'fa-smog', wind: '8 km/h', pressure: '1022 hPa', humidity: '85%', night: '-2°C' },
             'warminsko_mazurskie': { name: 'Warmińsko-Mazurskie', temp: '4°C', condition: 'Zachmurzenie duże', icon: 'fa-cloud', wind: '11 km/h', pressure: '1021 hPa', humidity: '82%', night: '-1°C' },
@@ -811,14 +861,12 @@
                 }
             }
 
-            // Aktualizacja sekcji Teraz / Następnie
             const currentShowObj = scheduleItems[activeIndex];
             const nextShowObj = scheduleItems[(activeIndex + 1) % scheduleItems.length];
 
             document.getElementById('current-show').innerText = currentShowObj.title;
             document.getElementById('next-show').innerText = nextShowObj.title;
 
-            // Podświetlenie aktywnego elementu w tabeli ramówki na stronie głównej
             const domItems = document.querySelectorAll('#schedule-list .schedule-item');
             domItems.forEach((el, idx) => {
                 if (idx === activeIndex) {
@@ -830,6 +878,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            initLiveNewsTicker();
             updateScheduleAndNowNext();
             setInterval(updateScheduleAndNowNext, 15000);
         });
