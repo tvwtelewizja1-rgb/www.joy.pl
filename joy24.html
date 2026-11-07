@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --card-bg: rgba(15, 23, 42, 0.9);
+            --card-bg: rgba(15, 23, 42, 0.88);
             --text-color: #ffffff;
             --text-muted: #cbd5e1;
         }
@@ -19,7 +19,7 @@
             font-weight: 700;
         }
         body {
-            /* Nowe tło – czerwony gradient z pliku graficznego */
+            /* Pełne tło z nowego czerwonego gradientu */
             background: url('gradient-bg.jpg') no-repeat center center fixed;
             background-size: cover;
             color: var(--text-color);
@@ -29,7 +29,7 @@
         }
 
         header {
-            background-color: rgba(13, 71, 161, 0.85);
+            background-color: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(8px);
             padding: 1rem 2rem;
             position: sticky;
@@ -72,7 +72,6 @@
             gap: 1.5rem;
         }
 
-        /* Idealne uwidocznienie loga Joy 24 pod nowym tłem */
         .header-logo-img {
             max-width: 210px;
             height: auto;
@@ -136,7 +135,15 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        footer { background-color: rgba(13, 71, 161, 0.85); backdrop-filter: blur(8px); text-align: center; padding: 2rem; color: var(--text-muted); margin-top: auto; }
+        footer { 
+            background-color: rgba(0, 0, 0, 0.3); 
+            backdrop-filter: blur(8px); 
+            text-align: center; 
+            padding: 2rem; 
+            color: var(--text-muted); 
+            margin-top: auto; 
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
     </style>
 </head>
 <body>
@@ -157,7 +164,6 @@
 
     <div class="container">
         <div class="testcard-box test-card-box">
-            <!-- Wyraźnie widoczne logo Joy 24 -->
             <img src="joy24-logo.png" alt="Joy 24 Logo" class="header-logo-img">
             
             <div class="test-status-badge">
@@ -168,7 +174,6 @@
                 Kanał <strong>Joy 24</strong> znajduje się obecnie w zamkniętej fazie testów systemowych oraz optymalizacji sygnału nadawczego. Oficjalna ramówka i regularny program pojawią się wkrótce!
             </p>
 
-            <!-- Klasyczne pasy testowe telewizyjne -->
             <div class="smpte-bars">
                 <div class="bar bar-gray"></div>
                 <div class="bar bar-yellow"></div>
@@ -179,7 +184,6 @@
                 <div class="bar bar-blue"></div>
             </div>
 
-            <!-- Zegar czasu warszawskiego -->
             <div class="test-clock-box">
                 <i class="fa-regular fa-clock"></i>
                 <span id="warsaw-time-clock">Ładowanie czasu...</span>
