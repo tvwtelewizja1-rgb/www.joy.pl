@@ -70,15 +70,14 @@
             gap: 1.5rem;
         }
 
-        /* Mocno powiększony kontener na logo z centrowaniem */
+        /* Usunięto ramkę i tło – teraz logo jest czyste i wycentrowane */
         .logo-wrapper {
-            background: #ffffff;
-            padding: 8px;
-            border-radius: 18px;
-            box-shadow: 0 0 25px rgba(255, 235, 59, 0.35), 0 8px 25px rgba(0,0,0,0.5);
-            border: 3px solid #ffeb3b;
+            background: transparent;
+            padding: 0;
+            border: none;
+            box-shadow: none;
             width: 240px;
-            height: 100px;
+            height: 90px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -89,7 +88,7 @@
             width: 100%;
             height: auto;
             object-fit: contain;
-            transform: scale(2.0); /* Powiększa sam rysunek logo wewnątrz ramki, niwelując białe marginesy */
+            transform: scale(1.6);
         }
 
         .smpte-bars {
