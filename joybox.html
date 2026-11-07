@@ -1,1 +1,221 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joy Box – TV Joy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --text-color: #ffffff;
+            --text-muted: #cbd5e1;
+        }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Gotham Bold', 'Gotham', 'Segoe UI', sans-serif; 
+            font-weight: 700;
+        }
+        body {
+            background: linear-gradient(to bottom, #1e88e5, #0d47a1);
+            background-attachment: fixed;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        header {
+            background-color: rgba(13, 71, 161, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .logo { text-decoration: none; display: flex; align-items: center; gap: 12px; }
+        
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffeb3b;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
 
+        nav { display: flex; gap: 1.5rem; align-items: center; }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; }
+        nav a:hover, nav a.active { color: #ffeb3b; }
+        .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
+        
+        .container { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; flex-grow: 1; width: 100%; }
+        
+        .hero-box {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .hero-box h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: #ffeb3b;
+        }
+        .hero-box p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        /* Lista kanałów */
+        .channels-box {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .channel-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            gap: 1rem;
+            transition: background 0.2s;
+            border-radius: 8px;
+        }
+        .channel-item:hover {
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+        .channel-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        .channel-num {
+            font-weight: bold;
+            color: #ffeb3b;
+            min-width: 45px;
+            font-size: 1.1rem;
+        }
+        .channel-name {
+            font-size: 1.05rem;
+            color: #ffffff;
+        }
+        
+        /* Badges dla pakietów */
+        .badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-normal { background-color: rgba(30, 136, 229, 0.3); color: #90caf9; border: 1px solid rgba(30, 136, 229, 0.5); }
+        .badge-mid { background-color: rgba(255, 152, 0, 0.3); color: #ffb74d; border: 1px solid rgba(255, 152, 0, 0.5); }
+        .badge-vip { background-color: rgba(156, 39, 176, 0.3); color: #e1bee7; border: 1px solid rgba(156, 39, 176, 0.5); }
+        .badge-extra { background-color: rgba(76, 175, 80, 0.3); color: #a5d6a7; border: 1px solid rgba(76, 175, 80, 0.5); }
+        .badge-vod { background-color: rgba(244, 67, 54, 0.3); color: #ef9a9a; border: 1px solid rgba(244, 67, 54, 0.5); }
+        .badge-empty { background-color: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.3); }
+
+        footer { background-color: rgba(13, 71, 161, 0.95); text-align: center; padding: 2rem; color: var(--text-muted); margin-top: 3rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="PFPjoy10kl.jpg" alt="TV Joy Logo" class="logo-img">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="joy24.html">Joy 24</a>
+            <a href="joybox.html" class="active">Joy Box</a>
+            <a href="https://www.youtube.com/@joy_twoja_u%C5%9Bmiechni%C4%99ta_tv" target="_blank" class="yt-btn">
+                <i class="fa-brands fa-youtube"></i> Subskrybuj
+            </a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="hero-box">
+            <h1>Joy Box</h1>
+            <p>Pełna lista kanałów telewizyjnych dostępnych w usłudze Joy Box</p>
+        </div>
+
+        <div class="channels-box">
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">100</span><span class="channel-name">Joy</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">101</span><span class="channel-name">Olixer</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">102</span><span class="channel-name">Olixer Music</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">103</span><span class="channel-name">Infiniti</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">104</span><span class="channel-name">Infiniti 2</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">105</span><span class="channel-name">TV94</span></div><span class="badge badge-mid">Mid</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">106</span><span class="channel-name">Vilion</span></div><span class="badge badge-mid">Mid</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">107</span><span class="channel-name">ITR</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">108</span><span class="channel-name">ITR >>1</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">109</span><span class="channel-name">ITR Hits</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">110</span><span class="channel-name">ITR Action</span></div><span class="badge badge-vip">VIP+</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">111</span><span class="channel-name">NetWave</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">112</span><span class="channel-name">Olixer News</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">113</span><span class="channel-name">Nex1</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">114</span><span class="channel-name">Nex2</span></div><span class="badge badge-mid">Mid</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">115</span><span class="channel-name">NexSPT</span></div><span class="badge badge-mid">Mid</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">116</span><span class="channel-name">snap hd</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">117</span><span class="channel-name">In Vibe</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">118</span><span class="channel-name">Tptv</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">119</span><span class="channel-name">tptv extra</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">120</span><span class="channel-name">TWP1</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">121</span><span class="channel-name">TWP2</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">122</span><span class="channel-name">Tptv music</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">123</span><span class="channel-name">camTV</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">124</span><span class="channel-name">ITR festival</span></div><span class="badge badge-vip">VIP+</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">125</span><span class="channel-name">ITR comedy</span></div><span class="badge badge-vip">VIP+</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">126</span><span class="channel-name">ITR emotion</span></div><span class="badge badge-vip">VIP+</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">127</span><span class="channel-name">Option!</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">128</span><span class="channel-name">Infiniti Music</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">129</span><span class="channel-name">quartz</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">130</span><span class="channel-name">INFO VOD</span></div><span class="badge badge-vod">VOD</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">131</span><span class="channel-name">Fotel TV</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">132</span><span class="channel-name">Fotel 2</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">133</span><span class="channel-name">KTA:TV</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">134</span><span class="channel-name">KTA:TV 2</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">135</span><span class="channel-name">KTA:TV Music</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">136</span><span class="channel-name">KTA:TV Dance</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">137</span><span class="channel-name">KTA:TV Hits</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">138</span><span class="channel-name">1.TV</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">139</span><span class="channel-name">MAX</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">140</span><span class="channel-name">Star</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">141</span><span class="channel-name">KTA:PUNKT</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">142</span><span class="channel-name">Słoneczna</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">143</span><span class="channel-name">Rytmiczny Wymiar</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">144</span><span class="channel-name">Fotel :3</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">145</span><span class="channel-name">Ktoś TV</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">146</span><span class="channel-name">Ktoś Inter</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">147</span><span class="channel-name">ATM 1</span></div><span class="badge badge-mid">Mid</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">148</span><span class="channel-name">ananta hd</span></div><span class="badge badge-mid">Mid</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">149</span><span class="channel-name">tv17</span></div><span class="badge badge-mid">Mid</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">150</span><span class="channel-name">fotel tv 4k</span></div><span class="badge badge-mid">Mid</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">151</span><span class="channel-name">ryż biały</span></div><span class="badge badge-extra">Extra</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">152</span><span class="channel-name">astra</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">153</span><span class="channel-name">Snap</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">154</span><span class="channel-name">kosmos</span></div><span class="badge badge-normal">Normal</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">155</span><span class="channel-name">Pusty Kanał</span></div><span class="badge badge-empty">Wolny</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">156</span><span class="channel-name">Pusty Kanał</span></div><span class="badge badge-empty">Wolny</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">157</span><span class="channel-name">Pusty Kanał</span></div><span class="badge badge-empty">Wolny</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">158</span><span class="channel-name">Pusty Kanał</span></div><span class="badge badge-empty">Wolny</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">159</span><span class="channel-name">Pusty Kanał</span></div><span class="badge badge-empty">Wolny</span></div>
+            <div class="channel-item"><div class="channel-left"><span class="channel-num">160</span><span class="channel-name">Co w Telewizji?</span></div><span class="badge badge-vod">VOD</span></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 TV Joy – Twoja Uśmiechnięta TV. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+</body>
+</html>
