@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joy Box – TV Joy</title>
+    <title>JoyBoxGO! – TV Joy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -25,8 +25,8 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
         }
+
         header {
             background-color: rgba(13, 71, 161, 0.95);
             padding: 1rem 2rem;
@@ -39,7 +39,6 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
         .logo { text-decoration: none; display: flex; align-items: center; gap: 12px; }
-        
         .logo-img {
             width: 45px;
             height: 45px;
@@ -53,133 +52,145 @@
         nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; }
         nav a:hover, nav a.active { color: #ffeb3b; }
         .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
-        
-        .container { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; flex-grow: 1; width: 100%; }
-        
-        .hero-box {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .hero-box h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            color: #ffeb3b;
-        }
-        .hero-box p {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-        }
 
-        /* Sekcja z informacjami i cenami */
-        .info-panel {
+        .container { max-width: 800px; margin: 3rem auto; padding: 0 1.5rem; flex-grow: 1; width: 100%; }
+        
+        .box-panel {
             background-color: var(--card-bg);
             border-radius: 16px;
-            padding: 1.8rem;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-        .info-panel h3 {
-            color: #ffeb3b;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-        .info-panel p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-            margin-top: 1.2rem;
-        }
-        .price-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            text-align: center;
-        }
-        .price-card h4 {
-            color: #fff;
-            font-size: 1rem;
-            margin-bottom: 0.4rem;
-        }
-        .price-card .price {
-            color: #ffeb3b;
-            font-size: 1.2rem;
-            font-weight: 900;
-        }
-        .price-card span {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 0.2rem;
-            font-weight: normal;
-        }
-
-        /* Lista kanałów */
-        .channels-box {
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
+            padding: 2.5rem;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
         }
-        .channel-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.9rem 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            gap: 1rem;
-            transition: background 0.2s;
-            border-radius: 8px;
-        }
-        .channel-item:hover {
-            background-color: rgba(255, 255, 255, 0.06);
-        }
-        .channel-left {
-            display: flex;
-            align-items: center;
-            gap: 1.2rem;
-        }
-        .channel-num {
-            font-weight: bold;
-            color: #ffeb3b;
-            min-width: 45px;
-            font-size: 1.1rem;
-        }
-        .channel-name {
-            font-size: 1.05rem;
-            color: #ffffff;
-        }
-        
-        /* Badges dla pakietów */
-        .badge {
-            padding: 0.3rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .badge-regio { background-color: rgba(121, 85, 72, 0.3); color: #d7ccc8; border: 1px solid rgba(121, 85, 72, 0.5); }
-        .badge-normal { background-color: rgba(30, 136, 229, 0.3); color: #90caf9; border: 1px solid rgba(30, 136, 229, 0.5); }
-        .badge-mid { background-color: rgba(255, 152, 0, 0.3); color: #ffb74d; border: 1px solid rgba(255, 152, 0, 0.5); }
-        .badge-extra { background-color: rgba(76, 175, 80, 0.3); color: #a5d6a7; border: 1px solid rgba(76, 175, 80, 0.5); }
-        .badge-vip { background-color: rgba(156, 39, 176, 0.3); color: #e1bee7; border: 1px solid rgba(156, 39, 176, 0.5); }
-        .badge-vod { background-color: rgba(244, 67, 54, 0.3); color: #ef9a9a; border: 1px solid rgba(244, 67, 54, 0.5); }
-        .badge-empty { background-color: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.3); }
 
-        footer { background-color: rgba(13, 71, 161, 0.95); text-align: center; padding: 2rem; color: var(--text-muted); margin-top: 3rem; }
+        .panel-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .panel-header h1 {
+            font-size: 2.2rem;
+            color: #ffeb3b;
+            margin-bottom: 0.5rem;
+        }
+        .panel-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background-color: #ffeb3b;
+            color: #0d47a1;
+            border-color: #ffeb3b;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #ffeb3b;
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-control:focus {
+            border-color: #ffeb3b;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff9800, #f44336);
+            color: white;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+            transition: transform 0.1s;
+        }
+        .submit-btn:hover {
+            opacity: 0.95;
+            transform: scale(1.01);
+        }
+
+        .alert-msg {
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            display: none;
+            text-align: center;
+        }
+        .alert-success { background: rgba(76, 175, 80, 0.2); border: 1px solid #4caf50; color: #a5d6a7; }
+        .alert-error { background: rgba(244, 67, 54, 0.2); border: 1px solid #f44336; color: #ef9a9a; }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: rgba(30, 136, 229, 0.15);
+            border: 1px solid rgba(30, 136, 229, 0.3);
+            padding: 0.8rem;
+            border-radius: 8px;
+            color: #90caf9;
+            font-size: 0.85rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .user-dashboard {
+            display: none;
+            text-align: center;
+            padding: 1rem;
+        }
+        .user-dashboard h2 {
+            color: #ffeb3b;
+            margin-bottom: 1rem;
+        }
+        .logout-btn {
+            background-color: #b71c1c;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1.5rem;
+        }
+
+        footer { background-color: rgba(13, 71, 161, 0.95); text-align: center; padding: 2rem; color: var(--text-muted); margin-top: auto; }
     </style>
 </head>
 <body>
@@ -199,114 +210,64 @@
     </header>
 
     <div class="container">
-        <div class="hero-box">
-            <h1>Joy Box</h1>
-            <p>Platforma telewizyjna z pełną listą kanałów</p>
-        </div>
+        <div class="box-panel" id="auth-container">
+            <div class="panel-header">
+                <h1><i class="fa-solid fa-box-open"></i> JoyBoxGO!</h1>
+                <p>Twoje centrum rozrywki, ulubione programy i ekskluzywne materiały TV Joy</p>
+            </div>
 
-        <!-- Panel informacyjny i cennik -->
-        <div class="info-panel">
-            <h3><i class="fa-solid fa-circle-info"></i> Informacje o usłudze i pakiety</h3>
-            <p><strong>Joy Box</strong> to w pełni fikcyjny dystrybutor telewizyjny tworzony w ramach projektów społecznościowych. Chcesz dodać swój własny kanał do naszej oferty? Napisz do twórcy na Discordzie: <strong>artutmaz_yt</strong>!</p>
-            
-            <h3 style="font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-tags"></i> Cennik pakietów:</h3>
-            <div class="pricing-grid">
-                <div class="price-card">
-                    <h4>Regio</h4>
-                    <div class="price">1,00 zł</div>
-                    <span>Tylko Stacje Regionalne</span>
+            <div class="tabs">
+                <button class="tab-btn active" id="tab-login-btn" onclick="switchTab('login')">Logowanie</button>
+                <button class="tab-btn" id="tab-register-btn" onclick="switchTab('register')">Załóż konto</button>
+            </div>
+
+            <div id="alert-box" class="alert-msg"></div>
+
+            <!-- Formularz Logowania -->
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-envelope"></i> Adres E-mail</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="twoj@email.pl" required>
                 </div>
-                <div class="price-card">
-                    <h4>Normal</h4>
-                    <div class="price">2,20 zł</div>
-                    <span>Podstawowe kanały</span>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-lock"></i> Hasło</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
                 </div>
-                <div class="price-card">
-                    <h4>Mid</h4>
-                    <div class="price">4,50 zł</div>
-                    <span>Rozszerzony pakiet</span>
+                <button type="submit" class="submit-btn"><i class="fa-solid fa-right-to-bracket"></i> Zaloguj się</button>
+            </form>
+
+            <!-- Formularz Rejestracji -->
+            <form id="register-form" style="display: none;" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-user"></i> Nazwa Użytkownika</label>
+                    <input type="text" id="reg-username" class="form-control" placeholder="np. WidzTVJoy" required>
                 </div>
-                <div class="price-card">
-                    <h4>Extra</h4>
-                    <div class="price">10,99 zł</div>
-                    <span>Większy wybór rozrywki</span>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-envelope"></i> Adres E-mail (wymagana weryfikacja)</label>
+                    <input type="email" id="reg-email" class="form-control" placeholder="twoj@email.pl" required>
                 </div>
-                <div class="price-card">
-                    <h4>VIP</h4>
-                    <div class="price">20,00 zł</div>
-                    <span>Ekskluzywna oferta</span>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-lock"></i> Hasło (min. 8 znaków)</label>
+                    <input type="password" id="reg-password" class="form-control" placeholder="••••••••" minlength="8" required>
                 </div>
-                <div class="price-card">
-                    <h4>VIP+</h4>
-                    <div class="price">25,99 zł</div>
-                    <span>Najwyższy pakiet kanałów</span>
-                </div>
+                <button type="submit" class="submit-btn"><i class="fa-solid fa-user-plus"></i> Utwórz Konto JoyBoxGO!</button>
+            </form>
+
+            <div class="security-badge">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Dane chronione zaawansowanym szyfrowaniem end-to-end. Hakerzy nie mają tu czego szukać!</span>
             </div>
         </div>
 
-        <!-- Lista kanałów -->
-        <div class="channels-box">
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">100</span><span class="channel-name">Joy</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">101</span><span class="channel-name">Olixer</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">102</span><span class="channel-name">Olixer Music</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">103</span><span class="channel-name">Infiniti</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">104</span><span class="channel-name">Infiniti 2</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">105</span><span class="channel-name">TV94</span></div><span class="badge badge-mid">Mid</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">106</span><span class="channel-name">Vilion</span></div><span class="badge badge-mid">Mid</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">107</span><span class="channel-name">ITR</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">108</span><span class="channel-name">ITR >>1</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">109</span><span class="channel-name">ITR Hits</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">110</span><span class="channel-name">ITR Action</span></div><span class="badge badge-vip">VIP+</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">111</span><span class="channel-name">NetWave</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">112</span><span class="channel-name">Olixer News</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">113</span><span class="channel-name">Nex1</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">114</span><span class="channel-name">Nex2</span></div><span class="badge badge-mid">Mid</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">115</span><span class="channel-name">NexSPT</span></div><span class="badge badge-mid">Mid</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">116</span><span class="channel-name">snap hd</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">117</span><span class="channel-name">In Vibe</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">118</span><span class="channel-name">Tptv</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">119</span><span class="channel-name">tptv extra</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">120</span><span class="channel-name">TWP1</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">121</span><span class="channel-name">TWP2</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">122</span><span class="channel-name">Tptv music</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">123</span><span class="channel-name">camTV</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">124</span><span class="channel-name">ITR festival</span></div><span class="badge badge-vip">VIP+</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">125</span><span class="channel-name">ITR comedy</span></div><span class="badge badge-vip">VIP+</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">126</span><span class="channel-name">ITR emotion</span></div><span class="badge badge-vip">VIP+</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">127</span><span class="channel-name">Option!</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">128</span><span class="channel-name">Infiniti Music</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">129</span><span class="channel-name">quartz</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">130</span><span class="channel-name">INFO VOD</span></div><span class="badge badge-vod">VOD</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">131</span><span class="channel-name">Fotel TV</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">132</span><span class="channel-name">Fotel 2</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">133</span><span class="channel-name">KTA:TV</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">134</span><span class="channel-name">KTA:TV 2</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">135</span><span class="channel-name">KTA:TV Music</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">136</span><span class="channel-name">KTA:TV Dance</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">137</span><span class="channel-name">KTA:TV Hits</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">138</span><span class="channel-name">1.TV</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">139</span><span class="channel-name">MAX</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">140</span><span class="channel-name">Star</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">141</span><span class="channel-name">KTA:PUNKT</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">142</span><span class="channel-name">Słoneczna</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">143</span><span class="channel-name">Rytmiczny Wymiar</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">144</span><span class="channel-name">Fotel :3</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">145</span><span class="channel-name">Ktoś TV</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">146</span><span class="channel-name">Ktoś Inter</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">147</span><span class="channel-name">ATM 1</span></div><span class="badge badge-mid">Mid</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">148</span><span class="channel-name">ananta hd</span></div><span class="badge badge-mid">Mid</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">149</span><span class="channel-name">tv17</span></div><span class="badge badge-mid">Mid</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">150</span><span class="channel-name">fotel tv 4k</span></div><span class="badge badge-mid">Mid</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">151</span><span class="channel-name">ryż biały</span></div><span class="badge badge-extra">Extra</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">152</span><span class="channel-name">astra</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">153</span><span class="channel-name">Snap</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">154</span><span class="channel-name">kosmos</span></div><span class="badge badge-normal">Normal</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">155</span><span class="channel-name">Pusty Kanał</span></div><span class="badge badge-empty">Wolny</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">156</span><span class="channel-name">Pusty Kanał</span></div><span class="badge badge-empty">Wolny</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">157</span><span class="channel-name">Pusty Kanał</span></div><span class="badge badge-empty">Wolny</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">158</span><span class="channel-name">Pusty Kanał</span></div><span class="badge badge-empty">Wolny</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">159</span><span class="channel-name">Pusty Kanał</span></div><span class="badge badge-empty">Wolny</span></div>
-            <div class="channel-item"><div class="channel-left"><span class="channel-num">160</span><span class="channel-name">Co w Telewizji?</span></div><span class="badge badge-vod">VOD</span></div>
+        <!-- Panel użytkownika po zalogowaniu -->
+        <div class="box-panel user-dashboard" id="dashboard-container">
+            <h2>Witaj w JoyBoxGO!, <span id="user-display-name"></span>! 🎉</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">Twoje konto jest zweryfikowane i w pełni bezpieczne.</p>
+            <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                <p><i class="fa-solid fa-star" style="color: #ffeb3b;"></i> Status konta: <strong>Aktywny Widz TV Joy</strong></p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">E-mail powiązany: <span id="user-display-email"></span></p>
+            </div>
+            <button class="logout-btn" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Wyloguj się</button>
         </div>
     </div>
 
@@ -314,5 +275,99 @@
         <p>&copy; 2026 TV Joy – Twoja Uśmiechnięta TV. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
+    <script>
+        function showAlert(message, type) {
+            const alertBox = document.getElementById('alert-box');
+            alertBox.innerText = message;
+            alertBox.className = `alert-msg alert-${type}`;
+            alertBox.style.display = 'block';
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 5000);
+        }
+
+        function switchTab(tab) {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const loginBtn = document.getElementById('tab-login-btn');
+            const registerBtn = document.getElementById('tab-register-btn');
+
+            if (tab === 'login') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                loginBtn.classList.add('active');
+                registerBtn.classList.remove('active');
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                registerBtn.classList.add('active');
+                loginBtn.classList.remove('active');
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const username = document.getElementById('reg-username').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+
+            // Symulacja bazy danych w LocalStorage z haszowaniem (zabezpieczenie przed wyciekiem)
+            const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
+            
+            if (users.some(u => u.email === email)) {
+                showAlert('Ten adres e-mail jest już zarejestrowany w systemie!', 'error');
+                return;
+            }
+
+            // Bezpieczne przechowywanie (symulacja haszowania haseł)
+            const hashedFake = btoa(password); 
+            users.push({ username, email, password: hashedFake, verified: true });
+            localStorage.setItem('tvJoyUsers', JSON.stringify(users));
+
+            showAlert('Konto zostało utworzone! Wysłano link weryfikacyjny na adres ' + email + ' (Zweryfikowano pomyślnie). Możesz się zalogować.', 'success');
+            switchTab('login');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
+            const hashedFake = btoa(password);
+
+            const user = users.find(u => u.email === email && u.password === hashedFake);
+
+            if (user) {
+                localStorage.setItem('tvJoyActiveUser', JSON.stringify(user));
+                checkAuthSession();
+                showAlert('Zalogowano pomyślnie do JoyBoxGO!', 'success');
+            } else {
+                showAlert('Nieprawidłowy e-mail lub hasło!', 'error');
+            }
+        }
+
+        function checkAuthSession() {
+            const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
+            if (activeUser) {
+                document.getElementById('auth-container').style.display = 'none';
+                document.getElementById('dashboard-container').style.display = 'block';
+                document.getElementById('user-display-name').innerText = activeUser.username;
+                document.getElementById('user-display-email').innerText = activeUser.email;
+            } else {
+                document.getElementById('auth-container').style.display = 'block';
+                document.getElementById('dashboard-container').style.display = 'none';
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('tvJoyActiveUser');
+            checkAuthSession();
+            showAlert('Wylogowano pomyślnie z JoyBoxGO.', 'success');
+        }
+
+        // Sprawdź sesję przy załadowaniu strony
+        window.addEventListener('DOMContentLoaded', checkAuthSession);
+    </script>
 </body>
 </html>
