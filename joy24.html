@@ -19,7 +19,6 @@
             font-weight: 700;
         }
         body {
-            /* Czerwony gradient stacyjny */
             background: linear-gradient(135deg, #e50914 0%, #b30000 50%, #660000 100%);
             background-attachment: fixed;
             color: var(--text-color);
@@ -57,7 +56,6 @@
 
         .container { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; flex-grow: 1; width: 100%; display: flex; flex-direction: column; justify-content: center; }
 
-        /* Plansza testowa */
         .test-card-box {
             background-color: var(--card-bg);
             border-radius: 16px;
@@ -72,28 +70,27 @@
             gap: 1.5rem;
         }
 
-        /* Kontener i idealne dopasowanie logo Joy 24 bez wielkiego białego tła */
+        /* Poprawiony kontener: ukrywa nadmiarowe marginesy grafiki i powiększa logo */
         .logo-wrapper {
             background: #ffffff;
-            padding: 1.2rem 2rem;
-            border-radius: 20px;
-            box-shadow: 0 0 25px rgba(255, 235, 59, 0.25), 0 8px 25px rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(255, 235, 59, 0.3), 0 8px 25px rgba(0,0,0,0.5);
             border: 3px solid #ffeb3b;
+            width: 220px;
+            height: 90px;
             display: flex;
             justify-content: center;
             align-items: center;
-            max-width: 280px;
-            width: 100%;
+            overflow: hidden; /* Odcina puste białe tło z pliku */
         }
 
         .header-logo-img {
-            width: 100%;
-            max-height: 110px;
+            width: 150%; /* Powiększa sam rysunek logo wewnątrz ramki */
+            height: auto;
             object-fit: contain;
-            display: block;
         }
 
-        /* Pasy testowe SMPTE */
         .smpte-bars {
             width: 100%;
             height: 140px;
@@ -175,7 +172,6 @@
 
     <div class="container">
         <div class="testcard-box test-card-box">
-            <!-- Elegancki boks na logo z wypełnionym obszarem -->
             <div class="logo-wrapper">
                 <img src="joy24-logo.png" alt="Joy 24 Logo" class="header-logo-img">
             </div>
