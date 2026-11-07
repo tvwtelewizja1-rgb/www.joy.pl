@@ -398,7 +398,6 @@
             overflow: hidden;
         }
 
-        /* Wbudowany czysty SVG z geodezyjnym kształtem Polski */
         .poland-svg-bg {
             position: absolute;
             top: 4%;
@@ -475,54 +474,6 @@
         .schedule-time { font-weight: bold; color: #ffeb3b; min-width: 70px; font-size: 1.1rem; }
         .schedule-img { width: 60px; height: 40px; border-radius: 6px; object-fit: cover; background: #334155; display: flex; align-items: center; justify-content: center; color: #cbd5e1; font-size: 1.2rem; }
         .schedule-title { flex-grow: 1; font-size: 1.05rem; }
-
-        /* Sekcja Spotify Polecajki */
-        .spotify-section {
-            margin-top: 4rem;
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .spotify-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .spotify-title {
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            color: #1db954;
-        }
-        .spotify-btn {
-            background-color: #1db954;
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-        .spotify-btn:hover {
-            background-color: #1ed760;
-            transform: scale(1.03);
-        }
-        .spotify-player-wrapper {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-        }
 
         footer { background-color: rgba(13, 71, 161, 0.95); text-align: center; padding: 2rem; color: var(--text-muted); margin-top: 3rem; }
     </style>
@@ -666,14 +617,13 @@
                         </div>
                     </div>
 
-                    <!-- Dokładna Mapa Geograficzna Polski SVG (kodowana bezpośrednio) -->
+                    <!-- Dokładna Mapa Geograficzna Polski SVG -->
                     <div class="weather-map-container">
                         <div class="tv-map-header">
                             <span><i class="fa-solid fa-map-location-dot"></i> Synoptyczna Mapa Polski IMGW</span>
                             <span style="font-size: 0.75rem; color: #90caf9;">Wizualizacja TV Joy</span>
                         </div>
                         <div class="tv-map-screen">
-                            <!-- Dokładna wektorowa mapa granicy RP -->
                             <svg class="poland-svg-bg" viewBox="0 0 600 550" fill="none">
                                 <path d="M 124 100 L 150 95 L 180 102 L 210 90 L 235 60 L 260 48 L 275 62 L 290 75 L 305 60 L 320 68 L 335 88 L 350 92 L 375 80 L 415 88 L 435 70 L 465 82 L 490 100 L 520 125 L 535 155 L 515 185 L 530 220 L 555 245 L 540 280 L 525 315 L 535 365 L 510 405 L 520 440 L 495 470 L 450 495 L 420 478 L 390 515 L 365 525 L 340 500 L 305 510 L 275 490 L 245 505 L 215 480 L 185 490 L 155 450 L 125 440 L 105 455 L 80 435 L 70 400 L 52 360 L 68 320 L 58 275 L 75 235 L 60 195 L 85 160 L 105 168 L 115 135 Z" 
                                       fill="rgba(30, 136, 229, 0.12)" stroke="#38bdf8" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
@@ -681,7 +631,6 @@
                                       fill="rgba(56, 189, 248, 0.2)" stroke="#ffeb3b" stroke-width="2.5" stroke-linecap="round"/>
                             </svg>
 
-                            <!-- Stacje rozmieszczone idealnie na obszarze Polski -->
                             <div class="map-station-node" style="top: 24%; left: 22%;" onclick="changeWeather('zachodniopomorskie', document.querySelectorAll('.weather-tab')[8])">Szczecin 9°C</div>
                             <div class="map-station-node" style="top: 17%; left: 45%;" onclick="changeWeather('pomorskie', document.querySelectorAll('.weather-tab')[7])">Gdańsk 8°C</div>
                             <div class="map-station-node" style="top: 26%; left: 74%;" onclick="changeWeather('elk', document.querySelectorAll('.weather-tab')[0])">Ełk 4°C</div>
@@ -702,6 +651,7 @@
             </div>
         </section>
 
+        <!-- Pełna, zamknięta ramówka -->
         <section id="ramowka">
             <h2 class="section-title"><i class="fa-solid fa-calendar-days"></i> Całodobowa Ramówka TV Joy</h2>
             <div class="schedule-box" id="schedule-list">
@@ -714,42 +664,29 @@
                 <div class="schedule-item" data-time="08:20"><span class="schedule-time">08:20</span><div class="schedule-img"><i class="fa-solid fa-music"></i></div><span class="schedule-title">Muzyczna pobudka — teledyski i hity</span></div>
                 <div class="schedule-item" data-time="09:00"><span class="schedule-time">09:00</span><div class="schedule-img"><i class="fa-solid fa-compact-disc"></i></div><span class="schedule-title">Hity XX wieku</span></div>
                 <div class="schedule-item" data-time="09:25"><span class="schedule-time">09:25</span><div class="schedule-img"><i class="fa-solid fa-plane"></i></div><span class="schedule-title">Podróże bez biletu — magazyn podróżniczy</span></div>
-                <div class="schedule-item" data-time="10:00"><span class="schedule-time">10:00</span><div class="schedule-img"><i class="fa-solid fa-user-tie"></i></div><span class="schedule-title">Czterdziestolatek</span></div>
-                <div class="schedule-item" data-time="10:50"><span class="schedule-time">10:50</span><div class="schedule-img"><i class="fa-solid fa-star"></i></div><span class="schedule-title">Stare, ale jare</span></div>
+                <div class="schedule-item" data-time="10:00"><span class="schedule-time">10:00</span><div class="schedule-img"><i class="fa-solid fa-film"></i></div><span class="schedule-title">Czterdziestolatek</span></div>
+                <div class="schedule-item" data-time="10:50"><span class="schedule-time">10:50</span><div class="schedule-img"><i class="fa-solid fa-box-archive"></i></div><span class="schedule-title">Stare, ale jare</span></div>
                 <div class="schedule-item" data-time="11:10"><span class="schedule-time">11:10</span><div class="schedule-img"><i class="fa-solid fa-paw"></i></div><span class="schedule-title">Świat zwierząt — film przyrodniczy</span></div>
-                <div class="schedule-item" data-time="11:40"><span class="schedule-time">11:40</span><div class="schedule-img"><i class="fa-solid fa-child"></i></div><span class="schedule-title">Dziecięce Hity</span></div>
+                <div class="schedule-item" data-time="11:40"><span class="schedule-time">11:40</span><div class="schedule-img"><i class="fa-solid fa-face-smile"></i></div><span class="schedule-title">Dziecięce Hity</span></div>
                 <div class="schedule-item" data-time="12:00"><span class="schedule-time">12:00</span><div class="schedule-img"><i class="fa-solid fa-book-open"></i></div><span class="schedule-title">Muminki</span></div>
-                <div class="schedule-item" data-time="12:25"><span class="schedule-time">12:25</span><div class="schedule-img"><i class="fa-solid fa-child"></i></div><span class="schedule-title">Dziecięce Hity</span></div>
+                <div class="schedule-item" data-time="12:25"><span class="schedule-time">12:25</span><div class="schedule-img"><i class="fa-solid fa-face-smile"></i></div><span class="schedule-title">Dziecięce Hity</span></div>
                 <div class="schedule-item" data-time="12:45"><span class="schedule-time">12:45</span><div class="schedule-img"><i class="fa-solid fa-wand-magic-sparkles"></i></div><span class="schedule-title">Bajkowa kraina — nowe pasmo animacji</span></div>
                 <div class="schedule-item" data-time="13:10"><span class="schedule-time">13:10</span><div class="schedule-img"><i class="fa-solid fa-circle-question"></i></div><span class="schedule-title">Prawda czy Fałsz</span></div>
                 <div class="schedule-item" data-time="13:45"><span class="schedule-time">13:45</span><div class="schedule-img"><i class="fa-solid fa-house"></i></div><span class="schedule-title">Rodzinka.pl — 2 odcinki</span></div>
-                <div class="schedule-item" data-time="14:35"><span class="schedule-time">14:35</span><div class="schedule-img"><i class="fa-solid fa-film"></i></div><span class="schedule-title">Sami Swoi</span></div>
-                <div class="schedule-item" data-time="15:00"><span class="schedule-time">15:00</span><div class="schedule-img"><i class="fa-solid fa-newspaper"></i></div><span class="schedule-title">Informacje</span></div>
-                <div class="schedule-item" data-time="15:15"><span class="schedule-time">15:15</span><div class="schedule-img"><i class="fa-solid fa-masks-theater"></i></div><span class="schedule-title">Moda na sukces</span></div>
+                <div class="schedule-item" data-time="14:35"><span class="schedule-time">14:35</span><div class="schedule-img"><i class="fa-solid fa-clapperboard"></i></div><span class="schedule-title">Sami Swoi</span></div>
+                <div class="schedule-item" data-time="15:00"><span class="schedule-time">15:00</span><div class="schedule-img"><i class="fa-solid fa-bullhorn"></i></div><span class="schedule-title">Informacje</span></div>
+                <div class="schedule-item" data-time="15:15"><span class="schedule-time">15:15</span><div class="schedule-img"><i class="fa-solid fa-heart"></i></div><span class="schedule-title">Moda na sukces</span></div>
                 <div class="schedule-item" data-time="15:45"><span class="schedule-time">15:45</span><div class="schedule-img"><i class="fa-solid fa-church"></i></div><span class="schedule-title">Plebania</span></div>
-                <div class="schedule-item" data-time="16:30"><span class="schedule-time">16:30</span><div class="schedule-img"><i class="fa-solid fa-heart"></i></div><span class="schedule-title">M jak Miłość</span></div>
+                <div class="schedule-item" data-time="16:30"><span class="schedule-time">16:30</span><div class="schedule-img"><i class="fa-solid fa-people-roof"></i></div><span class="schedule-title">M jak Miłość</span></div>
                 <div class="schedule-item" data-time="17:20"><span class="schedule-time">17:20</span><div class="schedule-img"><i class="fa-solid fa-triangle-exclamation"></i></div><span class="schedule-title">Trudne Sprawy</span></div>
-                <div class="schedule-item" data-time="18:10"><span class="schedule-time">18:10</span><div class="schedule-img"><i class="fa-solid fa-magnifying-glass"></i></div><span class="schedule-title">Ukryta prawda</span></div>
-                <div class="schedule-item" data-time="19:00"><span class="schedule-time">19:00</span><div class="schedule-img"><i class="fa-solid fa-globe"></i></div><span class="schedule-title">Wydarzenia dnia — główny serwis informacyjny</span></div>
+                <div class="schedule-item" data-time="18:10"><span class="schedule-time">18:10</span><div class="schedule-img"><i class="fa-solid fa-eye"></i></div><span class="schedule-title">Ukryta prawda</span></div>
+                <div class="schedule-item" data-time="19:00"><span class="schedule-time">19:00</span><div class="schedule-img"><i class="fa-solid fa-microphone"></i></div><span class="schedule-title">Wydarzenia dnia — główny serwis informacyjny</span></div>
                 <div class="schedule-item" data-time="19:25"><span class="schedule-time">19:25</span><div class="schedule-img"><i class="fa-solid fa-triangle-exclamation"></i></div><span class="schedule-title">Trudne Sprawy</span></div>
-                <div class="schedule-item" data-time="20:15"><span class="schedule-time">20:15</span><div class="schedule-img"><i class="fa-solid fa-clapperboard"></i></div><span class="schedule-title">Kiler</span></div>
+                <div class="schedule-item" data-time="20:15"><span class="schedule-time">20:15</span><div class="schedule-img"><i class="fa-solid fa-film"></i></div><span class="schedule-title">Kiler</span></div>
                 <div class="schedule-item" data-time="22:00"><span class="schedule-time">22:00</span><div class="schedule-img"><i class="fa-solid fa-ship"></i></div><span class="schedule-title">Rejs</span></div>
                 <div class="schedule-item" data-time="23:15"><span class="schedule-time">23:15</span><div class="schedule-img"><i class="fa-solid fa-shield-halved"></i></div><span class="schedule-title">997</span></div>
                 <div class="schedule-item" data-time="00:00"><span class="schedule-time">00:00</span><div class="schedule-img"><i class="fa-solid fa-moon"></i></div><span class="schedule-title">Seksmisja</span></div>
                 <div class="schedule-item" data-time="01:40"><span class="schedule-time">01:40</span><div class="schedule-img"><i class="fa-solid fa-bed"></i></div><span class="schedule-title">Miś Uszatek</span></div>
-            </div>
-        </section>
-
-        <!-- Polecajka muzyczna Spotify na dole strony -->
-        <section class="spotify-section">
-            <div class="spotify-header">
-                <h3 class="spotify-title"><i class="fa-brands fa-spotify"></i> Muzyczna Polecajka Dnia TV Joy</h3>
-                <button class="spotify-btn" onclick="randomizeSpotifyTrack()">
-                    <i class="fa-solid fa-shuffle"></i> Wylosuj inny utwór
-                </button>
-            </div>
-            <div class="spotify-player-wrapper">
-                <iframe id="spotify-player" style="border-radius:12px" src="" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
         </section>
     </div>
@@ -759,184 +696,143 @@
     </footer>
 
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const warningClosed = localStorage.getItem('tvJoyWarningClosed');
-            
-            if (!warningClosed) {
-                document.getElementById('warningModal').style.display = 'flex';
-                
-                try {
-                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    
-                    function playXpErrorSound() {
-                        const now = audioCtx.currentTime;
-                        
-                        const osc1 = audioCtx.createOscillator();
-                        const gain1 = audioCtx.createGain();
-                        osc1.type = 'sawtooth';
-                        osc1.frequency.setValueAtTime(440, now); 
-                        osc1.frequency.setValueAtTime(311.13, now + 0.08); 
-
-                        const osc2 = audioCtx.createOscillator();
-                        const gain2 = audioCtx.createGain();
-                        osc2.type = 'square';
-                        osc2.frequency.setValueAtTime(220, now);
-                        osc2.frequency.setValueAtTime(155.56, now + 0.08);
-
-                        gain1.gain.setValueAtTime(0.3, now);
-                        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-
-                        gain2.gain.setValueAtTime(0.2, now);
-                        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-
-                        osc1.connect(gain1);
-                        osc2.connect(gain2);
-                        gain1.connect(audioCtx.destination);
-                        gain2.connect(audioCtx.destination);
-
-                        osc1.start(now);
-                        osc2.start(now);
-                        osc1.stop(now + 0.35);
-                        osc2.stop(now + 0.35);
-                    }
-
-                    setTimeout(() => {
-                        if (audioCtx.state === 'suspended') {
-                            audioCtx.resume();
-                        }
-                        playXpErrorSound();
-                    }, 300);
-                } catch (e) {
-                    console.log('Audio Context zablokowany przez przeglądarkę.');
-                }
-            }
-        });
-
+        // Obsługa wyskakującego okienka ostrzegawczego Windows XP
         function closeWarning() {
             document.getElementById('warningModal').style.display = 'none';
-            localStorage.setItem('tvJoyWarningClosed', 'true');
         }
 
-        function updateNewsTicker() {
-            const newsItems = [
-                "TVFIKCYJNE WIKI: TV Joy awansuje w zestawieniu najpopularniejszych stacji tworzonych przez społeczność!",
-                "EŁK: Urząd Miasta ogłasza nowe dotacje na rozwój inicjatyw młodzieżowych i miejskiej infrastruktury.",
-                "CIEKAWOSTKA TVF: Czy wiesz, że na TVFikcyjne Wiki opisano już ponad setki autorskich projektów stacji telewizyjnych?",
-                "MAZURY: Oficjalne komunikaty urzędu marszałkowskiego ws. nowych tras turystycznych wokół Ełku.",
-                "TV JOY: Dziękujemy za wspólne oglądanie — sprawdzaj naszą całą ramówkę poniżej!"
-            ];
-
-            let itemsHtml = '';
-            newsItems.forEach(item => {
-                itemsHtml += `<span><i class="fa-solid fa-star" style="color: #ffeb3b;"></i> ${item}</span>`;
-            });
-
-            document.getElementById('ticker-text').innerHTML = itemsHtml + itemsHtml;
-        }
-
-        updateNewsTicker();
-
-        // Prawdziwe dane IMGW-PIB dla województw
-        const imgwData = {
-            elk: { loc: "Ełk (Mazury)", temp: "4°C", condition: "Mgły i zamglenia", wind: "8 km/h", pressure: "1022 hPa", humidity: "85%", night: "-2°C", icon: "fa-smog" },
-            warminsko_mazurskie: { loc: "Woj. Warmińsko-Mazurskie (Olsztyn)", temp: "4°C", condition: "Zachmurzenie umiarkowane", wind: "10 km/h", pressure: "1021 hPa", humidity: "82%", night: "-1°C", icon: "fa-cloud-sun" },
-            mazowieckie: { loc: "Woj. Mazowieckie (Warszawa)", temp: "6°C", condition: "Przejaśnienia", wind: "11 km/h", pressure: "1020 hPa", humidity: "75%", night: "-4°C", icon: "fa-sun" },
-            malopolskie: { loc: "Woj. Małopolskie (Kraków)", temp: "5°C", condition: "Słonecznie z mgłami", wind: "6 km/h", pressure: "1023 hPa", humidity: "78%", night: "-6°C", icon: "fa-sun" },
-            slaskie: { loc: "Woj. Śląskie (Katowice)", temp: "6°C", condition: "Pogodnie", wind: "7 km/h", pressure: "1022 hPa", humidity: "70%", night: "-5°C", icon: "fa-sun" },
-            dolnoslaskie: { loc: "Woj. Dolnośląskie (Wrocław)", temp: "8°C", condition: "Słonecznie", wind: "9 km/h", pressure: "1021 hPa", humidity: "65%", night: "-3°C", icon: "fa-sun" },
-            wielkopolskie: { loc: "Woj. Wielkopolskie (Poznań)", temp: "7°C", condition: "Umiarkowane zachmurzenie", wind: "12 km/h", pressure: "1020 hPa", humidity: "72%", night: "-2°C", icon: "fa-cloud-sun" },
-            pomorskie: { loc: "Woj. Pomorskie (Gdańsk)", temp: "8°C", condition: "Chmury i wiatr", wind: "18 km/h", pressure: "1018 hPa", humidity: "80%", night: "2°C", icon: "fa-cloud" },
-            zachodniopomorskie: { loc: "Woj. Zachodniopomorskie (Szczecin)", temp: "9°C", condition: "Przelotne zachmurzenie", wind: "16 km/h", pressure: "1019 hPa", humidity: "74%", night: "1°C", icon: "fa-cloud-sun" },
-            lodzkie: { loc: "Woj. Łódzkie (Łódź)", temp: "6°C", condition: "Przejaśnienia", wind: "9 km/h", pressure: "1021 hPa", humidity: "73%", night: "-4°C", icon: "fa-cloud-sun" },
-            kujawsko_pomorskie: { loc: "Woj. Kujawsko-Pomorskie (Bydgoszcz)", temp: "6°C", condition: "Zachmurzenie małe", wind: "11 km/h", pressure: "1020 hPa", humidity: "76%", night: "-2°C", icon: "fa-sun" },
-            lubelskie: { loc: "Woj. Lubelskie (Lublin)", temp: "4°C", condition: "Chłodno i słonecznie", wind: "8 km/h", pressure: "1023 hPa", humidity: "79%", night: "-6°C", icon: "fa-sun" },
-            podkarpackie: { loc: "Woj. Podkarpackie (Rzeszów)", temp: "5°C", condition: "Słonecznie, brak opadów", wind: "6 km/h", pressure: "1024 hPa", humidity: "76%", night: "-6°C", icon: "fa-sun" },
-            podlaskie: { loc: "Woj. Podlaskie (Białystok)", temp: "3°C", condition: "Pochmurno z rozpogodzeniami", wind: "10 km/h", pressure: "1022 hPa", humidity: "84%", night: "0°C", icon: "fa-cloud-sun" },
-            swietokrzyskie: { loc: "Woj. Świętokrzyskie (Kielce)", temp: "5°C", condition: "Bezchmurnie", wind: "7 km/h", pressure: "1022 hPa", humidity: "74%", night: "-5°C", icon: "fa-sun" },
-            opolskie: { loc: "Woj. Opolskie (Opole)", temp: "7°C", condition: "Słonecznie", wind: "8 km/h", pressure: "1021 hPa", humidity: "68%", night: "-4°C", icon: "fa-sun" },
-            lubuskie: { loc: "Woj. Lubuskie (Gorzów Wlkp.)", temp: "8°C", condition: "Umiarkowane zachmurzenie", wind: "13 km/h", pressure: "1020 hPa", humidity: "71%", night: "-1°C", icon: "fa-cloud-sun" }
+        // Baza danych pogody IMGW dla województw
+        const weatherData = {
+            'elk': { name: 'Ełk (Mazury)', temp: '4°C', condition: 'Mgły i zamglenia', icon: 'fa-smog', wind: '8 km/h', pressure: '1022 hPa', humidity: '85%', night: '-2°C' },
+            'warminsko_mazurskie': { name: 'Warmińsko-Mazurskie', temp: '4°C', condition: 'Zachmurzenie duże', icon: 'fa-cloud', wind: '11 km/h', pressure: '1021 hPa', humidity: '82%', night: '-1°C' },
+            'mazowieckie': { name: 'Mazowieckie', temp: '6°C', condition: 'Przejaśnienia', icon: 'fa-cloud-sun', wind: '10 km/h', pressure: '1020 hPa', humidity: '78%', night: '1°C' },
+            'malopolskie': { name: 'Małopolskie', temp: '5°C', condition: 'Zamglenia', icon: 'fa-smog', wind: '6 km/h', pressure: '1023 hPa', humidity: '88%', night: '0°C' },
+            'slaskie': { name: 'Śląskie', temp: '6°C', condition: 'Lekkie opady mżawki', icon: 'fa-cloud-rain', wind: '9 km/h', pressure: '1021 hPa', humidity: '84%', night: '2°C' },
+            'dolnoslaskie': { name: 'Dolnośląskie', temp: '8°C', condition: 'Słonecznie', icon: 'fa-sun', wind: '12 km/h', pressure: '1019 hPa', humidity: '70%', night: '3°C' },
+            'wielkopolskie': { name: 'Wielkopolskie', temp: '7°C', condition: 'Częściowe zachmurzenie', icon: 'fa-cloud-sun', wind: '14 km/h', pressure: '1020 hPa', humidity: '75%', night: '2°C' },
+            'pomorskie': { name: 'Pomorskie', temp: '8°C', condition: 'Wietrznie i pochmurno', icon: 'fa-wind', wind: '24 km/h', pressure: '1017 hPa', humidity: '79%', night: '4°C' },
+            'zachodniopomorskie': { name: 'Zachodniopomorskie', temp: '9°C', condition: 'Przelotne opady', icon: 'fa-cloud-showers-heavy', wind: '20 km/h', pressure: '1016 hPa', humidity: '80%', night: '5°C' },
+            'lodzkie': { name: 'Łódzkie', temp: '6°C', condition: 'Zachmurzenie umiarkowane', icon: 'fa-cloud', wind: '10 km/h', pressure: '1020 hPa', humidity: '81%', night: '1°C' },
+            'kujawsko_pomorskie': { name: 'Kujawsko-Pomorskie', temp: '7°C', condition: 'Pochmurno', icon: 'fa-cloud', wind: '12 km/h', pressure: '1019 hPa', humidity: '80%', night: '2°C' },
+            'lubelskie': { name: 'Lubelskie', temp: '4°C', condition: 'Mgliście', icon: 'fa-smog', wind: '7 km/h', pressure: '1022 hPa', humidity: '89%', night: '-1°C' },
+            'podkarpackie': { name: 'Podkarpackie', temp: '4°C', condition: 'Zamglenia poranne', icon: 'fa-smog', wind: '5 km/h', pressure: '1024 hPa', humidity: '90%', night: '-2°C' },
+            'podlaskie': { name: 'Podlaskie', temp: '3°C', condition: 'Chłodno, mgła', icon: 'fa-smog', wind: '8 km/h', pressure: '1023 hPa', humidity: '87%', night: '-3°C' },
+            'swietokrzyskie': { name: 'Świętokrzyskie', temp: '5°C', condition: 'Zachmurzenie duże', icon: 'fa-cloud', wind: '8 km/h', pressure: '1021 hPa', humidity: '83%', night: '0°C' },
+            'opolskie': { name: 'Opolskie', temp: '7°C', condition: 'Przejaśnienia', icon: 'fa-cloud-sun', wind: '10 km/h', pressure: '1020 hPa', humidity: '77%', night: '2°C' },
+            'lubuskie': { name: 'Lubuskie', temp: '8°C', condition: 'Umiarkowane zachmurzenie', icon: 'fa-cloud-sun', wind: '13 km/h', pressure: '1018 hPa', humidity: '74%', night: '3°C' }
         };
 
-        function changeWeather(regionKey, element) {
-            document.querySelectorAll('.weather-tab').forEach(tab => tab.classList.remove('active'));
-            if(element) element.classList.add('active');
+        function changeWeather(regionKey, btnElement) {
+            const data = weatherData[regionKey];
+            if (!data) return;
 
-            const data = imgwData[regionKey];
-            if(data) {
-                document.getElementById('w-location').innerText = data.loc;
-                document.getElementById('w-temp').innerText = data.temp;
-                document.getElementById('w-condition').innerText = data.condition;
-                document.getElementById('w-wind').innerText = data.wind;
-                document.getElementById('w-pressure').innerText = data.pressure;
-                document.getElementById('w-humidity').innerText = data.humidity;
-                document.getElementById('w-night').innerText = data.night;
-                document.getElementById('w-icon').innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
-            }
+            document.getElementById('w-location').innerText = data.name;
+            document.getElementById('w-temp').innerText = data.temp;
+            document.getElementById('w-condition').innerText = data.condition;
+            document.getElementById('w-icon').innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
+            document.getElementById('w-wind').innerText = data.wind;
+            document.getElementById('w-pressure').innerText = data.pressure;
+            document.getElementById('w-humidity').innerText = data.humidity;
+            document.getElementById('w-night').innerText = data.night;
+
+            document.querySelectorAll('.weather-tab').forEach(t => t.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
         }
 
-        function updateSchedule() {
-            const items = document.querySelectorAll('.schedule-item');
-            const now = new Date();
-            const currentMinutes = now.getHours() * 60 + now.getMinutes();
-            
-            let times = [];
-            items.forEach(item => {
-                const [h, m] = item.getAttribute('data-time').split(':').map(Number);
-                times.push(h * 60 + m);
-            });
+        // --- Logika ramówki telewizyjnej z czasem warszawskim i dobą startującą o 06:00 ---
+        const scheduleItems = [
+            { time: "06:00", title: "Poranek z uśmiechem — nowy program śniadaniowy" },
+            { time: "06:30", title: "Muminki" },
+            { time: "06:55", title: "Muminki" },
+            { time: "07:20", title: "Mały odkrywca — nowy program edukacyjny" },
+            { time: "07:40", title: "Kuchnia na start — nowy program kulinarny" },
+            { time: "08:10", title: "Teleranek Jaruzelskiego" },
+            { time: "08:20", title: "Muzyczna pobudka — teledyski i hity" },
+            { time: "09:00", title: "Hity XX wieku" },
+            { time: "09:25", title: "Podróże bez biletu — magazyn podróżniczy" },
+            { time: "10:00", title: "Czterdziestolatek" },
+            { time: "10:50", title: "Stare, ale jare" },
+            { time: "11:10", title: "Świat zwierząt — film przyrodniczy" },
+            { time: "11:40", title: "Dziecięce Hity" },
+            { time: "12:00", title: "Muminki" },
+            { time: "12:25", title: "Dziecięce Hity" },
+            { time: "12:45", title: "Bajkowa kraina — nowe pasmo animacji" },
+            { time: "13:10", title: "Prawda czy Fałsz" },
+            { time: "13:45", title: "Rodzinka.pl — 2 odcinki" },
+            { time: "14:35", title: "Sami Swoi" },
+            { time: "15:00", title: "Informacje" },
+            { time: "15:15", title: "Moda na sukces" },
+            { time: "15:45", title: "Plebania" },
+            { time: "16:30", title: "M jak Miłość" },
+            { time: "17:20", title: "Trudne Sprawy" },
+            { time: "18:10", title: "Ukryta prawda" },
+            { time: "19:00", title: "Wydarzenia dnia — główny serwis informacyjny" },
+            { time: "19:25", title: "Trudne Sprawy" },
+            { time: "20:15", title: "Kiler" },
+            { time: "22:00", title: "Rejs" },
+            { time: "23:15", title: "997" },
+            { time: "00:00", title: "Seksmisja" },
+            { time: "01:40", title: "Miś Uszatek" }
+        ];
 
-            let currentIndex = times.length - 1;
-            for (let i = 0; i < times.length; i++) {
-                if (currentMinutes < times[i]) {
-                    currentIndex = i - 1;
-                    if (currentIndex < 0) currentIndex = times.length - 1;
+        function getTvDayMinutes(timeStr) {
+            const parts = timeStr.split(":");
+            let h = parseInt(parts[0], 10);
+            let m = parseInt(parts[1], 10);
+            let total = h * 60 + m;
+            if (total < 360) {
+                total += 1440; // Przesunięcie po północy (00:00 do 05:59)
+            }
+            return total;
+        }
+
+        function getWarsawTimeString() {
+            const now = new Date();
+            const formatter = new Intl.DateTimeFormat('pl-PL', {
+                timeZone: 'Europe/Warsaw',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+            return formatter.format(now);
+        }
+
+        function updateScheduleAndNowNext() {
+            const nowTimeStr = getWarsawTimeString();
+            const currentTvMins = getTvDayMinutes(nowTimeStr);
+
+            let activeIndex = 0;
+            for (let i = 0; i < scheduleItems.length; i++) {
+                const progTvMins = getTvDayMinutes(scheduleItems[i].time);
+                if (currentTvMins >= progTvMins) {
+                    activeIndex = i;
+                } else {
                     break;
                 }
             }
 
-            items.forEach(item => item.classList.remove('active-now'));
-            items[currentIndex].classList.add('active-now');
+            // Aktualizacja sekcji Teraz / Następnie
+            const currentShowObj = scheduleItems[activeIndex];
+            const nextShowObj = scheduleItems[(activeIndex + 1) % scheduleItems.length];
 
-            const currentTitle = items[currentIndex].querySelector('.schedule-title').innerText;
-            const nextIndex = (currentIndex + 1) % items.length;
-            const nextTitle = items[nextIndex].querySelector('.schedule-title').innerText;
+            document.getElementById('current-show').innerText = currentShowObj.title;
+            document.getElementById('next-show').innerText = nextShowObj.title;
 
-            document.getElementById('current-show').innerText = currentTitle;
-            document.getElementById('next-show').innerText = nextTitle;
+            // Podświetlenie aktywnego elementu w tabeli ramówki na stronie głównej
+            const domItems = document.querySelectorAll('#schedule-list .schedule-item');
+            domItems.forEach((el, idx) => {
+                if (idx === activeIndex) {
+                    el.classList.add('active-now');
+                } else {
+                    el.classList.remove('active-now');
+                }
+            });
         }
 
-        updateSchedule();
-        setInterval(updateSchedule, 10000);
-
-        const safeSpotifyTracks = [
-            '0VjeePi8mRGlx0KYrE2t2M', // Coldplay - Viva La Vida
-            '4uLU6hMCjMI75M1A2tKUQC', // Queen - Don't Stop Me Now
-            '0b90gQ8GjKGj6vR616jW9d', // Dawid Podsiadło - Małomiasteczkowy
-            '2TAK21z2WmZSp27eaF5zch', // Sanah - Szampan
-            '1BxfuMiLl4Wtx2y2x7j70u', // Michael Jackson - Billie Jean
-            '3u1S1E8yP0vR1j3i3bUq3E', // ABBA - Dancing Queen
-            '0c489yWenHGlDFf4yebvYQ', // A-ha - Take on Me
-            '60nZcImufyMA1MKQY3dcCH', // Pharrell Williams - Happy
-            '6w899j7S3l048p0p2GfN0L', // Sanah, Dawid Podsiadło - Ostatnia nadzieja
-            '3yTkoTuiKRz1g2pPq0Y16i'  // Dua Lipa - Levitating
-        ];
-
-        let currentTrackIndex = -1;
-
-        function randomizeSpotifyTrack() {
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * safeSpotifyTracks.length);
-            } while (randomIndex === currentTrackIndex && safeSpotifyTracks.length > 1);
-
-            currentTrackIndex = randomIndex;
-            const trackId = safeSpotifyTracks[randomIndex];
-            const playerIframe = document.getElementById('spotify-player');
-            
-            playerIframe.src = `https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0&t=${Date.now()}`;
-        }
-
-        randomizeSpotifyTrack();
+        window.addEventListener('DOMContentLoaded', () => {
+            updateScheduleAndNowNext();
+            setInterval(updateScheduleAndNowNext, 15000);
+        });
     </script>
 </body>
 </html>
