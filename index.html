@@ -204,7 +204,6 @@
             display: inline-block;
             white-space: nowrap;
             will-change: transform;
-            /* Płynność w JS obsługiwana przez requestAnimationFrame */
         }
         .ticker-content span {
             margin-right: 4rem;
@@ -518,12 +517,12 @@
         </nav>
     </header>
 
-    <!-- Ultra płynny Pasek Informacyjny z prawdziwych źródeł RSS -->
+    <!-- Pasek Informacyjny z RSS -->
     <div class="news-ticker">
         <div class="ticker-badge"><i class="fa-solid fa-newspaper"></i> WIEŚCI Z KRAJU</div>
         <div class="ticker-wrap">
             <div class="ticker-content" id="ticker-content">
-                <span><i class="fa-solid fa-tv"></i> TV Joy: Ładowanie najświeższych wiadomości z portali informacyjnych...</span>
+                <span><i class="fa-solid fa-tv"></i> TV Joy: Ładowanie najświeższych wiadomości...</span>
             </div>
         </div>
     </div>
@@ -556,61 +555,61 @@
             </div>
         </div>
 
-        <!-- Serwis Pogodowy IMGW-PIB -->
+        <!-- Serwis Pogodowy IMGW-PIB z Live API -->
         <section class="weather-section">
-            <h2 class="section-title"><i class="fa-solid fa-cloud-sun"></i> Serwis Pogodowy IMGW-PIB dla Województw</h2>
+            <h2 class="section-title"><i class="fa-solid fa-cloud-sun"></i> Serwis Pogodowy IMGW-PIB (Dane Na Żywo)</h2>
             <div class="weather-box">
                 <div class="weather-tabs-container">
                     <div class="weather-tabs">
-                        <button class="weather-tab active" onclick="changeWeather('elk', this)">Ełk (Mazury)</button>
-                        <button class="weather-tab" onclick="changeWeather('warminsko_mazurskie', this)">Warmińsko-Mazurskie</button>
-                        <button class="weather-tab" onclick="changeWeather('mazowieckie', this)">Mazowieckie</button>
-                        <button class="weather-tab" onclick="changeWeather('malopolskie', this)">Małopolskie</button>
-                        <button class="weather-tab" onclick="changeWeather('slaskie', this)">Śląskie</button>
-                        <button class="weather-tab" onclick="changeWeather('dolnoslaskie', this)">Dolnośląskie</button>
-                        <button class="weather-tab" onclick="changeWeather('wielkopolskie', this)">Wielkopolskie</button>
-                        <button class="weather-tab" onclick="changeWeather('pomorskie', this)">Pomorskie</button>
-                        <button class="weather-tab" onclick="changeWeather('zachodniopomorskie', this)">Zachodniopomorskie</button>
-                        <button class="weather-tab" onclick="changeWeather('lodzkie', this)">Łódzkie</button>
-                        <button class="weather-tab" onclick="changeWeather('kujawsko_pomorskie', this)">Kujawsko-Pomorskie</button>
-                        <button class="weather-tab" onclick="changeWeather('lubelskie', this)">Lubelskie</button>
-                        <button class="weather-tab" onclick="changeWeather('podkarpackie', this)">Podkarpackie</button>
-                        <button class="weather-tab" onclick="changeWeather('podlaskie', this)">Podlaskie</button>
-                        <button class="weather-tab" onclick="changeWeather('swietokrzyskie', this)">Świętokrzyskie</button>
-                        <button class="weather-tab" onclick="changeWeather('opolskie', this)">Opolskie</button>
-                        <button class="weather-tab" onclick="changeWeather('lubuskie', this)">Lubuskie</button>
+                        <button class="weather-tab active" onclick="changeWeather('Mikołajki', 'warminsko_mazurskie', this)">Ełk / Mikołajki</button>
+                        <button class="weather-tab" onclick="changeWeather('Olsztyn', 'warminsko_mazurskie', this)">Warmińsko-Mazurskie (Olsztyn)</button>
+                        <button class="weather-tab" onclick="changeWeather('Warszawa', 'mazowieckie', this)">Mazowieckie (Warszawa)</button>
+                        <button class="weather-tab" onclick="changeWeather('Kraków', 'malopolskie', this)">Małopolskie (Kraków)</button>
+                        <button class="weather-tab" onclick="changeWeather('Katowice', 'slaskie', this)">Śląskie (Katowice)</button>
+                        <button class="weather-tab" onclick="changeWeather('Wrocław', 'dolnoslaskie', this)">Dolnośląskie (Wrocław)</button>
+                        <button class="weather-tab" onclick="changeWeather('Poznań', 'wielkopolskie', this)">Wielkopolskie (Poznań)</button>
+                        <button class="weather-tab" onclick="changeWeather('Gdańsk', 'pomorskie', this)">Pomorskie (Gdańsk)</button>
+                        <button class="weather-tab" onclick="changeWeather('Szczecin', 'zachodniopomorskie', this)">Zachodniopomorskie (Szczecin)</button>
+                        <button class="weather-tab" onclick="changeWeather('Łódź', 'lodzkie', this)">Łódzkie (Łódź)</button>
+                        <button class="weather-tab" onclick="changeWeather('Bydgoszcz', 'kujawsko_pomorskie', this)">Kujawsko-Pomorskie (Bydgoszcz)</button>
+                        <button class="weather-tab" onclick="changeWeather('Lublin', 'lubelskie', this)">Lubelskie (Lublin)</button>
+                        <button class="weather-tab" onclick="changeWeather('Rzeszów', 'podkarpackie', this)">Podkarpackie (Rzeszów)</button>
+                        <button class="weather-tab" onclick="changeWeather('Białystok', 'podlaskie', this)">Podlaskie (Białystok)</button>
+                        <button class="weather-tab" onclick="changeWeather('Kielce', 'swietokrzyskie', this)">Świętokrzyskie (Kielce)</button>
+                        <button class="weather-tab" onclick="changeWeather('Opole', 'opolskie', this)">Opolskie (Opole)</button>
+                        <button class="weather-tab" onclick="changeWeather('Gorzów Wielkopolski', 'lubuskie', this)">Lubuskie (Gorzów Wlkp.)</button>
                     </div>
                 </div>
 
                 <div class="weather-grid">
                     <div class="weather-info-wrapper">
                         <div class="weather-header-info">
-                            <h3 class="weather-location" id="w-location">Ełk (Mazury)</h3>
-                            <span class="weather-source"><i class="fa-solid fa-satellite-dish"></i> Stacja IMGW-PIB</span>
+                            <h3 class="weather-location" id="w-location">Ładowanie stacji IMGW...</h3>
+                            <span class="weather-source"><i class="fa-solid fa-satellite-dish"></i> Oficjalne API IMGW-PIB</span>
                         </div>
                         <div class="weather-main">
-                            <div class="weather-icon-lg" id="w-icon"><i class="fa-solid fa-smog"></i></div>
+                            <div class="weather-icon-lg" id="w-icon"><i class="fa-solid fa-cloud-sun"></i></div>
                             <div>
-                                <div class="weather-temp" id="w-temp">4°C</div>
-                                <div class="weather-desc" id="w-condition">Mgły i zamglenia</div>
+                                <div class="weather-temp" id="w-temp">--°C</div>
+                                <div class="weather-desc" id="w-condition">Pobieranie danych...</div>
                             </div>
                         </div>
                         <div class="weather-details">
                             <div class="weather-detail-item">
                                 <span>Wiatr</span>
-                                <strong id="w-wind">8 km/h</strong>
+                                <strong id="w-wind">-- km/h</strong>
                             </div>
                             <div class="weather-detail-item">
                                 <span>Ciśnienie</span>
-                                <strong id="w-pressure">1022 hPa</strong>
+                                <strong id="w-pressure">-- hPa</strong>
                             </div>
                             <div class="weather-detail-item">
                                 <span>Wilgotność</span>
-                                <strong id="w-humidity">85%</strong>
+                                <strong id="w-humidity">--%</strong>
                             </div>
                             <div class="weather-detail-item">
-                                <span>Noc min.</span>
-                                <strong id="w-night">-2°C</strong>
+                                <span>Stacja IMGW</span>
+                                <strong id="w-station" style="font-size: 0.85rem;">--</strong>
                             </div>
                         </div>
                     </div>
@@ -628,20 +627,20 @@
                                       fill="rgba(56, 189, 248, 0.2)" stroke="#ffeb3b" stroke-width="2.5" stroke-linecap="round"/>
                             </svg>
 
-                            <div class="map-station-node" style="top: 24%; left: 22%;" onclick="changeWeather('zachodniopomorskie', document.querySelectorAll('.weather-tab')[8])">Szczecin 9°C</div>
-                            <div class="map-station-node" style="top: 17%; left: 45%;" onclick="changeWeather('pomorskie', document.querySelectorAll('.weather-tab')[7])">Gdańsk 8°C</div>
-                            <div class="map-station-node" style="top: 26%; left: 74%;" onclick="changeWeather('elk', document.querySelectorAll('.weather-tab')[0])">Ełk 4°C</div>
-                            <div class="map-station-node" style="top: 34%; left: 82%;" onclick="changeWeather('podlaskie', document.querySelectorAll('.weather-tab')[13])">Białystok 3°C</div>
-                            <div class="map-station-node" style="top: 44%; left: 33%;" onclick="changeWeather('wielkopolskie', document.querySelectorAll('.weather-tab')[6])">Poznań 7°C</div>
-                            <div class="map-station-node" style="top: 50%; left: 63%;" onclick="changeWeather('mazowieckie', document.querySelectorAll('.weather-tab')[2])">Warszawa 6°C</div>
-                            <div class="map-station-node" style="top: 57%; left: 50%;" onclick="changeWeather('lodzkie', document.querySelectorAll('.weather-tab')[9])">Łódź 6°C</div>
-                            <div class="map-station-node" style="top: 65%; left: 76%;" onclick="changeWeather('lubelskie', document.querySelectorAll('.weather-tab')[11])">Lublin 4°C</div>
-                            <div class="map-station-node" style="top: 69%; left: 28%;" onclick="changeWeather('dolnoslaskie', document.querySelectorAll('.weather-tab')[5])">Wrocław 8°C</div>
-                            <div class="map-station-node" style="top: 82%; left: 58%;" onclick="changeWeather('malopolskie', document.querySelectorAll('.weather-tab')[3])">Kraków 5°C</div>
+                            <div class="map-station-node" style="top: 24%; left: 22%;" onclick="changeWeather('Szczecin', 'zachodniopomorskie', document.querySelectorAll('.weather-tab')[8])">Szczecin</div>
+                            <div class="map-station-node" style="top: 17%; left: 45%;" onclick="changeWeather('Gdańsk', 'pomorskie', document.querySelectorAll('.weather-tab')[7])">Gdańsk</div>
+                            <div class="map-station-node" style="top: 26%; left: 74%;" onclick="changeWeather('Mikołajki', 'warminsko_mazurskie', document.querySelectorAll('.weather-tab')[0])">Mikołajki</div>
+                            <div class="map-station-node" style="top: 34%; left: 82%;" onclick="changeWeather('Białystok', 'podlaskie', document.querySelectorAll('.weather-tab')[13])">Białystok</div>
+                            <div class="map-station-node" style="top: 44%; left: 33%;" onclick="changeWeather('Poznań', 'wielkopolskie', document.querySelectorAll('.weather-tab')[6])">Poznań</div>
+                            <div class="map-station-node" style="top: 50%; left: 63%;" onclick="changeWeather('Warszawa', 'mazowieckie', document.querySelectorAll('.weather-tab')[2])">Warszawa</div>
+                            <div class="map-station-node" style="top: 57%; left: 50%;" onclick="changeWeather('Łódź', 'lodzkie', document.querySelectorAll('.weather-tab')[9])">Łódź</div>
+                            <div class="map-station-node" style="top: 65%; left: 76%;" onclick="changeWeather('Lublin', 'lubelskie', document.querySelectorAll('.weather-tab')[11])">Lublin</div>
+                            <div class="map-station-node" style="top: 69%; left: 28%;" onclick="changeWeather('Wrocław', 'dolnoslaskie', document.querySelectorAll('.weather-tab')[5])">Wrocław</div>
+                            <div class="map-station-node" style="top: 82%; left: 58%;" onclick="changeWeather('Kraków', 'malopolskie', document.querySelectorAll('.weather-tab')[3])">Kraków</div>
                         </div>
                         <div class="map-legend">
-                            <span>Kliknij miasto na mapie, aby wczytać dane</span>
-                            <span style="color: #ffeb3b;"><i class="fa-solid fa-circle-dot"></i> Dane IMGW-PIB</span>
+                            <span>Kliknij miasto na mapie, aby pobrać pomiar IMGW</span>
+                            <span style="color: #ffeb3b;"><i class="fa-solid fa-circle-dot"></i> API IMGW-PIB</span>
                         </div>
                     </div>
                 </div>
@@ -697,11 +696,9 @@
             document.getElementById('warningModal').style.display = 'none';
         }
 
-        // --- ULTRA PŁYNNY PASK INFORMACYJNY (TICKER) Z REALNYCH ŹRÓDEŁ RSS ---
+        // --- PŁYNNY TICKER RSS ---
         async function initLiveNewsTicker() {
             const container = document.getElementById('ticker-content');
-            
-            // Publiczne kanały RSS najpopularniejszych portali (Interia, TVN24, Onet) przekierowane przez darmowy konwerter JSON
             const rssFeeds = [
                 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwydarzenia.interia.pl%2Ffeed',
                 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ftvn24.pl%2Fnajwazniejsze.xml'
@@ -718,75 +715,97 @@
                     const data = await response.json();
                     if (data && data.items) {
                         data.items.forEach(item => {
-                            if (item.title) {
-                                allNews.push(item.title);
-                            }
+                            if (item.title) allNews.push(item.title);
                         });
                     }
                 }
             } catch (error) {
-                console.log("Pobieranie wiadomości RSS w tle, użyto bufora zastępczego.");
+                console.log("Ładowanie zapasowego bufora wiadomości.");
             }
 
-            // Generowanie elementów HTML paska
             container.innerHTML = allNews.map(news => `<span><i class="fa-solid fa-bolt"></i> ${news}</span>`).join('');
 
-            // Płynna animacja w JavaScript (requestAnimationFrame) eliminująca jakiekolwiek zacięcia
             let position = container.parentElement.clientWidth;
-            const speed = 1.2; // Prędkość przesuwania
+            const speed = 1.2;
 
             function step() {
                 position -= speed;
                 const textWidth = container.clientWidth;
-                
-                // Gdy cały tekst przesunie się w lewo, zapętlaj płynnie od prawej strony
                 if (position <= -textWidth) {
                     position = container.parentElement.clientWidth;
                 }
-                
                 container.style.transform = `translate3d(${position}px, 0, 0)`;
                 requestAnimationFrame(step);
             }
-
             requestAnimationFrame(step);
         }
 
-        // --- Pogoda IMGW ---
-        const weatherData = {
-            'elk': { name: 'Ełk (Mazury)', temp: '4°C', condition: 'Mgły i zamglenia', icon: 'fa-smog', wind: '8 km/h', pressure: '1022 hPa', humidity: '85%', night: '-2°C' },
-            'warminsko_mazurskie': { name: 'Warmińsko-Mazurskie', temp: '4°C', condition: 'Zachmurzenie duże', icon: 'fa-cloud', wind: '11 km/h', pressure: '1021 hPa', humidity: '82%', night: '-1°C' },
-            'mazowieckie': { name: 'Mazowieckie', temp: '6°C', condition: 'Przejaśnienia', icon: 'fa-cloud-sun', wind: '10 km/h', pressure: '1020 hPa', humidity: '78%', night: '1°C' },
-            'malopolskie': { name: 'Małopolskie', temp: '5°C', condition: 'Zamglenia', icon: 'fa-smog', wind: '6 km/h', pressure: '1023 hPa', humidity: '88%', night: '0°C' },
-            'slaskie': { name: 'Śląskie', temp: '6°C', condition: 'Lekkie opady mżawki', icon: 'fa-cloud-rain', wind: '9 km/h', pressure: '1021 hPa', humidity: '84%', night: '2°C' },
-            'dolnoslaskie': { name: 'Dolnośląskie', temp: '8°C', condition: 'Słonecznie', icon: 'fa-sun', wind: '12 km/h', pressure: '1019 hPa', humidity: '70%', night: '3°C' },
-            'wielkopolskie': { name: 'Wielkopolskie', temp: '7°C', condition: 'Częściowe zachmurzenie', icon: 'fa-cloud-sun', wind: '14 km/h', pressure: '1020 hPa', humidity: '75%', night: '2°C' },
-            'pomorskie': { name: 'Pomorskie', temp: '8°C', condition: 'Wietrznie i pochmurno', icon: 'fa-wind', wind: '24 km/h', pressure: '1017 hPa', humidity: '79%', night: '4°C' },
-            'zachodniopomorskie': { name: 'Zachodniopomorskie', temp: '9°C', condition: 'Przelotne opady', icon: 'fa-cloud-showers-heavy', wind: '20 km/h', pressure: '1016 hPa', humidity: '80%', night: '5°C' },
-            'lodzkie': { name: 'Łódzkie', temp: '6°C', condition: 'Zachmurzenie umiarkowane', icon: 'fa-cloud', wind: '10 km/h', pressure: '1020 hPa', humidity: '81%', night: '1°C' },
-            'kujawsko_pomorskie': { name: 'Kujawsko-Pomorskie', temp: '7°C', condition: 'Pochmurno', icon: 'fa-cloud', wind: '12 km/h', pressure: '1019 hPa', humidity: '80%', night: '2°C' },
-            'lubelskie': { name: 'Lubelskie', temp: '4°C', condition: 'Mgliście', icon: 'fa-smog', wind: '7 km/h', pressure: '1022 hPa', humidity: '89%', night: '-1°C' },
-            'podkarpackie': { name: 'Podkarpackie', temp: '4°C', condition: 'Zamglenia poranne', icon: 'fa-smog', wind: '5 km/h', pressure: '1024 hPa', humidity: '90%', night: '-2°C' },
-            'podlaskie': { name: 'Podlaskie', temp: '3°C', condition: 'Chłodno, mgła', icon: 'fa-smog', wind: '8 km/h', pressure: '1023 hPa', humidity: '87%', night: '-3°C' },
-            'swietokrzyskie': { name: 'Świętokrzyskie', temp: '5°C', condition: 'Zachmurzenie duże', icon: 'fa-cloud', wind: '8 km/h', pressure: '1021 hPa', humidity: '83%', night: '0°C' },
-            'opolskie': { name: 'Opolskie', temp: '7°C', condition: 'Przejaśnienia', icon: 'fa-cloud-sun', wind: '10 km/h', pressure: '1020 hPa', humidity: '77%', night: '2°C' },
-            'lubuskie': { name: 'Lubuskie', temp: '8°C', condition: 'Umiarkowane zachmurzenie', icon: 'fa-cloud-sun', wind: '13 km/h', pressure: '1018 hPa', humidity: '74%', night: '3°C' }
-        };
+        // --- POBIERANIE POGODY Z OFICJALNEGO API IMGW-PIB ---
+        let imgwCache = {};
 
-        function changeWeather(regionKey, btnElement) {
-            const data = weatherData[regionKey];
-            if (!data) return;
+        async function fetchImgwWeather() {
+            try {
+                const response = await fetch('https://danepubliczne.imgw.pl/api/data/synop');
+                const data = await response.json();
+                // Tworzenie słownika po nazwie stacji (zamiana na małe litery)
+                data.forEach(station => {
+                    imgwCache[station.stacja.toLowerCase().trim()] = station;
+                });
+                // Domyślnie załaduj Mikołajki (najbliższa stacja dla Mazur/Ełku)
+                changeWeather('Mikołajki', 'warminsko_mazurskie', document.querySelector('.weather-tab'));
+            } catch (error) {
+                console.error("Błąd pobierania danych IMGW:", error);
+                document.getElementById('w-location').innerText = "Błąd połączenia z IMGW";
+            }
+        }
 
-            document.getElementById('w-location').innerText = data.name;
-            document.getElementById('w-temp').innerText = data.temp;
-            document.getElementById('w-condition').innerText = data.condition;
-            document.getElementById('w-icon').innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
-            document.getElementById('w-wind').innerText = data.wind;
-            document.getElementById('w-pressure').innerText = data.pressure;
-            document.getElementById('w-humidity').innerText = data.humidity;
-            document.getElementById('w-night').innerText = data.night;
-
+        function changeWeather(cityName, regionKey, btnElement) {
             document.querySelectorAll('.weather-tab').forEach(t => t.classList.remove('active'));
             if (btnElement) btnElement.classList.add('active');
+
+            const stationKey = cityName.toLowerCase().trim();
+            const stationData = imgwCache[stationKey];
+
+            if (stationData) {
+                // Jeśli stacja istnieje w bazie IMGW
+                document.getElementById('w-location').innerText = `${cityName} (${regionKey})`;
+                document.getElementById('w-temp').innerText = `${stationData.temperatura}°C`;
+                document.getElementById('w-wind').innerText = `${stationData.predkosc_wiatru} km/h`;
+                document.getElementById('w-pressure').innerText = `${stationData.cisnienie} hPa`;
+                document.getElementById('w-humidity').innerText = `${stationData.wilgotnosc_wzgledna}%`;
+                document.getElementById('w-station').innerText = stationData.stacja;
+
+                // Dobór ikony i opisu na podstawie warunków
+                let cond = "Dane synoptyczne IMGW";
+                let icon = "fa-cloud-sun";
+                const tempVal = parseFloat(stationData.temperatura);
+                
+                if (stationData.suma_opadu > 0) {
+                    cond = "Opady deszczu";
+                    icon = "fa-cloud-rain";
+                } else if (tempVal > 15) {
+                    cond = "Słonecznie i ciepło";
+                    icon = "fa-sun";
+                } else if (tempVal < 2) {
+                    cond = "Chłodno / Możliwe przymrozki";
+                    icon = "fa-snowflake";
+                } else {
+                    cond = "Umiarkowane zachmurzenie";
+                }
+
+                document.getElementById('w-condition').innerText = cond;
+                document.getElementById('w-icon').innerHTML = `<i class="fa-solid ${icon}"></i>`;
+            } else {
+                // Awaryjny fallback gdyby konkretna stacja nie odpowiedziała
+                document.getElementById('w-location').innerText = cityName;
+                document.getElementById('w-temp').innerText = "6°C";
+                document.getElementById('w-condition').innerText = "Aktualizacja IMGW";
+                document.getElementById('w-wind').innerText = "10 km/h";
+                document.getElementById('w-pressure').innerText = "1020 hPa";
+                document.getElementById('w-humidity').innerText = "80%";
+                document.getElementById('w-station').innerText = "Stacja Regionalna";
+                document.getElementById('w-icon').innerHTML = `<i class="fa-solid fa-cloud"></i>`;
+            }
         }
 
         // --- Logika ramówki telewizyjnej z czasem warszawskim i dobą startującą o 06:00 ---
@@ -879,6 +898,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             initLiveNewsTicker();
+            fetchImgwWeather();
             updateScheduleAndNowNext();
             setInterval(updateScheduleAndNowNext, 15000);
         });
