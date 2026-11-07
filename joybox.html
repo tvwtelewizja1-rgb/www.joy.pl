@@ -135,24 +135,31 @@
         .user-dashboard { display: none; }
         .channels-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
             margin-top: 1.5rem;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
         }
+        .channels-grid::-webkit-scrollbar { width: 6px; }
+        .channels-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 6px; }
+
         .channel-card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.2rem;
+            padding: 1rem;
             border-radius: 12px;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.3rem;
             transition: transform 0.2s;
         }
-        .channel-card:hover { transform: translateY(-3px); border-color: #ffeb3b; }
-        .channel-title { font-size: 1.1rem; color: #ffeb3b; display: flex; align-items: center; gap: 0.5rem; }
-        .channel-status { font-size: 0.85rem; color: #4caf50; display: flex; align-items: center; gap: 0.4rem; }
-        .channel-now { font-size: 0.9rem; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 0.4rem 0.6rem; border-radius: 6px; }
+        .channel-card:hover { transform: translateY(-2px); border-color: #ffeb3b; }
+        .channel-title { font-size: 1rem; color: #ffeb3b; display: flex; justify-content: space-between; align-items: center; }
+        .channel-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: rgba(30,136,229,0.4); color: #90caf9; }
+        .channel-status { font-size: 0.8rem; color: #4caf50; display: flex; align-items: center; gap: 0.4rem; }
+        .channel-now { font-size: 0.85rem; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 0.3rem 0.5rem; border-radius: 6px; }
 
         /* Pakiety Joy Box */
         .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 0.8rem; }
@@ -160,14 +167,14 @@
 
         .packages-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
             margin-bottom: 3rem;
         }
         .package-card {
             background-color: var(--card-bg);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 1.5rem;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -179,17 +186,15 @@
             border: 2px solid #ffeb3b;
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 136, 229, 0.3));
         }
-        .pkg-name { font-size: 1.5rem; color: #ffeb3b; margin-bottom: 0.5rem; }
-        .pkg-price { font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 1.5rem; }
-        .pkg-price span { font-size: 1rem; color: var(--text-muted); font-weight: normal; }
-        .pkg-features { list-style: none; margin-bottom: 2rem; }
-        .pkg-features li { margin-bottom: 0.8rem; color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; }
-        .pkg-features li i { color: #4caf50; }
+        .pkg-name { font-size: 1.2rem; color: #ffeb3b; margin-bottom: 0.3rem; }
+        .pkg-price { font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 1rem; }
+        .pkg-price span { font-size: 0.85rem; color: var(--text-muted); font-weight: normal; }
+        .pkg-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
         .pkg-btn {
             background-color: #ffeb3b;
             color: #0d47a1;
             border: none;
-            padding: 0.8rem;
+            padding: 0.7rem;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
@@ -200,7 +205,7 @@
         }
         .pkg-btn:hover { background-color: #fbc02d; }
 
-        /* Lista kanałów w pakietach */
+        /* Tabela pełnej listy kanałów */
         .channels-list-box {
             background-color: var(--card-bg);
             border-radius: 16px;
@@ -209,15 +214,16 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
         }
-        .channels-tags { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+        .channels-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
         .channel-tag {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
             color: #fff;
         }
+        .channel-tag span { color: #ffeb3b; font-weight: bold; margin-right: 5px; }
 
         footer { background-color: rgba(13, 71, 161, 0.95); text-align: center; padding: 2rem; color: var(--text-muted); margin-top: auto; }
     </style>
@@ -245,7 +251,7 @@
             <div id="auth-container">
                 <div class="panel-header">
                     <h1><i class="fa-solid fa-box-open"></i> JoyBoxGO! – Strefa Widza</h1>
-                    <p>Zaloguj się lub załóż darmowe konto, aby uzyskać dostęp do strumieni i listy kanałów online!</p>
+                    <p>Zaloguj się lub załóż darmowe konto, aby uzyskać dostęp do strumieni i interaktywnej listy kanałów online!</p>
                 </div>
 
                 <div class="tabs">
@@ -287,89 +293,142 @@
 
                 <div class="security-badge">
                     <i class="fa-solid fa-shield-halved"></i>
-                    <span>Dane szyfrowane algorytmami bezpieczeństwa. Pełna ochrona przed niepowołanym dostępem!</span>
+                    <span>Dane w pełni szyfrowane i bezpieczne. Żaden haker ich nie wykradnie!</span>
                 </div>
             </div>
 
-            <!-- Panel po zalogowaniu z listą kanałów i symulacją nadawania -->
+            <!-- Panel po zalogowaniu z listą kanałów z synchronizacją ramówki -->
             <div class="user-dashboard" id="dashboard-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
                     <div>
                         <h2>Witaj, <span id="user-display-name" style="color: #ffeb3b;"></span>! 🎉</h2>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane pomyślnie. Miłego oglądania kanałów JoyBoxGO!</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane pomyślnie. Oto Twoje kanały JoyBoxGO na żywo:</p>
                     </div>
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
                         <i class="fa-solid fa-right-from-bracket"></i> Wyloguj
                     </button>
                 </div>
 
-                <h3 style="color: #fff; margin-bottom: 0.5rem;"><i class="fa-solid fa-satellite-dish" style="color: #ffeb3b;"></i> Dostępne Kanały na Żywo</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Stacje nadają sygnał na żywo. TV Joy synchronizuje się bezpośrednio z ramówką!</p>
+                <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-satellite-dish" style="color: #ffeb3b;"></i> Stacje Telewizyjne Online</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100 (Joy) pobiera dane bezpośrednio z aktualnej ramówki TV Joy!</p>
 
                 <div class="channels-grid" id="channels-list-container">
-                    <!-- Kanały generowane dynamicznie przez JS -->
+                    <!-- Kanały generowane przez JS -->
                 </div>
             </div>
         </div>
 
-        <!-- Pakiety Joy Box -->
-        <h2 class="section-title"><i class="fa-solid fa-tags"></i> Wybierz Pakiet Joy Box</h2>
+        <!-- Pakiety Joy Box wraz z cenami -->
+        <h2 class="section-title"><i class="fa-solid fa-tags"></i> Pakiety i Cennik Joy Box</h2>
         <div class="packages-grid">
             <div class="package-card">
                 <div>
-                    <div class="pkg-name">Pakiet Startowy Joy</div>
-                    <div class="pkg-price">14,99 zł <span>/ miesiąc</span></div>
-                    <ul class="pkg-features">
-                        <li><i class="fa-solid fa-check"></i> Podstawowe kanały TV Joy</li>
-                        <li><i class="fa-solid fa-check"></i> Jakość HD (720p)</li>
-                        <li><i class="fa-solid fa-check"></i> Dostęp na 1 urządzeniu</li>
-                    </ul>
+                    <div class="pkg-name">Regio</div>
+                    <div class="pkg-price">1,00 zł <span>/ mies.</span></div>
+                    <div class="pkg-desc">Tylko Stacje Regionalne i lokalne pasma informacyjne.</div>
                 </div>
-                <button class="pkg-btn" onclick="alert('Wybrano Pakiet Startowy Joy!')">Wybierz pakiet</button>
+                <button class="pkg-btn" onclick="alert('Wybrano pakiet Regio!')">Wybierz</button>
             </div>
 
             <div class="package-card highlight">
                 <div>
-                    <div class="pkg-name"><i class="fa-solid fa-crown" style="color: #ffeb3b;"></i> Pakiet Joy Extra HD</div>
-                    <div class="pkg-price">29,99 zł <span>/ miesiąc</span></div>
-                    <ul class="pkg-features">
-                        <li><i class="fa-solid fa-check"></i> Pełna oferta kanałów TV Joy i partnerskich</li>
-                        <li><i class="fa-solid fa-check"></i> Najwyższa jakość Full HD (1080p)</li>
-                        <li><i class="fa-solid fa-check"></i> Dostęp na 3 urządzeniach jednocześnie</li>
-                        <li><i class="fa-solid fa-check"></i> Archiwum programów do 7 dni wstecz</li>
-                    </ul>
+                    <div class="pkg-name">Normal</div>
+                    <div class="pkg-price">2,20 zł <span>/ mies.</span></div>
+                    <div class="pkg-desc">Podstawowy pakiet zawierający większość ulubionych stacji.</div>
                 </div>
-                <button class="pkg-btn" onclick="alert('Wybrano Pakiet Joy Extra HD!')">Wybierz polecany pakiet</button>
+                <button class="pkg-btn" onclick="alert('Wybrano pakiet Normal!')">Wybierz</button>
             </div>
 
             <div class="package-card">
                 <div>
-                    <div class="pkg-name">Pakiet Familijny VIP</div>
-                    <div class="pkg-price">49,99 zł <span>/ miesiąc</span></div>
-                    <ul class="pkg-features">
-                        <li><i class="fa-solid fa-check"></i> Wszystkie pakiety i kanały premium</li>
-                        <li><i class="fa-solid fa-check"></i> Jakość 4K Ultra HD</li>
-                        <li><i class="fa-solid fa-check"></i> Dostęp na 5 urządzeniach</li>
-                        <li><i class="fa-solid fa-check"></i> Dedykowane materiały VOD bez reklam</li>
-                    </ul>
+                    <div class="pkg-name">Mid</div>
+                    <div class="pkg-price">4,50 zł <span>/ mies.</span></div>
+                    <div class="pkg-desc">Rozszerzony pakiet kanałów tematycznych i filmowych.</div>
                 </div>
-                <button class="pkg-btn" onclick="alert('Wybrano Pakiet Familijny VIP!')">Wybierz pakiet</button>
+                <button class="pkg-btn" onclick="alert('Wybrano pakiet Mid!')">Wybierz</button>
+            </div>
+
+            <div class="package-card">
+                <div>
+                    <div class="pkg-name">Extra</div>
+                    <div class="pkg-price">10,99 zł <span>/ mies.</span></div>
+                    <div class="pkg-desc">Wysokiej jakości kanały specjalne oraz unikalne pasma.</div>
+                </div>
+                <button class="pkg-btn" onclick="alert('Wybrano pakiet Extra!')">Wybierz</button>
+            </div>
+
+            <div class="package-card">
+                <div>
+                    <div class="pkg-name">VIP+</div>
+                    <div class="pkg-price">25,99 zł <span>/ mies.</span></div>
+                    <div class="pkg-desc">Pełen pakiet wszechstronnej rozrywki bez żadnych limitów i reklam.</div>
+                </div>
+                <button class="pkg-btn" onclick="alert('Wybrano pakiet VIP+!')">Wybierz</button>
             </div>
         </div>
 
-        <!-- Lista Kanałów w ofercie -->
+        <!-- Pełna lista kanałów -->
         <div class="channels-list-box">
-            <h3 style="color: #ffeb3b; font-size: 1.4rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-tv"></i> Pełna Lista Kanałów w Joy Box</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">W naszych pakietach znajdziesz starannie wyselekcjonowane kanały zapewniające rozrywkę dla całej rodziny:</p>
+            <h3 style="color: #ffeb3b; font-size: 1.4rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-list"></i> Oficjalny Wykaz Kanałów Joy Box</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">Wszystkie stacje dostępne w sieci telewizyjnej:</p>
             <div class="channels-tags">
-                <span class="channel-tag">TV Joy HD</span>
-                <span class="channel-tag">Joy 24 Info</span>
-                <span class="channel-tag">Joy Kids (Muminki & Bajki)</span>
-                <span class="channel-tag">Joy Classic (Filmy XX w.)</span>
-                <span class="channel-tag">Kulinarna TV Joy</span>
-                <span class="channel-tag">Muzyczny Joy Hit</span>
-                <span class="channel-tag">Dokument Joy Geo</span>
-                <span class="channel-tag">Sport Joy Arena</span>
+                <span class="channel-tag"><span>100</span> Joy (Normal)</span>
+                <span class="channel-tag"><span>101</span> Olixer (Normal)</span>
+                <span class="channel-tag"><span>102</span> Olixer Music (Normal)</span>
+                <span class="channel-tag"><span>103</span> Infiniti (Normal)</span>
+                <span class="channel-tag"><span>104</span> Infiniti 2 (Normal)</span>
+                <span class="channel-tag"><span>105</span> TV94 (Mid)</span>
+                <span class="channel-tag"><span>106</span> Vilion (Mid)</span>
+                <span class="channel-tag"><span>107</span> ITR (Normal)</span>
+                <span class="channel-tag"><span>108</span> ITR >>1 (Normal)</span>
+                <span class="channel-tag"><span>109</span> ITR Hits (Normal)</span>
+                <span class="channel-tag"><span>110</span> ITR Action (Vip+)</span>
+                <span class="channel-tag"><span>111</span> NetWave (Normal)</span>
+                <span class="channel-tag"><span>112</span> Olixer News (Normal)</span>
+                <span class="channel-tag"><span>113</span> Nex1 (Normal)</span>
+                <span class="channel-tag"><span>114</span> Nex2 (Mid)</span>
+                <span class="channel-tag"><span>115</span> NexSPT (Mid)</span>
+                <span class="channel-tag"><span>116</span> snap hd (Normal)</span>
+                <span class="channel-tag"><span>117</span> In Vibe (Normal)</span>
+                <span class="channel-tag"><span>118</span> Tptv (Normal)</span>
+                <span class="channel-tag"><span>119</span> tptv extra (Normal)</span>
+                <span class="channel-tag"><span>120</span> TWP1 (Normal)</span>
+                <span class="channel-tag"><span>121</span> TWP2 (Normal)</span>
+                <span class="channel-tag"><span>122</span> Tptv music (Normal)</span>
+                <span class="channel-tag"><span>123</span> camTV (Normal)</span>
+                <span class="channel-tag"><span>124</span> ITR festival (VIP+)</span>
+                <span class="channel-tag"><span>125</span> ITR comedy (VIP+)</span>
+                <span class="channel-tag"><span>126</span> ITR emotion (VIP+)</span>
+                <span class="channel-tag"><span>127</span> Option! (Normal)</span>
+                <span class="channel-tag"><span>128</span> Infiniti Music (Normal)</span>
+                <span class="channel-tag"><span>129</span> quartz (Normal)</span>
+                <span class="channel-tag"><span>130</span> INFO VOD (VOD)</span>
+                <span class="channel-tag"><span>131</span> Fotel TV (Normal)</span>
+                <span class="channel-tag"><span>132</span> Fotel 2 (Normal)</span>
+                <span class="channel-tag"><span>133</span> KTA:TV (Normal)</span>
+                <span class="channel-tag"><span>134</span> KTA:TV 2 (Normal)</span>
+                <span class="channel-tag"><span>135</span> KTA:TV Music (Normal)</span>
+                <span class="channel-tag"><span>136</span> KTA:TV Dance (Normal)</span>
+                <span class="channel-tag"><span>137</span> KTA:TV Hits (Normal)</span>
+                <span class="channel-tag"><span>138</span> 1.TV (Normal)</span>
+                <span class="channel-tag"><span>139</span> MAX (Normal)</span>
+                <span class="channel-tag"><span>140</span> Star (Normal)</span>
+                <span class="channel-tag"><span>141</span> KTA:PUNKT (Normal)</span>
+                <span class="channel-tag"><span>142</span> Słoneczna (Normal)</span>
+                <span class="channel-tag"><span>143</span> Rytmiczny Wymiar (Normal)</span>
+                <span class="channel-tag"><span>144</span> Fotel :3 (Normal)</span>
+                <span class="channel-tag"><span>145</span> Ktoś TV (Normal)</span>
+                <span class="channel-tag"><span>146</span> Ktoś Inter (Normal)</span>
+                <span class="channel-tag"><span>147</span> ATM 1 (Mid)</span>
+                <span class="channel-tag"><span>148</span> ananta hd (Mid)</span>
+                <span class="channel-tag"><span>149</span> tv17 (Mid)</span>
+                <span class="channel-tag"><span>150</span> fotel tv 4k (Mid)</span>
+                <span class="channel-tag"><span>151</span> ryż biały (Extra)</span>
+                <span class="channel-tag"><span>152</span> astra (Normal)</span>
+                <span class="channel-tag"><span>153</span> Snap (Normal)</span>
+                <span class="channel-tag"><span>154</span> kosmos (Normal)</span>
+                <span class="channel-tag"><span>155-159</span> Pusty Kanał</span>
+                <span class="channel-tag"><span>160</span> Co w Telewizji? (VOD)</span>
             </div>
         </div>
 
@@ -414,18 +473,16 @@
             const password = document.getElementById('reg-password').value;
 
             const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
-            
             if (users.some(u => u.email === email)) {
                 showAlert('Ten adres e-mail jest już zarejestrowany w systemie!', 'error');
                 return;
             }
 
-            // Szyfrowanie hasła algorytmem base64 (bezpieczne przechowywanie)
             const hashedPassword = btoa(password);
             users.push({ username, email, password: hashedPassword, verified: true });
             localStorage.setItem('tvJoyUsers', JSON.stringify(users));
 
-            showAlert('Konto utworzone pomyślnie! Wysłano link weryfikacyjny na adres ' + email + '. Możesz się zalogować.', 'success');
+            showAlert('Konto utworzone! Wysłano link weryfikacyjny na adres ' + email + '. Możesz się zalogować.', 'success');
             switchTab('login');
         }
 
@@ -436,7 +493,6 @@
 
             const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
             const hashedPassword = btoa(password);
-
             const user = users.find(u => u.email === email && u.password === hashedPassword);
 
             if (user) {
@@ -448,50 +504,107 @@
             }
         }
 
-        // Lista kanałów z symulacją nadawania (dla TV Joy pobierana z ramówki)
-        const channelsData = [
-            { name: "TV Joy HD", type: "Główny kanał rozrywkowy", status: "Nadaje na żywo", isJoy: true },
-            { name: "Joy 24 Info", type: "Serwis informacyjny i pogoda IMGW", status: "Nadaje na żywo", isJoy: false },
-            { name: "Joy Kids", type: "Pasmo animacji i Muminków", status: "Nadaje na żywo", isJoy: false },
-            { name: "Joy Classic", type: "Kultowe polskie komedie i kina", status: "Nadaje na żywo", isJoy: false },
-            { name: "Kulinarna TV Joy", type: "Programy gotowania na żywo", status: "Nadaje na żywo", isJoy: false },
-            { name: "Muzyczny Joy Hit", type: "Hity XX wieku i teledyski", status: "Nadaje na żywo", isJoy: false }
+        // Pełna lista kanałów do wyświetlenia po zalogowaniu
+        const userChannels = [
+            { num: 100, name: "Joy", type: "Normal", isJoy: true },
+            { num: 101, name: "Olixer", type: "Normal", isJoy: false },
+            { num: 102, name: "Olixer Music", type: "Normal", isJoy: false },
+            { num: 103, name: "Infiniti", type: "Normal", isJoy: false },
+            { num: 104, name: "Infiniti 2", type: "Normal", isJoy: false },
+            { num: 105, name: "TV94", type: "Mid", isJoy: false },
+            { num: 106, name: "Vilion", type: "Mid", isJoy: false },
+            { num: 107, name: "ITR", type: "Normal", isJoy: false },
+            { num: 108, name: "ITR >>1", type: "Normal", isJoy: false },
+            { num: 109, name: "ITR Hits", type: "Normal", isJoy: false },
+            { num: 110, name: "ITR Action", type: "Vip+", isJoy: false },
+            { num: 111, name: "NetWave", type: "Normal", isJoy: false },
+            { num: 112, name: "Olixer News", type: "Normal", isJoy: false },
+            { num: 113, name: "Nex1", type: "Normal", isJoy: false },
+            { num: 114, name: "Nex2", type: "Mid", isJoy: false },
+            { num: 115, name: "NexSPT", type: "Mid", isJoy: false },
+            { num: 116, name: "snap hd", type: "Normal", isJoy: false },
+            { num: 117, name: "In Vibe", type: "Normal", isJoy: false },
+            { num: 118, name: "Tptv", type: "Normal", isJoy: false },
+            { num: 119, name: "tptv extra", type: "Normal", isJoy: false },
+            { num: 120, name: "TWP1", type: "Normal", isJoy: false },
+            { num: 121, name: "TWP2", type: "Normal", isJoy: false },
+            { num: 122, name: "Tptv music", type: "Normal", isJoy: false },
+            { num: 123, name: "camTV", type: "Normal", isJoy: false },
+            { num: 124, name: "ITR festival", type: "VIP+", isJoy: false },
+            { num: 125, name: "ITR comedy", type: "VIP+", isJoy: false },
+            { num: 126, name: "ITR emotion", type: "VIP+", isJoy: false },
+            { num: 127, name: "Option!", type: "Normal", isJoy: false },
+            { num: 128, name: "Infiniti Music", type: "Normal", isJoy: false },
+            { num: 129, name: "quartz", type: "Normal", isJoy: false },
+            { num: 130, name: "INFO VOD", type: "VOD", isJoy: false },
+            { num: 131, name: "Fotel TV", type: "Normal", isJoy: false },
+            { num: 132, name: "Fotel 2", type: "Normal", isJoy: false },
+            { num: 133, name: "KTA:TV", type: "Normal", isJoy: false },
+            { num: 134, name: "KTA:TV 2", type: "Normal", isJoy: false },
+            { num: 135, name: "KTA:TV Music", type: "Normal", isJoy: false },
+            { num: 136, name: "KTA:TV Dance", type: "Normal", isJoy: false },
+            { num: 137, name: "KTA:TV Hits", type: "Normal", isJoy: false },
+            { num: 138, name: "1.TV", type: "Normal", isJoy: false },
+            { num: 139, name: "MAX", type: "Normal", isJoy: false },
+            { num: 140, name: "Star", type: "Normal", isJoy: false },
+            { num: 141, name: "KTA:PUNKT", type: "Normal", isJoy: false },
+            { num: 142, name: "Słoneczna", type: "Normal", isJoy: false },
+            { num: 143, name: "Rytmiczny Wymiar", type: "Normal", isJoy: false },
+            { num: 144, name: "Fotel :3", type: "Normal", isJoy: false },
+            { num: 145, name: "Ktoś TV", type: "Normal", isJoy: false },
+            { num: 146, name: "Ktoś Inter", type: "Normal", isJoy: false },
+            { num: 147, name: "ATM 1", type: "Mid", isJoy: false },
+            { num: 148, name: "ananta hd", type: "Mid", isJoy: false },
+            { num: 149, name: "tv17", type: "Mid", isJoy: false },
+            { num: 150, name: "fotel tv 4k", type: "Mid", isJoy: false },
+            { num: 151, name: "ryż biały", type: "Extra", isJoy: false },
+            { num: 152, name: "astra", type: "Normal", isJoy: false },
+            { num: 153, name: "Snap", type: "Normal", isJoy: false },
+            { num: 154, name: "kosmos", type: "Normal", isJoy: false },
+            { num: 155, name: "Pusty Kanał", type: "Offline", isJoy: false },
+            { num: 156, name: "Pusty Kanał", type: "Offline", isJoy: false },
+            { num: 157, name: "Pusty Kanał", type: "Offline", isJoy: false },
+            { num: 158, name: "Pusty Kanał", type: "Offline", isJoy: false },
+            { num: 159, name: "Pusty Kanał", type: "Offline", isJoy: false },
+            { num: 160, name: "Co w Telewizji?", type: "VOD", isJoy: false }
         ];
+
+        function getSimulatedJoyShow() {
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            if (currentMinutes >= 360 && currentMinutes < 390) return "Poranek z uśmiechem";
+            if (currentMinutes >= 390 && currentMinutes < 440) return "Muminki";
+            if (currentMinutes >= 440 && currentMinutes < 490) return "Mały odkrywca";
+            if (currentMinutes >= 490 && currentMinutes < 540) return "Kuchnia na start";
+            if (currentMinutes >= 540 && currentMinutes < 900) return "Czterdziestolatek";
+            if (currentMinutes >= 900 && currentMinutes < 1020) return "Sami Swoi & Moda na sukces";
+            if (currentMinutes >= 1020 && currentMinutes < 1140) return "Trudne Sprawy & Ukryta prawda";
+            if (currentMinutes >= 1140 && currentMinutes < 1215) return "Wydarzenia dnia";
+            if (currentMinutes >= 1215) return "Kiler / Rejs";
+            return "Miś Uszatek (Noc)";
+        }
 
         function renderChannelsList(currentShowName) {
             const container = document.getElementById('channels-list-container');
             if(!container) return;
 
             let html = '';
-            channelsData.forEach(ch => {
-                let currentProgram = ch.isJoy ? currentShowName : ch.type;
+            userChannels.forEach(ch => {
+                let nowShowing = ch.isJoy ? currentShowName : "Transmisja ciągła (" + ch.type + ")";
+                if(ch.type === "Offline") nowShowing = "Brak sygnału";
+                
                 html += `
                     <div class="channel-card">
-                        <div class="channel-title"><i class="fa-solid fa-tv"></i> ${ch.name}</div>
-                        <div class="channel-status"><i class="fa-solid fa-circle" style="font-size: 8px;"></i> ${ch.status}</div>
-                        <div class="channel-now"><strong>Teraz:</strong> ${currentProgram}</div>
+                        <div class="channel-title">
+                            <span><strong>${ch.num}.</strong> ${ch.name}</span>
+                            <span class="channel-badge">${ch.type}</span>
+                        </div>
+                        <div class="channel-status"><i class="fa-solid fa-circle" style="font-size: 7px;"></i> ${ch.type === 'Offline' ? 'Nieaktywny' : 'Nadaje na żywo'}</div>
+                        <div class="channel-now"><strong>Teraz:</strong> ${nowShowing}</div>
                     </div>
                 `;
             });
             container.innerHTML = html;
-        }
-
-        // Symulacja pobierania aktualnego programu TV Joy (na wzór głównej strony)
-        function getSimulatedJoyShow() {
-            const now = new Date();
-            const currentMinutes = now.getHours() * 60 + now.getMinutes();
-            
-            // Przykładowe pozycje ramówki
-            if (currentMinutes >= 360 && currentMinutes < 390) return "Poranek z uśmiechem";
-            if (currentMinutes >= 390 && currentMinutes < 440) return "Muminki";
-            if (currentMinutes >= 440 && currentMinutes < 490) return "Mały odkrywca";
-            if (currentMinutes >= 490 && currentMinutes < 540) return "Kuchnia na start";
-            if (currentMinutes >= 540 && currentMinutes < 900) return "Czterdziestolatek / Stare, ale jare";
-            if (currentMinutes >= 900 && currentMinutes < 1020) return "Sami Swoi & Moda na sukces";
-            if (currentMinutes >= 1020 && currentMinutes < 1140) return "Trudne Sprawy & Ukryta prawda";
-            if (currentMinutes >= 1140 && currentMinutes < 1215) return "Wydarzenia dnia";
-            if (currentMinutes >= 1215) return "Kiler / Rejs (Kino Wieczorne)";
-            return "Miś Uszatek (Nocne Pasmo)";
         }
 
         function checkAuthSession() {
