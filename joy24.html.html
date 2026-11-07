@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joy 24 – TV Joy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --text-color: #ffffff;
+            --text-muted: #cbd5e1;
+        }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Gotham Bold', 'Gotham', 'Segoe UI', sans-serif; 
+            font-weight: 700;
+        }
+        body {
+            background: url('tlo-czerwone.jpg') no-repeat center center fixed;
+            background-size: cover;
+            background-color: #b71c1c;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        header {
+            background-color: rgba(183, 28, 28, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .logo { text-decoration: none; display: flex; align-items: center; gap: 12px; }
+        
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffeb3b;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        .logo-text { font-size: 1.8rem; font-weight: 900; }
+        .logo-text .tv { color: #ffffff; }
+        .logo-text .joy { color: #ffeb3b; }
+        nav { display: flex; gap: 1.5rem; align-items: center; }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; }
+        nav a:hover, nav a.active { color: #ffeb3b; }
+        .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
+        
+        .container { max-width: 800px; margin: auto; padding: 4rem 1.5rem; text-align: center; flex-grow: 1; display: flex; justify-content: center; align-items: center; width: 100%; }
+        .content-box { background-color: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px); border-radius: 16px; padding: 4rem 3rem; border: 1px solid rgba(255, 255, 255, 0.1); width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .content-box h1 { font-size: 3rem; margin-bottom: 1.5rem; color: #ffeb3b; }
+        .content-box p { font-size: 2rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); }
+        
+        footer { background-color: rgba(183, 28, 28, 0.9); text-align: center; padding: 2rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="PFPjoy10kl.jpg" alt="TV Joy Logo" class="logo-img">
+            <div class="logo-text"><span class="tv">TV</span> <span class="joy">JOY</span></div>
+        </a>
+        <nav>
+            <a href="index.html">Na Żywo</a>
+            <a href="joy24.html" class="active">Joy 24</a>
+            <a href="index.html#ramowka">Ramówka</a>
+            <a href="https://www.youtube.com/@joy_twoja_u%C5%9Bmiechni%C4%99ta_tv" target="_blank" class="yt-btn">
+                <i class="fa-brands fa-youtube"></i> Subskrybuj
+            </a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="content-box">
+            <h1>Joy 24</h1>
+            <p>Wkrótce</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 TV Joy – Twoja Uśmiechnięta TV. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Joy – Twoja Uśmiechnięta TV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --text-color: #ffffff;
+            --text-muted: #cbd5e1;
+        }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Gotham Bold', 'Gotham', 'Segoe UI', sans-serif; 
+            font-weight: 700;
+        }
+        body {
+            background: linear-gradient(to bottom, #1e88e5, #0d47a1);
+            background-attachment: fixed;
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        /* Ekran ostrzegawczy w stylu Windows XP */
+        .ai-warning-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .winxp-window {
+            background-color: #ece9d8;
+            border: 3px solid #0055ea;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 4px 4px 20px rgba(0,0,0,0.6);
+            font-family: 'Tahoma', 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+        .winxp-titlebar {
+            background: linear-gradient(to right, #0055ea, #2680eb);
+            padding: 6px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        .winxp-title-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .winxp-close-btn {
+            background: #d4d0c8;
+            border: 1px solid #ffffff;
+            color: #000;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 3px;
+            cursor: pointer;
+            box-shadow: inset 1px 1px #fff, inset -1px -1px #808080;
+        }
+        .winxp-close-btn:active {
+            box-shadow: inset 1px 1px #808080, inset -1px -1px #fff;
+        }
+        .winxp-body {
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background-color: #ece9d8;
+            color: #000000;
+        }
+        .winxp-icon {
+            font-size: 2.5rem;
+            color: #e53935;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+        .winxp-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #002266;
+            font-weight: bold;
+        }
+        .winxp-text p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #222222;
+            font-weight: normal;
+        }
+        .winxp-footer {
+            background-color: #f5f4ef;
+            padding: 12px 20px;
+            border-top: 1px solid #d4d0c8;
+            display: flex;
+            justify-content: center;
+        }
+        .winxp-button {
+            background: linear-gradient(to bottom, #f3f2ee, #d4d0c8);
+            border: 1px solid #003c74;
+            padding: 6px 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #000;
+            border-radius: 3px;
+            cursor: pointer;
+            box-shadow: inset 1px 1px #fff, inset -1px -1px #b5b3a8;
+            transition: background 0.1s;
+        }
+        .winxp-button:hover {
+            background: linear-gradient(to bottom, #e5f1fb, #bcdbfa);
+            border-color: #002d65;
+        }
+        .winxp-button:active {
+            background: linear-gradient(to bottom, #b8d4f8, #9cc2f6);
+            box-shadow: inset 1px 1px #808080, inset -1px -1px #fff;
+        }
+
+        header {
+            background-color: rgba(13, 71, 161, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .logo { text-decoration: none; display: flex; align-items: center; gap: 12px; }
+        
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffeb3b;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        .logo-text { font-size: 1.8rem; font-weight: 900; }
+        .logo-text .tv { color: #ffffff; }
+        .logo-text .joy { color: #ffeb3b; }
+        nav { display: flex; gap: 1.5rem; align-items: center; }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; }
+        nav a:hover, nav a.active { color: #ffeb3b; }
+        .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
+        
+        /* Pasek Informacyjny ze stałym przewijaniem */
+        .news-ticker {
+            background-color: #b71c1c;
+            color: white;
+            padding: 0.7rem 1rem;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            white-space: nowrap;
+            border-bottom: 2px solid #ffeb3b;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .ticker-badge {
+            background-color: #ffeb3b;
+            color: #b71c1c;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            z-index: 2;
+        }
+        .ticker-wrap {
+            overflow: hidden;
+            width: 100%;
+        }
+        .ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 45s linear infinite;
+        }
+        .ticker-content span {
+            margin-right: 3rem;
+            font-size: 1rem;
+        }
+        .ticker-content span i {
+            color: #ffeb3b;
+            margin-right: 0.5rem;
+        }
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; }
+        .hero { text-align: center; margin-bottom: 3rem; }
+        .hero h1 { font-size: 3rem; margin-bottom: 0.5rem; }
+        .hero p { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem; }
+        
+        .now-next-box {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.9), rgba(244, 67, 54, 0.9));
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .nn-item h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; color: #fff; }
+        .nn-item p { font-size: 1.4rem; font-weight: bold; color: #ffeb3b; }
+
+        .player-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; background-color: #000; margin-bottom: 4rem; }
+        .fallback-box { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #0f172a; padding: 2rem; text-align: center; }
+        .watch-link-btn { background-color: #ff0000; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+
+        .section-title { font-size: 2rem; margin-bottom: 2rem; font-weight: 700; display: flex; align-items: center; gap: 1rem; }
+        .section-title i { color: #ffeb3b; }
+
+        .schedule-box { background-color: var(--card-bg); border-radius: 12px; padding: 2rem; max-height: 650px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .schedule-item { display: flex; align-items: center; padding: 0.8rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); gap: 1rem; transition: background 0.3s; }
+        .schedule-item:hover { background-color: rgba(255, 255, 255, 0.03); }
+        
+        .schedule-item.active-now {
+            background-color: rgba(255, 235, 59, 0.15);
+            border-left: 4px solid #ffeb3b;
+            border-radius: 4px;
+        }
+
+        .schedule-time { font-weight: bold; color: #ffeb3b; min-width: 70px; font-size: 1.1rem; }
+        .schedule-img { width: 60px; height: 40px; border-radius: 6px; object-fit: cover; background: #334155; display: flex; align-items: center; justify-content: center; color: #cbd5e1; font-size: 1.2rem; }
+        .schedule-title { flex-grow: 1; font-size: 1.05rem; }
+
+        /* Sekcja Spotify Polecajki */
+        .spotify-section {
+            margin-top: 4rem;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .spotify-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .spotify-title {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #1db954;
+        }
+        .spotify-btn {
+            background-color: #1db954;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .spotify-btn:hover {
+            background-color: #1ed760;
+            transform: scale(1.03);
+        }
+        .spotify-player-wrapper {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        footer { background-color: rgba(13, 71, 161, 0.95); text-align: center; padding: 2rem; color: var(--text-muted); margin-top: 3rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Okno ostrzegawcze w stylu Windows XP -->
+    <div class="ai-warning-overlay" id="warningModal" style="display: none;">
+        <div class="winxp-window">
+            <div class="winxp-titlebar">
+                <div class="winxp-title-left">
+                    <i class="fa-solid fa-circle-info"></i> Informacja o systemie
+                </div>
+                <div class="winxp-close-btn" onclick="closeWarning()">✕</div>
+            </div>
+            <div class="winxp-body">
+                <div class="winxp-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="winxp-text">
+                    <h3>Nota informacyjna o architekturze serwisu</h3>
+                    <p>Niniejsza strona internetowa znajduje się obecnie w fazie testów oraz została w pełni wygenerowana i zoptymalizowana przy udziale sztucznej inteligencji, a sam pomysł zrobienia strony jest zainspirowany serwisem Digitele. Wszelkie zapytania merytoryczne lub krytyczne uwagi dotyczące braku formalnego wykształcenia akademickiego w zakresie programowania prosimy kierować na bezpieczny dystans. Pozdrowienia od twórcy – ~ Artutmaz.</p>
+                </div>
+            </div>
+            <div class="winxp-footer">
+                <button class="winxp-button" onclick="closeWarning()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="PFPjoy10kl.jpg" alt="TV Joy Logo" class="logo-img">
+            <div class="logo-text"><span class="tv">TV</span> <span class="joy">JOY</span></div>
+        </a>
+        <nav>
+            <a href="index.html" class="active">Na Żywo</a>
+            <a href="joy24.html">Joy 24</a>
+            <a href="#ramowka">Ramówka</a>
+            <a href="https://www.youtube.com/@joy_twoja_u%C5%9Bmiechni%C4%99ta_tv" target="_blank" class="yt-btn">
+                <i class="fa-brands fa-youtube"></i> Subskrybuj
+            </a>
+        </nav>
+    </header>
+
+    <!-- Pasek Informacyjny -->
+    <div class="news-ticker">
+        <div class="ticker-badge"><i class="fa-solid fa-newspaper"></i> INFORMACJE</div>
+        <div class="ticker-wrap">
+            <div class="ticker-content" id="ticker-text">
+                <span><i class="fa-solid fa-tv"></i> TVFIKCYJNE WIKI: Witamy w oficjalnym serwisie informacyjnym TV Joy!</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section id="live" class="hero">
+            <h1>Twoja Uśmiechnięta TV</h1>
+            <p>Oglądaj naszą telewizję na żywo i ciesz się uśmiechem każdego dnia!</p>
+            <div class="player-container">
+                <div class="fallback-box">
+                    <i class="fa-brands fa-youtube" style="font-size: 3rem; color: #ff0000; margin-bottom: 1rem;"></i>
+                    <h3>Oglądaj bezpośrednio na YouTube</h3>
+                    <p style="color: var(--text-muted);">Kliknij poniżej, aby przejść do oficjalnego kanału TV Joy:</p>
+                    <a href="https://www.youtube.com/@joy_twoja_u%C5%9Bmiechni%C4%99ta_tv" target="_blank" class="watch-link-btn">
+                        <i class="fa-solid fa-play"></i> Otwórz kanał TV Joy
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pasek Co teraz / Następnie -->
+        <div class="now-next-box">
+            <div class="nn-item">
+                <h3><i class="fa-solid fa-circle-dot" style="color: #ffeb3b;"></i> Teraz na antenie</h3>
+                <p id="current-show">Ładowanie...</p>
+            </div>
+            <div class="nn-item">
+                <h3><i class="fa-solid fa-forward"></i> Następnie</h3>
+                <p id="next-show">Ładowanie...</p>
+            </div>
+        </div>
+
+        <section id="ramowka">
+            <h2 class="section-title"><i class="fa-solid fa-calendar-days"></i> Całodobowa Ramówka TV Joy</h2>
+            <div class="schedule-box" id="schedule-list">
+                <div class="schedule-item" data-time="06:00"><span class="schedule-time">06:00</span><div class="schedule-img"><i class="fa-solid fa-mug-hot"></i></div><span class="schedule-title">Poranek z uśmiechem — nowy program śniadaniowy</span></div>
+                <div class="schedule-item" data-time="06:30"><span class="schedule-time">06:30</span><div class="schedule-img"><i class="fa-solid fa-book-open"></i></div><span class="schedule-title">Muminki</span></div>
+                <div class="schedule-item" data-time="06:55"><span class="schedule-time">06:55</span><div class="schedule-img"><i class="fa-solid fa-book-open"></i></div><span class="schedule-title">Muminki</span></div>
+                <div class="schedule-item" data-time="07:20"><span class="schedule-time">07:20</span><div class="schedule-img"><i class="fa-solid fa-graduation-cap"></i></div><span class="schedule-title">Mały odkrywca — nowy program edukacyjny</span></div>
+                <div class="schedule-item" data-time="07:40"><span class="schedule-time">07:40</span><div class="schedule-img"><i class="fa-solid fa-utensils"></i></div><span class="schedule-title">Kuchnia na start — nowy program kulinarny</span></div>
+                <div class="schedule-item" data-time="08:10"><span class="schedule-time">08:10</span><div class="schedule-img"><i class="fa-solid fa-tv"></i></div><span class="schedule-title">Teleranek Jaruzelskiego</span></div>
+                <div class="schedule-item" data-time="08:20"><span class="schedule-time">08:20</span><div class="schedule-img"><i class="fa-solid fa-music"></i></div><span class="schedule-title">Muzyczna pobudka — teledyski i hity</span></div>
+                <div class="schedule-item" data-time="09:00"><span class="schedule-time">09:00</span><div class="schedule-img"><i class="fa-solid fa-compact-disc"></i></div><span class="schedule-title">Hity XX wieku</span></div>
+                <div class="schedule-item" data-time="09:25"><span class="schedule-time">09:25</span><div class="schedule-img"><i class="fa-solid fa-plane"></i></div><span class="schedule-title">Podróże bez biletu — magazyn podróżniczy</span></div>
+                <div class="schedule-item" data-time="10:00"><span class="schedule-time">10:00</span><div class="schedule-img"><i class="fa-solid fa-user-tie"></i></div><span class="schedule-title">Czterdziestolatek</span></div>
+                <div class="schedule-item" data-time="10:50"><span class="schedule-time">10:50</span><div class="schedule-img"><i class="fa-solid fa-star"></i></div><span class="schedule-title">Stare, ale jare</span></div>
+                <div class="schedule-item" data-time="11:10"><span class="schedule-time">11:10</span><div class="schedule-img"><i class="fa-solid fa-paw"></i></div><span class="schedule-title">Świat zwierząt — film przyrodniczy</span></div>
+                <div class="schedule-item" data-time="11:40"><span class="schedule-time">11:40</span><div class="schedule-img"><i class="fa-solid fa-child"></i></div><span class="schedule-title">Dziecięce Hity</span></div>
+                <div class="schedule-item" data-time="12:00"><span class="schedule-time">12:00</span><div class="schedule-img"><i class="fa-solid fa-book-open"></i></div><span class="schedule-title">Muminki</span></div>
+                <div class="schedule-item" data-time="12:25"><span class="schedule-time">12:25</span><div class="schedule-img"><i class="fa-solid fa-child"></i></div><span class="schedule-title">Dziecięce Hity</span></div>
+                <div class="schedule-item" data-time="12:45"><span class="schedule-time">12:45</span><div class="schedule-img"><i class="fa-solid fa-wand-magic-sparkles"></i></div><span class="schedule-title">Bajkowa kraina — nowe pasmo animacji</span></div>
+                <div class="schedule-item" data-time="13:10"><span class="schedule-time">13:10</span><div class="schedule-img"><i class="fa-solid fa-circle-question"></i></div><span class="schedule-title">Prawda czy Fałsz</span></div>
+                <div class="schedule-item" data-time="13:45"><span class="schedule-time">13:45</span><div class="schedule-img"><i class="fa-solid fa-house"></i></div><span class="schedule-title">Rodzinka.pl — 2 odcinki</span></div>
+                <div class="schedule-item" data-time="14:35"><span class="schedule-time">14:35</span><div class="schedule-img"><i class="fa-solid fa-film"></i></div><span class="schedule-title">Sami Swoi</span></div>
+                <div class="schedule-item" data-time="15:00"><span class="schedule-time">15:00</span><div class="schedule-img"><i class="fa-solid fa-newspaper"></i></div><span class="schedule-title">Informacje</span></div>
+                <div class="schedule-item" data-time="15:15"><span class="schedule-time">15:15</span><div class="schedule-img"><i class="fa-solid fa-masks-theater"></i></div><span class="schedule-title">Moda na sukces</span></div>
+                <div class="schedule-item" data-time="15:45"><span class="schedule-time">15:45</span><div class="schedule-img"><i class="fa-solid fa-church"></i></div><span class="schedule-title">Plebania</span></div>
+                <div class="schedule-item" data-time="16:30"><span class="schedule-time">16:30</span><div class="schedule-img"><i class="fa-solid fa-heart"></i></div><span class="schedule-title">M jak Miłość</span></div>
+                <div class="schedule-item" data-time="17:20"><span class="schedule-time">17:20</span><div class="schedule-img"><i class="fa-solid fa-triangle-exclamation"></i></div><span class="schedule-title">Trudne Sprawy</span></div>
+                <div class="schedule-item" data-time="18:10"><span class="schedule-time">18:10</span><div class="schedule-img"><i class="fa-solid fa-magnifying-glass"></i></div><span class="schedule-title">Ukryta prawda</span></div>
+                <div class="schedule-item" data-time="19:00"><span class="schedule-time">19:00</span><div class="schedule-img"><i class="fa-solid fa-globe"></i></div><span class="schedule-title">Wydarzenia dnia — główny serwis informacyjny</span></div>
+                <div class="schedule-item" data-time="19:25"><span class="schedule-time">19:25</span><div class="schedule-img"><i class="fa-solid fa-triangle-exclamation"></i></div><span class="schedule-title">Trudne Sprawy</span></div>
+                <div class="schedule-item" data-time="20:15"><span class="schedule-time">20:15</span><div class="schedule-img"><i class="fa-solid fa-clapperboard"></i></div><span class="schedule-title">Kiler</span></div>
+                <div class="schedule-item" data-time="22:00"><span class="schedule-time">22:00</span><div class="schedule-img"><i class="fa-solid fa-ship"></i></div><span class="schedule-title">Rejs</span></div>
+                <div class="schedule-item" data-time="23:15"><span class="schedule-time">23:15</span><div class="schedule-img"><i class="fa-solid fa-shield-halved"></i></div><span class="schedule-title">997</span></div>
+                <div class="schedule-item" data-time="00:00"><span class="schedule-time">00:00</span><div class="schedule-img"><i class="fa-solid fa-moon"></i></div><span class="schedule-title">Seksmisja</span></div>
+                <div class="schedule-item" data-time="01:40"><span class="schedule-time">01:40</span><div class="schedule-img"><i class="fa-solid fa-bed"></i></div><span class="schedule-title">Miś Uszatek</span></div>
+            </div>
+        </section>
+
+        <!-- Polecajka muzyczna Spotify na dole strony -->
+        <section class="spotify-section">
+            <div class="spotify-header">
+                <h3 class="spotify-title"><i class="fa-brands fa-spotify"></i> Muzyczna Polecajka Dnia TV Joy</h3>
+                <button class="spotify-btn" onclick="randomizeSpotifyTrack()">
+                    <i class="fa-solid fa-shuffle"></i> Wylosuj inny utwór
+                </button>
+            </div>
+            <div class="spotify-player-wrapper">
+                <iframe id="spotify-player" style="border-radius:12px" src="" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 TV Joy – Twoja Uśmiechnięta TV. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script>
+        // Sprawdzenie przy ładowaniu strony, czy użytkownik już zamknął okno
+        window.addEventListener('DOMContentLoaded', () => {
+            const warningClosed = localStorage.getItem('tvJoyWarningClosed');
+            
+            if (!warningClosed) {
+                document.getElementById('warningModal').style.display = 'flex';
+                
+                try {
+                    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    
+                    function playXpErrorSound() {
+                        const now = audioCtx.currentTime;
+                        
+                        const osc1 = audioCtx.createOscillator();
+                        const gain1 = audioCtx.createGain();
+                        osc1.type = 'sawtooth';
+                        osc1.frequency.setValueAtTime(440, now); 
+                        osc1.frequency.setValueAtTime(311.13, now + 0.08); 
+
+                        const osc2 = audioCtx.createOscillator();
+                        const gain2 = audioCtx.createGain();
+                        osc2.type = 'square';
+                        osc2.frequency.setValueAtTime(220, now);
+                        osc2.frequency.setValueAtTime(155.56, now + 0.08);
+
+                        gain1.gain.setValueAtTime(0.3, now);
+                        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+                        gain2.gain.setValueAtTime(0.2, now);
+                        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+
+                        osc1.connect(gain1);
+                        osc2.connect(gain2);
+                        gain1.connect(audioCtx.destination);
+                        gain2.connect(audioCtx.destination);
+
+                        osc1.start(now);
+                        osc2.start(now);
+                        osc1.stop(now + 0.35);
+                        osc2.stop(now + 0.35);
+                    }
+
+                    setTimeout(() => {
+                        if (audioCtx.state === 'suspended') {
+                            audioCtx.resume();
+                        }
+                        playXpErrorSound();
+                    }, 300);
+                } catch (e) {
+                    console.log('Audio Context zablokowany przez przeglądarkę.');
+                }
+            }
+        });
+
+        // Zamknięcie okna ostrzegawczego i zapisanie stanu w pamięci przeglądarki
+        function closeWarning() {
+            document.getElementById('warningModal').style.display = 'none';
+            localStorage.setItem('tvJoyWarningClosed', 'true');
+        }
+
+        // Wiadomości i ciekawostki ze świata TVFikcyjne Wiki oraz regionu Ełku
+        function updateNewsTicker() {
+            const newsItems = [
+                "TVFIKCYJNE WIKI: TV Joy awansuje w zestawieniu najpopularniejszych stacji tworzonych przez społeczność!",
+                "EŁK: Urząd Miasta ogłasza nowe dotacje na rozwój inicjatyw młodzieżowych i miejskiej infrastruktury.",
+                "CIEKAWOSTKA TVF: Czy wiesz, że na TVFikcyjne Wiki opisano już ponad setki autorskich projektów stacji telewizyjnych?",
+                "MAZURY: Oficjalne komunikaty urzędu marszałkowskiego ws. nowych tras turystycznych wokół Ełku.",
+                "TV JOY: Dziękujemy za wspólne oglądanie — sprawdzaj naszą całą ramówkę poniżej!"
+            ];
+
+            let itemsHtml = '';
+            newsItems.forEach(item => {
+                itemsHtml += `<span><i class="fa-solid fa-star" style="color: #ffeb3b;"></i> ${item}</span>`;
+            });
+
+            document.getElementById('ticker-text').innerHTML = itemsHtml + itemsHtml;
+        }
+
+        updateNewsTicker();
+
+        // Skrypt ramówki (Co teraz / Następnie)
+        function updateSchedule() {
+            const items = document.querySelectorAll('.schedule-item');
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            
+            let times = [];
+            items.forEach(item => {
+                const [h, m] = item.getAttribute('data-time').split(':').map(Number);
+                times.push(h * 60 + m);
+            });
+
+            let currentIndex = times.length - 1;
+            for (let i = 0; i < times.length; i++) {
+                if (currentMinutes < times[i]) {
+                    currentIndex = i - 1;
+                    if (currentIndex < 0) currentIndex = times.length - 1;
+                    break;
+                }
+            }
+
+            items.forEach(item => item.classList.remove('active-now'));
+            items[currentIndex].classList.add('active-now');
+
+            const currentTitle = items[currentIndex].querySelector('.schedule-title').innerText;
+            const nextIndex = (currentIndex + 1) % items.length;
+            const nextTitle = items[nextIndex].querySelector('.schedule-title').innerText;
+
+            document.getElementById('current-show').innerText = currentTitle;
+            document.getElementById('next-show').innerText = nextTitle;
+        }
+
+        updateSchedule();
+        setInterval(updateSchedule, 10000);
+
+        // Lista ID zweryfikowanych utworów Spotify (bez wulgaryzmów)
+        const safeSpotifyTracks = [
+            '0VjeePi8mRGlx0KYrE2t2M', // Coldplay - Viva La Vida
+            '4uLU6hMCjMI75M1A2tKUQC', // Queen - Don't Stop Me Now
+            '0b90gQ8GjKGj6vR616jW9d', // Dawid Podsiadło - Małomiasteczkowy
+            '2TAK21z2WmZSp27eaF5zch', // Sanah - Szampan
+            '1BxfuMiLl4Wtx2y2x7j70u', // Michael Jackson - Billie Jean
+            '3u1S1E8yP0vR1j3i3bUq3E', // ABBA - Dancing Queen
+            '0c489yWenHGlDFf4yebvYQ', // A-ha - Take on Me
+            '60nZcImufyMA1MKQY3dcCH', // Pharrell Williams - Happy
+            '6w899j7S3l048p0p2GfN0L', // Sanah, Dawid Podsiadło - Ostatnia nadzieja
+            '3yTkoTuiKRz1g2pPq0Y16i'  // Dua Lipa - Levitating
+        ];
+
+        let currentTrackIndex = -1;
+
+        function randomizeSpotifyTrack() {
+            let randomIndex;
+            // Gwarantuje wylosowanie innego utworu niż obecnie wyświetlany
+            do {
+                randomIndex = Math.floor(Math.random() * safeSpotifyTracks.length);
+            } while (randomIndex === currentTrackIndex && safeSpotifyTracks.length > 1);
+
+            currentTrackIndex = randomIndex;
+            const trackId = safeSpotifyTracks[randomIndex];
+            const playerIframe = document.getElementById('spotify-player');
+            
+            // Dodanie unikalnego znacznika czasowego unika problemów z blokowaniem odświeżania przez przeglądarkę
+            playerIframe.src = `https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0&t=${Date.now()}`;
+        }
+
+        // Inicjalne losowanie utworu przy wczytaniu strony
+        randomizeSpotifyTrack();
+    </script>
+</body>
+</html>
