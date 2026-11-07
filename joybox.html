@@ -58,7 +58,7 @@
         
         .hero-box {
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
         .hero-box h1 {
             font-size: 3rem;
@@ -68,6 +68,61 @@
         .hero-box p {
             color: var(--text-muted);
             font-size: 1.2rem;
+        }
+
+        /* Sekcja z informacjami i cenami */
+        .info-panel {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.8rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .info-panel h3 {
+            color: #ffeb3b;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .info-panel p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1.2rem;
+        }
+        .price-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+        .price-card h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+        .price-card .price {
+            color: #ffeb3b;
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+        .price-card span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+            font-weight: normal;
         }
 
         /* Lista kanałów */
@@ -116,10 +171,11 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+        .badge-regio { background-color: rgba(121, 85, 72, 0.3); color: #d7ccc8; border: 1px solid rgba(121, 85, 72, 0.5); }
         .badge-normal { background-color: rgba(30, 136, 229, 0.3); color: #90caf9; border: 1px solid rgba(30, 136, 229, 0.5); }
         .badge-mid { background-color: rgba(255, 152, 0, 0.3); color: #ffb74d; border: 1px solid rgba(255, 152, 0, 0.5); }
-        .badge-vip { background-color: rgba(156, 39, 176, 0.3); color: #e1bee7; border: 1px solid rgba(156, 39, 176, 0.5); }
         .badge-extra { background-color: rgba(76, 175, 80, 0.3); color: #a5d6a7; border: 1px solid rgba(76, 175, 80, 0.5); }
+        .badge-vip { background-color: rgba(156, 39, 176, 0.3); color: #e1bee7; border: 1px solid rgba(156, 39, 176, 0.5); }
         .badge-vod { background-color: rgba(244, 67, 54, 0.3); color: #ef9a9a; border: 1px solid rgba(244, 67, 54, 0.5); }
         .badge-empty { background-color: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.3); }
 
@@ -145,9 +201,50 @@
     <div class="container">
         <div class="hero-box">
             <h1>Joy Box</h1>
-            <p>Pełna lista kanałów telewizyjnych dostępnych w usłudze Joy Box</p>
+            <p>Platforma telewizyjna z pełną listą kanałów</p>
         </div>
 
+        <!-- Panel informacyjny i cennik -->
+        <div class="info-panel">
+            <h3><i class="fa-solid fa-circle-info"></i> Informacje o usłudze i pakiety</h3>
+            <p><strong>Joy Box</strong> to w pełni fikcyjny dystrybutor telewizyjny tworzony w ramach projektów społecznościowych. Chcesz dodać swój własny kanał do naszej oferty? Napisz do twórcy na Discordzie: <strong>artutmaz_yt</strong>!</p>
+            
+            <h3 style="font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-tags"></i> Cennik pakietów:</h3>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h4>Regio</h4>
+                    <div class="price">1,00 zł</div>
+                    <span>Tylko Stacje Regionalne</span>
+                </div>
+                <div class="price-card">
+                    <h4>Normal</h4>
+                    <div class="price">2,20 zł</div>
+                    <span>Podstawowe kanały</span>
+                </div>
+                <div class="price-card">
+                    <h4>Mid</h4>
+                    <div class="price">4,50 zł</div>
+                    <span>Rozszerzony pakiet</span>
+                </div>
+                <div class="price-card">
+                    <h4>Extra</h4>
+                    <div class="price">10,99 zł</div>
+                    <span>Większy wybór rozrywki</span>
+                </div>
+                <div class="price-card">
+                    <h4>VIP</h4>
+                    <div class="price">20,00 zł</div>
+                    <span>Ekskluzywna oferta</span>
+                </div>
+                <div class="price-card">
+                    <h4>VIP+</h4>
+                    <div class="price">25,99 zł</div>
+                    <span>Najwyższy pakiet kanałów</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista kanałów -->
         <div class="channels-box">
             <div class="channel-item"><div class="channel-left"><span class="channel-num">100</span><span class="channel-name">Joy</span></div><span class="badge badge-normal">Normal</span></div>
             <div class="channel-item"><div class="channel-left"><span class="channel-num">101</span><span class="channel-name">Olixer</span></div><span class="badge badge-normal">Normal</span></div>
