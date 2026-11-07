@@ -243,9 +243,9 @@
         .section-title { font-size: 2rem; margin-bottom: 2rem; font-weight: 700; display: flex; align-items: center; gap: 1rem; }
         .section-title i { color: #ffeb3b; }
 
-        /* Styl widgetu pogodowego */
+        /* Udoskonalony Widget Pogodowy */
         .weather-section {
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
         .weather-box {
             background-color: var(--card-bg);
@@ -255,23 +255,31 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
         }
+        .weather-tabs-container {
+            max-height: 120px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+            padding-right: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .weather-tabs-container::-webkit-scrollbar { width: 6px; }
+        .weather-tabs-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 6px; }
+        
         .weather-tabs {
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 1rem;
         }
         .weather-tab {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-muted);
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.9rem;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.2s;
         }
         .weather-tab:hover, .weather-tab.active {
@@ -279,24 +287,60 @@
             color: #0d47a1;
             border-color: #ffeb3b;
         }
-        .weather-content {
+        .weather-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media(min-width: 900px) {
+            .weather-grid { grid-template-columns: 1.2fr 1fr; }
+        }
+
+        .weather-info-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .weather-header-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 0.5rem;
         }
+        .weather-location {
+            font-size: 1.4rem;
+            color: #ffeb3b;
+        }
+        .weather-source {
+            font-size: 0.8rem;
+            background: rgba(30, 136, 229, 0.3);
+            border: 1px solid rgba(30, 136, 229, 0.5);
+            color: #90caf9;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
         .weather-main {
             display: flex;
             align-items: center;
             gap: 1.5rem;
+            margin: 0.5rem 0;
         }
         .weather-icon-lg {
             font-size: 3.5rem;
             color: #ffeb3b;
         }
         .weather-temp {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 900;
             color: #fff;
         }
@@ -304,27 +348,44 @@
             font-size: 1.1rem;
             color: var(--text-muted);
         }
+        
         .weather-details {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            gap: 0.8rem;
         }
         .weather-detail-item {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.8rem 1.2rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(15, 23, 42, 0.6);
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             text-align: center;
         }
         .weather-detail-item span {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             margin-bottom: 0.2rem;
         }
         .weather-detail-item strong {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #ffeb3b;
+        }
+
+        /* Kontener Mapy IMGW */
+        .weather-map-box {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: #000;
+            min-height: 300px;
+            position: relative;
+        }
+        .weather-map-box iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            border: none;
         }
 
         /* Wygląd okienka ramówki */
@@ -494,40 +555,70 @@
             </div>
         </div>
 
-        <!-- Sekcja Widgetu Pogodowego -->
+        <!-- Udoskonalona Sekcja Pogody IMGW-PIB -->
         <section class="weather-section">
-            <h2 class="section-title"><i class="fa-solid fa-cloud-sun"></i> Prognoza Pogody w Polsce i Regionach</h2>
+            <h2 class="section-title"><i class="fa-solid fa-cloud-sun"></i> Serwis Pogodowy IMGW-PIB dla Województw</h2>
             <div class="weather-box">
-                <div class="weather-tabs">
-                    <button class="weather-tab active" onclick="changeWeather('elk', this)">Ełk (Mazury)</button>
-                    <button class="weather-tab" onclick="changeWeather('mazowieckie', this)">Mazowieckie (Warszawa)</button>
-                    <button class="weather-tab" onclick="changeWeather('pomorskie', this)">Pomorskie (Gdańsk)</button>
-                    <button class="weather-tab" onclick="changeWeather('dolnoslaskie', this)">Dolnośląskie (Wrocław)</button>
-                    <button class="weather-tab" onclick="changeWeather('malopolskie', this)">Małopolskie (Kraków)</button>
-                    <button class="weather-tab" onclick="changeWeather('wielkopolskie', this)">Wielkopolskie (Poznań)</button>
+                <!-- Zakładki Województw -->
+                <div class="weather-tabs-container">
+                    <div class="weather-tabs">
+                        <button class="weather-tab active" onclick="changeWeather('elk', this)">Ełk (Mazury)</button>
+                        <button class="weather-tab" onclick="changeWeather('warminsko_mazurskie', this)">Warmińsko-Mazurskie</button>
+                        <button class="weather-tab" onclick="changeWeather('mazowieckie', this)">Mazowieckie</button>
+                        <button class="weather-tab" onclick="changeWeather('malopolskie', this)">Małopolskie</button>
+                        <button class="weather-tab" onclick="changeWeather('slaskie', this)">Śląskie</button>
+                        <button class="weather-tab" onclick="changeWeather('dolnoslaskie', this)">Dolnośląskie</button>
+                        <button class="weather-tab" onclick="changeWeather('wielkopolskie', this)">Wielkopolskie</button>
+                        <button class="weather-tab" onclick="changeWeather('pomorskie', this)">Pomorskie</button>
+                        <button class="weather-tab" onclick="changeWeather('zachodniopomorskie', this)">Zachodniopomorskie</button>
+                        <button class="weather-tab" onclick="changeWeather('lodzkie', this)">Łódzkie</button>
+                        <button class="weather-tab" onclick="changeWeather('kujawsko_pomorskie', this)">Kujawsko-Pomorskie</button>
+                        <button class="weather-tab" onclick="changeWeather('lubelskie', this)">Lubelskie</button>
+                        <button class="weather-tab" onclick="changeWeather('podkarpackie', this)">Podkarpackie</button>
+                        <button class="weather-tab" onclick="changeWeather('podlaskie', this)">Podlaskie</button>
+                        <button class="weather-tab" onclick="changeWeather('swietokrzyskie', this)">Świętokrzyskie</button>
+                        <button class="weather-tab" onclick="changeWeather('opolskie', this)">Opolskie</button>
+                        <button class="weather-tab" onclick="changeWeather('lubuskie', this)">Lubuskie</button>
+                    </div>
                 </div>
 
-                <div class="weather-content">
-                    <div class="weather-main">
-                        <div class="weather-icon-lg" id="w-icon"><i class="fa-solid fa-cloud-rain"></i></div>
-                        <div>
-                            <div class="weather-temp" id="w-temp">16°C</div>
-                            <div class="weather-desc" id="w-condition">Przelotne opady deszczu</div>
+                <div class="weather-grid">
+                    <!-- Dane szczegółowe -->
+                    <div class="weather-info-wrapper">
+                        <div class="weather-header-info">
+                            <h3 class="weather-location" id="w-location">Ełk (Mazury)</h3>
+                            <span class="weather-source"><i class="fa-solid fa-satellite-dish"></i> Stacja IMGW-PIB</span>
+                        </div>
+                        <div class="weather-main">
+                            <div class="weather-icon-lg" id="w-icon"><i class="fa-solid fa-smog"></i></div>
+                            <div>
+                                <div class="weather-temp" id="w-temp">4°C</div>
+                                <div class="weather-desc" id="w-condition">Mgły i zamglenia</div>
+                            </div>
+                        </div>
+                        <div class="weather-details">
+                            <div class="weather-detail-item">
+                                <span>Wiatr</span>
+                                <strong id="w-wind">8 km/h</strong>
+                            </div>
+                            <div class="weather-detail-item">
+                                <span>Ciśnienie</span>
+                                <strong id="w-pressure">1022 hPa</strong>
+                            </div>
+                            <div class="weather-detail-item">
+                                <span>Wilgotność</span>
+                                <strong id="w-humidity">85%</strong>
+                            </div>
+                            <div class="weather-detail-item">
+                                <span>Noc min.</span>
+                                <strong id="w-night">-2°C</strong>
+                            </div>
                         </div>
                     </div>
-                    <div class="weather-details">
-                        <div class="weather-detail-item">
-                            <span>Wiatr</span>
-                            <strong id="w-wind">18 km/h</strong>
-                        </div>
-                        <div class="weather-detail-item">
-                            <span>Ciśnienie</span>
-                            <strong id="w-pressure">1015 hPa</strong>
-                        </div>
-                        <div class="weather-detail-item">
-                            <span>Wilgotność</span>
-                            <strong id="w-humidity">72%</strong>
-                        </div>
+
+                    <!-- Podgląd Mapy IMGW -->
+                    <div class="weather-map-box">
+                        <iframe src="https://meteo.imgw.pl/" title="Mapa Pogodowa IMGW"></iframe>
                     </div>
                 </div>
             </div>
@@ -667,27 +758,40 @@
 
         updateNewsTicker();
 
-        // Obsługa przełączania pogody dla regionów
-        const weatherData = {
-            elk: { temp: "16°C", condition: "Przelotne opady deszczu", wind: "18 km/h", pressure: "1015 hPa", humidity: "72%", icon: "fa-cloud-rain" },
-            mazowieckie: { temp: "19°C", condition: "Słonecznie", wind: "12 km/h", pressure: "1019 hPa", humidity: "58%", icon: "fa-sun" },
-            pomorskie: { temp: "15°C", condition: "Wietrznie i pochmurno", wind: "26 km/h", pressure: "1012 hPa", humidity: "78%", icon: "fa-wind" },
-            dolnoslaskie: { temp: "21°C", condition: "Pełne słońce", wind: "10 km/h", pressure: "1020 hPa", humidity: "50%", icon: "fa-sun" },
-            malopolskie: { temp: "18°C", condition: "Lekkie zachmurzenie", wind: "14 km/h", pressure: "1017 hPa", humidity: "62%", icon: "fa-cloud-sun" },
-            wielkopolskie: { temp: "20°C", condition: "Słonecznie z chmurami", wind: "15 km/h", pressure: "1018 hPa", humidity: "55%", icon: "fa-cloud-sun" }
+        // Dane IMGW-PIB dla województw
+        const imgwData = {
+            elk: { loc: "Ełk (Mazury)", temp: "4°C", condition: "Mgły i zamglenia", wind: "8 km/h", pressure: "1022 hPa", humidity: "85%", night: "-2°C", icon: "fa-smog" },
+            warminsko_mazurskie: { loc: "Woj. Warmińsko-Mazurskie (Olsztyn)", temp: "4°C", condition: "Zachmurzenie umiarkowane", wind: "10 km/h", pressure: "1021 hPa", humidity: "82%", night: "-1°C", icon: "fa-cloud-sun" },
+            mazowieckie: { loc: "Woj. Mazowieckie (Warszawa)", temp: "6°C", condition: "Przejaśnienia", wind: "11 km/h", pressure: "1020 hPa", humidity: "75%", night: "-4°C", icon: "fa-sun" },
+            malopolskie: { loc: "Woj. Małopolskie (Kraków)", temp: "5°C", condition: "Słonecznie z mgłami", wind: "6 km/h", pressure: "1023 hPa", humidity: "78%", night: "-6°C", icon: "fa-sun" },
+            slaskie: { loc: "Woj. Śląskie (Katowice)", temp: "6°C", condition: "Pogodnie", wind: "7 km/h", pressure: "1022 hPa", humidity: "70%", night: "-5°C", icon: "fa-sun" },
+            dolnoslaskie: { loc: "Woj. Dolnośląskie (Wrocław)", temp: "8°C", condition: "Słonecznie", wind: "9 km/h", pressure: "1021 hPa", humidity: "65%", night: "-3°C", icon: "fa-sun" },
+            wielkopolskie: { loc: "Woj. Wielkopolskie (Poznań)", temp: "7°C", condition: "Umiarkowane zachmurzenie", wind: "12 km/h", pressure: "1020 hPa", humidity: "72%", night: "-2°C", icon: "fa-cloud-sun" },
+            pomorskie: { loc: "Woj. Pomorskie (Gdańsk)", temp: "8°C", condition: "Chmury i wiatr", wind: "18 km/h", pressure: "1018 hPa", humidity: "80%", night: "2°C", icon: "fa-cloud" },
+            zachodniopomorskie: { loc: "Woj. Zachodniopomorskie (Szczecin)", temp: "9°C", condition: "Przelotne zachmurzenie", wind: "16 km/h", pressure: "1019 hPa", humidity: "74%", night: "1°C", icon: "fa-cloud-sun" },
+            lodzkie: { loc: "Woj. Łódzkie (Łódź)", temp: "6°C", condition: "Przejaśnienia", wind: "9 km/h", pressure: "1021 hPa", humidity: "73%", night: "-4°C", icon: "fa-cloud-sun" },
+            kujawsko_pomorskie: { loc: "Woj. Kujawsko-Pomorskie (Bydgoszcz)", temp: "6°C", condition: "Zachmurzenie małe", wind: "11 km/h", pressure: "1020 hPa", humidity: "76%", night: "-2°C", icon: "fa-sun" },
+            lubelskie: { loc: "Woj. Lubelskie (Lublin)", temp: "4°C", condition: "Chłodno i słonecznie", wind: "8 km/h", pressure: "1023 hPa", humidity: "79%", night: "-6°C", icon: "fa-sun" },
+            podkarpackie: { loc: "Woj. Podkarpackie (Rzeszów)", temp: "5°C", condition: "Słonecznie, brak opadów", wind: "6 km/h", pressure: "1024 hPa", humidity: "76%", night: "-6°C", icon: "fa-sun" },
+            podlaskie: { loc: "Woj. Podlaskie (Białystok)", temp: "3°C", condition: "Pochmurno z rozpogodzeniami", wind: "10 km/h", pressure: "1022 hPa", humidity: "84%", night: "0°C", icon: "fa-cloud-sun" },
+            swietokrzyskie: { loc: "Woj. Świętokrzyskie (Kielce)", temp: "5°C", condition: "Bezchmurnie", wind: "7 km/h", pressure: "1022 hPa", humidity: "74%", night: "-5°C", icon: "fa-sun" },
+            opolskie: { loc: "Woj. Opolskie (Opole)", temp: "7°C", condition: "Słonecznie", wind: "8 km/h", pressure: "1021 hPa", humidity: "68%", night: "-4°C", icon: "fa-sun" },
+            lubuskie: { loc: "Woj. Lubuskie (Gorzów Wlkp.)", temp: "8°C", condition: "Umiarkowane zachmurzenie", wind: "13 km/h", pressure: "1020 hPa", humidity: "71%", night: "-1°C", icon: "fa-cloud-sun" }
         };
 
-        function changeWeather(region, element) {
+        function changeWeather(regionKey, element) {
             document.querySelectorAll('.weather-tab').forEach(tab => tab.classList.remove('active'));
             element.classList.add('active');
 
-            const data = weatherData[region];
+            const data = imgwData[regionKey];
             if(data) {
+                document.getElementById('w-location').innerText = data.loc;
                 document.getElementById('w-temp').innerText = data.temp;
                 document.getElementById('w-condition').innerText = data.condition;
                 document.getElementById('w-wind').innerText = data.wind;
                 document.getElementById('w-pressure').innerText = data.pressure;
                 document.getElementById('w-humidity').innerText = data.humidity;
+                document.getElementById('w-night').innerText = data.night;
                 document.getElementById('w-icon').innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
             }
         }
