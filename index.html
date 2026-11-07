@@ -243,6 +243,91 @@
         .section-title { font-size: 2rem; margin-bottom: 2rem; font-weight: 700; display: flex; align-items: center; gap: 1rem; }
         .section-title i { color: #ffeb3b; }
 
+        /* Styl widgetu pogodowego */
+        .weather-section {
+            margin-bottom: 3rem;
+        }
+        .weather-box {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .weather-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+        .weather-tab {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .weather-tab:hover, .weather-tab.active {
+            background-color: #ffeb3b;
+            color: #0d47a1;
+            border-color: #ffeb3b;
+        }
+        .weather-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .weather-main {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .weather-icon-lg {
+            font-size: 3.5rem;
+            color: #ffeb3b;
+        }
+        .weather-temp {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #fff;
+        }
+        .weather-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+        .weather-details {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .weather-detail-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+        }
+        .weather-detail-item span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.2rem;
+        }
+        .weather-detail-item strong {
+            font-size: 1.1rem;
+            color: #ffeb3b;
+        }
+
+        /* Wygląd okienka ramówki */
         .schedule-box { 
             background-color: var(--card-bg); 
             border-radius: 16px; 
@@ -409,6 +494,45 @@
             </div>
         </div>
 
+        <!-- Sekcja Widgetu Pogodowego -->
+        <section class="weather-section">
+            <h2 class="section-title"><i class="fa-solid fa-cloud-sun"></i> Prognoza Pogody w Polsce i Regionach</h2>
+            <div class="weather-box">
+                <div class="weather-tabs">
+                    <button class="weather-tab active" onclick="changeWeather('elk', this)">Ełk (Mazury)</button>
+                    <button class="weather-tab" onclick="changeWeather('mazowieckie', this)">Mazowieckie (Warszawa)</button>
+                    <button class="weather-tab" onclick="changeWeather('pomorskie', this)">Pomorskie (Gdańsk)</button>
+                    <button class="weather-tab" onclick="changeWeather('dolnoslaskie', this)">Dolnośląskie (Wrocław)</button>
+                    <button class="weather-tab" onclick="changeWeather('malopolskie', this)">Małopolskie (Kraków)</button>
+                    <button class="weather-tab" onclick="changeWeather('wielkopolskie', this)">Wielkopolskie (Poznań)</button>
+                </div>
+
+                <div class="weather-content">
+                    <div class="weather-main">
+                        <div class="weather-icon-lg" id="w-icon"><i class="fa-solid fa-cloud-rain"></i></div>
+                        <div>
+                            <div class="weather-temp" id="w-temp">16°C</div>
+                            <div class="weather-desc" id="w-condition">Przelotne opady deszczu</div>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <div class="weather-detail-item">
+                            <span>Wiatr</span>
+                            <strong id="w-wind">18 km/h</strong>
+                        </div>
+                        <div class="weather-detail-item">
+                            <span>Ciśnienie</span>
+                            <strong id="w-pressure">1015 hPa</strong>
+                        </div>
+                        <div class="weather-detail-item">
+                            <span>Wilgotność</span>
+                            <strong id="w-humidity">72%</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="ramowka">
             <h2 class="section-title"><i class="fa-solid fa-calendar-days"></i> Całodobowa Ramówka TV Joy</h2>
             <div class="schedule-box" id="schedule-list">
@@ -542,6 +666,31 @@
         }
 
         updateNewsTicker();
+
+        // Obsługa przełączania pogody dla regionów
+        const weatherData = {
+            elk: { temp: "16°C", condition: "Przelotne opady deszczu", wind: "18 km/h", pressure: "1015 hPa", humidity: "72%", icon: "fa-cloud-rain" },
+            mazowieckie: { temp: "19°C", condition: "Słonecznie", wind: "12 km/h", pressure: "1019 hPa", humidity: "58%", icon: "fa-sun" },
+            pomorskie: { temp: "15°C", condition: "Wietrznie i pochmurno", wind: "26 km/h", pressure: "1012 hPa", humidity: "78%", icon: "fa-wind" },
+            dolnoslaskie: { temp: "21°C", condition: "Pełne słońce", wind: "10 km/h", pressure: "1020 hPa", humidity: "50%", icon: "fa-sun" },
+            malopolskie: { temp: "18°C", condition: "Lekkie zachmurzenie", wind: "14 km/h", pressure: "1017 hPa", humidity: "62%", icon: "fa-cloud-sun" },
+            wielkopolskie: { temp: "20°C", condition: "Słonecznie z chmurami", wind: "15 km/h", pressure: "1018 hPa", humidity: "55%", icon: "fa-cloud-sun" }
+        };
+
+        function changeWeather(region, element) {
+            document.querySelectorAll('.weather-tab').forEach(tab => tab.classList.remove('active'));
+            element.classList.add('active');
+
+            const data = weatherData[region];
+            if(data) {
+                document.getElementById('w-temp').innerText = data.temp;
+                document.getElementById('w-condition').innerText = data.condition;
+                document.getElementById('w-wind').innerText = data.wind;
+                document.getElementById('w-pressure').innerText = data.pressure;
+                document.getElementById('w-humidity').innerText = data.humidity;
+                document.getElementById('w-icon').innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
+            }
+        }
 
         function updateSchedule() {
             const items = document.querySelectorAll('.schedule-item');
