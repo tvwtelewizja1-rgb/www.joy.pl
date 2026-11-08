@@ -154,7 +154,6 @@
 
         .user-dashboard { display: none; }
         
-        /* Nowy styl EPG (wzorowany na załączonym zdjęciu) */
         .epg-container {
             display: flex;
             flex-direction: column;
@@ -202,7 +201,6 @@
             border-right: 1px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
         }
-        /* Pasek postępu czasu trwania programu */
         .epg-progress-bar {
             position: absolute;
             bottom: 0;
@@ -861,65 +859,65 @@
 
         const userChannels = [
             { num: 100, name: "Joy", type: "Normal", isJoy: true },
-            { num: 101, name: "Olixer", type: "Normal", isJoy: false },
-            { num: 102, name: "Olixer Music", type: "Normal", isJoy: false },
+            { num: 101, name: "Olixer", type: "Normal" },
+            { num: 102, name: "Olixer Music", type: "Normal" },
             { num: 103, name: "Infiniti", type: "Normal", isInfiniti: true },
-            { num: 104, name: "Infiniti 2", type: "Normal", isJoy: false },
-            { num: 105, name: "TV94", type: "Mid", isJoy: false },
-            { num: 106, name: "Vilion", type: "Mid", isJoy: false },
-            { num: 107, name: "ITR", type: "Normal", isJoy: false },
-            { num: 108, name: "ITR >>1", type: "Normal", isJoy: false },
-            { num: 109, name: "ITR Hits", type: "Normal", isJoy: false },
-            { num: 110, name: "ITR Action", type: "Vip+", isJoy: false },
-            { num: 111, name: "NetWave", type: "Normal", isJoy: false },
-            { num: 112, name: "Olixer News", type: "Normal", isJoy: false },
+            { num: 104, name: "Infiniti 2", type: "Normal" },
+            { num: 105, name: "TV94", type: "Mid" },
+            { num: 106, name: "Vilion", type: "Mid" },
+            { num: 107, name: "ITR", type: "Normal" },
+            { num: 108, name: "ITR >>1", type: "Normal" },
+            { num: 109, name: "ITR Hits", type: "Normal" },
+            { num: 110, name: "ITR Action", type: "Vip+" },
+            { num: 111, name: "NetWave", type: "Normal" },
+            { num: 112, name: "Olixer News", type: "Normal" },
             { num: 113, name: "Nex1", type: "Normal", isNex1: true },
-            { num: 114, name: "Nex2", type: "Mid", isJoy: false },
-            { num: 115, name: "NexSPT", type: "Mid", isJoy: false },
-            { num: 116, name: "snap hd", type: "Normal", isJoy: false },
-            { num: 117, name: "In Vibe", type: "Normal", isJoy: false },
-            { num: 118, name: "Tptv", type: "Normal", isJoy: false },
-            { num: 119, name: "tptv extra", type: "Normal", isJoy: false },
-            { num: 120, name: "TWP1", type: "Normal", isJoy: false },
-            { num: 121, name: "TWP2", type: "Normal", isJoy: false },
-            { num: 122, name: "Tptv music", type: "Normal", isJoy: false },
-            { num: 123, name: "camTV", type: "Normal", isJoy: false },
-            { num: 124, name: "ITR festival", type: "VIP+", isJoy: false },
-            { num: 125, name: "ITR comedy", type: "VIP+", isJoy: false },
-            { num: 126, name: "ITR emotion", type: "VIP+", isJoy: false },
-            { num: 127, name: "Option!", type: "Normal", isJoy: false },
-            { num: 128, name: "Infiniti Music", type: "Normal", isJoy: false },
-            { num: 129, name: "quartz", type: "Normal", isJoy: false },
+            { num: 114, name: "Nex2", type: "Mid" },
+            { num: 115, name: "NexSPT", type: "Mid" },
+            { num: 116, name: "snap hd", type: "Normal" },
+            { num: 117, name: "In Vibe", type: "Normal" },
+            { num: 118, name: "Tptv", type: "Normal" },
+            { num: 119, name: "tptv extra", type: "Normal" },
+            { num: 120, name: "TWP1", type: "Normal" },
+            { num: 121, name: "TWP2", type: "Normal" },
+            { num: 122, name: "Tptv music", type: "Normal" },
+            { num: 123, name: "camTV", type: "Normal" },
+            { num: 124, name: "ITR festival", type: "VIP+" },
+            { num: 125, name: "ITR comedy", type: "VIP+" },
+            { num: 126, name: "ITR emotion", type: "VIP+" },
+            { num: 127, name: "Option!", type: "Normal" },
+            { num: 128, name: "Infiniti Music", type: "Normal" },
+            { num: 129, name: "quartz", type: "Normal" },
             { num: 130, name: "INFO VOD", type: "VOD", isInfoVOD: true },
             { num: 131, name: "Fotel TV", type: "Normal", isFotel: true },
-            { num: 132, name: "Fotel 2", type: "Normal", isJoy: false },
-            { num: 133, name: "KTA:TV", type: "Normal", isJoy: false },
-            { num: 134, name: "KTA:TV 2", type: "Normal", isJoy: false },
-            { num: 135, name: "KTA:TV Music", type: "Normal", isJoy: false },
-            { num: 136, name: "KTA:TV Dance", type: "Normal", isJoy: false },
-            { num: 137, name: "KTA:TV Hits", type: "Normal", isJoy: false },
-            { num: 138, name: "1.TV", type: "Normal", isJoy: false },
-            { num: 139, name: "MAX", type: "Normal", isJoy: false },
-            { num: 140, name: "Star", type: "Normal", isJoy: false },
-            { num: 141, name: "KTA:PUNKT", type: "Normal", isJoy: false },
-            { num: 142, name: "Słoneczna", type: "Normal", isJoy: false },
-            { num: 143, name: "Rytmiczny Wymiar", type: "Normal", isJoy: false },
-            { num: 144, name: "Fotel :3", type: "Normal", isJoy: false },
-            { num: 145, name: "Ktoś TV", type: "Normal", isJoy: false },
-            { num: 146, name: "Ktoś Inter", type: "Normal", isJoy: false },
-            { num: 147, name: "ATM 1", type: "Mid", isJoy: false },
-            { num: 148, name: "ananta hd", type: "Mid", isJoy: false },
-            { num: 149, name: "tv17", type: "Mid", isJoy: false },
-            { num: 150, name: "fotel tv 4k", type: "Mid", isJoy: false },
-            { num: 151, name: "ryż biały", type: "Extra", isJoy: false },
-            { num: 152, name: "astra", type: "Normal", isJoy: false },
-            { num: 153, name: "Snap", type: "Normal", isJoy: false },
-            { num: 154, name: "kosmos", type: "Normal", isJoy: false },
-            { num: 155, name: "Pusty Kanał", type: "Offline", isJoy: false },
-            { num: 156, name: "Pusty Kanał", type: "Offline", isJoy: false },
-            { num: 157, name: "Pusty Kanał", type: "Offline", isJoy: false },
-            { num: 158, name: "Pusty Kanał", type: "Offline", isJoy: false },
-            { num: 159, name: "Pusty Kanał", type: "Offline", isJoy: false },
+            { num: 132, name: "Fotel 2", type: "Normal" },
+            { num: 133, name: "KTA:TV", type: "Normal" },
+            { num: 134, name: "KTA:TV 2", type: "Normal" },
+            { num: 135, name: "KTA:TV Music", type: "Normal" },
+            { num: 136, name: "KTA:TV Dance", type: "Normal" },
+            { num: 137, name: "KTA:TV Hits", type: "Normal" },
+            { num: 138, name: "1.TV", type: "Normal" },
+            { num: 139, name: "MAX", type: "Normal" },
+            { num: 140, name: "Star", type: "Normal" },
+            { num: 141, name: "KTA:PUNKT", type: "Normal" },
+            { num: 142, name: "Słoneczna", type: "Normal" },
+            { num: 143, name: "Rytmiczny Wymiar", type: "Normal" },
+            { num: 144, name: "Fotel :3", type: "Normal" },
+            { num: 145, name: "Ktoś TV", type: "Normal" },
+            { num: 146, name: "Ktoś Inter", type: "Normal" },
+            { num: 147, name: "ATM 1", type: "Mid" },
+            { num: 148, name: "ananta hd", type: "Mid" },
+            { num: 149, name: "tv17", type: "Mid" },
+            { num: 150, name: "fotel tv 4k", type: "Mid" },
+            { num: 151, name: "ryż biały", type: "Extra" },
+            { num: 152, name: "astra", type: "Normal" },
+            { num: 153, name: "Snap", type: "Normal" },
+            { num: 154, name: "kosmos", type: "Normal" },
+            { num: 155, name: "Pusty Kanał", type: "Offline" },
+            { num: 156, name: "Pusty Kanał", type: "Offline" },
+            { num: 157, name: "Pusty Kanał", type: "Offline" },
+            { num: 158, name: "Pusty Kanał", type: "Offline" },
+            { num: 159, name: "Pusty Kanał", type: "Offline" },
             { num: 160, name: "Co w Telewizji?", type: "VOD", isGuideVOD: true }
         ];
 
@@ -944,7 +942,6 @@
             { time: "20:00", title: "Niania", desc: "Frania Maj w rezydencji.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" }
         ];
 
-        // Ramówka dla kanału Nex1 (Kanał 113)
         const nex1Schedule = [
             { time: "06:00", title: "Pokemon Horyzonty (AT!)", desc: "Przygody w świecie Pokemon.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
             { time: "06:30", title: "Yu-Gi-Oh Duel Monsters (AT!)", desc: "Pojedynki karciane.", zap: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&auto=format&fit=crop&q=80" },
@@ -1005,7 +1002,6 @@
             return formatter.format(now);
         }
 
-        // Funkcja obliczająca postęp oraz minut do końca dla EPG
         function getEpgDetails(schedList) {
             const nowTimeStr = getWarsawTimeString();
             const currentTvMins = getTvDayMinutes(nowTimeStr);
@@ -1047,18 +1043,14 @@
             const container = document.getElementById('channels-list-container');
             if(!container) return;
 
-            const currentJoy = getEpgDetails(schedule);
-            const currentInfiniti = getEpgDetails(infinitiSchedule);
-            const currentFotel = getEpgDetails(fotelSchedule);
-            const currentNex1 = getEpgDetails(nex1Schedule);
-
             let html = '';
             userChannels.forEach(ch => {
-                let epgData = null;
-                if(ch.isJoy) epgData = currentJoy;
-                else if(ch.isInfiniti) epgData = currentInfiniti;
-                else if(ch.isFotel) epgData = currentFotel;
-                else if(ch.isNex1) epgData = currentNex1;
+                let activeSched = schedule; // domyślna ramówka dla pozostałych stacji
+                if(ch.isInfiniti) activeSched = infinitiSchedule;
+                else if(ch.isFotel) activeSched = fotelSchedule;
+                else if(ch.isNex1) activeSched = nex1Schedule;
+
+                let epgData = getEpgDetails(activeSched);
 
                 let clickAttr = '';
                 if(ch.isJoy) clickAttr = `onclick="openPlayer('joy')"`;
@@ -1069,10 +1061,10 @@
                 else if(ch.isGuideVOD) clickAttr = `onclick="openPlayer('guidevod')"`;
                 else clickAttr = `onclick="alert('Kanał ${ch.num}. ${ch.name} jest w pełni gotowy do odbioru!')"`;
 
-                let currentShowTitle = ch.type === "Offline" ? "Brak sygnału" : (epgData ? epgData.current.title : "Transmisja ciągła (" + ch.type + ")");
-                let nextShowTitle = epgData ? `Dziś, ${epgData.next.time} — ${epgData.next.title}` : "Brak danych";
-                let timeLeftText = epgData ? `${epgData.timeLeftMinutes} MIN DO KOŃCA` : "NA ŻYWO";
-                let progressBarWidth = epgData ? epgData.progress : 100;
+                let currentShowTitle = ch.type === "Offline" ? "Brak sygnału" : epgData.current.title;
+                let nextShowTitle = `Dziś, ${epgData.next.time} — ${epgData.next.title}`;
+                let timeLeftText = ch.type === "Offline" ? "OFFLINE" : `${epgData.timeLeftMinutes} MIN DO KOŃCA`;
+                let progressBarWidth = ch.type === "Offline" ? 0 : epgData.progress;
 
                 html += `
                     <div class="epg-row" ${clickAttr}>
