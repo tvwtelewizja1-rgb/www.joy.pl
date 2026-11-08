@@ -466,14 +466,13 @@
             <div class="user-dashboard" id="dashboard-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
                     <div style="display: flex; align-items: center; gap: 15px;">
-                        <!-- Awatar z opcją zmiany po zalogowaniu -->
                         <div style="position: relative; display: inline-block; cursor: pointer;" onclick="openPfpModal()" title="Kliknij, aby zmienić swój awatar profilowy (PFP)">
                             <img id="user-header-avatar" src="" alt="Awatar" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-yellow);">
                             <span style="position: absolute; bottom: -2px; right: -2px; background: var(--accent-yellow); color: #0d47a1; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.4);"><i class="fa-solid fa-pen"></i></span>
                         </div>
                         <div>
                             <h2>Witaj, <span id="user-display-name" style="color: var(--accent-yellow);"></span>! 🎉</h2>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane. Kliknij na kanał <strong>100. Joy</strong>, <strong>103. Infiniti</strong> lub kanały VOD, aby oglądać!</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane. Kliknij na kanał <strong>100. Joy</strong>, <strong>103. Infiniti</strong>, <strong>131. Fotel TV</strong> lub VOD, aby oglądać!</p>
                         </div>
                     </div>
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
@@ -481,7 +480,6 @@
                     </button>
                 </div>
 
-                <!-- Modal zmiany awatara dla zalogowanego użytkownika -->
                 <div id="pfp-modal" style="display: none; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000; justify-content: center; align-items: center;">
                     <div style="background: #0f172a; border: 2px solid var(--accent-yellow); border-radius: 16px; padding: 2rem; max-width: 450px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.8); text-align: center;">
                         <h3 style="color: var(--accent-yellow); margin-bottom: 1rem;"><i class="fa-solid fa-user-pen"></i> Zmień awatar profilowy (PFP)</h3>
@@ -514,7 +512,7 @@
                 </div>
 
                 <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-satellite-dish" style="color: var(--accent-yellow);"></i> Stacje Telewizyjne Online</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100, kanał 103 (Infiniti) oraz kanały VOD posiadają dynamiczny pokaz slajdów oraz zsynchronizowany program!</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanały posiadają zsynchronizowany program na żywo oraz dynamiczne pasma!</p>
 
                 <div class="channels-grid" id="channels-list-container"></div>
             </div>
@@ -747,26 +745,12 @@
 
         const infoVodSlides = [
             { title: "INFO VOD: Wielka Promocja Pakietu VIP+", desc: "Zyskaj pełny dostęp do wszystkich filmów i kanałów za jedyne 25,99 zł miesięcznie bez reklam!", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&auto=format&fit=crop&q=80" },
-            { title: "Dostępność Serwisu 24/7", desc: "JoyBoxGO! gwarantuje stabilne nadawanie na komputerach, smartfonach i telewizorach smart.", img: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
-            { title: "Informacja o Pakiecie Normal", desc: "Podstawowy pakiet w cenie 2,20 zł/mies. zawiera ulubione stacje w świetnej jakości obrazu.", img: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
-            { title: "Status Sieci i Łącza", desc: "Wszystkie węzły nadawcze działają bez zakłóceń. Przepustowość sygnału HD jest optymalna.", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { title: "Promocja Pakietu Mid", desc: "Rozszerz swoje horyzonty za 4,50 zł miesięcznie i zyskaj dostęp do filmowych kanałów tematycznych.", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
-            { title: "Weryfikacja Kont i Bezpieczeństwo", desc: "Twoje dane oraz szyfrowane połączenie ze strefą widza są w pełni chronione przed dostępem osób trzecich.", img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
-            { title: "Pakiet Extra dla Wymagających", desc: "Wysokiej jakości kanały specjalne oraz unikalne pasma w cenie 10,99 zł miesięcznie.", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" },
-            { title: "Pomoc Techniczna i FAQ", desc: "W razie pytań nasz zespół służy wsparciem przez całą dobę. Sprawdź zakładkę kontaktową na stronie głównej.", img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
-            { title: "Dziękujemy za Wybór TV Joy", desc: "Twoja Uśmiechnięta Telewizja stale się rozwija, dostarczając najlepszą rozrywkę do Twojego domu.", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" }
+            { title: "Dostępność Serwisu 24/7", desc: "JoyBoxGO! gwarantuje stabilne nadawanie na komputerach, smartfonach i telewizorach smart.", img: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" }
         ];
 
         const tvGuideSlides = [
             { title: "Co w Telewizji? — Hit Wieczoru", desc: "Już dziś o 20:15 włącz pasmo filmowe i oglądaj kultową komedię 'Kiler' z rewelacyjną obsadą!", img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
-            { title: "Poranek z Uśmiechem", desc: "Codziennie od 6:00 rano zapraszamy na poranny magazyn śniadaniowy pełen pozytywnej energii.", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
-            { title: "Pasmo Bajkowe dla Dzieci", desc: "Muminki oraz ulubione animacje czekają na najmłodszych w porannych i popołudniowych blokach.", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { title: "Magazyn Podróżniczy", desc: "Odkrywaj najpiękniejsze zakątki świata w programie 'Podróże bez biletu' w każdy weekend.", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" },
-            { title: "Strefa Muzyczna TV Joy", desc: "Najlepsze teledyski i hity minionych dekad non-stop na kanałach Olixer Music oraz ITR Hits.", img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
-            { title: "Wieczorne Seriale Obyczajowe", desc: "Śledź emocjonujące perypetie bohaterów w serialach emitowanych od godziny 16:30.", img: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
-            { title: "Klasyka Polskiego Kina", desc: "W każdy piątek o 22:00 zapraszamy na niezapomniane seanse filmowe w najwyższej jakości.", img: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { title: "Magazyn Dokumentalny", desc: "Poznaj fascynujące tajemnice natury, nauki i historii w środowych pasmach specjalnych.", img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=900&auto=format&fit=crop&q=80" },
-            { title: "Pełna Ramówka Doby Telewizyjnej", desc: "Program stacji rozpoczyna się codziennie o 06:00 rano i trwa przez całą dobę aż do 05:59 dnia następnego.", img: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" }
+            { title: "Poranek z Uśmiechem", desc: "Codziennie od 6:00 rano zapraszamy na poranny magazyn śniadaniowy pełen pozytywnej energii.", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" }
         ];
 
         let vodSlideInterval = null;
@@ -871,7 +855,7 @@
             { num: 128, name: "Infiniti Music", type: "Normal", isJoy: false },
             { num: 129, name: "quartz", type: "Normal", isJoy: false },
             { num: 130, name: "INFO VOD", type: "VOD", isInfoVOD: true },
-            { num: 131, name: "Fotel TV", type: "Normal", isJoy: false },
+            { num: 131, name: "Fotel TV", type: "Normal", isFotel: true },
             { num: 132, name: "Fotel 2", type: "Normal", isJoy: false },
             { num: 133, name: "KTA:TV", type: "Normal", isJoy: false },
             { num: 134, name: "KTA:TV 2", type: "Normal", isJoy: false },
@@ -904,79 +888,49 @@
         ];
 
         const schedule = [
-            { time: "06:00", title: "Poranek z uśmiechem — nowy program śniadaniowy", desc: "Poranek z uśmiechem na dobry początek dnia.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
-            { time: "06:30", title: "Muminki", desc: "Kultowe przygody w Dolinie Muminków.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "06:55", title: "Muminki", desc: "Kultowe przygody w Dolinie Muminków.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "07:20", title: "Mały odkrywca — nowy program edukacyjny", desc: "Program edukacyjny dla dzieci.", zap: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900&auto=format&fit=crop&q=80" },
-            { time: "07:40", title: "Kuchnia na start — nowy program kulinarny", desc: "Pyszne poranne przepisy.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
-            { time: "08:10", title: "Teleranek Jaruzelskiego", desc: "Pasmo publicystyczne.", zap: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
-            { time: "08:20", title: "Muzyczna pobudka — teledyski i hity", desc: "Najlepsze teledyski na poranek.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
-            { time: "09:00", title: "Hity XX wieku", desc: "Muzyczny powrót do ubiegłego wieku.", zap: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=900&auto=format&fit=crop&q=80" },
-            { time: "09:25", title: "Podróże bez biletu — magazyn podróżniczy", desc: "Magazyn pełen wypraw.", zap: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" },
-            { time: "10:00", title: "Czterdziestolatek", desc: "Kultowy polski serial.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
-            { time: "10:50", title: "Stare, ale jare", desc: "Archiwalne materiały rozrywkowe.", zap: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&auto=format&fit=crop&q=80" },
-            { time: "11:10", title: "Świat zwierząt — film przyrodniczy", desc: "Niezwykła przyroda w obiektywie.", zap: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=900&auto=format&fit=crop&q=80" },
-            { time: "11:40", title: "Dziecięce Hity", desc: "Blok z bajkami.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
-            { time: "12:00", title: "Muminki", desc: "Dolina Muminków zaprasza.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "12:25", title: "Dziecięce Hity", desc: "Ulubione utwory i animacje.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
-            { time: "12:45", title: "Bajkowa kraina — nowe pasmo animacji", desc: "Nowe kreskówki.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "13:10", title: "Prawda czy Fałsz", desc: "Teleturniej sprawdzający wiedzę.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
-            { time: "13:45", title: "Rodzinka.pl — 2 odcinki", desc: "Serial komediowy.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "14:35", title: "Sami Swoi", desc: "Kultowy film komediowy.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:00", title: "Poranek z uśmiechem", desc: "Poranny program śniadaniowy.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:00", title: "Muminki", desc: "Dolina Muminków.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
             { time: "15:00", title: "Informacje", desc: "Serwis informacyjny.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:15", title: "Moda na sukces", desc: "Słynny serial obyczajowy.", zap: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:45", title: "Plebania", desc: "Polski serial obyczajowy.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
-            { time: "16:30", title: "M jak Miłość", desc: "Obyczajowy serial TVP.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
-            { time: "17:20", title: "Trudne Sprawy", desc: "Docu-crime i perypetie życiowe.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
-            { time: "18:10", title: "Ukryta prawda", desc: "Ludzkie historie i tajemnice.", zap: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&auto=format&fit=crop&q=80" },
-            { time: "19:00", title: "Wydarzenia dnia — główny serwis informacyjny", desc: "Najważniejsze wiadomości.", zap: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
-            { time: "19:25", title: "Trudne Sprawy", desc: "Wieczorny odcinek serialu.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:15", title: "Kiler", desc: "Superkomedia Juliusza Machulskiego.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
-            { time: "22:00", title: "Rejs", desc: "Klasyka polskiego kina.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "23:15", title: "997", desc: "Magazyn kryminalny.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
-            { time: "00:00", title: "Seksmisja", desc: "Kina nocne — kultowa komedia.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "01:40", title: "Miś Uszatek", desc: "Nocne pasmo dla najwytrwalszych.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" }
+            { time: "20:15", title: "Kiler", desc: "Kultowa komedia.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" }
         ];
 
-        // Dedykowana ramówka dla kanału Infiniti (Kanał 103)
         const infinitiSchedule = [
-            { time: "00:00", title: "South Park", desc: "Kultowy serial animowany dla dorosłych.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "00:30", title: "Rick and Morty", desc: "Przygody szalonego naukowca i jego wnuka.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "01:00", title: "Włatcy Móch", desc: "Słynna polska animacja.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "01:30", title: "Family Guy", desc: "Codzienne przygody rodziny Griffinów.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
-            { time: "02:00", title: "American Dad!", desc: "Agent CIA i jego niezwykła rodzina.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
-            { time: "02:30", title: "Futurama", desc: "Podróże w czasie i przestrzeni z przyszłości.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
-            { time: "03:00", title: "Robot Chicken", desc: "Szybkie i szalone skecze stop-motion.", zap: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&auto=format&fit=crop&q=80" },
-            { time: "03:30", title: "Invincible", desc: "Animowana superbohaterska akcja.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "04:00", title: "Blok Ekipa", desc: "Kultowe osiedlowe perypetie.", zap: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=900&auto=format&fit=crop&q=80" },
-            { time: "04:30", title: "Simpsonowie", desc: "Żółta rodzinka z Springfield.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
-            { time: "05:00", title: "Smiling Friends", desc: "Pozytywna dawka humoru.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
-            { time: "05:30", title: "South Park", desc: "Kolejna dawka humoru w miasteczku.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "00:00", title: "South Park", desc: "Serial animowany dla dorosłych.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
             { time: "06:00", title: "Pobudka", desc: "Poranny rozruch na kanale Infiniti.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
-            { time: "07:00", title: "Rodzinka.pl", desc: "Codzienne perypetie Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "07:30", title: "Klan", desc: "Najdłuższy polski serial obyczajowy.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
-            { time: "08:30", title: "(Nowa) Rodzina Zmieszanych", desc: "Nowy serial komediowy.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
-            { time: "09:00", title: "Rodzina Wierzbickich (planowane)", desc: "Zapowiedzi i przedpremiera nowego serialu.", zap: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
-            { time: "09:30", title: "BrzydUla", desc: "Losy Uli Cieplak w firmie F&D.", zap: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=900&auto=format&fit=crop&q=80" },
-            { time: "10:30", title: "Awantura o kasę", desc: "Legendarny teleturniej z mistrzami.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
-            { time: "11:30", title: "infinews", desc: "Serwis informacyjny stacji Infiniti.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
             { time: "12:00", title: "Ojciec Mateusz", desc: "Kryminalne zagadki w Sandomierzu.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
-            { time: "13:00", title: "krok po kroku do nikąd", desc: "Autorski program rozrywkowy.", zap: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" },
-            { time: "13:30", title: "Daleko od noszy", desc: "Humor w szpitalu w wariackich warunkach.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
-            { time: "14:00", title: "19+", desc: "Życie, miłość i wyzwania warszawskiej młodzieży.", zap: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:00", title: "Gliniarze", desc: "Trzymające w napięciu akcje policyjne.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
-            { time: "16:00", title: "Ranczo", desc: "Wizyta w Wilkowyjach i niezapomniani mieszkańcy.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "17:00", title: "Historia Loga Fikcji", desc: "Ciekawe zestawienie i analiza projektów graficznych.", zap: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=900&auto=format&fit=crop&q=80" },
-            { time: "17:30", title: "Graphic Vis!ON", desc: "Magazyn poświęcony nowoczesnej grafice i designowi.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "18:00", title: "Poczuj Vibe Muzyki!", desc: "Najlepsze brzmienia i teledyski.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
-            { time: "18:30", title: "Geometry Dash Na Modach", desc: "Rozgrywka i customowe poziomy w grze.", zap: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=900&auto=format&fit=crop&q=80" },
-            { time: "19:00", title: "Hotel Paradise", desc: "Emocje, intrygi i randkowe show.", zap: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:00", title: "Milionerzy", desc: "Walka o główne i wielkie pieniądze z Hubertem.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
-            { time: "21:00", title: "Świat według Kiepskich", desc: "Codzienne zmagania Ferdka i Halinki.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "21:30", title: "13 Posterunek", desc: "Kultowy polski sitcom policyjkowy.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
-            { time: "22:00", title: "Tajemniczy Fabian", desc: "Wciągający serial z fabułą pełną zwrotów akcji.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
-            { time: "22:30", title: "N Jak Nienawinność", desc: "Dramat psychologiczny.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
-            { time: "23:00", title: "Pacu Łacu – w kupie raźniej!", desc: "Wieczorny, szalony program rozrywkowy.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" }
+            { time: "20:00", title: "Milionerzy", desc: "Walka o główne i wielkie pieniądze.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" }
+        ];
+
+        // Dedykowana ramówka dla kanału Fotel TV (Kanał 131)
+        const fotelSchedule = [
+            { time: "00:00", title: "Kuchenne Rewolucje", desc: "Magda Gessler ratuje restauracje.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:45", title: "Na dobre i na złe", desc: "Dramaty medyczne w Leśnej Górze.", zap: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:45", title: "Zakończenie programu", desc: "Przerwa nocna w stacji Fotel TV.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "05:45", title: "Rodzinka.pl", desc: "Perypetie rodziny Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:15", title: "Ranczo", desc: "Wizyta w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:45", title: "Polska. Największe tajemnice", desc: "Dokument o sekretach kraju.", zap: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:15", title: "Telewpadki x2 odc.", desc: "Zabawne wpadki telewizyjne.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:30", title: "Co polak potrafi na drodze?", desc: "Magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:00", title: "Miodowe Lata", desc: "Krawczyk i Norek w Warszawie.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:30", title: "Trudne Sprawy", desc: "Historie z życia wzięte.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
+            { time: "10:30", title: "Ojciec Mateusz", desc: "Kryminalne zagadki.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:00", title: "Świat Według Kiepskich", desc: "Ferdynand i spółka na Kamiennej.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:00", title: "Familiada", desc: "Legendarny teleturniej z Karolem.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "14:00", title: "77 TV", desc: "Program autorski stacji.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "14:30", title: "Fineasz i Ferb", desc: "Przygody braci w wakacje.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:30", title: "Niesamowity Świat Gumballa", desc: "Animowane szaleństwo.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
+            { time: "16:00", title: "Rodzinka.pl", desc: "Codzienne perypetie Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:30", title: "Rolnicy. Podlasie", desc: "Życie na polskiej wsi.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:30", title: "Chłopaki do wzięcia", desc: "Poszukiwanie miłości.", zap: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:00", title: "Frieren. U kresu drogi.", desc: "Magiczna opowieść fantasy.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:00", title: "Niania", desc: "Frania Maj w rezydencji Skalskiego.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:30", title: "Miodowe lata", desc: "Krawczyk i Norek.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
+            { time: "21:00", title: "Ranczo", desc: "Wizyta w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "21:30", title: "Masza i Niedźwiedź", desc: "Bajka dla małych i dużych.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:00", title: "Ranczo", desc: "Kolejne odcinki serialu.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:30", title: "Raport 77", desc: "Podsumowanie dnia.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "23:00", title: "Włatcy Móch", desc: "Kultowa polska kreskówka.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "23:45", title: "Kuchenne Rewolucje", desc: "Wieczorny finał pasma.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" }
         ];
 
         function getTvDayMinutes(timeStr) {
@@ -1022,10 +976,11 @@
 
             const currentJoyProg = getCurrentProgram(schedule);
             const currentInfinitiProg = getCurrentProgram(infinitiSchedule);
+            const currentFotelProg = getCurrentProgram(fotelSchedule);
 
             let html = '';
             userChannels.forEach(ch => {
-                let nowShowing = ch.isJoy ? currentJoyProg.title : (ch.isInfiniti ? currentInfinitiProg.title : (ch.isInfoVOD ? "INFO VOD (Promocje i Dostępność)" : (ch.isGuideVOD ? "Co w Telewizji? (Zapowiedzi)" : "Transmisja ciągła (" + ch.type + ")")));
+                let nowShowing = ch.isJoy ? currentJoyProg.title : (ch.isInfiniti ? currentInfinitiProg.title : (ch.isFotel ? currentFotelProg.title : (ch.isInfoVOD ? "INFO VOD (Promocje i Dostępność)" : (ch.isGuideVOD ? "Co w Telewizji? (Zapowiedzi)" : "Transmisja ciągła (" + ch.type + ")"))));
                 if(ch.type === "Offline") nowShowing = "Brak sygnału";
                 
                 let clickAttr = '';
@@ -1033,6 +988,8 @@
                     clickAttr = `onclick="openJoyPlayer('joy')"`;
                 } else if(ch.isInfiniti) {
                     clickAttr = `onclick="openJoyPlayer('infiniti')"`;
+                } else if(ch.isFotel) {
+                    clickAttr = `onclick="openJoyPlayer('fotel')"`;
                 } else if(ch.isInfoVOD) {
                     clickAttr = `onclick="openJoyPlayer('infovod')"`;
                 } else if(ch.isGuideVOD) {
@@ -1076,6 +1033,13 @@
                 titleEl.innerHTML = `<i class="fa-solid fa-tv"></i> Odtwarzacz Infiniti (Kanał 103) – Na żywo`;
                 liveBadge.style.display = 'flex';
                 const currentProg = getCurrentProgram(infinitiSchedule);
+                document.getElementById('modal-show-title').innerText = currentProg.title;
+                document.getElementById('modal-show-desc').innerText = currentProg.desc;
+                document.getElementById('modal-zap-img').src = currentProg.zap;
+            } else if(type === 'fotel') {
+                titleEl.innerHTML = `<i class="fa-solid fa-tv"></i> Odtwarzacz Fotel TV (Kanał 131) – Na żywo`;
+                liveBadge.style.display = 'flex';
+                const currentProg = getCurrentProgram(fotelSchedule);
                 document.getElementById('modal-show-title').innerText = currentProg.title;
                 document.getElementById('modal-show-desc').innerText = currentProg.desc;
                 document.getElementById('modal-zap-img').src = currentProg.zap;
