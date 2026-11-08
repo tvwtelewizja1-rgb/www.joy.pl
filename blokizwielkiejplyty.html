@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloki z Wielkiej Płyty .online – Oficjalny Portal Architektury Wielkopłytowej</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --panel-bg: rgba(30, 41, 59, 0.85);
+            --concrete-grey: #64748b;
+            --accent-yellow: #facc15;
+            --accent-orange: #f97316;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #090d16 0%, #1e293b 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        /* Top Header */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            border-bottom: 2px solid var(--accent-yellow);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .brand-icon {
+            background: var(--accent-yellow);
+            color: #0f172a;
+            font-size: 1.4rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 12px rgba(250, 204, 21, 0.4);
+        }
+
+        .brand-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-title span {
+            color: var(--accent-yellow);
+        }
+
+        nav {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-yellow);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        /* Hero Banner / Artykuł Główny */
+        .featured-article-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-orange);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 850px) {
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .featured-img-box {
+            width: 100%;
+            height: 100%;
+            min-height: 350px;
+            position: relative;
+        }
+
+        .featured-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-content h1 {
+            font-size: 1.9rem;
+            color: var(--accent-yellow);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .featured-content p {
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--concrete-grey);
+            margin-bottom: 1rem;
+        }
+
+        /* Sekcja Newsów (Auto-Generowane Artykuły) */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #22c55e;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .news-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-yellow);
+        }
+
+        .news-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-body {
+            padding: 1.2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-tag {
+            font-size: 0.75rem;
+            color: var(--accent-yellow);
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 0.4rem;
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+        }
+
+        .news-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .news-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--concrete-grey);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 0.8rem;
+        }
+
+        /* Sekcja Ciekawostek */
+        .facts-container {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .facts-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.2rem;
+        }
+
+        .fact-box {
+            background: rgba(15, 23, 42, 0.6);
+            border-left: 4px solid var(--accent-yellow);
+            padding: 1.2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .fact-box h4 {
+            color: var(--accent-yellow);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fact-box p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        /* Styl Przycisków */
+        .btn-action {
+            background: var(--accent-yellow);
+            color: #0f172a;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-action:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            background-color: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="blokizwielkiejplyty.html" class="site-brand">
+            <div class="brand-icon"><i class="fa-solid fa-city"></i></div>
+            <div class="brand-title">Bloki z Wielkiej Płyty <span>.online</span></div>
+        </a>
+        <nav>
+            <a href="index.html">Strona Główna TV Joy</a>
+            <a href="joybox.html">Joy Box</a>
+            <a href="blokizwielkiejplyty.html" class="active">Wielka Płyta News</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <!-- ARTYKUŁ GŁÓWNY: KULOSTAN I WIELKA PŁYTA -->
+        <article class="featured-article-card">
+            <div class="featured-badge"><i class="fa-solid fa-star"></i> Artykuł BAZOWY</div>
+            <div class="featured-grid">
+                <div class="featured-img-box">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&auto=format&fit=crop&q=80" alt="Wielka Płyta Kulostan">
+                </div>
+                <div class="featured-content">
+                    <div class="meta-info">
+                        <span><i class="fa-solid fa-calendar-days"></i> Archiwum Historii Architektury</span>
+                        <span><i class="fa-solid fa-user"></i> Redakcja Portalowa</span>
+                    </div>
+                    <h1>Jak Fikcyjne Państwo Kulostan Rozsławiło Budownictwo z Wielkiej Płyty na Całym Świecie!</h1>
+                    <p>Choć prefabrykacja betonu powstawała w różnych zakątkach globu, to właśnie niesamowity fenomen gospodarczy i architektoniczny fikcyjnego państwa <strong>Kulostan</strong> sprawił, że wielka płyta stała się globalnym symbolem nowoczesności i wygody.</p>
+                    <p>W połowie XX wieku architekci z Kulostanu jako pierwsi opracowali plan tzw. <em>"Osiedli Błyskawicznych"</em>. Twierdzili oni, że modułowe ściany i standaryzowane wielkopłytowe moduły mieszkaniowe są w stanie zapewnić dach nad głową milionom obywateli w rekordowym tempie. Sukces projektu z Kulostanu odbił się szerokim echem w prasie międzynarodowej, czyniąc z wielkiej płyty absolutny hit budowlany!</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- SEKCJA NEWSÓW AUTOMATYCZNIE WSTAWIANYCH -->
+        <div class="section-header">
+            <h2><span class="live-dot"></span> Samowstawiające się Wiadomości i Aktualności</h2>
+            <button class="btn-action" onclick="fetchNewArticles()"><i class="fa-solid fa-rotate"></i> Odśwież Wiadomości</button>
+        </div>
+
+        <div class="news-grid" id="news-feed-container">
+            <!-- Artykuły generowane dynamicznie przez JavaScript -->
+        </div>
+
+        <!-- SEKCJA CIEKAWOSTEK -->
+        <div class="facts-container">
+            <div class="section-header" style="border:none; margin-bottom: 0.5rem;">
+                <h2><i class="fa-solid fa-lightbulb" style="color: var(--accent-yellow);"></i> Ciekawostki o Blokach z Wielkiej Płyty</h2>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Poznaj najważniejsze faktograficzne tajniki konstrukcji, które zdominowały krajobraz naszych miast:</p>
+
+            <div class="facts-list">
+                <div class="fact-box">
+                    <h4><i class="fa-solid fa-shield-cat"></i> Niezwykła Trwałość</h4>
+                    <p>Projektanci zakładali trwałość bloków na 50-80 lat. Współczesne ekspertyzy inżynieryjne wykazują jednak, że dobrze utrzymana wielka płyta przetrwa bez problemu ponad 120 lat!</p>
+                </div>
+
+                <div class="fact-box">
+                    <h4><i class="fa-solid fa-bolt"></i> Wściekłe Tempo Budowy</h4>
+                    <p>W szczytowym okresie prefabrykacji w Kulostanie i Europie Środkowej kompletne piętro bloku z wielkiej płyty montowano w zaledwie 24 do 48 godzin!</p>
+                </div>
+
+                <div class="fact-box">
+                    <h4><i class="fa-solid fa-temperature-arrow-up"></i> Termomodernizacyjny Przełom</h4>
+                    <p>Współczesne docieplenia i kolorowe elewacje nie tylko poprawiają estetykę osiedli, ale redukują utratę ciepła w wielkiej płycie aż o 40%.</p>
+                </div>
+
+                <div class="fact-box">
+                    <h4><i class="fa-solid fa-cubes"></i> Systemy Fabryki Bloków</h4>
+                    <p>Ściany nie powstawały na placu budowy! Przywożono je z tak zwanych "Fabryk Domy" bezpośrednio ciężarówkami i łączono spawami oraz betonem.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Bloki z Wielkiej Płyty .online – Serwis Informacyjny TV Joy. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script>
+        // Baza samowstawiających się artykułów prasowych
+        const newsDatabase = [
+            {
+                title: "Wielka Płyta 2.0: Nowoczesne technologie termoizolacji osiedli",
+                tag: "Technologia",
+                excerpt: "Inżynierowie przedstawiają najnowsze płyty z powłoką grafenową, które podniosą efektywność energetyczną bloków budowanych w latach 70.",
+                img: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?w=600&auto=format&fit=crop&q=80",
+                date: "Dzisiaj, 11:30"
+            },
+            {
+                title: "Śladami Kulostanu: Jak fikcyjne państwo wpłynęło na polskie osiedla?",
+                tag: "Historia",
+                excerpt: "Unikalna analiza historyczna pokazująca powiązania między myślą architektoniczną Kulostanu a kultowymi polskimi osiedlami mieszkaniowymi.",
+                img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&auto=format&fit=crop&q=80",
+                date: "Dzisiaj, 09:15"
+            },
+            {
+                title: "Wielkopłytowe wieżowce zyskują zielone dachy i panele fotowoltaiczne",
+                tag: "Eko-Trend",
+                excerpt: "Zarządcy osiedli z wielkiej płyty inwestują w odnawialne źródła energii. Na dachach powstają oazy zieleni i mikro-farmy słoneczne.",
+                img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&auto=format&fit=crop&q=80",
+                date: "Wczoraj, 18:40"
+            },
+            {
+                title: "Dlaczego młodzi ludzie uwielbiają mieszkania w wielkiej płycie?",
+                tag: "Rynek Nieruchomości",
+                excerpt: "Świetne rozkłady pomieszczeń, mnóstwo zieleni między blokami i świetna infrastruktura czynią te mieszkania hitem rynkowym.",
+                img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&auto=format&fit=crop&q=80",
+                date: "Wczoraj, 14:20"
+            },
+            {
+                title: "Badania spoin betonowych: Wielka płyta stabilniejsza niż przypuszczano",
+                tag: "Inżynieria",
+                excerpt: "Najnowszy raport naukowy potwierdza: stalowe łączniki montażowe w płycie są w idealnym stanie technicznym.",
+                img: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=600&auto=format&fit=crop&q=80",
+                date: "2 dni temu"
+            },
+            {
+                title: "Wystawa Fotograficzna: 'Piękno Surowego Betonu'",
+                tag: "Kultura",
+                excerpt: "Zobacz niesamowitą galerię zdjęć ukazującą najciekawsze wieżowce i bloki wielkopłytowe z całego globu.",
+                img: "https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?w=600&auto=format&fit=crop&q=80",
+                date: "3 dni temu"
+            }
+        ];
+
+        // Funkcja renderująca samowstawiające się artykuły
+        function renderNewsFeed() {
+            const container = document.getElementById('news-feed-container');
+            if (!container) return;
+
+            let html = '';
+            newsDatabase.forEach(item => {
+                html += `
+                    <article class="news-card">
+                        <img src="${item.img}" alt="${item.title}" class="news-img">
+                        <div class="news-body">
+                            <div class="news-tag">${item.tag}</div>
+                            <h3 class="news-title">${item.title}</h3>
+                            <p class="news-excerpt">${item.excerpt}</p>
+                            <div class="news-footer">
+                                <span><i class="fa-regular fa-clock"></i> ${item.date}</span>
+                                <span><i class="fa-solid fa-arrow-right" style="color: var(--accent-yellow);"></i> Czytaj</span>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Funkcja symulująca pobieranie/odświeżanie najnowszych wiadomości
+        function fetchNewArticles() {
+            const container = document.getElementById('news-feed-container');
+            container.style.opacity = '0.4';
+            setTimeout(() => {
+                // Przetasowanie artykułów dla efektu "odświeżenia"
+                newsDatabase.sort(() => Math.random() - 0.5);
+                renderNewsFeed();
+                container.style.opacity = '1';
+            }, 400);
+        }
+
+        // Inicjalizacja przy załadowaniu strony
+        window.addEventListener('DOMContentLoaded', () => {
+            renderNewsFeed();
+        });
+    </script>
+</body>
+</html>
