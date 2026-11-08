@@ -141,65 +141,8 @@
         .alert-success { background: rgba(76, 175, 80, 0.2); border: 1px solid #4caf50; color: #a5d6a7; }
         .alert-error { background: rgba(244, 67, 54, 0.2); border: 1px solid #f44336; color: #ef9a9a; }
 
-        /* PAKIETY FIKCYJNE */
-        .packages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .package-card {
-            background: #111827;
-            border: 2px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-        .package-card:hover { transform: translateY(-5px); border-color: var(--accent-yellow); }
-        .package-card.highlight { border-color: var(--accent-orange); background: linear-gradient(135deg, #131c2e, #1f1b18); }
-        .package-title { font-size: 1.3rem; color: var(--accent-yellow); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; }
-        .package-price { font-size: 1.5rem; color: #fff; margin-bottom: 1rem; font-weight: 800; }
-        .package-features { list-style: none; margin-bottom: 1.5rem; color: #cbd5e1; font-size: 0.9rem; }
-        .package-features li { margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; }
-        .package-features li i { color: #4caf50; }
-
-        .disclaimer-box {
-            background: rgba(255, 152, 0, 0.1);
-            border: 1px dashed var(--accent-orange);
-            color: #ffe0b2;
-            padding: 1rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        /* ADMIN PANEL */
-        .admin-panel {
-            background: #090d16;
-            border: 2px dashed #38bdf8;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .admin-header { color: #38bdf8; font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
-        .code-result-box {
-            background: #1e293b;
-            padding: 0.8rem 1rem;
-            border-radius: 6px;
-            color: var(--accent-yellow);
-            font-family: monospace;
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* STYL VECTRA EPG / VOD */
+        .user-dashboard { display: none; }
+        
         .tvp-epg-wrapper {
             background: var(--vod-bg);
             border: 1px solid var(--vod-border);
@@ -224,7 +167,7 @@
         .tvp-epg-list {
             display: flex;
             flex-direction: column;
-            max-height: 500px;
+            max-height: 600px;
             overflow-y: auto;
         }
         .tvp-epg-list::-webkit-scrollbar { width: 6px; }
@@ -245,25 +188,87 @@
             border-left: 4px solid var(--accent-yellow);
         }
         .tvp-epg-row.offline-row { opacity: 0.55; }
+
         .tvp-epg-row.vod-channel-row {
             background: linear-gradient(90deg, rgba(229, 9, 20, 0.08), var(--vod-card));
             border-left: 4px solid var(--vectra-red);
         }
 
-        .tvp-ch-col { padding: 0.8rem 1rem; display: flex; align-items: center; gap: 12px; border-right: 1px solid var(--vod-border); background: #0e1420; }
-        .tvp-ch-badge { background: #2563eb; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; }
-        .tvp-ch-badge.vod-badge { background: var(--vectra-red); box-shadow: 0 0 8px rgba(229, 9, 20, 0.6); }
-        .tvp-ch-name { font-size: 0.95rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tvp-ch-col {
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-right: 1px solid var(--vod-border);
+            background: #0e1420;
+        }
+        .tvp-ch-badge {
+            background: #2563eb;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+        .tvp-ch-badge.vod-badge {
+            background: var(--vectra-red);
+            box-shadow: 0 0 8px rgba(229, 9, 20, 0.6);
+        }
+        .tvp-ch-name {
+            font-size: 0.95rem;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-        .tvp-now-col { position: relative; padding: 0.8rem 1rem; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--vod-border); background: rgba(30, 41, 59, 0.15); }
-        .tvp-time-left { font-size: 0.7rem; color: #38bdf8; margin-bottom: 4px; letter-spacing: 0.5px; }
-        .tvp-show-title { font-size: 0.9rem; color: #f8fafc; line-height: 1.3; }
-        .tvp-progress-line { position: absolute; bottom: 0; left: 0; height: 3px; background: #38bdf8; }
-        .vod-channel-row .tvp-progress-line { background: var(--vectra-red); }
+        .tvp-now-col {
+            position: relative;
+            padding: 0.8rem 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid var(--vod-border);
+            background: rgba(30, 41, 59, 0.15);
+        }
+        .tvp-time-left {
+            font-size: 0.7rem;
+            color: #38bdf8;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        .tvp-show-title {
+            font-size: 0.9rem;
+            color: #f8fafc;
+            line-height: 1.3;
+        }
+        .tvp-progress-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: #38bdf8;
+        }
+        .vod-channel-row .tvp-progress-line {
+            background: var(--vectra-red);
+        }
 
-        .tvp-next-col { padding: 0.8rem 1rem; display: flex; flex-direction: column; justify-content: center; }
-        .tvp-next-time { font-size: 0.7rem; color: #64748b; margin-bottom: 4px; }
-        .tvp-next-title { font-size: 0.85rem; color: #94a3b8; line-height: 1.3; }
+        .tvp-next-col {
+            padding: 0.8rem 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .tvp-next-time {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+        .tvp-next-title {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.3;
+        }
 
         .player-modal {
             display: none;
@@ -275,16 +280,96 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             position: relative;
         }
-        .player-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .player-modal-title { font-size: 1.2rem; color: var(--accent-yellow); display: flex; align-items: center; gap: 0.5rem; }
-        .close-player { background: #b71c1c; color: white; border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; }
-        .tv-screen-box { position: relative; width: 100%; height: 420px; background: #000; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); display: flex; flex-direction: column; justify-content: flex-end; }
-        .zap-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.75; filter: contrast(1.1) saturate(1.2); }
-        .zap-overlay-gradient { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 15%, rgba(0,0,0,0.3) 60%, transparent 100%); z-index: 1; }
-        .tv-screen-content { position: relative; z-index: 2; padding: 1.5rem; text-align: left; }
-        .tv-screen-content h4 { font-size: 1.8rem; color: var(--accent-yellow); margin-bottom: 0.3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.9); }
-        .tv-screen-content p { color: #fff; font-size: 1rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); }
-        .live-badge { position: absolute; top: 12px; left: 12px; background: #d32f2f; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; display: flex; align-items: center; gap: 4px; z-index: 3; box-shadow: 0 2px 6px rgba(0,0,0,0.5); }
+        .player-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .player-modal-title {
+            font-size: 1.2rem;
+            color: var(--accent-yellow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .close-player {
+            background: #b71c1c;
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tv-screen-box {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .zap-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.75;
+            filter: contrast(1.1) saturate(1.2);
+        }
+        .zap-overlay-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 15%, rgba(0,0,0,0.3) 60%, transparent 100%);
+            z-index: 1;
+        }
+        .tv-screen-content {
+            position: relative;
+            z-index: 2;
+            padding: 1.5rem;
+            text-align: left;
+        }
+        .tv-screen-content h4 {
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+            margin-bottom: 0.3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+        }
+        .tv-screen-content p {
+            color: #fff;
+            font-size: 1.0rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+        }
+        .live-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #d32f2f;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 3;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+        }
 
         footer { background-color: rgba(13, 71, 161, 0.95); text-align: center; padding: 2rem; color: #cbd5e1; margin-top: auto; }
     </style>
@@ -309,50 +394,15 @@
     <div class="container">
         
         <div class="box-panel" id="auth-panel-wrapper">
-            
-            <!-- PANEL PRZED ZALOGOWANIEM: OFERTY I KANAŁY -->
             <div id="auth-container">
                 <div class="panel-header">
                     <h1><i class="fa-solid fa-box-open"></i> JoyBoxGO! – Strefa Widza</h1>
-                    <p>Zaloguj się lub załóż konto, aby oglądać telewizję online. Wymagany kod aktywacyjny pakietu!</p>
+                    <p>Zaloguj się lub załóż darmowe konto, aby uzyskać dostęp do strumieni i interaktywnej listy kanałów online!</p>
                 </div>
 
-                <div class="disclaimer-box">
-                    <i class="fa-solid fa-triangle-exclamation"></i> <strong>Uwaga:</strong> Prezentowane pakiety oraz oferty są <strong>całkowicie fikcyjne</strong> i służą wyłącznie celom demonstracyjnym w projekcie rozrywkowym TV Joy.
-                </div>
-
-                <!-- PAKIETY FIKCYJNE DOSTĘPNE DLA KAŻDEGO -->
-                <h3 style="color: var(--accent-yellow); margin-bottom: 1rem;"><i class="fa-solid fa-tags"></i> Dostępne pakiety fikcyjne w JoyBoxGO!</h3>
-                <div class="packages-grid">
-                    <div class="package-card">
-                        <div>
-                            <div class="package-title"><i class="fa-solid fa-seedling"></i> Pakiet Startowy</div>
-                            <div class="package-price">0 zł / mies.</div>
-                            <ul class="package-features">
-                                <li><i class="fa-solid fa-check"></i> Podstawowe kanały (Joy, Olixer)</li>
-                                <li><i class="fa-solid fa-check"></i> Standardowa jakość SD/HD</li>
-                                <li><i class="fa-solid fa-check"></i> Podstawowy EPG</li>
-                            </ul>
-                        </div>
-                        <div style="font-size:0.8rem; color:#94a3b8;">Wymaga darmowego kodu aktywacyjnego od Administratora.</div>
-                    </div>
-                    <div class="package-card highlight">
-                        <div>
-                            <div class="package-title"><i class="fa-solid fa-crown"></i> Pakiet JoyBox VIP+</div>
-                            <div class="package-price">29 zł / mies. (Fikcyjnie)</div>
-                            <ul class="package-features">
-                                <li><i class="fa-solid fa-check"></i> Pełna lista 60+ kanałów TV</li>
-                                <li><i class="fa-solid fa-check"></i> Dostęp do wszystkich katalogów VOD (Vectra Style)</li>
-                                <li><i class="fa-solid fa-check"></i> Najwyższa jakość HD/4K bez reklam</li>
-                            </ul>
-                        </div>
-                        <div style="font-size:0.8rem; color:#cbd5e1;">Wymaga kodu VIP wygenerowanego w Panelu Admina.</div>
-                    </div>
-                </div>
-
-                <div class="tabs" style="margin-top: 2.5rem;">
+                <div class="tabs">
                     <button class="tab-btn active" id="tab-login-btn" onclick="switchTab('login')">Logowanie</button>
-                    <button class="tab-btn" id="tab-register-btn" onclick="switchTab('register')">Załóż konto (Wymaga kodu)</button>
+                    <button class="tab-btn" id="tab-register-btn" onclick="switchTab('register')">Załóż konto</button>
                 </div>
 
                 <div id="alert-box" class="alert-msg"></div>
@@ -375,16 +425,12 @@
                         <input type="text" id="reg-username" class="form-control" placeholder="np. WidzTVJoy" required>
                     </div>
                     <div class="form-group">
-                        <label><i class="fa-solid fa-envelope"></i> Adres E-mail</label>
+                        <label><i class="fa-solid fa-envelope"></i> Adres E-mail (wymagana weryfikacja)</label>
                         <input type="email" id="reg-email" class="form-control" placeholder="twoj@email.pl" required>
                     </div>
                     <div class="form-group">
                         <label><i class="fa-solid fa-lock"></i> Hasło (min. 8 znaków)</label>
                         <input type="password" id="reg-password" class="form-control" placeholder="••••••••" minlength="8" required>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fa-solid fa-key"></i> Kod aktywacyjny pakietu (od Administratora Artutmaz):</label>
-                        <input type="text" id="reg-activation-code" class="form-control" placeholder="np. JOY-VIP-XXXXX" required>
                     </div>
                     
                     <div class="form-group">
@@ -398,83 +444,23 @@
 
                     <button type="submit" class="submit-btn"><i class="fa-solid fa-user-plus"></i> Załóż konto w JoyBoxGO!</button>
                 </form>
-
-                <!-- PODGLĄD KANAŁÓW PRZED ZALOGOWANIEM -->
-                <div style="margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
-                    <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-tv" style="color: var(--accent-yellow);"></i> Podgląd oferty kanałów i EPG</h3>
-                    <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 1rem;">Możesz przejrzeć dostępne kanały telewizyjne i stacje VOD. Aby odtwarzać materiały, zaloguj się na swoje konto.</p>
-                    <div class="tvp-epg-wrapper">
-                        <div class="tvp-epg-header">
-                            <div>KANAŁ / VOD</div>
-                            <div>TERAZ W EMISJI</div>
-                            <div>NASTĘPNY MATERIAŁ</div>
-                        </div>
-                        <div class="tvp-epg-list" id="epg-rows-target-preview"></div>
-                    </div>
-                </div>
-
             </div>
 
-            <!-- DASHBOARD PO ZALOGOWANIU -->
             <div class="user-dashboard" id="dashboard-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
                     <div style="display: flex; align-items: center; gap: 15px;">
-                        <div style="position: relative; display: inline-block; cursor: pointer;" onclick="openPfpModal()" title="Kliknij, aby zmienić swój awatar (PFP)">
+                        <div style="position: relative; display: inline-block; cursor: pointer;" onclick="openPfpModal()" title="Kliknij, aby zmienić swój awatar profilowy (PFP)">
                             <img id="user-header-avatar" src="" alt="Awatar" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-yellow);">
                             <span style="position: absolute; bottom: -2px; right: -2px; background: var(--accent-yellow); color: #0d47a1; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.4);"><i class="fa-solid fa-pen"></i></span>
                         </div>
                         <div>
                             <h2>Witaj, <span id="user-display-name" style="color: var(--accent-yellow);"></span>! 🎉</h2>
-                            <p style="color: #cbd5e1; font-size: 0.9rem;">Twój aktywny pakiet: <strong id="user-active-package" style="color: var(--accent-orange);">Brak</strong> (Ważny do: <span id="user-package-expiry">-</span>)</p>
+                            <p style="color: #cbd5e1; font-size: 0.9rem;">Konto zweryfikowane. EPG w stylu cyfrowego dekodera aktywne!</p>
                         </div>
                     </div>
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
                         <i class="fa-solid fa-right-from-bracket"></i> Wyloguj
                     </button>
-                </div>
-
-                <!-- PANEL ADMINISTRATORA (WIDOCZNY TYLKO DLA Artutmaz) -->
-                <div id="admin-panel-section" class="admin-panel" style="display: none;">
-                    <div class="admin-header"><i class="fa-solid fa-shield-halved"></i> Panel Administratora Strony (Zalogowany jako: Artutmaz)</div>
-                    <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 1rem;">Wygeneruj kod aktywacyjny pakietu dla nowego użytkownika:</p>
-                    
-                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; align-items: end;">
-                        <div class="form-group" style="margin:0;">
-                            <label>Wybierz pakiet:</label>
-                            <select id="admin-package-select" class="form-control">
-                                <option value="Pakiet Startowy">Pakiet Startowy (Darmowy)</option>
-                                <option value="Pakiet JoyBox VIP+">Pakiet JoyBox VIP+ (Pełny VOD i 60+ kanałów)</option>
-                            </select>
-                        </div>
-                        <div class="form-group" style="margin:0;">
-                            <label>Czas ważności:</label>
-                            <select id="admin-duration-select" class="form-control">
-                                <option value="30">30 dni</option>
-                                <option value="90">90 dni</option>
-                                <option value="365">1 rok</option>
-                                <option value="9999">Bezużyteczny / Bezterminowy</option>
-                            </select>
-                        </div>
-                        <button class="submit-btn" style="margin:0; height: 42px;" onclick="generateActivationCode()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generuj kod</button>
-                    </div>
-
-                    <div id="admin-generated-box" style="display: none; margin-top: 1rem;">
-                        <label style="font-size: 0.8rem; color: #38bdf8; margin-bottom: 4px; display:block;">Wygenerowany kod aktywacyjny:</label>
-                        <div class="code-result-box">
-                            <span id="admin-code-text">JOY-VIP-XXXXX</span>
-                            <button onclick="copyAdminCode()" style="background: #38bdf8; color: #090d16; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold;"><i class="fa-regular fa-copy"></i> Kopiuj</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AKTYWACJA / ZMIANA PAKIETU DLA ZWYKŁYCH UŻYTKOWNIKÓW -->
-                <div class="box-panel" style="background: rgba(15, 23, 42, 0.5); padding: 1.5rem; margin-bottom: 1.5rem;">
-                    <h4 style="color: var(--accent-yellow); margin-bottom: 0.5rem;"><i class="fa-solid fa-ticket"></i> Aktywuj lub Zmień Pakiet Kodem</h4>
-                    <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 1rem;">Otrzymałeś kod aktywacyjny od administratora? Wpisz go poniżej, aby aktywować lub przedłużyć swój pakiet:</p>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <input type="text" id="user-activation-input" class="form-control" placeholder="Wpisz kod aktywacyjny (np. JOY-...)" style="flex-grow: 1; max-width: 400px; margin:0;">
-                        <button class="submit-btn" style="margin:0; width: auto; padding: 0.7rem 1.5rem;" onclick="activateUserPackageByCode()">Aktywuj pakiet</button>
-                    </div>
                 </div>
 
                 <div id="pfp-modal" style="display: none; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000; justify-content: center; align-items: center;">
@@ -591,7 +577,7 @@
                         localStorage.setItem('tvJoyActiveUser', JSON.stringify(activeUser));
                         updateHeaderPfpDisplay(customUrl);
                     }
-                    showAlert('Awatar PFP został zaktualizowany!', 'success');
+                    showAlert('Własny awatar PFP został zaktualizowany!', 'success');
                 };
                 reader.readAsDataURL(file);
             }
@@ -632,63 +618,11 @@
             }
         }
 
-        // BAZA KODÓW AKTYWACYJNYCH W LOCALSTORAGE
-        function getCodesDB() {
-            return JSON.parse(localStorage.getItem('tvJoyCodesDB') || '[]');
-        }
-
-        function saveCodesDB(codes) {
-            localStorage.setItem('tvJoyCodesDB', JSON.stringify(codes));
-        }
-
-        function generateActivationCode() {
-            const pkg = document.getElementById('admin-package-select').value;
-            const days = parseInt(document.getElementById('admin-duration-select').value, 10);
-            
-            const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase();
-            const code = `JOY-${pkg.includes('VIP') ? 'VIP' : 'START'}-${randomPart}`;
-
-            const codes = getCodesDB();
-            const expiryDate = new Date();
-            expiryDate.setDate(expiryDate.getDate() + days);
-
-            codes.push({
-                code: code,
-                package: pkg,
-                expiry: expiryDate.getTime(),
-                used: false
-            });
-            saveCodesDB(codes);
-
-            document.getElementById('admin-code-text').innerText = code;
-            document.getElementById('admin-generated-box').style.display = 'block';
-            alert(`Wygenerowano kod aktywacyjny dla pakietu: ${pkg}!`);
-        }
-
-        function copyAdminCode() {
-            const text = document.getElementById('admin-code-text').innerText;
-            navigator.clipboard.writeText(text);
-            alert('Kod skopiowany do schowka!');
-        }
-
         function handleRegister(e) {
             e.preventDefault();
             const username = document.getElementById('reg-username').value;
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
-            const codeInput = document.getElementById('reg-activation-code').value.trim();
-
-            const codes = getCodesDB();
-            const foundCode = codes.find(c => c.code === codeInput);
-
-            if (!foundCode) {
-                showAlert('Błąd: Podany kod aktywacyjny nie istnieje lub jest nieprawidłowy!', 'error');
-                return;
-            }
-            if (foundCode.used && username.toLowerCase() !== 'artutmaz') {
-                showAlert('Błąd: Ten kod aktywacyjny został już wykorzystany!', 'error');
-                return;
-            }
 
             const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
             if (users.some(u => u.email === email)) {
@@ -696,23 +630,11 @@
                 return;
             }
 
-            foundCode.used = true;
-            saveCodesDB(codes);
-
             const hashedPassword = btoa(password);
-            const newUser = {
-                username,
-                email,
-                password: hashedPassword,
-                avatar: selectedAvatarUrl,
-                package: foundCode.package,
-                packageExpiry: foundCode.expiry
-            };
-
-            users.push(newUser);
+            users.push({ username, email, password: hashedPassword, avatar: selectedAvatarUrl });
             localStorage.setItem('tvJoyUsers', JSON.stringify(users));
 
-            showAlert('Konto utworzone pomyślnie! Zaloguj się teraz.', 'success');
+            showAlert('Konto utworzone! Zaloguj się teraz.', 'success');
             switchTab('login');
         }
 
@@ -727,51 +649,11 @@
 
             if (user) {
                 if(!user.avatar) user.avatar = defaultAvatars[0];
-                if(user.username.toLowerCase() === 'artutmaz') {
-                    user.package = 'Pakiet JoyBox VIP+ (Administrator)';
-                    user.packageExpiry = new Date().getTime() + 999999999999;
-                }
                 localStorage.setItem('tvJoyActiveUser', JSON.stringify(user));
                 checkAuthSession();
             } else {
                 showAlert('Nieprawidłowy e-mail lub hasło!', 'error');
             }
-        }
-
-        function activateUserPackageByCode() {
-            const codeInput = document.getElementById('user-activation-input').value.trim();
-            const codes = getCodesDB();
-            const foundCode = codes.find(c => c.code === codeInput);
-
-            if (!foundCode) {
-                alert('Błąd: Nieprawidłowy kod aktywacyjny.');
-                return;
-            }
-            if (foundCode.used && foundCode.assignedTo !== JSON.parse(localStorage.getItem('tvJoyActiveUser')).email) {
-                alert('Błąd: Ten kod został już zużyty przez kogoś innego.');
-                return;
-            }
-
-            foundCode.used = true;
-            foundCode.assignedTo = JSON.parse(localStorage.getItem('tvJoyActiveUser')).email;
-            saveCodesDB(codes);
-
-            const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
-            activeUser.package = foundCode.package;
-            activeUser.packageExpiry = foundCode.expiry;
-            localStorage.setItem('tvJoyActiveUser', JSON.stringify(activeUser));
-
-            const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
-            const idx = users.findIndex(u => u.email === activeUser.email);
-            if(idx !== -1) {
-                users[idx].package = activeUser.package;
-                users[idx].packageExpiry = activeUser.packageExpiry;
-                localStorage.setItem('tvJoyUsers', JSON.stringify(users));
-            }
-
-            alert(`Sukces! Pomyślnie aktywowano pakiet: ${foundCode.package}`);
-            document.getElementById('user-activation-input').value = '';
-            checkAuthSession();
         }
 
         const rawChannels = [
@@ -838,7 +720,6 @@
             { num: 160, name: "Co w Telewizji?", tag: "GUIDE", key: null, isVod: false }
         ];
 
-        /* PIERWOTNE RAMÓWKI - PEŁNA WERSJA */
         const joySched = [
             { time: "06:00", title: "Poranek z uśmiechem", desc: "Nowy program śniadaniowy.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
             { time: "06:30", title: "Muminki", desc: "Kultowa animacja.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
@@ -914,37 +795,17 @@
             { time: "23:00", title: "Pacu Łacu – w kupie raźniej!", desc: "Wieczorny show rozrywkowy.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" }
         ];
 
+        /* TUTAJ JEST WYMYŚLNA, SPÓJNA I DZIAŁAJĄCA RAMÓWKA DLA FOTEL TV */
         const fotelSched = [
-            { time: "23:45", title: "Kuchenne Rewolucje", desc: "Magda Gessler ratuje restauracje.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
-            { time: "00:45", title: "Kuchenne Rewolucje", desc: "Kolejny odcinek kulminacyjny.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
-            { time: "01:45", title: "Na dobre i na złe", desc: "Dramaty medyczne w Leśnej Górze.", zap: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=900&auto=format&fit=crop&q=80" },
-            { time: "02:45", title: "Zakończenie programu", desc: "Przerwa nocna w stacji Fotel TV.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "05:45", title: "Rodzinka.pl", desc: "Perypetie rodziny Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "06:15", title: "Ranczo", desc: "Wizyta w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "07:15", title: "Telewpadki x2 odc.", desc: "Zabawne wpadki telewizyjne.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
-            { time: "07:30", title: "Co polak potrafi na drodze?", desc: "Magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "08:30", title: "Ranczo", desc: "Poranne pasmo serialu Ranczo.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "09:30", title: "Ranczo", desc: "Kolejne odcinki Rancza.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "10:30", title: "Ranczo", desc: "Wizyta w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "11:30", title: "Ranczo", desc: "Kolejny odcinek Rancza.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "12:30", title: "Co polak potrafi na drodze?", desc: "Magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "13:30", title: "Co polak potrafi na drodze?", desc: "Magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "14:30", title: "Niania", desc: "Frania Maj w rezydencji Skalskiego.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:00", title: "Fineasz i Ferb", desc: "Przygody braci w wakacje.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:30", title: "Niesamowity Świat Gumballa", desc: "Animowane szaleństwo.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:45", title: "Cudownie dziwny świat Gumballa", desc: "Kolejna porcja animacji.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
-            { time: "16:00", title: "Rodzinka.pl", desc: "Codzienne perypetie Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "16:30", title: "Świat Według Kiepskich", desc: "Ferdynand i spółka na Kamiennej.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "17:00", title: "77 TV", desc: "Program autorski stacji.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
-            { time: "18:00", title: "Co polak potrafi na drodze?", desc: "Wieczorny magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "19:00", title: "Fineasz i Ferb", desc: "Przygody braci.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "19:30", title: "Fineasz i Ferb", desc: "Kolejne przygody.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:00", title: "Niania", desc: "Frania Maj.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:30", title: "Miodowe lata", desc: "Krawczyk i Norek.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
-            { time: "21:00", title: "Ranczo", desc: "Wieczorne losy w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "22:00", title: "Ranczo", desc: "Kolejne odcinki serialu.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "23:00", title: "Włatcy Móch", desc: "Kultowa polska kreskówka.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "23:30", title: "Telewpadki x2 odc.", desc: "Przegląd wpadek telewizyjnych.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" }
+            { time: "00:00", title: "Nocne Przemeblowanie Salonu", desc: "Eksperymenty z kanapą w ciemnościach.", zap: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:30", title: "Symfonia Chrapania w HD", desc: "Relaksacyjny dźwięk i obraz poduszek.", zap: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:00", title: "Poranne Wstawanie z Poduch", desc: "Gimnastyka leniwego widza.", zap: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:00", title: "Test Wytrzymałości Sprężyn", desc: "Ile kilogramów zdoła wytrzymać kultowy fotel?", zap: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:00", title: "Akademik Session: Gotowanie z Czajnika", desc: "Kulinarne cuda na kacu i w biegu.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:00", title: "Mistrzostwa Świata w Pilocie", desc: "Kto pierwszy przełączy kanał bez wstawiania się?", zap: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:00", title: "Kroniki Zaginionego Popcornu", desc: "Gdzie podziewają się okruchy wpadające w szczeliny?", zap: "https://images.unsplash.com/photo-1578849278619-e73505e9610f?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:00", title: "Wielki Seans na Siedząco", desc: "Premiera autorskiego filmu stacji Fotel TV.", zap: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:00", title: "Nocne Polaków Rozmowy o Niczym", desc: "Filozoficzne rozkminy przy zgaszonym świetle.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" }
         ];
 
         const nex1Sched = [
@@ -985,7 +846,6 @@
             { time: "02:15", title: "Radio Metronomia (przerwa w transmisji Nex1)", desc: "Przerwa techniczna i audycja radiowa.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" }
         ];
 
-        // RAMÓWKI VOD
         const infoVodSched = [
             { time: "00:00", title: "[VOD] Jak korzystać z katalogu wideo?", desc: "Wprowadzenie do usługi VOD Vectra Style w JoyBox.", zap: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=900&auto=format&fit=crop&q=80" },
             { time: "06:00", title: "[VOD] Nowości Tygodnia w JoyBox", desc: "Prezentacja premierowych filmów i seriali.", zap: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=900&auto=format&fit=crop&q=80" },
@@ -1015,13 +875,17 @@
 
         function getTvScheduleData(sched) {
             if (!sched || sched.length === 0) return null;
+
             const now = new Date();
             const nowMins = now.getHours() * 60 + now.getMinutes();
 
             let idx = 0;
             for (let i = 0; i < sched.length; i++) {
-                if (nowMins >= getMinutes(sched[i].time)) idx = i;
-                else break;
+                if (nowMins >= getMinutes(sched[i].time)) {
+                    idx = i;
+                } else {
+                    break;
+                }
             }
 
             const current = sched[idx];
@@ -1050,8 +914,8 @@
             };
         }
 
-        function renderEpgList(targetId, isPreview = false) {
-            const target = document.getElementById(targetId);
+        function renderEpgList() {
+            const target = document.getElementById('epg-rows-target');
             if (!target) return;
 
             let html = '';
@@ -1071,13 +935,9 @@
                 const badgeClass = ch.isVod ? 'tvp-ch-badge vod-badge' : 'tvp-ch-badge';
                 const timeLabel = ch.isVod ? 'DOSTĘPNE W VOD' : `${data ? data.timeLeft : 0} MIN DO KOŃCA`;
 
-                const clickAction = isPreview 
-                    ? `alert('Aby oglądać materiały i korzystać z odtwarzacza, zaloguj się na swoje konto w JoyBoxGO!');`
-                    : `playChannel('${ch.name}', '${data ? data.currentTitle.replace(/'/g, "\\'") : "Brak"}', '${data ? data.currentDesc.replace(/'/g, "\\'") : ""}', '${data ? data.currentZap : ""}', ${ch.isVod})`;
-
                 if (data) {
                     html += `
-                        <div class="${rowClass}" onclick="${clickAction}">
+                        <div class="${rowClass}" onclick="playChannel('${ch.name}', '${data.currentTitle.replace(/'/g, "\\'")}', '${data.currentDesc.replace(/'/g, "\\'")}', '${data.currentZap}', ${ch.isVod})">
                             <div class="tvp-ch-col">
                                 <span class="${badgeClass}">${ch.tag}</span>
                                 <span class="tvp-ch-name"><strong>${ch.num}.</strong> ${ch.name}</span>
@@ -1095,7 +955,7 @@
                     `;
                 } else {
                     html += `
-                        <div class="tvp-epg-row offline-row">
+                        <div class="tvp-epg-row offline-row" onclick="alert('Kanał ${ch.num}. ${ch.name}: Brak sygnału.')">
                             <div class="tvp-ch-col">
                                 <span class="tvp-ch-badge" style="background: #475569;">${ch.tag}</span>
                                 <span class="tvp-ch-name"><strong>${ch.num}.</strong> ${ch.name}</span>
@@ -1148,28 +1008,11 @@
                 document.getElementById('auth-container').style.display = 'none';
                 document.getElementById('dashboard-container').style.display = 'block';
                 document.getElementById('user-display-name').innerText = activeUser.username;
-                document.getElementById('user-active-package').innerText = activeUser.package || 'Brak aktywnego';
-                
-                if(activeUser.packageExpiry) {
-                    const expDate = new Date(activeUser.packageExpiry);
-                    document.getElementById('user-package-expiry').innerText = expDate.toLocaleDateString();
-                } else {
-                    document.getElementById('user-package-expiry').innerText = 'Bezterminowo';
-                }
-
                 updateHeaderPfpDisplay(activeUser.avatar || defaultAvatars[0]);
-
-                if (activeUser.username.toLowerCase() === 'artutmaz') {
-                    document.getElementById('admin-panel-section').style.display = 'block';
-                } else {
-                    document.getElementById('admin-panel-section').style.display = 'none';
-                }
-
-                renderEpgList('epg-rows-target', false);
+                renderEpgList();
             } else {
                 document.getElementById('auth-container').style.display = 'block';
                 document.getElementById('dashboard-container').style.display = 'none';
-                renderEpgList('epg-rows-target-preview', true);
             }
         }
 
@@ -1183,9 +1026,7 @@
             checkAuthSession();
             setInterval(() => {
                 if(localStorage.getItem('tvJoyActiveUser')) {
-                    renderEpgList('epg-rows-target', false);
-                } else {
-                    renderEpgList('epg-rows-target-preview', true);
+                    renderEpgList();
                 }
             }, 10000);
         });
