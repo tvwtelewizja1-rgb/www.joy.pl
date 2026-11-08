@@ -39,6 +39,13 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
         .logo { text-decoration: none; display: flex; align-items: center; gap: 12px; }
+        
+        /* Klikalne logo/PFP w nagłówku */
+        .logo-img-container {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+        }
         .logo-img {
             width: 45px;
             height: 45px;
@@ -46,6 +53,28 @@
             object-fit: cover;
             border: 2px solid #ffeb3b;
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .logo-img-container:hover .logo-img {
+            transform: scale(1.08);
+        }
+        .logo-img-container::after {
+            content: '\f044';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            background: #ffeb3b;
+            color: #0d47a1;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
 
         nav { display: flex; gap: 1.5rem; align-items: center; }
@@ -96,7 +125,7 @@
         }
         .form-control:focus { border-color: #ffeb3b; }
 
-        /* Stylizacja wyboru awatara */
+        /* Siatka awatarów w formularzu i modalu */
         .avatar-picker-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -258,7 +287,7 @@
             padding: 1.5rem;
             text-align: left;
         }
-        .tv-screen-content h4 {
+            .tv-screen-content h4 {
             font-size: 1.8rem;
             color: #ffeb3b;
             margin-bottom: 0.3rem;
@@ -285,6 +314,29 @@
             z-index: 3;
             box-shadow: 0 2px 6px rgba(0,0,0,0.5);
         }
+
+        /* Modal zmiany awatara PFP w nagłówku */
+        .pfp-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .pfp-modal-content {
+            background: #0f172a;
+            border: 2px solid #ffeb3b;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+        .pfp-modal-content h3 { color: #ffeb3b; margin-bottom: 1rem; }
 
         .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 0.8rem; }
         .section-title i { color: #ffeb3b; }
@@ -353,10 +405,30 @@
 </head>
 <body>
 
+    <!-- Modal zmiany PFP z nagłówka -->
+    <div class="pfp-modal-overlay" id="pfp-modal">
+        <div class="pfp-modal-content">
+            <h3><i class="fa-solid fa-user-pen"></i> Zmień awatar profilowy (PFP)</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Wybierz jeden z 10 domyślnych lub wgraj własny z dysku:</p>
+            
+            <div class="avatar-picker-grid" id="modal-avatar-picker-container" style="margin-bottom: 1rem;">
+                <!-- Generowane w JS -->
+            </div>
+
+            <div class="form-group" style="text-align: left;">
+                <label style="font-size: 0.8rem; color: #ffeb3b;">Prześlij własny plik graficzny:</label>
+                <input type="file" class="form-control" accept="image/*" onchange="handleHeaderCustomAvatar(event)">
+            </div>
+
+            <button class="submit-btn" onclick="closePfpModal()" style="margin-top: 1rem;">Zamknij / Zapisz</button>
+        </div>
+    </div>
+
     <header>
-        <a href="index.html" class="logo">
-            <img src="PFPjoy10kl.jpg" alt="TV Joy Logo" class="logo-img">
-        </a>
+        <!-- Klikalne PFP w nagłówku -->
+        <div class="logo-img-container" onclick="openPfpModal()" title="Kliknij, aby zmienić awatar profilowy (PFP)">
+            <img src="PFPjoy10kl.jpg" alt="TV Joy Logo" class="logo-img" id="header-pfp-img">
+        </div>
         <nav>
             <a href="index.html">Home</a>
             <a href="joy24.html">Joy 24</a>
@@ -409,12 +481,9 @@
                         <input type="password" id="reg-password" class="form-control" placeholder="••••••••" minlength="8" required>
                     </div>
                     
-                    <!-- Wybór awatara -->
                     <div class="form-group">
                         <label><i class="fa-solid fa-image"></i> Wybierz awatar profilowy lub wgraj własny:</label>
-                        <div class="avatar-picker-grid" id="avatar-picker-container">
-                            <!-- Generowane dynamicznie przez JS -->
-                        </div>
+                        <div class="avatar-picker-grid" id="avatar-picker-container"></div>
                     </div>
                     <div class="form-group">
                         <label style="font-size: 0.75rem; color: var(--text-muted);">Lub prześlij własny plik graficzny:</label>
@@ -590,7 +659,6 @@
     </footer>
 
     <script>
-        // 10 domyślnych awatarów profilowych
         const defaultAvatars = [
             "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80",
             "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150&auto=format&fit=crop&q=80",
@@ -606,21 +674,41 @@
 
         let selectedAvatarUrl = defaultAvatars[0];
 
-        function initAvatarPicker() {
-            const container = document.getElementById('avatar-picker-container');
-            if(!container) return;
+        function initAvatarPickers() {
+            // Inicjalizacja w formularzu rejestracji
+            const regContainer = document.getElementById('avatar-picker-container');
+            // Inicjalizacja w modalu nagłówka PFP
+            const modalContainer = document.getElementById('modal-avatar-picker-container');
+            
             let html = '';
             defaultAvatars.forEach((url, idx) => {
                 const isSel = (idx === 0) ? 'selected' : '';
                 html += `<img src="${url}" class="avatar-option ${isSel}" onclick="selectAvatar('${url}', this)" alt="Awatar ${idx+1}">`;
             });
-            container.innerHTML = html;
+
+            if(regContainer) regContainer.innerHTML = html;
+            if(modalContainer) modalContainer.innerHTML = html;
         }
 
         function selectAvatar(url, el) {
             selectedAvatarUrl = url;
             document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('selected'));
-            el.classList.add('selected');
+            // Zaznacz we wszystkich widokach
+            document.querySelectorAll(`.avatar-option[src="${url}"]`).forEach(img => img.classList.add('selected'));
+
+            // Jeśli użytkownik jest zalogowany i zmienił PFP przez modal w nagłówku
+            const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
+            if(activeUser) {
+                activeUser.avatar = url;
+                localStorage.setItem('tvJoyActiveUser', JSON.stringify(activeUser));
+                
+                // Aktualizacja w bazie użytkowników
+                let users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
+                users = users.map(u => u.email === activeUser.email ? {...u, avatar: url} : u);
+                localStorage.setItem('tvJoyUsers', JSON.stringify(users));
+
+                updateHeaderPfpDisplay(url);
+            }
         }
 
         function handleCustomAvatarUpload(e) {
@@ -635,7 +723,45 @@
             }
         }
 
-        // 9 grafik obracanych automatycznie dla kanałów VOD (INFO VOD oraz Co w Telewizji?)
+        function handleHeaderCustomAvatar(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(uploadEvent) {
+                    const customUrl = uploadEvent.target.result;
+                    
+                    const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
+                    if(activeUser) {
+                        activeUser.avatar = customUrl;
+                        localStorage.setItem('tvJoyActiveUser', JSON.stringify(activeUser));
+                        
+                        let users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
+                        users = users.map(u => u.email === activeUser.email ? {...u, avatar: customUrl} : u);
+                        localStorage.setItem('tvJoyUsers', JSON.stringify(users));
+
+                        updateHeaderPfpDisplay(customUrl);
+                    }
+                    showAlert('Własny awatar PFP został zaktualizowany!', 'success');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function openPfpModal() {
+            document.getElementById('pfp-modal').style.display = 'flex';
+        }
+
+        function closePfpModal() {
+            document.getElementById('pfp-modal').style.display = 'none';
+        }
+
+        function updateHeaderPfpDisplay(url) {
+            const headerPfp = document.getElementById('header-pfp-img');
+            const dashboardPfp = document.getElementById('user-header-avatar');
+            if(headerPfp) headerPfp.src = url;
+            if(dashboardPfp) dashboardPfp.src = url;
+        }
+
         const vodSlides = [
             { title: "INFO VOD: Wielka Promocja Pakietu VIP+", desc: "Zyskaj dostęp do wszystkich filmów i stacji za jedyne 25,99 zł miesięcznie bez reklam!", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&auto=format&fit=crop&q=80" },
             { title: "Dostępność Usługi 24/7", desc: "JoyBoxGO! działa stabilnie na każdym urządzeniu. Sprawdź nowe pasma w jakości HD.", img: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
@@ -950,10 +1076,8 @@
                 document.getElementById('dashboard-container').style.display = 'block';
                 document.getElementById('user-display-name').innerText = activeUser.username;
                 
-                const avatarImg = document.getElementById('user-header-avatar');
-                if(avatarImg) {
-                    avatarImg.src = activeUser.avatar || defaultAvatars[0];
-                }
+                const userAvatar = activeUser.avatar || defaultAvatars[0];
+                updateHeaderPfpDisplay(userAvatar);
 
                 if (pricingWrapper) pricingWrapper.style.display = 'none';
                 renderChannelsList();
@@ -961,6 +1085,7 @@
                 document.getElementById('auth-container').style.display = 'block';
                 document.getElementById('dashboard-container').style.display = 'none';
                 if (pricingWrapper) pricingWrapper.style.display = 'block';
+                updateHeaderPfpDisplay("PFPjoy10kl.jpg"); // Domyślne logo PFP
             }
         }
 
@@ -972,7 +1097,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            initAvatarPicker();
+            initAvatarPickers();
             checkAuthSession();
             setInterval(() => {
                 if(localStorage.getItem('tvJoyActiveUser')) {
