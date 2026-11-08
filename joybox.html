@@ -8,8 +8,11 @@
     <style>
         :root {
             --card-bg: rgba(15, 23, 42, 0.85);
+            --card-hover-bg: rgba(30, 41, 59, 0.95);
             --text-color: #ffffff;
             --text-muted: #cbd5e1;
+            --accent-yellow: #ffeb3b;
+            --accent-orange: #ff9800;
         }
         * { 
             box-sizing: border-box; 
@@ -19,7 +22,7 @@
             font-weight: 700;
         }
         body {
-            background: linear-gradient(to bottom, #1e88e5, #0d47a1);
+            background: linear-gradient(135deg, #1e88e5, #0d47a1);
             background-attachment: fixed;
             color: var(--text-color);
             min-height: 100vh;
@@ -50,7 +53,7 @@
             height: 45px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #ffeb3b;
+            border: 2px solid var(--accent-yellow);
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
             transition: transform 0.2s;
         }
@@ -64,7 +67,7 @@
             position: absolute;
             bottom: -2px;
             right: -2px;
-            background: #ffeb3b;
+            background: var(--accent-yellow);
             color: #0d47a1;
             font-size: 10px;
             width: 18px;
@@ -76,9 +79,9 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
 
-        nav { display: flex; gap: 1.5rem; align-items: center; }
+        nav { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
         nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; transition: color 0.2s; }
-        nav a:hover, nav a.active { color: #ffeb3b; }
+        nav a:hover, nav a.active { color: var(--accent-yellow); }
         .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
 
         .container { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; flex-grow: 1; width: 100%; }
@@ -94,7 +97,7 @@
         }
 
         .panel-header { text-align: center; margin-bottom: 1.5rem; }
-        .panel-header h1 { font-size: 2rem; color: #ffeb3b; margin-bottom: 0.3rem; }
+        .panel-header h1 { font-size: 2rem; color: var(--accent-yellow); margin-bottom: 0.3rem; }
         .panel-header p { color: var(--text-muted); font-size: 0.95rem; }
 
         .tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
@@ -108,10 +111,10 @@
             font-weight: bold;
             transition: all 0.2s;
         }
-        .tab-btn.active, .tab-btn:hover { background-color: #ffeb3b; color: #0d47a1; border-color: #ffeb3b; }
+        .tab-btn.active, .tab-btn:hover { background-color: var(--accent-yellow); color: #0d47a1; border-color: var(--accent-yellow); }
 
         .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.85rem; color: #ffeb3b; }
+        .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--accent-yellow); }
         .form-control {
             width: 100%;
             padding: 0.7rem 1rem;
@@ -122,7 +125,7 @@
             font-size: 0.95rem;
             outline: none;
         }
-        .form-control:focus { border-color: #ffeb3b; }
+        .form-control:focus { border-color: var(--accent-yellow); }
 
         .avatar-picker-grid {
             display: grid;
@@ -140,7 +143,7 @@
             transition: transform 0.2s, border-color 0.2s;
         }
         .avatar-option:hover { transform: scale(1.08); }
-        .avatar-option.selected { border-color: #ffeb3b; box-shadow: 0 0 10px rgba(255,235,59,0.5); }
+        .avatar-option.selected { border-color: var(--accent-yellow); box-shadow: 0 0 10px rgba(255,235,59,0.5); }
 
         .submit-btn {
             width: 100%;
@@ -203,10 +206,10 @@
         .channel-card.clickable { cursor: pointer; }
         .channel-card.clickable:hover {
             transform: translateY(-3px);
-            border-color: #ffeb3b;
+            border-color: var(--accent-yellow);
             background: rgba(255, 235, 59, 0.08);
         }
-        .channel-title { font-size: 1.05rem; color: #ffeb3b; display: flex; justify-content: space-between; align-items: center; }
+        .channel-title { font-size: 1.05rem; color: var(--accent-yellow); display: flex; justify-content: space-between; align-items: center; }
         .channel-badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: rgba(30,136,229,0.4); color: #90caf9; }
         .channel-status { font-size: 0.8rem; color: #4caf50; display: flex; align-items: center; gap: 0.4rem; }
         .channel-now { font-size: 0.85rem; color: var(--text-muted); background: rgba(0,0,0,0.3); padding: 0.3rem 0.5rem; border-radius: 6px; }
@@ -214,7 +217,7 @@
         .player-modal {
             display: none;
             background: rgba(5, 10, 20, 0.95);
-            border: 2px solid #ffeb3b;
+            border: 2px solid var(--accent-yellow);
             border-radius: 12px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
@@ -229,7 +232,7 @@
         }
         .player-modal-title {
             font-size: 1.2rem;
-            color: #ffeb3b;
+            color: var(--accent-yellow);
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -287,7 +290,7 @@
         }
         .tv-screen-content h4 {
             font-size: 1.8rem;
-            color: #ffeb3b;
+            color: var(--accent-yellow);
             margin-bottom: 0.3rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
         }
@@ -325,7 +328,7 @@
         }
         .pfp-modal-content {
             background: #0f172a;
-            border: 2px solid #ffeb3b;
+            border: 2px solid var(--accent-yellow);
             border-radius: 16px;
             padding: 2rem;
             max-width: 450px;
@@ -333,38 +336,67 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.8);
             text-align: center;
         }
-        .pfp-modal-content h3 { color: #ffeb3b; margin-bottom: 1rem; }
+        .pfp-modal-content h3 { color: var(--accent-yellow); margin-bottom: 1rem; }
 
         .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 0.8rem; }
-        .section-title i { color: #ffeb3b; }
+        .section-title i { color: var(--accent-yellow); }
 
+        /* Ulepszona siatka pakietów (Plakietki Cenowe) */
         .packages-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
             margin-bottom: 3rem;
         }
         .package-card {
             background-color: var(--card-bg);
             border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            padding: 1.8rem 1.4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s, background-color 0.3s;
+        }
+        .package-card:hover {
+            transform: translateY(-8px);
+            background-color: var(--card-hover-bg);
+            border-color: var(--accent-yellow);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
         .package-card.highlight {
-            border: 2px solid #ffeb3b;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 136, 229, 0.3));
+            border: 2px solid var(--accent-yellow);
+            background: linear-gradient(to bottom, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
         }
-        .pkg-name { font-size: 1.2rem; color: #ffeb3b; margin-bottom: 0.3rem; }
-        .pkg-price { font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 1rem; }
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff9800, #f44336);
+            color: white;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 50px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(244,67,54,0.4);
+            white-space: nowrap;
+        }
+        .pkg-icon {
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+            margin-bottom: 0.8rem;
+        }
+        .pkg-name { font-size: 1.3rem; color: #fff; margin-bottom: 0.3rem; }
+        .pkg-price { font-size: 1.7rem; font-weight: 900; color: var(--accent-yellow); margin-bottom: 1rem; }
         .pkg-price span { font-size: 0.85rem; color: var(--text-muted); font-weight: normal; }
-        .pkg-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .pkg-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.4; flex-grow: 1; }
         .pkg-btn {
-            background-color: #ffeb3b;
+            background: linear-gradient(135deg, #ffeb3b, #fbc02d);
             color: #0d47a1;
             border: none;
             padding: 0.7rem;
@@ -374,9 +406,13 @@
             text-align: center;
             text-decoration: none;
             display: block;
-            transition: background 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(255, 235, 59, 0.3);
         }
-        .pkg-btn:hover { background-color: #fbc02d; }
+        .pkg-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 16px rgba(255, 235, 59, 0.5);
+        }
 
         .channels-list-box {
             background-color: var(--card-bg);
@@ -395,7 +431,7 @@
             font-size: 0.85rem;
             color: #fff;
         }
-        .channel-tag span { color: #ffeb3b; font-weight: bold; margin-right: 5px; }
+        .channel-tag span { color: var(--accent-yellow); font-weight: bold; margin-right: 5px; }
 
         footer { background-color: rgba(13, 71, 161, 0.95); text-align: center; padding: 2rem; color: var(--text-muted); margin-top: auto; }
     </style>
@@ -410,7 +446,7 @@
             <div class="avatar-picker-grid" id="modal-avatar-picker-container" style="margin-bottom: 1rem;"></div>
 
             <div class="form-group" style="text-align: left;">
-                <label style="font-size: 0.8rem; color: #ffeb3b;">Prześlij własny plik graficzny:</label>
+                <label style="font-size: 0.8rem; color: var(--accent-yellow);">Prześlij własny plik graficzny:</label>
                 <input type="file" class="form-control" accept="image/*" onchange="handleHeaderCustomAvatar(event)">
             </div>
 
@@ -426,7 +462,7 @@
             <a href="index.html">Home</a>
             <a href="joy24.html">Joy 24</a>
             <a href="joybox.html" class="active">Joy Box</a>
-            <a href="blokizwielkiejplyty.html" style="color: #ffeb3b;"><i class="fa-solid fa-city"></i> Wielka Płyta News</a>
+            <a href="blokizwielkiejplyty.html" style="color: var(--accent-yellow);"><i class="fa-solid fa-city"></i> Wielka Płyta News</a>
             <a href="https://www.youtube.com/@joy_twoja_u%C5%9Bmiechni%C4%99ta_tv" target="_blank" class="yt-btn">
                 <i class="fa-brands fa-youtube"></i> Subskrybuj
             </a>
@@ -496,9 +532,9 @@
             <div class="user-dashboard" id="dashboard-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
                     <div style="display: flex; align-items: center; gap: 15px;">
-                        <img id="user-header-avatar" src="" alt="Awatar" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #ffeb3b;">
+                        <img id="user-header-avatar" src="" alt="Awatar" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-yellow);">
                         <div>
-                            <h2>Witaj, <span id="user-display-name" style="color: #ffeb3b;"></span>! 🎉</h2>
+                            <h2>Witaj, <span id="user-display-name" style="color: var(--accent-yellow);"></span>! 🎉</h2>
                             <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane. Kliknij na kanał <strong>100. Joy</strong> lub kanały VOD, aby oglądać!</p>
                         </div>
                     </div>
@@ -525,7 +561,7 @@
                     </div>
                 </div>
 
-                <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-satellite-dish" style="color: #ffeb3b;"></i> Stacje Telewizyjne Online</h3>
+                <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-satellite-dish" style="color: var(--accent-yellow);"></i> Stacje Telewizyjne Online</h3>
                 <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100 i kanały VOD posiadają dynamiczny pokaz slajdów (zmieniający się co 30 sek.) oraz zsynchronizowany program!</p>
 
                 <div class="channels-grid" id="channels-list-container"></div>
@@ -535,8 +571,11 @@
         <div id="pricing-section-wrapper">
             <h2 class="section-title"><i class="fa-solid fa-tags"></i> Pakiety i Cennik Joy Box</h2>
             <div class="packages-grid">
+                
+                <!-- Regio -->
                 <div class="package-card">
                     <div>
+                        <div class="pkg-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
                         <div class="pkg-name">Regio</div>
                         <div class="pkg-price">1,00 zł <span>/ mies.</span></div>
                         <div class="pkg-desc">Tylko Stacje Regionalne i lokalne pasma informacyjne.</div>
@@ -544,8 +583,11 @@
                     <button class="pkg-btn" onclick="alert('Wybrano pakiet Regio!')">Wybierz</button>
                 </div>
 
+                <!-- Normal (Wyróżniony) -->
                 <div class="package-card highlight">
+                    <div class="popular-badge">Najpopularniejszy</div>
                     <div>
+                        <div class="pkg-icon"><i class="fa-solid fa-star"></i></div>
                         <div class="pkg-name">Normal</div>
                         <div class="pkg-price">2,20 zł <span>/ mies.</span></div>
                         <div class="pkg-desc">Podstawowy pakiet zawierający większość ulubionych stacji.</div>
@@ -553,8 +595,10 @@
                     <button class="pkg-btn" onclick="alert('Wybrano pakiet Normal!')">Wybierz</button>
                 </div>
 
+                <!-- Mid -->
                 <div class="package-card">
                     <div>
+                        <div class="pkg-icon"><i class="fa-solid fa-film"></i></div>
                         <div class="pkg-name">Mid</div>
                         <div class="pkg-price">4,50 zł <span>/ mies.</span></div>
                         <div class="pkg-desc">Rozszerzony pakiet kanałów tematycznych i filmowych.</div>
@@ -562,8 +606,10 @@
                     <button class="pkg-btn" onclick="alert('Wybrano pakiet Mid!')">Wybierz</button>
                 </div>
 
+                <!-- Extra -->
                 <div class="package-card">
                     <div>
+                        <div class="pkg-icon"><i class="fa-solid fa-gem"></i></div>
                         <div class="pkg-name">Extra</div>
                         <div class="pkg-price">10,99 zł <span>/ mies.</span></div>
                         <div class="pkg-desc">Wysokiej jakości kanały specjalne oraz unikalne pasma.</div>
@@ -571,19 +617,22 @@
                     <button class="pkg-btn" onclick="alert('Wybrano pakiet Extra!')">Wybierz</button>
                 </div>
 
+                <!-- VIP+ -->
                 <div class="package-card">
                     <div>
+                        <div class="pkg-icon"><i class="fa-solid fa-crown" style="color: #ff9800;"></i></div>
                         <div class="pkg-name">VIP+</div>
                         <div class="pkg-price">25,99 zł <span>/ mies.</span></div>
                         <div class="pkg-desc">Pełen pakiet wszechstronnej rozrywki bez żadnych limitów i reklam.</div>
                     </div>
                     <button class="pkg-btn" onclick="alert('Wybrano pakiet VIP+!')">Wybierz</button>
                 </div>
+
             </div>
         </div>
 
         <div class="channels-list-box">
-            <h3 style="color: #ffeb3b; font-size: 1.4rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-list"></i> Oficjalny Wykaz Kanałów Joy Box</h3>
+            <h3 style="color: var(--accent-yellow); font-size: 1.4rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-list"></i> Oficjalny Wykaz Kanałów Joy Box</h3>
             <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">Wszystkie stacje dostępne w sieci telewizyjnej:</p>
             <div class="channels-tags">
                 <span class="channel-tag"><span>100</span> Joy (Normal)</span>
@@ -751,7 +800,6 @@
             if(dashboardPfp) dashboardPfp.src = url;
         }
 
-        // Ramówka 9 grafik dla INFO VOD (Kanał 130)
         const infoVodSlides = [
             { title: "INFO VOD: Wielka Promocja Pakietu VIP+", desc: "Zyskaj pełny dostęp do wszystkich filmów i kanałów za jedyne 25,99 zł miesięcznie bez reklam!", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&auto=format&fit=crop&q=80" },
             { title: "Dostępność Serwisu 24/7", desc: "JoyBoxGO! gwarantuje stabilne nadawanie na komputerach, smartfonach i telewizorach smart.", img: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
@@ -764,7 +812,6 @@
             { title: "Dziękujemy za Wybór TV Joy", desc: "Twoja Uśmiechnięta Telewizja stale się rozwija, dostarczając najlepszą rozrywkę do Twojego domu.", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" }
         ];
 
-        // Ramówka 9 grafik dla Co w Telewizji? (Kanał 160)
         const tvGuideSlides = [
             { title: "Co w Telewizji? — Hit Wieczoru", desc: "Już dziś o 20:15 włącz pasmo filmowe i oglądaj kultową komedię 'Kiler' z rewelacyjną obsadą!", img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
             { title: "Poranek z Uśmiechem", desc: "Codziennie od 6:00 rano zapraszamy na poranny magazyn śniadaniowy pełen pozytywnej energii.", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
@@ -1043,7 +1090,6 @@
                 currentVodIndex = 0;
                 updateVodSlide();
                 
-                // Zmiana planszy co 30 sekund
                 vodSlideInterval = setInterval(() => {
                     currentVodIndex = (currentVodIndex + 1) % activeSlidesList.length;
                     updateVodSlide();
@@ -1055,7 +1101,6 @@
                 currentVodIndex = 0;
                 updateVodSlide();
                 
-                // Zmiana planszy co 30 sekund
                 vodSlideInterval = setInterval(() => {
                     currentVodIndex = (currentVodIndex + 1) % activeSlidesList.length;
                     updateVodSlide();
