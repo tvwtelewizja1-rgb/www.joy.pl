@@ -43,11 +43,6 @@
         }
         .logo { text-decoration: none; display: flex; align-items: center; gap: 12px; }
         
-        .logo-img-container {
-            position: relative;
-            cursor: pointer;
-            display: inline-block;
-        }
         .logo-img {
             width: 45px;
             height: 45px;
@@ -55,28 +50,6 @@
             object-fit: cover;
             border: 2px solid var(--accent-yellow);
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
-        }
-        .logo-img-container:hover .logo-img {
-            transform: scale(1.08);
-        }
-        .logo-img-container::after {
-            content: '\f044';
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            bottom: -2px;
-            right: -2px;
-            background: var(--accent-yellow);
-            color: #0d47a1;
-            font-size: 10px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
 
         nav { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
@@ -316,28 +289,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.5);
         }
 
-        .pfp-modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-        .pfp-modal-content {
-            background: #0f172a;
-            border: 2px solid var(--accent-yellow);
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 450px;
-            width: 90%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-            text-align: center;
-        }
-        .pfp-modal-content h3 { color: var(--accent-yellow); margin-bottom: 1rem; }
-
         .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 0.8rem; }
         .section-title i { color: var(--accent-yellow); }
 
@@ -437,26 +388,10 @@
 </head>
 <body>
 
-    <div class="pfp-modal-overlay" id="pfp-modal">
-        <div class="pfp-modal-content">
-            <h3><i class="fa-solid fa-user-pen"></i> Zmień awatar profilowy (PFP)</h3>
-            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Wybierz jeden z 10 domyślnych lub wgraj własny z dysku:</p>
-            
-            <div class="avatar-picker-grid" id="modal-avatar-picker-container" style="margin-bottom: 1rem;"></div>
-
-            <div class="form-group" style="text-align: left;">
-                <label style="font-size: 0.8rem; color: var(--accent-yellow);">Prześlij własny plik graficzny:</label>
-                <input type="file" class="form-control" accept="image/*" onchange="handleHeaderCustomAvatar(event)">
-            </div>
-
-            <button class="submit-btn" onclick="closePfpModal()" style="margin-top: 1rem;">Zamknij / Zapisz</button>
-        </div>
-    </div>
-
     <header>
-        <div class="logo-img-container" onclick="openPfpModal()" title="Kliknij, aby zmienić awatar profilowy (PFP)">
-            <img src="PFPjoy10kl.jpg" alt="TV Joy Logo" class="logo-img" id="header-pfp-img">
-        </div>
+        <a href="index.html" class="logo">
+            <img src="PFPjoy10kl.jpg" alt="TV Joy Logo" class="logo-img" id="header-logo-img">
+        </a>
         <nav>
             <a href="index.html">Home</a>
             <a href="joy24.html">Joy 24</a>
@@ -511,7 +446,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label><i class="fa-solid fa-image"></i> Wybierz awatar profilowy lub wgraj własny:</label>
+                        <label><i class="fa-solid fa-image"></i> Wybierz awatar profilowy (PFP) do konta:</label>
                         <div class="avatar-picker-grid" id="avatar-picker-container"></div>
                     </div>
                     <div class="form-group">
@@ -531,7 +466,11 @@
             <div class="user-dashboard" id="dashboard-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
                     <div style="display: flex; align-items: center; gap: 15px;">
-                        <img id="user-header-avatar" src="" alt="Awatar" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-yellow);">
+                        <!-- Awatar z opcją zmiany po zalogowaniu -->
+                        <div style="position: relative; display: inline-block; cursor: pointer;" onclick="openPfpModal()" title="Kliknij, aby zmienić swój awatar profilowy (PFP)">
+                            <img id="user-header-avatar" src="" alt="Awatar" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-yellow);">
+                            <span style="position: absolute; bottom: -2px; right: -2px; background: var(--accent-yellow); color: #0d47a1; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.4);"><i class="fa-solid fa-pen"></i></span>
+                        </div>
                         <div>
                             <h2>Witaj, <span id="user-display-name" style="color: var(--accent-yellow);"></span>! 🎉</h2>
                             <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane. Kliknij na kanał <strong>100. Joy</strong>, <strong>103. Infiniti</strong> lub kanały VOD, aby oglądać!</p>
@@ -540,6 +479,20 @@
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
                         <i class="fa-solid fa-right-from-bracket"></i> Wyloguj
                     </button>
+                </div>
+
+                <!-- Modal zmiany awatara dla zalogowanego użytkownika -->
+                <div id="pfp-modal" style="display: none; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000; justify-content: center; align-items: center;">
+                    <div style="background: #0f172a; border: 2px solid var(--accent-yellow); border-radius: 16px; padding: 2rem; max-width: 450px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.8); text-align: center;">
+                        <h3 style="color: var(--accent-yellow); margin-bottom: 1rem;"><i class="fa-solid fa-user-pen"></i> Zmień awatar profilowy (PFP)</h3>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Wybierz jeden z domyślnych lub wgraj własny z dysku:</p>
+                        <div class="avatar-picker-grid" id="modal-avatar-picker-container" style="margin-bottom: 1rem;"></div>
+                        <div class="form-group" style="text-align: left;">
+                            <label style="font-size: 0.8rem; color: var(--accent-yellow);">Prześlij własny plik graficzny:</label>
+                            <input type="file" class="form-control" accept="image/*" onchange="handleHeaderCustomAvatar(event)">
+                        </div>
+                        <button class="submit-btn" onclick="closePfpModal()" style="margin-top: 1rem;">Zamknij / Zapisz</button>
+                    </div>
                 </div>
 
                 <div class="player-modal" id="joy-player-modal">
@@ -571,7 +524,6 @@
             <h2 class="section-title"><i class="fa-solid fa-tags"></i> Pakiety i Cennik Joy Box</h2>
             <div class="packages-grid">
                 
-                <!-- Regio -->
                 <div class="package-card">
                     <div>
                         <div class="pkg-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
@@ -582,7 +534,6 @@
                     <button class="pkg-btn" onclick="alert('Wybrano pakiet Regio!')">Wybierz</button>
                 </div>
 
-                <!-- Normal (Wyróżniony) -->
                 <div class="package-card highlight">
                     <div class="popular-badge">Najpopularniejszy</div>
                     <div>
@@ -594,7 +545,6 @@
                     <button class="pkg-btn" onclick="alert('Wybrano pakiet Normal!')">Wybierz</button>
                 </div>
 
-                <!-- Mid -->
                 <div class="package-card">
                     <div>
                         <div class="pkg-icon"><i class="fa-solid fa-film"></i></div>
@@ -605,7 +555,6 @@
                     <button class="pkg-btn" onclick="alert('Wybrano pakiet Mid!')">Wybierz</button>
                 </div>
 
-                <!-- Extra -->
                 <div class="package-card">
                     <div>
                         <div class="pkg-icon"><i class="fa-solid fa-gem"></i></div>
@@ -616,7 +565,6 @@
                     <button class="pkg-btn" onclick="alert('Wybrano pakiet Extra!')">Wybierz</button>
                 </div>
 
-                <!-- VIP+ -->
                 <div class="package-card">
                     <div>
                         <div class="pkg-icon"><i class="fa-solid fa-crown" style="color: #ff9800;"></i></div>
@@ -714,7 +662,7 @@
             "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80"
         ];
 
-        let selectedAvatarUrl = localStorage.getItem('tvJoyGlobalAvatar') || defaultAvatars[0];
+        let selectedAvatarUrl = defaultAvatars[0];
 
         function initAvatarPickers() {
             const regContainer = document.getElementById('avatar-picker-container');
@@ -722,18 +670,16 @@
             
             let html = '';
             defaultAvatars.forEach((url, idx) => {
-                const isSel = (url === selectedAvatarUrl) ? 'selected' : '';
+                const isSel = (idx === 0) ? 'selected' : '';
                 html += `<img src="${url}" class="avatar-option ${isSel}" onclick="selectAvatar('${url}', this)" alt="Awatar ${idx+1}">`;
             });
 
             if(regContainer) regContainer.innerHTML = html;
             if(modalContainer) modalContainer.innerHTML = html;
-            updateHeaderPfpDisplay(selectedAvatarUrl);
         }
 
         function selectAvatar(url, el) {
             selectedAvatarUrl = url;
-            localStorage.setItem('tvJoyGlobalAvatar', url);
             document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('selected'));
             document.querySelectorAll(`.avatar-option[src="${url}"]`).forEach(img => img.classList.add('selected'));
 
@@ -745,8 +691,9 @@
                 let users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
                 users = users.map(u => u.email === activeUser.email ? {...u, avatar: url} : u);
                 localStorage.setItem('tvJoyUsers', JSON.stringify(users));
+
+                updateHeaderPfpDisplay(url);
             }
-            updateHeaderPfpDisplay(url);
         }
 
         function handleCustomAvatarUpload(e) {
@@ -755,7 +702,6 @@
                 const reader = new FileReader();
                 reader.onload = function(uploadEvent) {
                     selectedAvatarUrl = uploadEvent.target.result;
-                    localStorage.setItem('tvJoyGlobalAvatar', selectedAvatarUrl);
                     showAlert('Własny awatar został wgrany pomyślnie!', 'success');
                 };
                 reader.readAsDataURL(file);
@@ -768,8 +714,6 @@
                 const reader = new FileReader();
                 reader.onload = function(uploadEvent) {
                     const customUrl = uploadEvent.target.result;
-                    selectedAvatarUrl = customUrl;
-                    localStorage.setItem('tvJoyGlobalAvatar', customUrl);
                     
                     const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
                     if(activeUser) {
@@ -779,8 +723,9 @@
                         let users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
                         users = users.map(u => u.email === activeUser.email ? {...u, avatar: customUrl} : u);
                         localStorage.setItem('tvJoyUsers', JSON.stringify(users));
+
+                        updateHeaderPfpDisplay(customUrl);
                     }
-                    updateHeaderPfpDisplay(customUrl);
                     showAlert('Własny awatar PFP został zaktualizowany!', 'success');
                 };
                 reader.readAsDataURL(file);
@@ -796,9 +741,7 @@
         }
 
         function updateHeaderPfpDisplay(url) {
-            const headerPfp = document.getElementById('header-pfp-img');
             const dashboardPfp = document.getElementById('user-header-avatar');
-            if(headerPfp) headerPfp.src = url;
             if(dashboardPfp) dashboardPfp.src = url;
         }
 
@@ -887,7 +830,7 @@
             const user = users.find(u => u.email === email && u.password === hashedPassword);
 
             if (user) {
-                if(!user.avatar) user.avatar = selectedAvatarUrl;
+                if(!user.avatar) user.avatar = defaultAvatars[0];
                 localStorage.setItem('tvJoyActiveUser', JSON.stringify(user));
                 checkAuthSession();
                 showAlert('Zalogowano pomyślnie do JoyBoxGO!', 'success');
@@ -1195,7 +1138,7 @@
                 document.getElementById('dashboard-container').style.display = 'block';
                 document.getElementById('user-display-name').innerText = activeUser.username;
                 
-                const userAvatar = activeUser.avatar || selectedAvatarUrl;
+                const userAvatar = activeUser.avatar || defaultAvatars[0];
                 updateHeaderPfpDisplay(userAvatar);
 
                 if (pricingWrapper) pricingWrapper.style.display = 'none';
@@ -1204,7 +1147,6 @@
                 document.getElementById('auth-container').style.display = 'block';
                 document.getElementById('dashboard-container').style.display = 'none';
                 if (pricingWrapper) pricingWrapper.style.display = 'block';
-                updateHeaderPfpDisplay(selectedAvatarUrl);
             }
         }
 
@@ -1218,7 +1160,9 @@
         window.addEventListener('DOMContentLoaded', () => {
             checkAuthSession();
             setInterval(() => {
-                renderChannelsList();
+                if(localStorage.getItem('tvJoyActiveUser')) {
+                    renderChannelsList();
+                }
             }, 10000);
         });
     </script>
