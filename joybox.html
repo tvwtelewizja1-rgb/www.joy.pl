@@ -707,7 +707,6 @@
             { num: 160, name: "Co w Telewizji?", tag: "GUIDE", key: null }
         ];
 
-        // Zaktualizowana ramówka dla Joy (Kanał 100)
         const joySched = [
             { time: "06:00", title: "Poranek z uśmiechem", desc: "Nowy program śniadaniowy.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
             { time: "06:30", title: "Muminki", desc: "Kultowa animacja.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
@@ -743,11 +742,45 @@
             { time: "01:40", title: "Miś Uszatek", desc: "Dobranocka na zakończenie dnia.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" }
         ];
 
+        // Zaktualizowana ramówka dla Infiniti (Kanał 103)
         const infinitiSched = [
             { time: "00:00", title: "South Park", desc: "Serial animowany dla dorosłych.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "06:00", title: "Pobudka", desc: "Muzyka i pozytywna energia na poranek.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
-            { time: "12:00", title: "Ojciec Mateusz", desc: "Kryminalne zagadki Sandomierza.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:00", title: "Milionerzy", desc: "Wielki teleturniej wiedzy.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" }
+            { time: "00:30", title: "Rick and Morty", desc: "Przygody szalonego naukowca i wnuczka.", zap: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:00", title: "Włatcy Móch", desc: "Kultowa polska kreskówka.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:30", title: "Family Guy", desc: "Perypetie rodziny Griffinów.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:00", title: "American Dad!", desc: "Agent CIA i jego niezwykła rodzina.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:30", title: "Futurama", desc: "Przygody w przyszłości.", zap: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&auto=format&fit=crop&q=80" },
+            { time: "03:00", title: "Robot Chicken", desc: "Szkicowa animacja poklatkowa.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "03:30", title: "Invincible", desc: "Serial superbohaterski.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "04:00", title: "Blok Ekipa", desc: "Życie blokersów.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "04:30", title: "Simpsonowie", desc: "Kultowa rodzina z Springfield.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "05:00", title: "Smiling Friends", desc: "Animowana komedia.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "05:30", title: "South Park", desc: "Poranna dawka humoru.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:00", title: "Pobudka", desc: "Poranny start na kanale Infiniti.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:00", title: "Rodzinka.pl", desc: "Perypetie rodziny Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:30", title: "Klan", desc: "Najpopularniejsza telenowela.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:30", title: "(Nowa) Rodzina Zmieszanych", desc: "Serial komediowy.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:00", title: "Rodzina Wierzbickich (planowane)", desc: "Zapowiedzi i nowy serial.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:30", title: "BrzydUla", desc: "Losy Uli Cieplak.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
+            { time: "10:30", title: "Awantura o kasę", desc: "Legendarny teleturniej.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:30", title: "infinews", desc: "Serwis informacyjny stacji.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:00", title: "Ojciec Mateusz", desc: "Kryminalne zagadki w Sandomierzu.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:00", title: "krok po kroku do nikąd", desc: "Magazyn obyczajowy.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:30", title: "Daleko od noszy", desc: "Kultowy serial komediowy.", zap: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=900&auto=format&fit=crop&q=80" },
+            { time: "14:00", title: "19+", desc: "Serial paradokumentalny.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:00", title: "Gliniarze", desc: "Serial kryminalny.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
+            { time: "16:00", title: "Ranczo", desc: "Wizyta w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:00", title: "Historia Loga Fikcji", desc: "Program dokumentalny.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:30", title: "Graphic Vis!ON", desc: "Magazyn graficzny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:00", title: "Poczuj Vibe Muzyki!", desc: "Pasmo muzyczne.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:30", title: "Geometry Dash Na Modach", desc: "Magazyn gamingowy.", zap: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:00", title: "Hotel Paradise", desc: "Reality show pełne emocji.", zap: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:00", title: "Milionerzy", desc: "Walka o główne i wielkie pieniądze.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "21:00", title: "Świat według Kiepskich", desc: "Ferdynand i spółka na Kamiennej.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "21:30", title: "13 Posterunek", desc: "Kultowy serial komediowy.", zap: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:00", title: "Tajemniczy Fabian", desc: "Pasmo wieczorne.", zap: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:30", title: "N Jak Nienawinność", desc: "Serial fabularny.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "23:00", title: "Pacu Łacu – w kupie raźniej!", desc: "Wieczorny show rozrywkowy.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" }
         ];
 
         const fotelSched = [
