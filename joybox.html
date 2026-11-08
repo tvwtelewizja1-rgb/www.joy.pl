@@ -13,10 +13,11 @@
             --text-muted: #94a3b8;
             --accent-yellow: #ffeb3b;
             --accent-orange: #ff9800;
-            --vod-bg: #0f0f13;
-            --vod-card: #18181f;
-            --vod-card-hover: #22222d;
-            --vod-border: #2a2a38;
+            --vod-bg: #0b0f19;
+            --vod-card: #131c2e;
+            --vod-card-hover: #1e293b;
+            --vod-border: #1e293b;
+            --vectra-red: #e50914;
         }
         * { 
             box-sizing: border-box; 
@@ -142,23 +143,26 @@
 
         .user-dashboard { display: none; }
         
+        /* STYL VECTRA EPG / VOD */
         .tvp-epg-wrapper {
             background: var(--vod-bg);
             border: 1px solid var(--vod-border);
             border-radius: 12px;
             overflow: hidden;
             margin-top: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
         
         .tvp-epg-header {
             display: grid;
-            grid-template-columns: 180px 1fr 1fr;
-            background: #121218;
-            padding: 0.75rem 1rem;
+            grid-template-columns: 200px 1fr 1fr;
+            background: #070a10;
+            padding: 0.85rem 1rem;
             border-bottom: 1px solid var(--vod-border);
-            color: #64748b;
+            color: #94a3b8;
             font-size: 0.75rem;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .tvp-epg-list {
@@ -172,18 +176,26 @@
 
         .tvp-epg-row {
             display: grid;
-            grid-template-columns: 180px 1fr 1fr;
+            grid-template-columns: 200px 1fr 1fr;
             background: var(--vod-card);
             border-bottom: 1px solid var(--vod-border);
             cursor: pointer;
-            transition: background 0.15s ease-in-out;
-            min-height: 75px;
+            transition: all 0.2s ease-in-out;
+            min-height: 80px;
         }
         .tvp-epg-row:hover {
             background: var(--vod-card-hover);
+            transform: scale(1.002);
+            border-left: 4px solid var(--accent-yellow);
         }
         .tvp-epg-row.offline-row {
-            opacity: 0.65;
+            opacity: 0.55;
+        }
+
+        /* SPECJALNY STYL VECTRA VOD DLA KANAŁÓW VOD */
+        .tvp-epg-row.vod-channel-row {
+            background: linear-gradient(90deg, rgba(229, 9, 20, 0.08), var(--vod-card));
+            border-left: 4px solid var(--vectra-red);
         }
 
         .tvp-ch-col {
@@ -192,7 +204,7 @@
             align-items: center;
             gap: 12px;
             border-right: 1px solid var(--vod-border);
-            background: #14141c;
+            background: #0e1420;
         }
         .tvp-ch-badge {
             background: #2563eb;
@@ -201,6 +213,10 @@
             border-radius: 4px;
             font-size: 0.75rem;
             font-weight: 800;
+        }
+        .tvp-ch-badge.vod-badge {
+            background: var(--vectra-red);
+            box-shadow: 0 0 8px rgba(229, 9, 20, 0.6);
         }
         .tvp-ch-name {
             font-size: 0.95rem;
@@ -217,7 +233,7 @@
             flex-direction: column;
             justify-content: center;
             border-right: 1px solid var(--vod-border);
-            background: rgba(30, 41, 59, 0.2);
+            background: rgba(30, 41, 59, 0.15);
         }
         .tvp-time-left {
             font-size: 0.7rem;
@@ -236,6 +252,9 @@
             left: 0;
             height: 3px;
             background: #38bdf8;
+        }
+        .vod-channel-row .tvp-progress-line {
+            background: var(--vectra-red);
         }
 
         .tvp-next-col {
@@ -441,7 +460,7 @@
                         </div>
                         <div>
                             <h2>Witaj, <span id="user-display-name" style="color: var(--accent-yellow);"></span>! 🎉</h2>
-                            <p style="color: #cbd5e1; font-size: 0.9rem;">Konto zweryfikowane. Kliknij w program w EPG, aby włączyć transmisję na żywo!</p>
+                            <p style="color: #cbd5e1; font-size: 0.9rem;">Konto zweryfikowane. EPG w stylu cyfrowego dekodera aktywne!</p>
                         </div>
                     </div>
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
@@ -465,30 +484,30 @@
                 <div class="player-modal" id="joy-player-modal">
                     <div class="player-modal-header">
                         <div class="player-modal-title" id="modal-window-title">
-                            <i class="fa-solid fa-tv"></i> Odtwarzacz TV – Tryb HD
+                            <i class="fa-solid fa-tv"></i> Odtwarzacz VOD / TV
                         </div>
                         <button class="close-player" onclick="closeJoyPlayer()">&times;</button>
                     </div>
                     <div class="tv-screen-box">
-                        <div class="live-badge" id="modal-live-indicator"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> NA ŻYWO</div>
+                        <div class="live-badge" id="modal-live-indicator"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> VOD KATALOG</div>
                         <img id="modal-zap-img" class="zap-image" src="" alt="Stream / VOD Slide">
                         <div class="zap-overlay-gradient"></div>
                         <div class="tv-screen-content">
                             <h4 id="modal-show-title">Ładowanie...</h4>
-                            <p id="modal-show-desc">Trwa pobieranie transmisji...</p>
+                            <p id="modal-show-desc">Trwa pobieranie pozycji z biblioteki...</p>
                         </div>
                     </div>
                 </div>
 
-                <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-tv" style="color: var(--accent-yellow);"></i> Program TV – Widok EPG</h3>
-                <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 1rem;">Oglądaj swoje ulubione kanały oraz sprawdzaj postęp audycji.</p>
+                <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-tv" style="color: var(--accent-yellow);"></i> Przewodnik po programach – Cyfrowy Dekoder</h3>
+                <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 1rem;">Kanały telewizyjne oraz stacje VOD (Vectra Style) z katalogiem wideo na żądanie.</p>
 
-                <!-- EPG TVP VOD STRUCTURE -->
+                <!-- VECTRA STYLE EPG / VOD STRUCTURE -->
                 <div class="tvp-epg-wrapper">
                     <div class="tvp-epg-header">
-                        <div>STACJA TV</div>
-                        <div>TERAZ W TV</div>
-                        <div>NASTĘPNIE</div>
+                        <div>KANAŁ / VOD</div>
+                        <div>TERAZ W EMISJI</div>
+                        <div>NASTĘPNY MATERIAŁ</div>
                     </div>
                     <div class="tvp-epg-list" id="epg-rows-target"></div>
                 </div>
@@ -644,67 +663,67 @@
         }
 
         const rawChannels = [
-            { num: 100, name: "Joy", tag: "JOY", key: "joy" },
-            { num: 101, name: "Olixer", tag: "OLX", key: null },
-            { num: 102, name: "Olixer Music", tag: "MUS", key: null },
-            { num: 103, name: "Infiniti", tag: "INF", key: "infiniti" },
-            { num: 104, name: "Infiniti 2", tag: "INF2", key: null },
-            { num: 105, name: "TV94", tag: "TV94", key: null },
-            { num: 106, name: "Vilion", tag: "VIL", key: null },
-            { num: 107, name: "ITR", tag: "ITR", key: null },
-            { num: 108, name: "ITR >>1", tag: "ITR1", key: null },
-            { num: 109, name: "ITR Hits", tag: "ITRH", key: null },
-            { num: 110, name: "ITR Action", tag: "ITRA", key: null },
-            { num: 111, name: "NetWave", tag: "NET", key: null },
-            { num: 112, name: "Olixer News", tag: "NEWS", key: null },
-            { num: 113, name: "Nex1", tag: "NEX1", key: "nex1" },
-            { num: 114, name: "Nex2", tag: "NEX2", key: null },
-            { num: 115, name: "NexSPT", tag: "SPT", key: null },
-            { num: 116, name: "snap hd", tag: "SNAP", key: null },
-            { num: 117, name: "In Vibe", tag: "VIBE", key: null },
-            { num: 118, name: "Tptv", tag: "TPTV", key: null },
-            { num: 119, name: "tptv extra", tag: "TPEX", key: null },
-            { num: 120, name: "TWP1", tag: "TWP1", key: null },
-            { num: 121, name: "TWP2", tag: "TWP2", key: null },
-            { num: 122, name: "Tptv music", tag: "TPM", key: null },
-            { num: 123, name: "camTV", tag: "CAM", key: null },
-            { num: 124, name: "ITR festival", tag: "FEST", key: null },
-            { num: 125, name: "ITR comedy", tag: "COM", key: null },
-            { num: 126, name: "ITR emotion", tag: "EMO", key: null },
-            { num: 127, name: "Option!", tag: "OPT", key: null },
-            { num: 128, name: "Infiniti Music", tag: "INFM", key: null },
-            { num: 129, name: "quartz", tag: "QRZ", key: null },
-            { num: 130, name: "INFO VOD", tag: "VOD", key: null },
-            { num: 131, name: "Fotel TV", tag: "FTL", key: "fotel" },
-            { num: 132, name: "Fotel 2", tag: "FTL2", key: null },
-            { num: 133, name: "KTA:TV", tag: "KTA", key: null },
-            { num: 134, name: "KTA:TV 2", tag: "KTA2", key: null },
-            { num: 135, name: "KTA:TV Music", tag: "KTAM", key: null },
-            { num: 136, name: "KTA:TV Dance", tag: "KTAD", key: null },
-            { num: 137, name: "KTA:TV Hits", tag: "KTAH", key: null },
-            { num: 138, name: "1.TV", tag: "1TV", key: null },
-            { num: 139, name: "MAX", tag: "MAX", key: null },
-            { num: 140, name: "Star", tag: "STAR", key: null },
-            { num: 141, name: "KTA:PUNKT", tag: "PNKT", key: null },
-            { num: 142, name: "Słoneczna", tag: "SLN", key: null },
-            { num: 143, name: "Rytmiczny Wymiar", tag: "RYT", key: null },
-            { num: 144, name: "Fotel :3", tag: "FTL3", key: null },
-            { num: 145, name: "Ktoś TV", tag: "KTOS", key: null },
-            { num: 146, name: "Ktoś Inter", tag: "KINT", key: null },
-            { num: 147, name: "ATM 1", tag: "ATM1", key: null },
-            { num: 148, name: "ananta hd", tag: "ANA", key: null },
-            { num: 149, name: "tv17", tag: "TV17", key: null },
-            { num: 150, name: "fotel tv 4k", tag: "FT4K", key: null },
-            { num: 151, name: "ryż biały", tag: "RYZ", key: null },
-            { num: 152, name: "astra", tag: "AST", key: null },
-            { num: 153, name: "Snap", tag: "SNP", key: null },
-            { num: 154, name: "kosmos", tag: "KOSM", key: null },
-            { num: 155, name: "Pusty Kanał", tag: "EMP", key: null },
-            { num: 156, name: "Pusty Kanał", tag: "EMP", key: null },
-            { num: 157, name: "Pusty Kanał", tag: "EMP", key: null },
-            { num: 158, name: "Pusty Kanał", tag: "EMP", key: null },
-            { num: 159, name: "Pusty Kanał", tag: "EMP", key: null },
-            { num: 160, name: "Co w Telewizji?", tag: "GUIDE", key: null }
+            { num: 100, name: "Joy", tag: "JOY", key: "joy", isVod: false },
+            { num: 101, name: "Olixer", tag: "OLX", key: null, isVod: false },
+            { num: 102, name: "Olixer Music", tag: "MUS", key: null, isVod: false },
+            { num: 103, name: "Infiniti", tag: "INF", key: "infiniti", isVod: false },
+            { num: 104, name: "Infiniti 2", tag: "INF2", key: null, isVod: false },
+            { num: 105, name: "TV94", tag: "TV94", key: null, isVod: false },
+            { num: 106, name: "Vilion", tag: "VIL", key: null, isVod: false },
+            { num: 107, name: "ITR", tag: "ITR", key: null, isVod: false },
+            { num: 108, name: "ITR >>1", tag: "ITR1", key: null, isVod: false },
+            { num: 109, name: "ITR Hits", tag: "ITRH", key: null, isVod: false },
+            { num: 110, name: "ITR Action", tag: "ITRA", key: null, isVod: false },
+            { num: 111, name: "NetWave", tag: "NET", key: null, isVod: false },
+            { num: 112, name: "Olixer News", tag: "NEWS", key: null, isVod: false },
+            { num: 113, name: "Nex1", tag: "NEX1", key: "nex1", isVod: false },
+            { num: 114, name: "Nex2", tag: "NEX2", key: null, isVod: false },
+            { num: 115, name: "NexSPT", tag: "SPT", key: null, isVod: false },
+            { num: 116, name: "snap hd", tag: "SNAP", key: null, isVod: false },
+            { num: 117, name: "In Vibe", tag: "VIBE", key: null, isVod: false },
+            { num: 118, name: "Tptv", tag: "TPTV", key: null, isVod: false },
+            { num: 119, name: "tptv extra", tag: "TPEX", key: null, isVod: false },
+            { num: 120, name: "TWP1", tag: "TWP1", key: null, isVod: false },
+            { num: 121, name: "TWP2", tag: "TWP2", key: null, isVod: false },
+            { num: 122, name: "Tptv music", tag: "TPM", key: null, isVod: false },
+            { num: 123, name: "camTV", tag: "CAM", key: null, isVod: false },
+            { num: 124, name: "ITR festival", tag: "FEST", key: null, isVod: false },
+            { num: 125, name: "ITR comedy", tag: "COM", key: null, isVod: false },
+            { num: 126, name: "ITR emotion", tag: "EMO", key: null, isVod: false },
+            { num: 127, name: "Option!", tag: "OPT", key: null, isVod: false },
+            { num: 128, name: "Infiniti Music", tag: "INFM", key: null, isVod: false },
+            { num: 129, name: "quartz", tag: "QRZ", key: null, isVod: false },
+            { num: 130, name: "INFO VOD", tag: "VOD", key: "infovod", isVod: true },
+            { num: 131, name: "Fotel TV", tag: "FTL", key: "fotel", isVod: false },
+            { num: 132, name: "Fotel 2", tag: "FTL2", key: null, isVod: false },
+            { num: 133, name: "KTA:TV", tag: "KTA", key: null, isVod: false },
+            { num: 134, name: "KTA:TV 2", tag: "KTA2", key: null, isVod: false },
+            { num: 135, name: "KTA:TV Music", tag: "KTAM", key: null, isVod: false },
+            { num: 136, name: "KTA:TV Dance", tag: "KTAD", key: null, isVod: false },
+            { num: 137, name: "KTA:TV Hits", tag: "KTAH", key: null, isVod: false },
+            { num: 138, name: "1.TV", tag: "1TV", key: null, isVod: false },
+            { num: 139, name: "MAX", tag: "MAX", key: null, isVod: false },
+            { num: 140, name: "Star", tag: "STAR", key: null, isVod: false },
+            { num: 141, name: "KTA:PUNKT", tag: "PNKT", key: null, isVod: false },
+            { num: 142, name: "Słoneczna", tag: "SLN", key: null, isVod: false },
+            { num: 143, name: "Rytmiczny Wymiar", tag: "RYT", key: null, isVod: false },
+            { num: 144, name: "Fotel :3", tag: "FTL3", key: null, isVod: false },
+            { num: 145, name: "Ktoś TV", tag: "KTOS", key: null, isVod: false },
+            { num: 146, name: "Ktoś Inter", tag: "KINT", key: null, isVod: false },
+            { num: 147, name: "ATM 1", tag: "ATM1", key: null, isVod: false },
+            { num: 148, name: "ananta hd", tag: "ANA", key: null, isVod: false },
+            { num: 149, name: "tv17", tag: "TV17", key: null, isVod: false },
+            { num: 150, name: "fotel tv 4k", tag: "FT4K", key: null, isVod: false },
+            { num: 151, name: "ryż biały", tag: "RYZ", key: null, isVod: false },
+            { num: 152, name: "astra", tag: "AST", key: null, isVod: false },
+            { num: 153, name: "Snap", tag: "SNP", key: null, isVod: false },
+            { num: 154, name: "kosmos", tag: "KOSM", key: null, isVod: false },
+            { num: 155, name: "VOD Katalog Główny", tag: "VOD1", key: "vodcatalog", isVod: true },
+            { num: 156, name: "VOD Seriale Hit", tag: "VOD2", key: "vodseries", isVod: true },
+            { num: 157, name: "VOD Kino Familijne", tag: "VOD3", key: "vodfamily", isVod: true },
+            { num: 158, name: "Pusty Kanał", tag: "EMP", key: null, isVod: false },
+            { num: 159, name: "Pusty Kanał", tag: "EMP", key: null, isVod: false },
+            { num: 160, name: "Co w Telewizji?", tag: "GUIDE", key: null, isVod: false }
         ];
 
         const joySched = [
@@ -782,21 +801,37 @@
             { time: "23:00", title: "Pacu Łacu – w kupie raźniej!", desc: "Wieczorny show rozrywkowy.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" }
         ];
 
-        // AUTORSKA, CZYSTA I STABILNA RAMÓWKA FOTEL TV (KANAŁ 131)
         const fotelSched = [
-            { time: "06:00", title: "Fotelowy Poranek", desc: "Witamy w nowym dniu na Fotonie!", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
-            { time: "07:00", title: "Kreskówkowy Poranek", desc: "Najlepsze animacje na start dnia.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "09:00", title: "Ranczo w Wilkowyjach", desc: "Klasyczne odcinki kultowego serialu.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "11:00", title: "Miodowe Lata", desc: "Przygody Krawczyka i Norka.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
-            { time: "13:00", title: "Co Polak potrafi na drodze?", desc: "Magazyn motoryzacyjny i drogowy.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "14:30", title: "Niania", desc: "Frania Maj i przygody w rezydencji.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:30", title: "Fineasz i Ferb", desc: "Wakacyjne wynalazki i przygody.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
-            { time: "16:30", title: "Świat Według Kiepskich", desc: "Codzienne perypetie na Kamiennej.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "18:00", title: "Rodzinka.pl", desc: "Życie z rodziną Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "19:30", title: "Telewpadki", desc: "Najzabawniejsze momenty w telewizji.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:00", title: "Fotelowy Hit Wieczoru", desc: "Wyjątkowy seans filmowy lub serialowy.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
-            { time: "22:00", title: "Włatcy Móch", desc: "Wieczorne pasmo animacji dla starszych.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "23:30", title: "Kuchenne Rewolucje", desc: "Nocne gotowanie i ratowanie restauracji.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" }
+            { time: "23:45", title: "Kuchenne Rewolucje", desc: "Magda Gessler ratuje restauracje.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
+            { time: "00:45", title: "Kuchenne Rewolucje", desc: "Kolejny odcinek kulminacyjny.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:45", title: "Na dobre i na złe", desc: "Dramaty medyczne w Leśnej Górze.", zap: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:45", title: "Zakończenie programu", desc: "Przerwa nocna w stacji Fotel TV.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "05:45", title: "Rodzinka.pl", desc: "Perypetie rodziny Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:15", title: "Ranczo", desc: "Wizyta w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:15", title: "Telewpadki x2 odc.", desc: "Zabawne wpadki telewizyjne.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:30", title: "Co polak potrafi na drodze?", desc: "Magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:30", title: "Ranczo", desc: "Poranne pasmo serialu Ranczo.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:30", title: "Ranczo", desc: "Kolejne odcinki Rancza.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "10:30", title: "Ranczo", desc: "Wizyta w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:30", title: "Ranczo", desc: "Kolejny odcinek Rancza.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:30", title: "Co polak potrafi na drodze?", desc: "Magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:30", title: "Co polak potrafi na drodze?", desc: "Magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "14:30", title: "Niania", desc: "Frania Maj w rezydencji Skalskiego.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:00", title: "Fineasz i Ferb", desc: "Przygody braci w wakacje.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:30", title: "Niesamowity Świat Gumballa", desc: "Animowane szaleństwo.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:45", title: "Cudownie dziwny świat Gumballa", desc: "Kolejna porcja animacji.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
+            { time: "16:00", title: "Rodzinka.pl", desc: "Codzienne perypetie Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "16:30", title: "Świat Według Kiepskich", desc: "Ferdynand i spółka na Kamiennej.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:00", title: "77 TV", desc: "Program autorski stacji.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:00", title: "Co polak potrafi na drodze?", desc: "Wieczorny magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:00", title: "Fineasz i Ferb", desc: "Przygody braci.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:30", title: "Fineasz i Ferb", desc: "Kolejne przygody.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:00", title: "Niania", desc: "Frania Maj.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:30", title: "Miodowe lata", desc: "Krawczyk i Norek.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
+            { time: "21:00", title: "Ranczo", desc: "Wieczorne losy w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:00", title: "Ranczo", desc: "Kolejne odcinki serialu.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "23:00", title: "Włatcy Móch", desc: "Kultowa polska kreskówka.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "23:30", title: "Telewpadki x2 odc.", desc: "Przegląd wpadek telewizyjnych.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" }
         ];
 
         const nex1Sched = [
@@ -837,13 +872,36 @@
             { time: "02:15", title: "Radio Metronomia (przerwa w transmisji Nex1)", desc: "Przerwa techniczna i audycja radiowa.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" }
         ];
 
+        // SPECJALNE RAMÓWKI W STYLU VOD VECTRA
+        const infoVodSched = [
+            { time: "00:00", title: "[VOD] Jak korzystać z katalogu wideo?", desc: "Wprowadzenie do usługi VOD Vectra Style w JoyBox.", zap: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:00", title: "[VOD] Nowości Tygodnia w JoyBox", desc: "Prezentacja premierowych filmów i seriali.", zap: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:00", title: "[VOD] Polecane przez Redakcję", desc: "Wybrane hity kinowe i programy specjalne.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:00", title: "[VOD] Hit Wieczoru: Seans na Żądanie", desc: "Najpopularniejszy film ostatnich dni.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" }
+        ];
+
+        const vodCatalogSched = [
+            { time: "00:00", title: "Katalog Główny VOD", desc: "Wybierz film lub serial z pełnej bazy VOD.", zap: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:00", title: "Seans Familijny w VOD", desc: "Propozycje filmowe dla całej rodziny.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "16:00", title: "Premiery Kinowe VOD", desc: "Najgłośniejsze nowości prosto z ekranów.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" }
+        ];
+
+        const vodSeriesSched = [
+            { time: "00:00", title: "Maraton Serialowy VOD", desc: "Wszystkie sezony ulubionych produkcji pod ręką.", zap: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:00", title: "Seriale Komediowe VOD", desc: "Śmiech bez limitu w bibliotece VOD.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" }
+        ];
+
+        const vodFamilySched = [
+            { time: "00:00", title: "Kino Bajkowe i Rodzinne VOD", desc: "Animacje i familijne opowieści na żądanie.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" }
+        ];
+
         function getMinutes(timeStr) {
             const parts = timeStr.split(":");
             return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
         }
 
         function getTvScheduleData(sched) {
-            if (!sched) return null;
+            if (!sched || sched.length === 0) return null;
 
             const now = new Date();
             const nowMins = now.getHours() * 60 + now.getMinutes();
@@ -894,41 +952,48 @@
                 else if (ch.key === 'infiniti') s = infinitiSched;
                 else if (ch.key === 'fotel') s = fotelSched;
                 else if (ch.key === 'nex1') s = nex1Sched;
+                else if (ch.key === 'infovod') s = infoVodSched;
+                else if (ch.key === 'vodcatalog') s = vodCatalogSched;
+                else if (ch.key === 'vodseries') s = vodSeriesSched;
+                else if (ch.key === 'vodfamily') s = vodFamilySched;
 
                 const data = getTvScheduleData(s);
+                const rowClass = ch.isVod ? 'tvp-epg-row vod-channel-row' : 'tvp-epg-row';
+                const badgeClass = ch.isVod ? 'tvp-ch-badge vod-badge' : 'tvp-ch-badge';
+                const timeLabel = ch.isVod ? 'DOSTĘPNE W VOD' : `${data ? data.timeLeft : 0} MIN DO KOŃCA`;
 
                 if (data) {
                     html += `
-                        <div class="tvp-epg-row" onclick="playChannel('${ch.name}', '${data.currentTitle.replace(/'/g, "\\'")}', '${data.currentDesc.replace(/'/g, "\\'")}', '${data.currentZap}')">
+                        <div class="${rowClass}" onclick="playChannel('${ch.name}', '${data.currentTitle.replace(/'/g, "\\'")}', '${data.currentDesc.replace(/'/g, "\\'")}', '${data.currentZap}', ${ch.isVod})">
                             <div class="tvp-ch-col">
-                                <span class="tvp-ch-badge">${ch.tag}</span>
+                                <span class="${badgeClass}">${ch.tag}</span>
                                 <span class="tvp-ch-name"><strong>${ch.num}.</strong> ${ch.name}</span>
                             </div>
                             <div class="tvp-now-col">
-                                <div class="tvp-time-left">${data.timeLeft} MIN DO KOŃCA</div>
+                                <div class="tvp-time-left">${timeLabel}</div>
                                 <div class="tvp-show-title"><strong>${data.currentTitle}</strong></div>
                                 <div class="tvp-progress-line" style="width: ${data.progress}%;"></div>
                             </div>
                             <div class="tvp-next-col">
-                                <div class="tvp-next-time">DZIŚ, ${data.nextTime}</div>
+                                <div class="tvp-next-time">${ch.isVod ? 'KOLEJNA POZYCJA' : 'DZIŚ, ' + data.nextTime}</div>
                                 <div class="tvp-next-title">${data.nextTitle}</div>
                             </div>
                         </div>
                     `;
                 } else {
                     html += `
-                        <div class="tvp-epg-row offline-row" onclick="alert('Kanał ${ch.num}. ${ch.name}: Brak sygnału od nadawcy.')">
+                        <div class="tvp-epg-row offline-row" onclick="alert('Kanał ${ch.num}. ${ch.name}: Brak sygnału.')">
                             <div class="tvp-ch-col">
                                 <span class="tvp-ch-badge" style="background: #475569;">${ch.tag}</span>
                                 <span class="tvp-ch-name"><strong>${ch.num}.</strong> ${ch.name}</span>
                             </div>
                             <div class="tvp-now-col">
                                 <div class="tvp-time-left" style="color: #64748b;">OFFLINE</div>
-                                <div class="tvp-show-title" style="color: #94a3b8;"><em>Brak sygnału od nadawcy</em></div>
+                                <div class="tvp-show-title" style="color: #94a3b8;"><em>Brak materiałów</em></div>
                                 <div class="tvp-progress-line" style="width: 0%;"></div>
                             </div>
                             <div class="tvp-next-col">
-                                <div class="tvp-next-time">NASTĘPNIE</div>
+                                <div class="tvp-next-time">WKRÓTCE</div>
                                 <div class="tvp-next-title" style="color: #64748b;">Brak programu</div>
                             </div>
                         </div>
@@ -938,9 +1003,19 @@
             target.innerHTML = html;
         }
 
-        function playChannel(chName, showTitle, showDesc, zapUrl) {
+        function playChannel(chName, showTitle, showDesc, zapUrl, isVod) {
             const modal = document.getElementById('joy-player-modal');
-            document.getElementById('modal-window-title').innerHTML = `<i class="fa-solid fa-tv"></i> Na Żywo: ${chName}`;
+            const badge = document.getElementById('modal-live-indicator');
+            
+            if(isVod) {
+                badge.innerHTML = '<i class="fa-solid fa-play" style="font-size: 6px;"></i> VOD KATALOG VECTRA';
+                badge.style.background = 'var(--vectra-red)';
+            } else {
+                badge.innerHTML = '<i class="fa-solid fa-circle" style="font-size: 6px;"></i> NA ŻYWO';
+                badge.style.background = '#d32f2f';
+            }
+
+            document.getElementById('modal-window-title').innerHTML = `<i class="fa-solid fa-tv"></i> ${isVod ? 'Katalog VOD' : 'Na Żywo'}: ${chName}`;
             document.getElementById('modal-show-title').innerText = showTitle;
             document.getElementById('modal-show-desc').innerText = showDesc;
             document.getElementById('modal-zap-img').src = zapUrl;
