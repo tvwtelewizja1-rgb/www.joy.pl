@@ -40,7 +40,6 @@
         }
         .logo { text-decoration: none; display: flex; align-items: center; gap: 12px; }
         
-        /* Klikalne logo/PFP w nagłówku */
         .logo-img-container {
             position: relative;
             cursor: pointer;
@@ -125,7 +124,6 @@
         }
         .form-control:focus { border-color: #ffeb3b; }
 
-        /* Siatka awatarów w formularzu i modalu */
         .avatar-picker-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -287,7 +285,7 @@
             padding: 1.5rem;
             text-align: left;
         }
-            .tv-screen-content h4 {
+        .tv-screen-content h4 {
             font-size: 1.8rem;
             color: #ffeb3b;
             margin-bottom: 0.3rem;
@@ -315,7 +313,6 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.5);
         }
 
-        /* Modal zmiany awatara PFP w nagłówku */
         .pfp-modal-overlay {
             display: none;
             position: fixed;
@@ -405,15 +402,12 @@
 </head>
 <body>
 
-    <!-- Modal zmiany PFP z nagłówka -->
     <div class="pfp-modal-overlay" id="pfp-modal">
         <div class="pfp-modal-content">
             <h3><i class="fa-solid fa-user-pen"></i> Zmień awatar profilowy (PFP)</h3>
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Wybierz jeden z 10 domyślnych lub wgraj własny z dysku:</p>
             
-            <div class="avatar-picker-grid" id="modal-avatar-picker-container" style="margin-bottom: 1rem;">
-                <!-- Generowane w JS -->
-            </div>
+            <div class="avatar-picker-grid" id="modal-avatar-picker-container" style="margin-bottom: 1rem;"></div>
 
             <div class="form-group" style="text-align: left;">
                 <label style="font-size: 0.8rem; color: #ffeb3b;">Prześlij własny plik graficzny:</label>
@@ -425,7 +419,6 @@
     </div>
 
     <header>
-        <!-- Klikalne PFP w nagłówku -->
         <div class="logo-img-container" onclick="openPfpModal()" title="Kliknij, aby zmienić awatar profilowy (PFP)">
             <img src="PFPjoy10kl.jpg" alt="TV Joy Logo" class="logo-img" id="header-pfp-img">
         </div>
@@ -675,9 +668,7 @@
         let selectedAvatarUrl = defaultAvatars[0];
 
         function initAvatarPickers() {
-            // Inicjalizacja w formularzu rejestracji
             const regContainer = document.getElementById('avatar-picker-container');
-            // Inicjalizacja w modalu nagłówka PFP
             const modalContainer = document.getElementById('modal-avatar-picker-container');
             
             let html = '';
@@ -693,16 +684,13 @@
         function selectAvatar(url, el) {
             selectedAvatarUrl = url;
             document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('selected'));
-            // Zaznacz we wszystkich widokach
             document.querySelectorAll(`.avatar-option[src="${url}"]`).forEach(img => img.classList.add('selected'));
 
-            // Jeśli użytkownik jest zalogowany i zmienił PFP przez modal w nagłówku
             const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
             if(activeUser) {
                 activeUser.avatar = url;
                 localStorage.setItem('tvJoyActiveUser', JSON.stringify(activeUser));
                 
-                // Aktualizacja w bazie użytkowników
                 let users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
                 users = users.map(u => u.email === activeUser.email ? {...u, avatar: url} : u);
                 localStorage.setItem('tvJoyUsers', JSON.stringify(users));
@@ -762,20 +750,35 @@
             if(dashboardPfp) dashboardPfp.src = url;
         }
 
-        const vodSlides = [
-            { title: "INFO VOD: Wielka Promocja Pakietu VIP+", desc: "Zyskaj dostęp do wszystkich filmów i stacji za jedyne 25,99 zł miesięcznie bez reklam!", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&auto=format&fit=crop&q=80" },
-            { title: "Dostępność Usługi 24/7", desc: "JoyBoxGO! działa stabilnie na każdym urządzeniu. Sprawdź nowe pasma w jakości HD.", img: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
-            { title: "Nowość w Bibliotece VOD: Kino Akcji", desc: "Najlepsze hity kinowe już dostępne w sekcji na żądanie w najwyższej rozdzielczości.", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
-            { title: "Specjalny Program Dokumentalny", desc: "Odkryj sekrety natury i technologii w cotygodniowym paśmie edukacyjnym.", img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=900&auto=format&fit=crop&q=80" },
-            { title: "Hit Tygodnia w TV Joy", desc: "Nie przegap kultowych komedii w weekendowym paśmie wieczornym o godzinie 20:15.", img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
-            { title: "Strefa Muzyczna JoyBoxGO!", desc: "Najlepsze teledyski, pasma dance i rockowe hity non-stop na kanałach muzycznych.", img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
-            { title: "Aktualizacja Wykazu Kanałów", desc: "Sprawdź nowe pozycje na liście od 130 do 160. Dodano nowe pasma regionalne i VOD.", img: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
-            { title: "Bezpieczna Strefa Widza", desc: "Twoje konto i subskrypcje są w pełni chronione. Korzystaj bez obaw o prywatność.", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { title: "Życzymy Miłego Oglądania!", desc: "Dziękujemy, że jesteś z nami. TV Joy – Twoja Uśmiechnięta Telewizja!", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" }
+        // Oddzielna ramówka 9 grafik dla INFO VOD (Kanał 130) – Promocje i dostępność
+        const infoVodSlides = [
+            { title: "INFO VOD: Wielka Promocja Pakietu VIP+", desc: "Zyskaj pełny dostęp do wszystkich filmów i kanałów za jedyne 25,99 zł miesięcznie bez reklam!", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&auto=format&fit=crop&q=80" },
+            { title: "Dostępność Serwisu 24/7", desc: "JoyBoxGO! gwarantuje stabilne nadawanie na komputerach, smartfonach i telewizorach smart.", img: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
+            { title: "Informacja o Pakiecie Normal", desc: "Podstawowy pakiet w cenie 2,20 zł/mies. zawiera ulubione stacje w świetnej jakości obrazu.", img: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
+            { title: "Status Sieci i Łącza", desc: "Wszystkie węzły nadawcze działają bez zakłóceń. Przepustowość sygnału HD jest optymalna.", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { title: "Promocja Pakietu Mid", desc: "Rozszerz swoje horyzonty za 4,50 zł miesięcznie i zyskaj dostęp do filmowych kanałów tematycznych.", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
+            { title: "Weryfikacja Kont i Bezpieczeństwo", desc: "Twoje dane oraz szyfrowane połączenie ze strefą widza są w pełni chronione przed dostępem osób trzecich.", img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { title: "Pakiet Extra dla Wymagających", desc: "Wysokiej jakości kanały specjalne oraz unikalne pasma w cenie 10,99 zł miesięcznie.", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" },
+            { title: "Pomoc Techniczna i FAQ", desc: "W razie pytań nasz zespół służy wsparciem przez całą dobę. Sprawdź zakładkę kontaktową na stronie głównej.", img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { title: "Dziękujemy za Wybór TV Joy", desc: "Twoja Uśmiechnięta Telewizja stale się rozwija, dostarczając najlepszą rozrywkę do Twojego domu.", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" }
+        ];
+
+        // Oddzielna ramówka 9 grafik dla Co w Telewizji? (Kanał 160) – Zapowiedzi i premiery
+        const tvGuideSlides = [
+            { title: "Co w Telewizji? — Hit Wieczoru", desc: "Już dziś o 20:15 włącz pasmo filmowe i oglądaj kultową komedię 'Kiler' z rewelacyjną obsadą!", img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { title: "Poranek z Uśmiechem", desc: "Codziennie od 6:00 rano zapraszamy na poranny magazyn śniadaniowy pełen pozytywnej energii.", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
+            { title: "Pasmo Bajkowe dla Dzieci", desc: "Muminki oraz ulubione animacje czekają na najmłodszych w porannych i popołudniowych blokach.", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { title: "Magazyn Podróżniczy", desc: "Odkrywaj najpiękniejsze zakątki świata w programie 'Podróże bez biletu' w każdy weekend.", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" },
+            { title: "Strefa Muzyczna TV Joy", desc: "Najlepsze teledyski i hity minionych dekad non-stop na kanałach Olixer Music oraz ITR Hits.", img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
+            { title: "Wieczorne Seriale Obyczajowe", desc: "Śledź emocjonujące perypetie bohaterów w serialach emitowanych od godziny 16:30.", img: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
+            { title: "Klasyka Polskiego Kina", desc: "W każdy piątek o 22:00 zapraszamy na niezapomniane seanse filmowe w najwyższej jakości.", img: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { title: "Magazyn Dokumentalny", desc: "Poznaj fascynujące tajemnice natury, nauki i historii w środowych pasmach specjalnych.", img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=900&auto=format&fit=crop&q=80" },
+            { title: "Pełna Ramówka Doby Telewizyjnej", desc: "Program stacji rozpoczyna się codziennie o 06:00 rano i trwa przez całą dobę aż do 05:59 dnia następnego.", img: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" }
         ];
 
         let vodSlideInterval = null;
         let currentVodIndex = 0;
+        let activeSlidesList = [];
 
         function showAlert(message, type) {
             const alertBox = document.getElementById('alert-box');
@@ -874,7 +877,7 @@
             { num: 127, name: "Option!", type: "Normal", isJoy: false },
             { num: 128, name: "Infiniti Music", type: "Normal", isJoy: false },
             { num: 129, name: "quartz", type: "Normal", isJoy: false },
-            { num: 130, name: "INFO VOD", type: "VOD", isVOD: true },
+            { num: 130, name: "INFO VOD", type: "VOD", isInfoVOD: true },
             { num: 131, name: "Fotel TV", type: "Normal", isJoy: false },
             { num: 132, name: "Fotel 2", type: "Normal", isJoy: false },
             { num: 133, name: "KTA:TV", type: "Normal", isJoy: false },
@@ -904,7 +907,7 @@
             { num: 157, name: "Pusty Kanał", type: "Offline", isJoy: false },
             { num: 158, name: "Pusty Kanał", type: "Offline", isJoy: false },
             { num: 159, name: "Pusty Kanał", type: "Offline", isJoy: false },
-            { num: 160, name: "Co w Telewizji?", type: "VOD", isVOD: true }
+            { num: 160, name: "Co w Telewizji?", type: "VOD", isGuideVOD: true }
         ];
 
         const schedule = [
@@ -987,14 +990,16 @@
 
             let html = '';
             userChannels.forEach(ch => {
-                let nowShowing = ch.isJoy ? currentJoyProg.title : (ch.isVOD ? "Biblioteka VOD (Slajdy promocyjne)" : "Transmisja ciągła (" + ch.type + ")");
+                let nowShowing = ch.isJoy ? currentJoyProg.title : (ch.isInfoVOD ? "INFO VOD (Promocje i Dostępność)" : (ch.isGuideVOD ? "Co w Telewizji? (Zapowiedzi)" : "Transmisja ciągła (" + ch.type + ")"));
                 if(ch.type === "Offline") nowShowing = "Brak sygnału";
                 
                 let clickAttr = '';
                 if(ch.isJoy) {
                     clickAttr = `onclick="openJoyPlayer('joy')"`;
-                } else if(ch.isVOD) {
-                    clickAttr = `onclick="openJoyPlayer('vod', '${ch.name}')"`;
+                } else if(ch.isInfoVOD) {
+                    clickAttr = `onclick="openJoyPlayer('infovod')"`;
+                } else if(ch.isGuideVOD) {
+                    clickAttr = `onclick="openJoyPlayer('guidevod')"`;
                 } else {
                     clickAttr = `onclick="alert('Kanał ${ch.num}. ${ch.name} jest w pełni gotowy do odbioru!')"`;
                 }
@@ -1013,7 +1018,7 @@
             container.innerHTML = html;
         }
 
-        function openJoyPlayer(type, channelName = "Joy") {
+        function openJoyPlayer(type) {
             const modal = document.getElementById('joy-player-modal');
             const titleEl = document.getElementById('modal-window-title');
             const liveBadge = document.getElementById('modal-live-indicator');
@@ -1030,17 +1035,30 @@
                 document.getElementById('modal-show-title').innerText = currentProg.title;
                 document.getElementById('modal-show-desc').innerText = currentProg.desc;
                 document.getElementById('modal-zap-img').src = currentProg.zap;
-            } else if(type === 'vod') {
-                titleEl.innerHTML = `<i class="fa-solid fa-film"></i> Odtwarzacz VOD (${channelName}) – Promocje i Dostępność`;
+            } else if(type === 'infovod') {
+                titleEl.innerHTML = `<i class="fa-solid fa-film"></i> INFO VOD (Kanał 130) – Promocje i Dostępność`;
                 liveBadge.style.display = 'none';
-                
+                activeSlidesList = infoVodSlides;
                 currentVodIndex = 0;
                 updateVodSlide();
                 
+                // Zmiana planszy co 30 sekund (30000 ms)
                 vodSlideInterval = setInterval(() => {
-                    currentVodIndex = (currentVodIndex + 1) % vodSlides.length;
+                    currentVodIndex = (currentVodIndex + 1) % activeSlidesList.length;
                     updateVodSlide();
-                }, 4000);
+                }, 30000);
+            } else if(type === 'guidevod') {
+                titleEl.innerHTML = `<i class="fa-solid id-card"></i> Co w Telewizji? (Kanał 160) – Ramówka i Zapowiedzi`;
+                liveBadge.style.display = 'none';
+                activeSlidesList = tvGuideSlides;
+                currentVodIndex = 0;
+                updateVodSlide();
+                
+                // Zmiana planszy co 30 sekund (30000 ms)
+                vodSlideInterval = setInterval(() => {
+                    currentVodIndex = (currentVodIndex + 1) % activeSlidesList.length;
+                    updateVodSlide();
+                }, 30000);
             }
             
             modal.style.display = 'block';
@@ -1048,7 +1066,7 @@
         }
 
         function updateVodSlide() {
-            const slide = vodSlides[currentVodIndex];
+            const slide = activeSlidesList[currentVodIndex];
             const imgEl = document.getElementById('modal-zap-img');
             imgEl.style.opacity = '0.2';
             setTimeout(() => {
@@ -1085,7 +1103,7 @@
                 document.getElementById('auth-container').style.display = 'block';
                 document.getElementById('dashboard-container').style.display = 'none';
                 if (pricingWrapper) pricingWrapper.style.display = 'block';
-                updateHeaderPfpDisplay("PFPjoy10kl.jpg"); // Domyślne logo PFP
+                updateHeaderPfpDisplay("PFPjoy10kl.jpg");
             }
         }
 
