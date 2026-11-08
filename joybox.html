@@ -143,6 +143,14 @@
 
         .user-dashboard { display: none; }
         
+        .admin-panel {
+            background: rgba(13, 148, 136, 0.15);
+            border: 2px dashed #14b8a6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
         .tvp-epg-wrapper {
             background: var(--vod-bg);
             border: 1px solid var(--vod-border);
@@ -397,20 +405,20 @@
             <div id="auth-container">
                 <div class="panel-header">
                     <h1><i class="fa-solid fa-box-open"></i> JoyBoxGO! – Strefa Widza</h1>
-                    <p>Zaloguj się lub załóż darmowe konto, aby uzyskać dostęp do strumieni i interaktywnej listy kanałów online!</p>
+                    <p>Zaloguj się lub załóż konto z kodem aktywacyjnym od administratora (Artutmaz)!</p>
                 </div>
 
                 <div class="tabs">
                     <button class="tab-btn active" id="tab-login-btn" onclick="switchTab('login')">Logowanie</button>
-                    <button class="tab-btn" id="tab-register-btn" onclick="switchTab('register')">Załóż konto</button>
+                    <button class="tab-btn" id="tab-register-btn" onclick="switchTab('register')">Załóż konto (Wymaga kodu)</button>
                 </div>
 
                 <div id="alert-box" class="alert-msg"></div>
 
                 <form id="login-form" onsubmit="handleLogin(event)">
                     <div class="form-group">
-                        <label><i class="fa-solid fa-envelope"></i> Adres E-mail</label>
-                        <input type="email" id="login-email" class="form-control" placeholder="twoj@email.pl" required>
+                        <label><i class="fa-solid fa-envelope"></i> Nazwa użytkownika lub E-mail</label>
+                        <input type="text" id="login-email" class="form-control" placeholder="Artutmaz lub twoj@email.pl" required>
                     </div>
                     <div class="form-group">
                         <label><i class="fa-solid fa-lock"></i> Hasło</label>
@@ -425,12 +433,16 @@
                         <input type="text" id="reg-username" class="form-control" placeholder="np. WidzTVJoy" required>
                     </div>
                     <div class="form-group">
-                        <label><i class="fa-solid fa-envelope"></i> Adres E-mail (wymagana weryfikacja)</label>
+                        <label><i class="fa-solid fa-envelope"></i> Adres E-mail</label>
                         <input type="email" id="reg-email" class="form-control" placeholder="twoj@email.pl" required>
                     </div>
                     <div class="form-group">
                         <label><i class="fa-solid fa-lock"></i> Hasło (min. 8 znaków)</label>
                         <input type="password" id="reg-password" class="form-control" placeholder="••••••••" minlength="8" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-key"></i> Kod aktywacyjny (od Admina Artutmaz)</label>
+                        <input type="text" id="reg-code" class="form-control" placeholder="Wpisz wygenerowany kod" required>
                     </div>
                     
                     <div class="form-group">
@@ -461,6 +473,18 @@
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
                         <i class="fa-solid fa-right-from-bracket"></i> Wyloguj
                     </button>
+                </div>
+
+                <!-- PANEL ADMINA DLA KONT ARTUTMAZ -->
+                <div id="admin-panel" class="admin-panel" style="display: none;">
+                    <h3 style="color: #14b8a6; margin-bottom: 0.5rem;"><i class="fa-solid fa-user-shield"></i> Panel Administratora (Artutmaz)</h3>
+                    <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 1rem;">Wygeneruj kod aktywacyjny umożliwiający założenie konta na platformie:</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <button class="submit-btn" style="margin: 0; width: auto; background: #14b8a6;" onclick="generateAdminCode()">Wygeneruj nowy kod aktywacyjny</button>
+                    </div>
+                    <div id="generated-code-box" style="display: none; background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 8px; border: 1px solid #14b8a6;">
+                        Wygenerowany kod: <strong id="generated-code-text" style="color: var(--accent-yellow); font-size: 1.2rem; font-family: monospace;"></strong>
+                    </div>
                 </div>
 
                 <div id="pfp-modal" style="display: none; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000; justify-content: center; align-items: center;">
@@ -618,16 +642,52 @@
             }
         }
 
+        // GENEROWANIE I WERYFIKACJA KODÓW AKTYWACYJNYCH
+        function getActivationCodes() {
+            return JSON.parse(localStorage.getItem('tvJoyActivationCodes') || '[]');
+        }
+
+        function generateAdminCode() {
+            const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
+            if (!activeUser || activeUser.username.toLowerCase() !== 'artutmaz') {
+                alert('Tylko konto Artutmaz posiada uprawnienia do generowania kodów!');
+                return;
+            }
+
+            const code = 'JOY-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+            const codes = getActivationCodes();
+            codes.push({ code: code, used: false });
+            localStorage.setItem('tvJoyActivationCodes', JSON.stringify(codes));
+
+            document.getElementById('generated-code-text').innerText = code;
+            document.getElementById('generated-code-box').style.display = 'block';
+        }
+
         function handleRegister(e) {
             e.preventDefault();
             const username = document.getElementById('reg-username').value;
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
+            const codeInput = document.getElementById('reg-code').value.trim();
 
             const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
-            if (users.some(u => u.email === email)) {
-                showAlert('Ten adres e-mail jest już zarejestrowany!', 'error');
+            if (users.some(u => u.email === email || u.username.toLowerCase() === username.toLowerCase())) {
+                showAlert('Użytkownik o tej nazwie lub e-mailu już istnieje!', 'error');
                 return;
+            }
+
+            // Sprawdzanie kodu aktywacyjnego (pomijane tylko jeśli konto zakłada bezpośrednio Artutmaz)
+            if (username.toLowerCase() !== 'artutmaz') {
+                const codes = getActivationCodes();
+                const validCodeObj = codes.find(c => c.code === codeInput && !c.used);
+
+                if (!validCodeObj) {
+                    showAlert('Nieprawidłowy lub wykorzystany kod aktywacyjny!', 'error');
+                    return;
+                }
+
+                validCodeObj.used = true;
+                localStorage.setItem('tvJoyActivationCodes', JSON.stringify(codes));
             }
 
             const hashedPassword = btoa(password);
@@ -640,19 +700,33 @@
 
         function handleLogin(e) {
             e.preventDefault();
-            const email = document.getElementById('login-email').value;
+            const emailOrUsername = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
 
             const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
             const hashedPassword = btoa(password);
-            const user = users.find(u => u.email === email && u.password === hashedPassword);
+            
+            // Domyślne konto administratora Artutmaz jeśli jeszcze nie istnieje w bazie
+            if (emailOrUsername.toLowerCase() === 'artutmaz' && password === 'admin123') {
+                let adminUser = users.find(u => u.username.toLowerCase() === 'artutmaz');
+                if (!adminUser) {
+                    adminUser = { username: 'Artutmaz', email: 'artutmaz@tvjoy.pl', password: btoa('admin123'), avatar: defaultAvatars[0] };
+                    users.push(adminUser);
+                    localStorage.setItem('tvJoyUsers', JSON.stringify(users));
+                }
+                localStorage.setItem('tvJoyActiveUser', JSON.stringify(adminUser));
+                checkAuthSession();
+                return;
+            }
+
+            const user = users.find(u => (u.email === emailOrUsername || u.username.toLowerCase() === emailOrUsername.toLowerCase()) && u.password === hashedPassword);
 
             if (user) {
                 if(!user.avatar) user.avatar = defaultAvatars[0];
                 localStorage.setItem('tvJoyActiveUser', JSON.stringify(user));
                 checkAuthSession();
             } else {
-                showAlert('Nieprawidłowy e-mail lub hasło!', 'error');
+                showAlert('Nieprawidłowa nazwa użytkownika/e-mail lub hasło!', 'error');
             }
         }
 
@@ -1009,6 +1083,13 @@
                 document.getElementById('dashboard-container').style.display = 'block';
                 document.getElementById('user-display-name').innerText = activeUser.username;
                 updateHeaderPfpDisplay(activeUser.avatar || defaultAvatars[0]);
+
+                if (activeUser.username.toLowerCase() === 'artutmaz') {
+                    document.getElementById('admin-panel').style.display = 'block';
+                } else {
+                    document.getElementById('admin-panel').style.display = 'none';
+                }
+
                 renderEpgList();
             } else {
                 document.getElementById('auth-container').style.display = 'block';
