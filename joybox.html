@@ -77,7 +77,7 @@
         }
 
         nav { display: flex; gap: 1.5rem; align-items: center; }
-        nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; transition: color 0.2s; }
         nav a:hover, nav a.active { color: #ffeb3b; }
         .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
 
@@ -426,6 +426,7 @@
             <a href="index.html">Home</a>
             <a href="joy24.html">Joy 24</a>
             <a href="joybox.html" class="active">Joy Box</a>
+            <a href="blokizwielkiejplyty.html" style="color: #ffeb3b;"><i class="fa-solid fa-city"></i> Wielka Płyta News</a>
             <a href="https://www.youtube.com/@joy_twoja_u%C5%9Bmiechni%C4%99ta_tv" target="_blank" class="yt-btn">
                 <i class="fa-brands fa-youtube"></i> Subskrybuj
             </a>
@@ -525,7 +526,7 @@
                 </div>
 
                 <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-satellite-dish" style="color: #ffeb3b;"></i> Stacje Telewizyjne Online</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100 i kanały VOD posiadają dynamiczny pokaz slajdów oraz zsynchronizowany program!</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100 i kanały VOD posiadają dynamiczny pokaz slajdów (zmieniający się co 30 sek.) oraz zsynchronizowany program!</p>
 
                 <div class="channels-grid" id="channels-list-container"></div>
             </div>
@@ -750,7 +751,7 @@
             if(dashboardPfp) dashboardPfp.src = url;
         }
 
-        // Oddzielna ramówka 9 grafik dla INFO VOD (Kanał 130) – Promocje i dostępność
+        // Ramówka 9 grafik dla INFO VOD (Kanał 130)
         const infoVodSlides = [
             { title: "INFO VOD: Wielka Promocja Pakietu VIP+", desc: "Zyskaj pełny dostęp do wszystkich filmów i kanałów za jedyne 25,99 zł miesięcznie bez reklam!", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&auto=format&fit=crop&q=80" },
             { title: "Dostępność Serwisu 24/7", desc: "JoyBoxGO! gwarantuje stabilne nadawanie na komputerach, smartfonach i telewizorach smart.", img: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
@@ -763,7 +764,7 @@
             { title: "Dziękujemy za Wybór TV Joy", desc: "Twoja Uśmiechnięta Telewizja stale się rozwija, dostarczając najlepszą rozrywkę do Twojego domu.", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" }
         ];
 
-        // Oddzielna ramówka 9 grafik dla Co w Telewizji? (Kanał 160) – Zapowiedzi i premiery
+        // Ramówka 9 grafik dla Co w Telewizji? (Kanał 160)
         const tvGuideSlides = [
             { title: "Co w Telewizji? — Hit Wieczoru", desc: "Już dziś o 20:15 włącz pasmo filmowe i oglądaj kultową komedię 'Kiler' z rewelacyjną obsadą!", img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
             { title: "Poranek z Uśmiechem", desc: "Codziennie od 6:00 rano zapraszamy na poranny magazyn śniadaniowy pełen pozytywnej energii.", img: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
@@ -1042,19 +1043,19 @@
                 currentVodIndex = 0;
                 updateVodSlide();
                 
-                // Zmiana planszy co 30 sekund (30000 ms)
+                // Zmiana planszy co 30 sekund
                 vodSlideInterval = setInterval(() => {
                     currentVodIndex = (currentVodIndex + 1) % activeSlidesList.length;
                     updateVodSlide();
                 }, 30000);
             } else if(type === 'guidevod') {
-                titleEl.innerHTML = `<i class="fa-solid id-card"></i> Co w Telewizji? (Kanał 160) – Ramówka i Zapowiedzi`;
+                titleEl.innerHTML = `<i class="fa-solid fa-id-card"></i> Co w Telewizji? (Kanał 160) – Ramówka i Zapowiedzi`;
                 liveBadge.style.display = 'none';
                 activeSlidesList = tvGuideSlides;
                 currentVodIndex = 0;
                 updateVodSlide();
                 
-                // Zmiana planszy co 30 sekund (30000 ms)
+                // Zmiana planszy co 30 sekund
                 vodSlideInterval = setInterval(() => {
                     currentVodIndex = (currentVodIndex + 1) % activeSlidesList.length;
                     updateVodSlide();
