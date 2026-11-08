@@ -10,6 +10,7 @@
             --card-bg: rgba(15, 23, 42, 0.9);
             --text-color: #ffffff;
             --text-muted: #cbd5e1;
+            --accent-yellow: #ffeb3b;
         }
         * { 
             box-sizing: border-box; 
@@ -45,13 +46,13 @@
             height: 45px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #ffeb3b;
+            border: 2px solid var(--accent-yellow);
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
 
         nav { display: flex; gap: 1.5rem; align-items: center; }
-        nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; }
-        nav a:hover, nav a.active { color: #ffeb3b; }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; transition: color 0.2s; }
+        nav a:hover, nav a.active { color: var(--accent-yellow); }
         .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
 
         .container { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; flex-grow: 1; width: 100%; display: flex; flex-direction: column; justify-content: center; }
@@ -61,7 +62,7 @@
             border-radius: 16px;
             padding: 2.5rem;
             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            border: 2px solid #ffeb3b;
+            border: 2px solid var(--accent-yellow);
             backdrop-filter: blur(12px);
             text-align: center;
             display: flex;
@@ -87,7 +88,7 @@
             width: 100%;
             height: auto;
             object-fit: contain;
-            transform: scale(1.25); /* Idealnie dopasowany rozmiar */
+            transform: scale(1.25);
         }
 
         .smpte-bars {
@@ -134,7 +135,7 @@
             padding: 0.8rem 1.5rem;
             border-radius: 10px;
             font-size: 1.2rem;
-            color: #ffeb3b;
+            color: var(--accent-yellow);
             letter-spacing: 1px;
             display: flex;
             align-items: center;
@@ -163,6 +164,7 @@
             <a href="index.html">Home</a>
             <a href="joy24.html" class="active">Joy 24</a>
             <a href="joybox.html">Joy Box</a>
+            <a href="blokizwielkiejplyty.html" style="color: var(--accent-yellow);"><i class="fa-solid fa-city"></i> Wielka Płyta News</a>
             <a href="https://www.youtube.com/@joy_twoja_u%C5%9Bmiechni%C4%99ta_tv" target="_blank" class="yt-btn">
                 <i class="fa-brands fa-youtube"></i> Subskrybuj
             </a>
