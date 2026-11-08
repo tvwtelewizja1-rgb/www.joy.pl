@@ -341,7 +341,6 @@
         .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 0.8rem; }
         .section-title i { color: var(--accent-yellow); }
 
-        /* Ulepszona siatka pakietów (Plakietki Cenowe) */
         .packages-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -535,7 +534,7 @@
                         <img id="user-header-avatar" src="" alt="Awatar" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-yellow);">
                         <div>
                             <h2>Witaj, <span id="user-display-name" style="color: var(--accent-yellow);"></span>! 🎉</h2>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane. Kliknij na kanał <strong>100. Joy</strong> lub kanały VOD, aby oglądać!</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane. Kliknij na kanał <strong>100. Joy</strong>, <strong>103. Infiniti</strong> lub kanały VOD, aby oglądać!</p>
                         </div>
                     </div>
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
@@ -562,7 +561,7 @@
                 </div>
 
                 <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-satellite-dish" style="color: var(--accent-yellow);"></i> Stacje Telewizyjne Online</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100 i kanały VOD posiadają dynamiczny pokaz slajdów (zmieniający się co 30 sek.) oraz zsynchronizowany program!</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100, kanał 103 (Infiniti) oraz kanały VOD posiadają dynamiczny pokaz slajdów oraz zsynchronizowany program!</p>
 
                 <div class="channels-grid" id="channels-list-container"></div>
             </div>
@@ -715,7 +714,7 @@
             "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80"
         ];
 
-        let selectedAvatarUrl = defaultAvatars[0];
+        let selectedAvatarUrl = localStorage.getItem('tvJoyGlobalAvatar') || defaultAvatars[0];
 
         function initAvatarPickers() {
             const regContainer = document.getElementById('avatar-picker-container');
@@ -723,16 +722,18 @@
             
             let html = '';
             defaultAvatars.forEach((url, idx) => {
-                const isSel = (idx === 0) ? 'selected' : '';
+                const isSel = (url === selectedAvatarUrl) ? 'selected' : '';
                 html += `<img src="${url}" class="avatar-option ${isSel}" onclick="selectAvatar('${url}', this)" alt="Awatar ${idx+1}">`;
             });
 
             if(regContainer) regContainer.innerHTML = html;
             if(modalContainer) modalContainer.innerHTML = html;
+            updateHeaderPfpDisplay(selectedAvatarUrl);
         }
 
         function selectAvatar(url, el) {
             selectedAvatarUrl = url;
+            localStorage.setItem('tvJoyGlobalAvatar', url);
             document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('selected'));
             document.querySelectorAll(`.avatar-option[src="${url}"]`).forEach(img => img.classList.add('selected'));
 
@@ -744,9 +745,8 @@
                 let users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
                 users = users.map(u => u.email === activeUser.email ? {...u, avatar: url} : u);
                 localStorage.setItem('tvJoyUsers', JSON.stringify(users));
-
-                updateHeaderPfpDisplay(url);
             }
+            updateHeaderPfpDisplay(url);
         }
 
         function handleCustomAvatarUpload(e) {
@@ -755,6 +755,7 @@
                 const reader = new FileReader();
                 reader.onload = function(uploadEvent) {
                     selectedAvatarUrl = uploadEvent.target.result;
+                    localStorage.setItem('tvJoyGlobalAvatar', selectedAvatarUrl);
                     showAlert('Własny awatar został wgrany pomyślnie!', 'success');
                 };
                 reader.readAsDataURL(file);
@@ -767,6 +768,8 @@
                 const reader = new FileReader();
                 reader.onload = function(uploadEvent) {
                     const customUrl = uploadEvent.target.result;
+                    selectedAvatarUrl = customUrl;
+                    localStorage.setItem('tvJoyGlobalAvatar', customUrl);
                     
                     const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
                     if(activeUser) {
@@ -776,9 +779,8 @@
                         let users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
                         users = users.map(u => u.email === activeUser.email ? {...u, avatar: customUrl} : u);
                         localStorage.setItem('tvJoyUsers', JSON.stringify(users));
-
-                        updateHeaderPfpDisplay(customUrl);
                     }
+                    updateHeaderPfpDisplay(customUrl);
                     showAlert('Własny awatar PFP został zaktualizowany!', 'success');
                 };
                 reader.readAsDataURL(file);
@@ -885,7 +887,7 @@
             const user = users.find(u => u.email === email && u.password === hashedPassword);
 
             if (user) {
-                if(!user.avatar) user.avatar = defaultAvatars[0];
+                if(!user.avatar) user.avatar = selectedAvatarUrl;
                 localStorage.setItem('tvJoyActiveUser', JSON.stringify(user));
                 checkAuthSession();
                 showAlert('Zalogowano pomyślnie do JoyBoxGO!', 'success');
@@ -898,7 +900,7 @@
             { num: 100, name: "Joy", type: "Normal", isJoy: true },
             { num: 101, name: "Olixer", type: "Normal", isJoy: false },
             { num: 102, name: "Olixer Music", type: "Normal", isJoy: false },
-            { num: 103, name: "Infiniti", type: "Normal", isJoy: false },
+            { num: 103, name: "Infiniti", type: "Normal", isInfiniti: true },
             { num: 104, name: "Infiniti 2", type: "Normal", isJoy: false },
             { num: 105, name: "TV94", type: "Mid", isJoy: false },
             { num: 106, name: "Vilion", type: "Mid", isJoy: false },
@@ -993,6 +995,47 @@
             { time: "01:40", title: "Miś Uszatek", desc: "Nocne pasmo dla najwytrwalszych.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" }
         ];
 
+        // Dedykowana ramówka dla kanału Infiniti (Kanał 103)
+        const infinitiSchedule = [
+            { time: "00:00", title: "South Park", desc: "Kultowy serial animowany dla dorosłych.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "00:30", title: "Rick and Morty", desc: "Przygody szalonego naukowca i jego wnuka.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:00", title: "Włatcy Móch", desc: "Słynna polska animacja.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:30", title: "Family Guy", desc: "Codzienne przygody rodziny Griffinów.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:00", title: "American Dad!", desc: "Agent CIA i jego niezwykła rodzina.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:30", title: "Futurama", desc: "Podróże w czasie i przestrzeni z przyszłości.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "03:00", title: "Robot Chicken", desc: "Szybkie i szalone skecze stop-motion.", zap: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&auto=format&fit=crop&q=80" },
+            { time: "03:30", title: "Invincible", desc: "Animowana superbohaterska akcja.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "04:00", title: "Blok Ekipa", desc: "Kultowe osiedlowe perypetie.", zap: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=900&auto=format&fit=crop&q=80" },
+            { time: "04:30", title: "Simpsonowie", desc: "Żółta rodzinka z Springfield.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
+            { time: "05:00", title: "Smiling Friends", desc: "Pozytywna dawka humoru.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
+            { time: "05:30", title: "South Park", desc: "Kolejna dawka humoru w miasteczku.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:00", title: "Pobudka", desc: "Poranny rozruch na kanale Infiniti.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:00", title: "Rodzinka.pl", desc: "Codzienne perypetie Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:30", title: "Klan", desc: "Najdłuższy polski serial obyczajowy.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:30", title: "(Nowa) Rodzina Zmieszanych", desc: "Nowy serial komediowy.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:00", title: "Rodzina Wierzbickich (planowane)", desc: "Zapowiedzi i przedpremiera nowego serialu.", zap: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:30", title: "BrzydUla", desc: "Losy Uli Cieplak w firmie F&D.", zap: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=900&auto=format&fit=crop&q=80" },
+            { time: "10:30", title: "Awantura o kasę", desc: "Legendarny teleturniej z mistrzami.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:30", title: "infinews", desc: "Serwis informacyjny stacji Infiniti.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:00", title: "Ojciec Mateusz", desc: "Kryminalne zagadki w Sandomierzu.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:00", title: "krok po kroku do nikąd", desc: "Autorski program rozrywkowy.", zap: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:30", title: "Daleko od noszy", desc: "Humor w szpitalu w wariackich warunkach.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
+            { time: "14:00", title: "19+", desc: "Życie, miłość i wyzwania warszawskiej młodzieży.", zap: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:00", title: "Gliniarze", desc: "Trzymające w napięciu akcje policyjne.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
+            { time: "16:00", title: "Ranczo", desc: "Wizyta w Wilkowyjach i niezapomniani mieszkańcy.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:00", title: "Historia Loga Fikcji", desc: "Ciekawe zestawienie i analiza projektów graficznych.", zap: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:30", title: "Graphic Vis!ON", desc: "Magazyn poświęcony nowoczesnej grafice i designowi.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:00", title: "Poczuj Vibe Muzyki!", desc: "Najlepsze brzmienia i teledyski.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:30", title: "Geometry Dash Na Modach", desc: "Rozgrywka i customowe poziomy w grze.", zap: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:00", title: "Hotel Paradise", desc: "Emocje, intrygi i randkowe show.", zap: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:00", title: "Milionerzy", desc: "Walka o główne i wielkie pieniądze z Hubertem.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "21:00", title: "Świat według Kiepskich", desc: "Codzienne zmagania Ferdka i Halinki.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "21:30", title: "13 Posterunek", desc: "Kultowy polski sitcom policyjkowy.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:00", title: "Tajemniczy Fabian", desc: "Wciągający serial z fabułą pełną zwrotów akcji.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:30", title: "N Jak Nienawinność", desc: "Dramat psychologiczny.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
+            { time: "23:00", title: "Pacu Łacu – w kupie raźniej!", desc: "Wieczorny, szalony program rozrywkowy.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" }
+        ];
+
         function getTvDayMinutes(timeStr) {
             const parts = timeStr.split(":");
             let h = parseInt(parts[0], 10);
@@ -1015,14 +1058,14 @@
             return formatter.format(now);
         }
 
-        function getCurrentJoyProgram() {
+        function getCurrentProgram(schedList) {
             const nowTimeStr = getWarsawTimeString();
             const currentTvMins = getTvDayMinutes(nowTimeStr);
-            let activeProg = schedule[0];
-            for (let i = 0; i < schedule.length; i++) {
-                const progTvMins = getTvDayMinutes(schedule[i].time);
+            let activeProg = schedList[0];
+            for (let i = 0; i < schedList.length; i++) {
+                const progTvMins = getTvDayMinutes(schedList[i].time);
                 if (currentTvMins >= progTvMins) {
-                    activeProg = schedule[i];
+                    activeProg = schedList[i];
                 } else {
                     break;
                 }
@@ -1034,16 +1077,19 @@
             const container = document.getElementById('channels-list-container');
             if(!container) return;
 
-            const currentJoyProg = getCurrentJoyProgram();
+            const currentJoyProg = getCurrentProgram(schedule);
+            const currentInfinitiProg = getCurrentProgram(infinitiSchedule);
 
             let html = '';
             userChannels.forEach(ch => {
-                let nowShowing = ch.isJoy ? currentJoyProg.title : (ch.isInfoVOD ? "INFO VOD (Promocje i Dostępność)" : (ch.isGuideVOD ? "Co w Telewizji? (Zapowiedzi)" : "Transmisja ciągła (" + ch.type + ")"));
+                let nowShowing = ch.isJoy ? currentJoyProg.title : (ch.isInfiniti ? currentInfinitiProg.title : (ch.isInfoVOD ? "INFO VOD (Promocje i Dostępność)" : (ch.isGuideVOD ? "Co w Telewizji? (Zapowiedzi)" : "Transmisja ciągła (" + ch.type + ")")));
                 if(ch.type === "Offline") nowShowing = "Brak sygnału";
                 
                 let clickAttr = '';
                 if(ch.isJoy) {
                     clickAttr = `onclick="openJoyPlayer('joy')"`;
+                } else if(ch.isInfiniti) {
+                    clickAttr = `onclick="openJoyPlayer('infiniti')"`;
                 } else if(ch.isInfoVOD) {
                     clickAttr = `onclick="openJoyPlayer('infovod')"`;
                 } else if(ch.isGuideVOD) {
@@ -1079,7 +1125,14 @@
             if(type === 'joy') {
                 titleEl.innerHTML = `<i class="fa-solid fa-tv"></i> Odtwarzacz TV Joy (Kanał 100) – Na żywo`;
                 liveBadge.style.display = 'flex';
-                const currentProg = getCurrentJoyProgram();
+                const currentProg = getCurrentProgram(schedule);
+                document.getElementById('modal-show-title').innerText = currentProg.title;
+                document.getElementById('modal-show-desc').innerText = currentProg.desc;
+                document.getElementById('modal-zap-img').src = currentProg.zap;
+            } else if(type === 'infiniti') {
+                titleEl.innerHTML = `<i class="fa-solid fa-tv"></i> Odtwarzacz Infiniti (Kanał 103) – Na żywo`;
+                liveBadge.style.display = 'flex';
+                const currentProg = getCurrentProgram(infinitiSchedule);
                 document.getElementById('modal-show-title').innerText = currentProg.title;
                 document.getElementById('modal-show-desc').innerText = currentProg.desc;
                 document.getElementById('modal-zap-img').src = currentProg.zap;
@@ -1135,12 +1188,14 @@
             const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
             const pricingWrapper = document.getElementById('pricing-section-wrapper');
 
+            initAvatarPickers();
+
             if (activeUser) {
                 document.getElementById('auth-container').style.display = 'none';
                 document.getElementById('dashboard-container').style.display = 'block';
                 document.getElementById('user-display-name').innerText = activeUser.username;
                 
-                const userAvatar = activeUser.avatar || defaultAvatars[0];
+                const userAvatar = activeUser.avatar || selectedAvatarUrl;
                 updateHeaderPfpDisplay(userAvatar);
 
                 if (pricingWrapper) pricingWrapper.style.display = 'none';
@@ -1149,7 +1204,7 @@
                 document.getElementById('auth-container').style.display = 'block';
                 document.getElementById('dashboard-container').style.display = 'none';
                 if (pricingWrapper) pricingWrapper.style.display = 'block';
-                updateHeaderPfpDisplay("PFPjoy10kl.jpg");
+                updateHeaderPfpDisplay(selectedAvatarUrl);
             }
         }
 
@@ -1161,12 +1216,9 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            initAvatarPickers();
             checkAuthSession();
             setInterval(() => {
-                if(localStorage.getItem('tvJoyActiveUser')) {
-                    renderChannelsList();
-                }
+                renderChannelsList();
             }, 10000);
         });
     </script>
