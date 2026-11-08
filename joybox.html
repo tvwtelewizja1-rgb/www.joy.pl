@@ -96,6 +96,25 @@
         }
         .form-control:focus { border-color: #ffeb3b; }
 
+        /* Stylizacja wyboru awatara */
+        .avatar-picker-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 0.5rem;
+        }
+        .avatar-option {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .avatar-option:hover { transform: scale(1.08); }
+        .avatar-option.selected { border-color: #ffeb3b; box-shadow: 0 0 10px rgba(255,235,59,0.5); }
+
         .submit-btn {
             width: 100%;
             background: linear-gradient(135deg, #ff9800, #f44336);
@@ -132,7 +151,6 @@
 
         .user-dashboard { display: none; }
         
-        /* Rozciągnięta siatka kanałów na pełną szerokość */
         .channels-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -202,7 +220,6 @@
             align-items: center;
             justify-content: center;
         }
-        /* Rozciągnięte okno odtwarzacza TV */
         .tv-screen-box {
             position: relative;
             width: 100%;
@@ -224,6 +241,7 @@
             object-fit: cover;
             opacity: 0.75;
             filter: contrast(1.1) saturate(1.2);
+            transition: opacity 0.5s ease-in-out;
         }
         .zap-overlay-gradient {
             position: absolute;
@@ -390,7 +408,20 @@
                         <label><i class="fa-solid fa-lock"></i> Hasło (min. 8 znaków)</label>
                         <input type="password" id="reg-password" class="form-control" placeholder="••••••••" minlength="8" required>
                     </div>
-                    <button type="submit" class="submit-btn"><i class="fa-solid fa-user-plus"></i> Załóż konto (Wyślij weryfikację e-mail)</button>
+                    
+                    <!-- Wybór awatara -->
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-image"></i> Wybierz awatar profilowy lub wgraj własny:</label>
+                        <div class="avatar-picker-grid" id="avatar-picker-container">
+                            <!-- Generowane dynamicznie przez JS -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: 0.75rem; color: var(--text-muted);">Lub prześlij własny plik graficzny:</label>
+                        <input type="file" id="reg-custom-avatar" class="form-control" accept="image/*" onchange="handleCustomAvatarUpload(event)">
+                    </div>
+
+                    <button type="submit" class="submit-btn"><i class="fa-solid fa-user-plus"></i> Załóż konto w JoyBoxGO!</button>
                 </form>
 
                 <div class="security-badge">
@@ -401,9 +432,12 @@
 
             <div class="user-dashboard" id="dashboard-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
-                    <div>
-                        <h2>Witaj, <span id="user-display-name" style="color: #ffeb3b;"></span>! 🎉</h2>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane pomyślnie. Kliknij na kanał <strong>100. Joy</strong>, aby uruchomić rozszerzony odtwarzacz!</p>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <img id="user-header-avatar" src="" alt="Awatar" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #ffeb3b;">
+                        <div>
+                            <h2>Witaj, <span id="user-display-name" style="color: #ffeb3b;"></span>! 🎉</h2>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Konto zweryfikowane. Kliknij na kanał <strong>100. Joy</strong> lub kanały VOD, aby oglądać!</p>
+                        </div>
                     </div>
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
                         <i class="fa-solid fa-right-from-bracket"></i> Wyloguj
@@ -412,14 +446,14 @@
 
                 <div class="player-modal" id="joy-player-modal">
                     <div class="player-modal-header">
-                        <div class="player-modal-title">
-                            <i class="fa-solid fa-tv"></i> Odtwarzacz TV Joy (Kanał 100) – Tryb HD
+                        <div class="player-modal-title" id="modal-window-title">
+                            <i class="fa-solid fa-tv"></i> Odtwarzacz TV Joy – Tryb HD
                         </div>
                         <button class="close-player" onclick="closeJoyPlayer()">&times;</button>
                     </div>
                     <div class="tv-screen-box">
-                        <div class="live-badge"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> NA ŻYWO</div>
-                        <img id="modal-zap-img" class="zap-image" src="" alt="ZAP z programu z internetu">
+                        <div class="live-badge" id="modal-live-indicator"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> NA ŻYWO</div>
+                        <img id="modal-zap-img" class="zap-image" src="" alt="Stream / VOD Slide">
                         <div class="zap-overlay-gradient"></div>
                         <div class="tv-screen-content">
                             <h4 id="modal-show-title">Ładowanie...</h4>
@@ -429,13 +463,12 @@
                 </div>
 
                 <h3 style="color: #fff; margin-bottom: 0.3rem;"><i class="fa-solid fa-satellite-dish" style="color: #ffeb3b;"></i> Stacje Telewizyjne Online</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100 (Joy) synchronizuje się z czasem w Warszawie. Kliknij, aby włączyć strumień!</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Kanał 100 i kanały VOD posiadają dynamiczny pokaz slajdów oraz zsynchronizowany program!</p>
 
                 <div class="channels-grid" id="channels-list-container"></div>
             </div>
         </div>
 
-        <!-- Sekcja pakietów i cennika ukrywana automatycznie po zalogowaniu -->
         <div id="pricing-section-wrapper">
             <h2 class="section-title"><i class="fa-solid fa-tags"></i> Pakiety i Cennik Joy Box</h2>
             <div class="packages-grid">
@@ -557,6 +590,67 @@
     </footer>
 
     <script>
+        // 10 domyślnych awatarów profilowych
+        const defaultAvatars = [
+            "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1628157582853-a796fa650a6a?w=150&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150&auto=format&fit=crop&q=80",
+            "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80"
+        ];
+
+        let selectedAvatarUrl = defaultAvatars[0];
+
+        function initAvatarPicker() {
+            const container = document.getElementById('avatar-picker-container');
+            if(!container) return;
+            let html = '';
+            defaultAvatars.forEach((url, idx) => {
+                const isSel = (idx === 0) ? 'selected' : '';
+                html += `<img src="${url}" class="avatar-option ${isSel}" onclick="selectAvatar('${url}', this)" alt="Awatar ${idx+1}">`;
+            });
+            container.innerHTML = html;
+        }
+
+        function selectAvatar(url, el) {
+            selectedAvatarUrl = url;
+            document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function handleCustomAvatarUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(uploadEvent) {
+                    selectedAvatarUrl = uploadEvent.target.result;
+                    showAlert('Własny awatar został wgrany pomyślnie!', 'success');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // 9 grafik obracanych automatycznie dla kanałów VOD (INFO VOD oraz Co w Telewizji?)
+        const vodSlides = [
+            { title: "INFO VOD: Wielka Promocja Pakietu VIP+", desc: "Zyskaj dostęp do wszystkich filmów i stacji za jedyne 25,99 zł miesięcznie bez reklam!", img: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&auto=format&fit=crop&q=80" },
+            { title: "Dostępność Usługi 24/7", desc: "JoyBoxGO! działa stabilnie na każdym urządzeniu. Sprawdź nowe pasma w jakości HD.", img: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
+            { title: "Nowość w Bibliotece VOD: Kino Akcji", desc: "Najlepsze hity kinowe już dostępne w sekcji na żądanie w najwyższej rozdzielczości.", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
+            { title: "Specjalny Program Dokumentalny", desc: "Odkryj sekrety natury i technologii w cotygodniowym paśmie edukacyjnym.", img: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=900&auto=format&fit=crop&q=80" },
+            { title: "Hit Tygodnia w TV Joy", desc: "Nie przegap kultowych komedii w weekendowym paśmie wieczornym o godzinie 20:15.", img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { title: "Strefa Muzyczna JoyBoxGO!", desc: "Najlepsze teledyski, pasma dance i rockowe hity non-stop na kanałach muzycznych.", img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
+            { title: "Aktualizacja Wykazu Kanałów", desc: "Sprawdź nowe pozycje na liście od 130 do 160. Dodano nowe pasma regionalne i VOD.", img: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
+            { title: "Bezpieczna Strefa Widza", desc: "Twoje konto i subskrypcje są w pełni chronione. Korzystaj bez obaw o prywatność.", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { title: "Życzymy Miłego Oglądania!", desc: "Dziękujemy, że jesteś z nami. TV Joy – Twoja Uśmiechnięta Telewizja!", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" }
+        ];
+
+        let vodSlideInterval = null;
+        let currentVodIndex = 0;
+
         function showAlert(message, type) {
             const alertBox = document.getElementById('alert-box');
             alertBox.innerText = message;
@@ -597,10 +691,10 @@
             }
 
             const hashedPassword = btoa(password);
-            users.push({ username, email, password: hashedPassword, verified: true });
+            users.push({ username, email, password: hashedPassword, avatar: selectedAvatarUrl, verified: true });
             localStorage.setItem('tvJoyUsers', JSON.stringify(users));
 
-            showAlert('Konto utworzone! Wysłano link weryfikacyjny na adres ' + email + '. Możesz się zalogować.', 'success');
+            showAlert('Konto utworzone z wybranym awatarem! Możesz się teraz zalogować.', 'success');
             switchTab('login');
         }
 
@@ -614,6 +708,7 @@
             const user = users.find(u => u.email === email && u.password === hashedPassword);
 
             if (user) {
+                if(!user.avatar) user.avatar = defaultAvatars[0];
                 localStorage.setItem('tvJoyActiveUser', JSON.stringify(user));
                 checkAuthSession();
                 showAlert('Zalogowano pomyślnie do JoyBoxGO!', 'success');
@@ -653,7 +748,7 @@
             { num: 127, name: "Option!", type: "Normal", isJoy: false },
             { num: 128, name: "Infiniti Music", type: "Normal", isJoy: false },
             { num: 129, name: "quartz", type: "Normal", isJoy: false },
-            { num: 130, name: "INFO VOD", type: "VOD", isJoy: false },
+            { num: 130, name: "INFO VOD", type: "VOD", isVOD: true },
             { num: 131, name: "Fotel TV", type: "Normal", isJoy: false },
             { num: 132, name: "Fotel 2", type: "Normal", isJoy: false },
             { num: 133, name: "KTA:TV", type: "Normal", isJoy: false },
@@ -683,7 +778,7 @@
             { num: 157, name: "Pusty Kanał", type: "Offline", isJoy: false },
             { num: 158, name: "Pusty Kanał", type: "Offline", isJoy: false },
             { num: 159, name: "Pusty Kanał", type: "Offline", isJoy: false },
-            { num: 160, name: "Co w Telewizji?", type: "VOD", isJoy: false }
+            { num: 160, name: "Co w Telewizji?", type: "VOD", isVOD: true }
         ];
 
         const schedule = [
@@ -746,9 +841,7 @@
         function getCurrentJoyProgram() {
             const nowTimeStr = getWarsawTimeString();
             const currentTvMins = getTvDayMinutes(nowTimeStr);
-
             let activeProg = schedule[0];
-
             for (let i = 0; i < schedule.length; i++) {
                 const progTvMins = getTvDayMinutes(schedule[i].time);
                 if (currentTvMins >= progTvMins) {
@@ -768,10 +861,17 @@
 
             let html = '';
             userChannels.forEach(ch => {
-                let nowShowing = ch.isJoy ? currentJoyProg.title : "Transmisja ciągła (" + ch.type + ")";
+                let nowShowing = ch.isJoy ? currentJoyProg.title : (ch.isVOD ? "Biblioteka VOD (Slajdy promocyjne)" : "Transmisja ciągła (" + ch.type + ")");
                 if(ch.type === "Offline") nowShowing = "Brak sygnału";
                 
-                let clickAttr = ch.isJoy ? `onclick="openJoyPlayer()"` : `onclick="alert('Kanał ${ch.num}. ${ch.name} jest w pełni gotowy do odbioru!')"`;
+                let clickAttr = '';
+                if(ch.isJoy) {
+                    clickAttr = `onclick="openJoyPlayer('joy')"`;
+                } else if(ch.isVOD) {
+                    clickAttr = `onclick="openJoyPlayer('vod', '${ch.name}')"`;
+                } else {
+                    clickAttr = `onclick="alert('Kanał ${ch.num}. ${ch.name} jest w pełni gotowy do odbioru!')"`;
+                }
                 
                 html += `
                     <div class="channel-card clickable" ${clickAttr}>
@@ -787,19 +887,57 @@
             container.innerHTML = html;
         }
 
-        function openJoyPlayer() {
+        function openJoyPlayer(type, channelName = "Joy") {
             const modal = document.getElementById('joy-player-modal');
-            const currentProg = getCurrentJoyProgram();
+            const titleEl = document.getElementById('modal-window-title');
+            const liveBadge = document.getElementById('modal-live-indicator');
             
-            document.getElementById('modal-show-title').innerText = currentProg.title;
-            document.getElementById('modal-show-desc').innerText = currentProg.desc;
-            document.getElementById('modal-zap-img').src = currentProg.zap;
+            if(vodSlideInterval) {
+                clearInterval(vodSlideInterval);
+                vodSlideInterval = null;
+            }
+
+            if(type === 'joy') {
+                titleEl.innerHTML = `<i class="fa-solid fa-tv"></i> Odtwarzacz TV Joy (Kanał 100) – Na żywo`;
+                liveBadge.style.display = 'flex';
+                const currentProg = getCurrentJoyProgram();
+                document.getElementById('modal-show-title').innerText = currentProg.title;
+                document.getElementById('modal-show-desc').innerText = currentProg.desc;
+                document.getElementById('modal-zap-img').src = currentProg.zap;
+            } else if(type === 'vod') {
+                titleEl.innerHTML = `<i class="fa-solid fa-film"></i> Odtwarzacz VOD (${channelName}) – Promocje i Dostępność`;
+                liveBadge.style.display = 'none';
+                
+                currentVodIndex = 0;
+                updateVodSlide();
+                
+                vodSlideInterval = setInterval(() => {
+                    currentVodIndex = (currentVodIndex + 1) % vodSlides.length;
+                    updateVodSlide();
+                }, 4000);
+            }
             
             modal.style.display = 'block';
             modal.scrollIntoView({ behavior: 'smooth' });
         }
 
+        function updateVodSlide() {
+            const slide = vodSlides[currentVodIndex];
+            const imgEl = document.getElementById('modal-zap-img');
+            imgEl.style.opacity = '0.2';
+            setTimeout(() => {
+                imgEl.src = slide.img;
+                document.getElementById('modal-show-title').innerText = slide.title;
+                document.getElementById('modal-show-desc').innerText = slide.desc;
+                imgEl.style.opacity = '0.75';
+            }, 200);
+        }
+
         function closeJoyPlayer() {
+            if(vodSlideInterval) {
+                clearInterval(vodSlideInterval);
+                vodSlideInterval = null;
+            }
             document.getElementById('joy-player-modal').style.display = 'none';
         }
 
@@ -812,26 +950,29 @@
                 document.getElementById('dashboard-container').style.display = 'block';
                 document.getElementById('user-display-name').innerText = activeUser.username;
                 
-                // Ukrycie sekcji cennika po zalogowaniu
-                if (pricingWrapper) pricingWrapper.style.display = 'none';
+                const avatarImg = document.getElementById('user-header-avatar');
+                if(avatarImg) {
+                    avatarImg.src = activeUser.avatar || defaultAvatars[0];
+                }
 
+                if (pricingWrapper) pricingWrapper.style.display = 'none';
                 renderChannelsList();
             } else {
                 document.getElementById('auth-container').style.display = 'block';
                 document.getElementById('dashboard-container').style.display = 'none';
-                
-                // Przywrócenie sekcji cennika po wylogowaniu
                 if (pricingWrapper) pricingWrapper.style.display = 'block';
             }
         }
 
         function handleLogout() {
+            closeJoyPlayer();
             localStorage.removeItem('tvJoyActiveUser');
             checkAuthSession();
             showAlert('Wylogowano pomyślnie z JoyBoxGO.', 'success');
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            initAvatarPicker();
             checkAuthSession();
             setInterval(() => {
                 if(localStorage.getItem('tvJoyActiveUser')) {
