@@ -707,11 +707,40 @@
             { num: 160, name: "Co w Telewizji?", tag: "GUIDE", key: null }
         ];
 
+        // Zaktualizowana ramówka dla Joy (Kanał 100)
         const joySched = [
-            { time: "06:00", title: "Poranek z uśmiechem", desc: "Poranny magazyn rozrywkowy.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:00", title: "Poranek z uśmiechem", desc: "Nowy program śniadaniowy.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:30", title: "Muminki", desc: "Kultowa animacja.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:55", title: "Muminki", desc: "Kolejny odcinek.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:20", title: "Mały odkrywca", desc: "Nowy program edukacyjny.", zap: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:40", title: "Kuchnia na start", desc: "Nowy program kulinarny.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:10", title: "Teleranek Jaruzelskiego", desc: "Magazyn historyczno-rozrywkowy.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:20", title: "Muzyczna pobudka", desc: "Teledyski i hity.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:00", title: "Hity XX wieku", desc: "Największe przeboje dawnych lat.", zap: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:25", title: "Podróże bez biletu", desc: "Magazyn podróżniczy.", zap: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" },
+            { time: "10:00", title: "Czterdziestolatek", desc: "Kultowy serial.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "10:50", title: "Stare, ale jare", desc: "Magazyn rozrywkowy.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:10", title: "Świat zwierząt", desc: "Film przyrodniczy.", zap: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:40", title: "Dziecięce Hity", desc: "Piosenki i animacje dla najmłodszych.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
             { time: "12:00", title: "Muminki", desc: "Przygody w Dolinie Muminków.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:00", title: "Informacje TV Joy", desc: "Serwis informacyjny.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:15", title: "Kiler - Kultowy Film", desc: "Komedia polska.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" }
+            { time: "12:25", title: "Dziecięce Hity", desc: "Kolejna porcja muzyki.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:45", title: "Bajkowa kraina", desc: "Nowe pasmo animacji.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:10", title: "Prawda czy Fałsz", desc: "Teleturniej.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:45", title: "Rodzinka.pl — 2 odcinki", desc: "Serial komediowy.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "14:35", title: "Sami Swoi", desc: "Kultowa komedia.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:00", title: "Informacje", desc: "Serwis informacyjny.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:15", title: "Moda na sukces", desc: "Serial obyczajowy.", zap: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:45", title: "Plebania", desc: "Serial obyczajowy.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
+            { time: "16:30", title: "M jak Miłość", desc: "Serial obyczajowy.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:20", title: "Trudne Sprawy", desc: "Docudrama.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:10", title: "Ukryta prawda", desc: "Docudrama.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:00", title: "Wydarzenia dnia", desc: "Główny serwis informacyjny.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:25", title: "Trudne Sprawy", desc: "Docudrama.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:15", title: "Kiler", desc: "Kultowa komedia sensacyjna.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:00", title: "Rejs", desc: "Klasyka polskiego kina.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "23:15", title: "997", desc: "Magazyn kryminalny.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
+            { time: "00:00", title: "Seksmisja", desc: "Kultowa komedia SF.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:40", title: "Miś Uszatek", desc: "Dobranocka na zakończenie dnia.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" }
         ];
 
         const infinitiSched = [
