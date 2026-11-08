@@ -143,6 +143,7 @@
 
         .user-dashboard { display: none; }
         
+        /* ADMIN PANEL */
         .admin-panel {
             background: rgba(13, 148, 136, 0.15);
             border: 2px dashed #14b8a6;
@@ -150,7 +151,25 @@
             padding: 1.5rem;
             margin-bottom: 2rem;
         }
-        
+        .admin-header { color: #14b8a6; font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+
+        /* PAKIETY FIKCYJNE PREZENTACJA */
+        .packages-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+        .pkg-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 0.7rem;
+            text-align: center;
+        }
+        .pkg-badge strong { display: block; color: var(--accent-yellow); font-size: 0.95rem; }
+        .pkg-badge span { font-size: 0.8rem; color: #cbd5e1; }
+
         .tvp-epg-wrapper {
             background: var(--vod-bg);
             border: 1px solid var(--vod-border);
@@ -408,6 +427,34 @@
                     <p>Zaloguj się lub załóż konto z kodem aktywacyjnym od administratora (Artutmaz)!</p>
                 </div>
 
+                <!-- PREZENTACJA PAKIETÓW -->
+                <div class="packages-preview-grid">
+                    <div class="pkg-badge">
+                        <strong>Regio</strong>
+                        <span>1,00 zł (Tylko Stacje Regionalne)</span>
+                    </div>
+                    <div class="pkg-badge">
+                        <strong>Normal</strong>
+                        <span>2,20 zł</span>
+                    </div>
+                    <div class="pkg-badge">
+                        <strong>Mid</strong>
+                        <span>4,50 zł</span>
+                    </div>
+                    <div class="pkg-badge">
+                        <strong>Extra</strong>
+                        <span>10,99 zł</span>
+                    </div>
+                    <div class="pkg-badge">
+                        <strong>VIP</strong>
+                        <span>20,00 zł</span>
+                    </div>
+                    <div class="pkg-badge" style="border-color: var(--accent-orange);">
+                        <strong style="color: var(--accent-orange);">VIP+</strong>
+                        <span>25,99 zł</span>
+                    </div>
+                </div>
+
                 <div class="tabs">
                     <button class="tab-btn active" id="tab-login-btn" onclick="switchTab('login')">Logowanie</button>
                     <button class="tab-btn" id="tab-register-btn" onclick="switchTab('register')">Załóż konto (Wymaga kodu)</button>
@@ -441,8 +488,8 @@
                         <input type="password" id="reg-password" class="form-control" placeholder="••••••••" minlength="8" required>
                     </div>
                     <div class="form-group">
-                        <label><i class="fa-solid fa-key"></i> Kod aktywacyjny (od Admina Artutmaz)</label>
-                        <input type="text" id="reg-code" class="form-control" placeholder="Wpisz wygenerowany kod" required>
+                        <label><i class="fa-solid fa-key"></i> Kod aktywacyjny pakietu (od Admina Artutmaz)</label>
+                        <input type="text" id="reg-code" class="form-control" placeholder="np. JOY-VIP-XXXXX" required>
                     </div>
                     
                     <div class="form-group">
@@ -458,6 +505,7 @@
                 </form>
             </div>
 
+            <!-- DOKUMENTACJA KONT DLA ZALOGOWANYCH -->
             <div class="user-dashboard" id="dashboard-container">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
                     <div style="display: flex; align-items: center; gap: 15px;">
@@ -467,7 +515,7 @@
                         </div>
                         <div>
                             <h2>Witaj, <span id="user-display-name" style="color: var(--accent-yellow);"></span>! 🎉</h2>
-                            <p style="color: #cbd5e1; font-size: 0.9rem;">Konto zweryfikowane. EPG w stylu cyfrowego dekodera aktywne!</p>
+                            <p style="color: #cbd5e1; font-size: 0.9rem;">Aktywny pakiet: <strong id="user-active-package" style="color: var(--accent-orange);">Brak</strong> (Ważny do: <span id="user-package-expiry">-</span>)</p>
                         </div>
                     </div>
                     <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
@@ -475,15 +523,53 @@
                     </button>
                 </div>
 
-                <!-- PANEL ADMINA DLA KONT ARTUTMAZ -->
+                <!-- PANEL ADMINA (WIDOCZNY TYLKO DLA KONA Artutmaz) -->
                 <div id="admin-panel" class="admin-panel" style="display: none;">
-                    <h3 style="color: #14b8a6; margin-bottom: 0.5rem;"><i class="fa-solid fa-user-shield"></i> Panel Administratora (Artutmaz)</h3>
-                    <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 1rem;">Wygeneruj kod aktywacyjny umożliwiający założenie konta na platformie:</p>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem;">
-                        <button class="submit-btn" style="margin: 0; width: auto; background: #14b8a6;" onclick="generateAdminCode()">Wygeneruj nowy kod aktywacyjny</button>
+                    <div class="admin-header"><i class="fa-solid fa-user-shield"></i> Panel Administratora (Zalogowany jako: Artutmaz)</div>
+                    <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 1rem;">Wygeneruj kod aktywacyjny i wybierz pakiet oraz czas jego ważności:</p>
+                    
+                    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; align-items: end;">
+                        <div class="form-group" style="margin: 0;">
+                            <label>Wybierz pakiet:</label>
+                            <select id="admin-pkg-select" class="form-control">
+                                <option value="Regio (1,00 zł)">Regio - 1,00 zł (Stacje Regionalne)</option>
+                                <option value="Normal (2,20 zł)">Normal - 2,20 zł</option>
+                                <option value="Mid (4,50 zł)">Mid - 4,50 zł</option>
+                                <option value="Extra (10,99 zł)">Extra - 10,99 zł</option>
+                                <option value="VIP (20,00 zł)">VIP - 20,00 zł</option>
+                                <option value="VIP+ (25,99 zł)">VIP+ - 25,99 zł</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin: 0;">
+                            <label>Okres ważności:</label>
+                            <select id="admin-duration-select" class="form-control">
+                                <option value="30">30 dni</option>
+                                <option value="90">90 dni</option>
+                                <option value="365">1 rok</option>
+                                <option value="9999">Bezterminowy</option>
+                            </select>
+                        </div>
+                        <button class="submit-btn" style="margin: 0; height: 42px; background: #14b8a6;" onclick="generateAdminCode()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generuj kod</button>
                     </div>
-                    <div id="generated-code-box" style="display: none; background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 8px; border: 1px solid #14b8a6;">
-                        Wygenerowany kod: <strong id="generated-code-text" style="color: var(--accent-yellow); font-size: 1.2rem; font-family: monospace;"></strong>
+
+                    <div id="generated-code-box" style="display: none; background: rgba(0,0,0,0.4); padding: 1rem; border-radius: 8px; border: 1px solid #14b8a6; margin-top: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                               Wygenerowany kod dla pakietu: <strong id="generated-pkg-name" style="color: #14b8a6;"></strong><br>
+                               Kod aktywacji: <strong id="generated-code-text" style="color: var(--accent-yellow); font-size: 1.2rem; font-family: monospace;"></strong>
+                            </div>
+                            <button onclick="copyAdminCode()" style="background: #14b8a6; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;"><i class="fa-regular fa-copy"></i> Kopiuj</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MOŻLIWOŚĆ ZMIANY PAKIETU DLA ZWYKŁYCH UŻYTKOWNIKÓW -->
+                <div style="background: rgba(15, 23, 42, 0.6); padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem;">
+                    <h4 style="color: var(--accent-yellow); margin-bottom: 0.5rem;"><i class="fa-solid fa-ticket"></i> Aktywuj lub Zmień Pakiet Kodem</h4>
+                    <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 0.8rem;">Masz nowy kod aktywacyjny od administratora? Wpisz go poniżej, aby uaktualnić swój pakiet:</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <input type="text" id="user-redeem-code" class="form-control" placeholder="Wpisz kod (np. JOY-VIP-...)" style="max-width: 350px; margin: 0;">
+                        <button class="submit-btn" style="margin: 0; width: auto; padding: 0.7rem 1.5rem;" onclick="redeemCodeByUser()">Aktywuj kod</button>
                     </div>
                 </div>
 
@@ -642,7 +728,7 @@
             }
         }
 
-        // GENEROWANIE I WERYFIKACJA KODÓW AKTYWACYJNYCH
+        // --- ZARZĄDZANIE KODAMI I PAKIETAMI ---
         function getActivationCodes() {
             return JSON.parse(localStorage.getItem('tvJoyActivationCodes') || '[]');
         }
@@ -654,13 +740,33 @@
                 return;
             }
 
-            const code = 'JOY-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+            const selectedPkg = document.getElementById('admin-pkg-select').value;
+            const days = parseInt(document.getElementById('admin-duration-select').value, 10);
+            
+            const pkgTag = selectedPkg.split(' ')[0].toUpperCase();
+            const code = `JOY-${pkgTag}-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
+
             const codes = getActivationCodes();
-            codes.push({ code: code, used: false });
+            const expiryTime = (days === 9999) ? null : new Date().getTime() + (days * 24 * 60 * 60 * 1000);
+
+            codes.push({
+                code: code,
+                package: selectedPkg,
+                expiry: expiryTime,
+                used: false
+            });
+
             localStorage.setItem('tvJoyActivationCodes', JSON.stringify(codes));
 
+            document.getElementById('generated-pkg-name').innerText = selectedPkg;
             document.getElementById('generated-code-text').innerText = code;
             document.getElementById('generated-code-box').style.display = 'block';
+        }
+
+        function copyAdminCode() {
+            const text = document.getElementById('generated-code-text').innerText;
+            navigator.clipboard.writeText(text);
+            alert('Kod skopiowano do schowka!');
         }
 
         function handleRegister(e) {
@@ -676,7 +782,9 @@
                 return;
             }
 
-            // Sprawdzanie kodu aktywacyjnego (pomijane tylko jeśli konto zakłada bezpośrednio Artutmaz)
+            let assignedPackage = 'Podstawowy';
+            let assignedExpiry = null;
+
             if (username.toLowerCase() !== 'artutmaz') {
                 const codes = getActivationCodes();
                 const validCodeObj = codes.find(c => c.code === codeInput && !c.used);
@@ -688,14 +796,58 @@
 
                 validCodeObj.used = true;
                 localStorage.setItem('tvJoyActivationCodes', JSON.stringify(codes));
+
+                assignedPackage = validCodeObj.package;
+                assignedExpiry = validCodeObj.expiry;
+            } else {
+                assignedPackage = 'VIP+ (25,99 zł) [Admin]';
             }
 
             const hashedPassword = btoa(password);
-            users.push({ username, email, password: hashedPassword, avatar: selectedAvatarUrl });
+            users.push({ 
+                username, 
+                email, 
+                password: hashedPassword, 
+                avatar: selectedAvatarUrl,
+                package: assignedPackage,
+                packageExpiry: assignedExpiry
+            });
             localStorage.setItem('tvJoyUsers', JSON.stringify(users));
 
-            showAlert('Konto utworzone! Zaloguj się teraz.', 'success');
+            showAlert('Konto utworzone pomyślnie z pakietem: ' + assignedPackage, 'success');
             switchTab('login');
+        }
+
+        function redeemCodeByUser() {
+            const input = document.getElementById('user-redeem-code').value.trim();
+            const codes = getActivationCodes();
+            const validCodeObj = codes.find(c => c.code === input && !c.used);
+
+            if (!validCodeObj) {
+                alert('Nieprawidłowy lub wykorzytany kod!');
+                return;
+            }
+
+            validCodeObj.used = true;
+            localStorage.setItem('tvJoyActivationCodes', JSON.stringify(codes));
+
+            const activeUser = JSON.parse(localStorage.getItem('tvJoyActiveUser'));
+            activeUser.package = validCodeObj.package;
+            activeUser.packageExpiry = validCodeObj.expiry;
+
+            localStorage.setItem('tvJoyActiveUser', JSON.stringify(activeUser));
+
+            const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
+            const idx = users.findIndex(u => u.username.toLowerCase() === activeUser.username.toLowerCase());
+            if (idx !== -1) {
+                users[idx].package = validCodeObj.package;
+                users[idx].packageExpiry = validCodeObj.expiry;
+                localStorage.setItem('tvJoyUsers', JSON.stringify(users));
+            }
+
+            alert('Sukces! Twój nowy pakiet to: ' + validCodeObj.package);
+            document.getElementById('user-redeem-code').value = '';
+            checkAuthSession();
         }
 
         function handleLogin(e) {
@@ -706,11 +858,17 @@
             const users = JSON.parse(localStorage.getItem('tvJoyUsers') || '[]');
             const hashedPassword = btoa(password);
             
-            // Domyślne konto administratora Artutmaz jeśli jeszcze nie istnieje w bazie
             if (emailOrUsername.toLowerCase() === 'artutmaz' && password === 'admin123') {
                 let adminUser = users.find(u => u.username.toLowerCase() === 'artutmaz');
                 if (!adminUser) {
-                    adminUser = { username: 'Artutmaz', email: 'artutmaz@tvjoy.pl', password: btoa('admin123'), avatar: defaultAvatars[0] };
+                    adminUser = { 
+                        username: 'Artutmaz', 
+                        email: 'artutmaz@tvjoy.pl', 
+                        password: btoa('admin123'), 
+                        avatar: defaultAvatars[0],
+                        package: 'VIP+ (25,99 zł) [Admin]',
+                        packageExpiry: null
+                    };
                     users.push(adminUser);
                     localStorage.setItem('tvJoyUsers', JSON.stringify(users));
                 }
@@ -869,7 +1027,7 @@
             { time: "23:00", title: "Pacu Łacu – w kupie raźniej!", desc: "Wieczorny show rozrywkowy.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" }
         ];
 
-        /* TUTAJ JEST WYMYŚLNA, SPÓJNA I DZIAŁAJĄCA RAMÓWKA DLA FOTEL TV */
+        /* RAMÓWKA FOTEL TV */
         const fotelSched = [
             { time: "00:00", title: "Nocne Przemeblowanie Salonu", desc: "Eksperymenty z kanapą w ciemnościach.", zap: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&auto=format&fit=crop&q=80" },
             { time: "02:30", title: "Symfonia Chrapania w HD", desc: "Relaksacyjny dźwięk i obraz poduszek.", zap: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=900&auto=format&fit=crop&q=80" },
@@ -1082,6 +1240,15 @@
                 document.getElementById('auth-container').style.display = 'none';
                 document.getElementById('dashboard-container').style.display = 'block';
                 document.getElementById('user-display-name').innerText = activeUser.username;
+                document.getElementById('user-active-package').innerText = activeUser.package || 'Brak';
+                
+                if (activeUser.packageExpiry) {
+                    const expDate = new Date(activeUser.packageExpiry);
+                    document.getElementById('user-package-expiry').innerText = expDate.toLocaleDateString();
+                } else {
+                    document.getElementById('user-package-expiry').innerText = 'Bezterminowo';
+                }
+
                 updateHeaderPfpDisplay(activeUser.avatar || defaultAvatars[0]);
 
                 if (activeUser.username.toLowerCase() === 'artutmaz') {
