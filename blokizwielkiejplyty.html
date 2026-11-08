@@ -146,6 +146,7 @@
             height: 100%;
             min-height: 380px;
             position: relative;
+            background: #334155;
         }
 
         .featured-img-box img {
@@ -241,6 +242,7 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
+            background: #334155;
         }
 
         .news-body {
@@ -352,7 +354,7 @@
 
     <header>
         <a href="blokizwielkiejplyty.html" class="site-brand">
-            <div class="brand-icon"><i class="fa-solid fa-building-ngo"></i></div>
+            <div class="brand-icon"><i class="fa-solid fa-building"></i></div>
             <div class="brand-title">Bloki z Wielkiej Płyty <span>.online</span></div>
         </a>
         <nav>
@@ -365,13 +367,12 @@
 
     <div class="container">
         
-        <!-- ARTYKUŁ GŁÓWNY: KULOSTAN I SUROWA WIELKA PŁYTA -->
+        <!-- ARTYKUŁ GŁÓWNY -->
         <article class="featured-article-card">
             <div class="featured-badge"><i class="fa-solid fa-star"></i> Artykuł BAZOWY</div>
             <div class="featured-grid">
                 <div class="featured-img-box">
-                    <!-- Autentyczne zdjęcie surowego, betonowego bloku z płyt prefabrykowanych -->
-                    <img src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=900&auto=format&fit=crop&q=80" alt="Surowy betonowy blok z wielkiej płyty">
+                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=900&auto=format&fit=crop&q=80" alt="Betonowy blok z wielkiej płyty" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=900&auto=format&fit=crop&q=80'">
                 </div>
                 <div class="featured-content">
                     <div class="meta-info">
@@ -379,7 +380,7 @@
                         <span><i class="fa-solid fa-user"></i> Redakcja Portalowa</span>
                     </div>
                     <h1>Jak Fikcyjne Państwo Kulostan Rozsławiło Surowe Budownictwo z Wielkiej Płyty na Całym Świecie!</h1>
-                    <p>Wielka płyta to symbol epoki surowego betonu. Wykonana z prefabrykowanych w fabrykach ("Fabrykach Domy") paneli betonowych ze sztywną armaturą, była odpowiedzią na ogromny powojenny kryzys mieszkaniowy.</p>
+                    <p>Wielka płyta to symbol epoki surowego betonu. Wykonana z prefabrykowanych w fabrykach paneli betonowych ze sztywną armaturą, była odpowiedzią na ogromny powojenny kryzys mieszkaniowy.</p>
                     <p>To jednak w fikcyjnym państwie <strong>Kulostan</strong> inżynierowie opracowali legendarny system montażu modułowego. Płyty betonowe z gotowymi otworami okiennymi i widocznymi fugami spoinowymi scalano na placu budowy w zaledwie kilkanaście dni. Fenomen osiedli wielkopłytowych z Kulostanu zainspirował budownictwo masowe w całej Europie Środkowo-Wschodniej!</p>
                 </div>
             </div>
@@ -398,7 +399,7 @@
             <div class="section-header" style="border:none; margin-bottom: 0.5rem;">
                 <h2><i class="fa-solid fa-lightbulb" style="color: var(--accent-yellow);"></i> Ciekawostki o Surowej Wielkiej Płycie</h2>
             </div>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">Wszystko o prawdziwych szarych blaszakach i wielkopłytowcach bez styropianowej pastelozy:</p>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Wszystko o prawdziwych betonowych blokach bez styropianowej pastelozy:</p>
 
             <div class="facts-list">
                 <div class="fact-box">
@@ -408,17 +409,17 @@
 
                 <div class="fact-box">
                     <h4><i class="fa-solid fa-truck-ramp-box"></i> Transport z Fabryki Domy</h4>
-                    <p>Płyty ścienne i stropowe wlewano w formie ciekłego betonu w stacjonarnych fabrykach, a na teren budowy dowożono je specjalnymi naczepami zwanymi panelowcami/wielkopłytowcami.</p>
+                    <p>Płyty ścienne i stropowe wlewano w formie ciekłego betonu w stacjonarnych fabrykach, a na teren budowy dowożono je specjalnymi naczepami zwanymi panelowcami.</p>
                 </div>
 
                 <div class="fact-box">
                     <h4><i class="fa-solid fa-shield-halved"></i> Wytrzymałość W-70 i OGW</h4>
-                    <p>Choć krytykowano akustykę wielkiej płyty, jej konstrukcja nośna oparta na spawanych kotwach stalowych jest tak trwała, że wytrzymuje wstrząsy sejsmiczne i podmuchy huraganowe.</p>
+                    <p>Choć krytykowano akustykę wielkiej płyty, jej konstrukcja nośna oparta na spawanych kotwach stalowych jest niezwykle trwała i solidna.</p>
                 </div>
 
                 <div class="fact-box">
                     <h4><i class="fa-solid fa-mountain-city"></i> Urbanistyka Słońca</h4>
-                    <p>Osiedla wielkopłytowe budowano z zachowaniem tzw. norm usłonecznienia – bloki stawiano w dużych odległościach od siebie, tworząc przestronne podwórka pełne zieleni.</p>
+                    <p>Osiedla wielkopłytowe budowano z zachowaniem dużych odległości między budynkami, tworząc przestronne podwórka pełne zieleni i alejek.</p>
                 </div>
             </div>
         </div>
@@ -430,20 +431,19 @@
     </footer>
 
     <script>
-        // Baza artykułów z autentycznymi zdjęciami nieocieplonej/szarej wielkiej płyty
         const newsDatabase = [
             {
                 title: "Szary beton i widoczne łączenia: Architektura surowej płyty przeżywa renesans",
                 tag: "Architektura",
                 excerpt: "Miłośnicy brutalizmu i socmodernizmu dokumentują stare nieocieplone elewacje bloków z lat 70. Zobacz unikalne fotografie spoin betonowych.",
-                img: "https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?w=600&auto=format&fit=crop&q=80",
+                img: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=600&auto=format&fit=crop&q=80",
                 date: "Dzisiaj, 11:30"
             },
             {
                 title: "Śladami Kulostanu: Jak fikcyjne państwo dało początek masowej prefabrykacji?",
                 tag: "Historia",
                 excerpt: "Analiza dokumentów pokazująca, jak systemy modułowych płyt betonowych rodem z Kulostanu trafiły na place budów w całej Europie.",
-                img: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=600&auto=format&fit=crop&q=80",
+                img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&auto=format&fit=crop&q=80",
                 date: "Dzisiaj, 09:15"
             },
             {
@@ -477,7 +477,7 @@
             newsDatabase.forEach(item => {
                 html += `
                     <article class="news-card">
-                        <img src="${item.img}" alt="${item.title}" class="news-img">
+                        <img src="${item.img}" alt="${item.title}" class="news-img" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=600&auto=format&fit=crop&q=80'">
                         <div class="news-body">
                             <div class="news-tag">${item.tag}</div>
                             <h3 class="news-title">${item.title}</h3>
