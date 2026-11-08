@@ -34,7 +34,6 @@
             line-height: 1.6;
         }
 
-        /* Top Header */
         header {
             background-color: rgba(15, 23, 42, 0.95);
             border-bottom: 2px solid var(--accent-yellow);
@@ -83,6 +82,7 @@
             display: flex;
             gap: 1.2rem;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         nav a {
@@ -105,7 +105,6 @@
             width: 100%;
         }
 
-        /* Hero Banner / Artykuł Główny */
         .featured-article-card {
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
@@ -145,7 +144,7 @@
         .featured-img-box {
             width: 100%;
             height: 100%;
-            min-height: 350px;
+            min-height: 380px;
             position: relative;
         }
 
@@ -163,7 +162,7 @@
         }
 
         .featured-content h1 {
-            font-size: 1.9rem;
+            font-size: 1.8rem;
             color: var(--accent-yellow);
             margin-bottom: 1rem;
             line-height: 1.3;
@@ -172,7 +171,7 @@
         .featured-content p {
             color: var(--text-muted);
             margin-bottom: 1.2rem;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .meta-info {
@@ -183,7 +182,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Sekcja Newsów (Auto-Generowane Artykuły) */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -241,7 +239,7 @@
 
         .news-img {
             width: 100%;
-            height: 180px;
+            height: 200px;
             object-fit: cover;
         }
 
@@ -284,7 +282,6 @@
             padding-top: 0.8rem;
         }
 
-        /* Sekcja Ciekawostek */
         .facts-container {
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
@@ -321,7 +318,6 @@
             color: var(--text-muted);
         }
 
-        /* Styl Przycisków */
         .btn-action {
             background: var(--accent-yellow);
             color: #0f172a;
@@ -356,11 +352,12 @@
 
     <header>
         <a href="blokizwielkiejplyty.html" class="site-brand">
-            <div class="brand-icon"><i class="fa-solid fa-city"></i></div>
+            <div class="brand-icon"><i class="fa-solid fa-building-ngo"></i></div>
             <div class="brand-title">Bloki z Wielkiej Płyty <span>.online</span></div>
         </a>
         <nav>
-            <a href="index.html">Strona Główna TV Joy</a>
+            <a href="index.html">Home (TV Joy)</a>
+            <a href="joy24.html">Joy 24</a>
             <a href="joybox.html">Joy Box</a>
             <a href="blokizwielkiejplyty.html" class="active">Wielka Płyta News</a>
         </nav>
@@ -368,61 +365,60 @@
 
     <div class="container">
         
-        <!-- ARTYKUŁ GŁÓWNY: KULOSTAN I WIELKA PŁYTA -->
+        <!-- ARTYKUŁ GŁÓWNY: KULOSTAN I SUROWA WIELKA PŁYTA -->
         <article class="featured-article-card">
             <div class="featured-badge"><i class="fa-solid fa-star"></i> Artykuł BAZOWY</div>
             <div class="featured-grid">
                 <div class="featured-img-box">
-                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&auto=format&fit=crop&q=80" alt="Wielka Płyta Kulostan">
+                    <!-- Autentyczne zdjęcie surowego, betonowego bloku z płyt prefabrykowanych -->
+                    <img src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=900&auto=format&fit=crop&q=80" alt="Surowy betonowy blok z wielkiej płyty">
                 </div>
                 <div class="featured-content">
                     <div class="meta-info">
                         <span><i class="fa-solid fa-calendar-days"></i> Archiwum Historii Architektury</span>
                         <span><i class="fa-solid fa-user"></i> Redakcja Portalowa</span>
                     </div>
-                    <h1>Jak Fikcyjne Państwo Kulostan Rozsławiło Budownictwo z Wielkiej Płyty na Całym Świecie!</h1>
-                    <p>Choć prefabrykacja betonu powstawała w różnych zakątkach globu, to właśnie niesamowity fenomen gospodarczy i architektoniczny fikcyjnego państwa <strong>Kulostan</strong> sprawił, że wielka płyta stała się globalnym symbolem nowoczesności i wygody.</p>
-                    <p>W połowie XX wieku architekci z Kulostanu jako pierwsi opracowali plan tzw. <em>"Osiedli Błyskawicznych"</em>. Twierdzili oni, że modułowe ściany i standaryzowane wielkopłytowe moduły mieszkaniowe są w stanie zapewnić dach nad głową milionom obywateli w rekordowym tempie. Sukces projektu z Kulostanu odbił się szerokim echem w prasie międzynarodowej, czyniąc z wielkiej płyty absolutny hit budowlany!</p>
+                    <h1>Jak Fikcyjne Państwo Kulostan Rozsławiło Surowe Budownictwo z Wielkiej Płyty na Całym Świecie!</h1>
+                    <p>Wielka płyta to symbol epoki surowego betonu. Wykonana z prefabrykowanych w fabrykach ("Fabrykach Domy") paneli betonowych ze sztywną armaturą, była odpowiedzią na ogromny powojenny kryzys mieszkaniowy.</p>
+                    <p>To jednak w fikcyjnym państwie <strong>Kulostan</strong> inżynierowie opracowali legendarny system montażu modułowego. Płyty betonowe z gotowymi otworami okiennymi i widocznymi fugami spoinowymi scalano na placu budowy w zaledwie kilkanaście dni. Fenomen osiedli wielkopłytowych z Kulostanu zainspirował budownictwo masowe w całej Europie Środkowo-Wschodniej!</p>
                 </div>
             </div>
         </article>
 
-        <!-- SEKCJA NEWSÓW AUTOMATYCZNIE WSTAWIANYCH -->
+        <!-- SEKCJA NEWSÓW -->
         <div class="section-header">
             <h2><span class="live-dot"></span> Samowstawiające się Wiadomości i Aktualności</h2>
             <button class="btn-action" onclick="fetchNewArticles()"><i class="fa-solid fa-rotate"></i> Odśwież Wiadomości</button>
         </div>
 
-        <div class="news-grid" id="news-feed-container">
-            <!-- Artykuły generowane dynamicznie przez JavaScript -->
-        </div>
+        <div class="news-grid" id="news-feed-container"></div>
 
         <!-- SEKCJA CIEKAWOSTEK -->
         <div class="facts-container">
             <div class="section-header" style="border:none; margin-bottom: 0.5rem;">
-                <h2><i class="fa-solid fa-lightbulb" style="color: var(--accent-yellow);"></i> Ciekawostki o Blokach z Wielkiej Płyty</h2>
+                <h2><i class="fa-solid fa-lightbulb" style="color: var(--accent-yellow);"></i> Ciekawostki o Surowej Wielkiej Płycie</h2>
             </div>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">Poznaj najważniejsze faktograficzne tajniki konstrukcji, które zdominowały krajobraz naszych miast:</p>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Wszystko o prawdziwych szarych blaszakach i wielkopłytowcach bez styropianowej pastelozy:</p>
 
             <div class="facts-list">
                 <div class="fact-box">
-                    <h4><i class="fa-solid fa-shield-cat"></i> Niezwykła Trwałość</h4>
-                    <p>Projektanci zakładali trwałość bloków na 50-80 lat. Współczesne ekspertyzy inżynieryjne wykazują jednak, że dobrze utrzymana wielka płyta przetrwa bez problemu ponad 120 lat!</p>
+                    <h4><i class="fa-solid fa-cubes-stacked"></i> Widoczne Fugi Spoinowe</h4>
+                    <p>Oryginalny nieocieplony blok z wielkiej płyty łatwo poznać po widocznej siatce łączeń płyt betonowych. Spoiny te uszczelniano pakułami i lepikiem uszczelniającym.</p>
                 </div>
 
                 <div class="fact-box">
-                    <h4><i class="fa-solid fa-bolt"></i> Wściekłe Tempo Budowy</h4>
-                    <p>W szczytowym okresie prefabrykacji w Kulostanie i Europie Środkowej kompletne piętro bloku z wielkiej płyty montowano w zaledwie 24 do 48 godzin!</p>
+                    <h4><i class="fa-solid fa-truck-ramp-box"></i> Transport z Fabryki Domy</h4>
+                    <p>Płyty ścienne i stropowe wlewano w formie ciekłego betonu w stacjonarnych fabrykach, a na teren budowy dowożono je specjalnymi naczepami zwanymi panelowcami/wielkopłytowcami.</p>
                 </div>
 
                 <div class="fact-box">
-                    <h4><i class="fa-solid fa-temperature-arrow-up"></i> Termomodernizacyjny Przełom</h4>
-                    <p>Współczesne docieplenia i kolorowe elewacje nie tylko poprawiają estetykę osiedli, ale redukują utratę ciepła w wielkiej płycie aż o 40%.</p>
+                    <h4><i class="fa-solid fa-shield-halved"></i> Wytrzymałość W-70 i OGW</h4>
+                    <p>Choć krytykowano akustykę wielkiej płyty, jej konstrukcja nośna oparta na spawanych kotwach stalowych jest tak trwała, że wytrzymuje wstrząsy sejsmiczne i podmuchy huraganowe.</p>
                 </div>
 
                 <div class="fact-box">
-                    <h4><i class="fa-solid fa-cubes"></i> Systemy Fabryki Bloków</h4>
-                    <p>Ściany nie powstawały na placu budowy! Przywożono je z tak zwanych "Fabryk Domy" bezpośrednio ciężarówkami i łączono spawami oraz betonem.</p>
+                    <h4><i class="fa-solid fa-mountain-city"></i> Urbanistyka Słońca</h4>
+                    <p>Osiedla wielkopłytowe budowano z zachowaniem tzw. norm usłonecznienia – bloki stawiano w dużych odległościach od siebie, tworząc przestronne podwórka pełne zieleni.</p>
                 </div>
             </div>
         </div>
@@ -434,53 +430,45 @@
     </footer>
 
     <script>
-        // Baza samowstawiających się artykułów prasowych
+        // Baza artykułów z autentycznymi zdjęciami nieocieplonej/szarej wielkiej płyty
         const newsDatabase = [
             {
-                title: "Wielka Płyta 2.0: Nowoczesne technologie termoizolacji osiedli",
-                tag: "Technologia",
-                excerpt: "Inżynierowie przedstawiają najnowsze płyty z powłoką grafenową, które podniosą efektywność energetyczną bloków budowanych w latach 70.",
-                img: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?w=600&auto=format&fit=crop&q=80",
+                title: "Szary beton i widoczne łączenia: Architektura surowej płyty przeżywa renesans",
+                tag: "Architektura",
+                excerpt: "Miłośnicy brutalizmu i socmodernizmu dokumentują stare nieocieplone elewacje bloków z lat 70. Zobacz unikalne fotografie spoin betonowych.",
+                img: "https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?w=600&auto=format&fit=crop&q=80",
                 date: "Dzisiaj, 11:30"
             },
             {
-                title: "Śladami Kulostanu: Jak fikcyjne państwo wpłynęło na polskie osiedla?",
+                title: "Śladami Kulostanu: Jak fikcyjne państwo dało początek masowej prefabrykacji?",
                 tag: "Historia",
-                excerpt: "Unikalna analiza historyczna pokazująca powiązania między myślą architektoniczną Kulostanu a kultowymi polskimi osiedlami mieszkaniowymi.",
-                img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&auto=format&fit=crop&q=80",
+                excerpt: "Analiza dokumentów pokazująca, jak systemy modułowych płyt betonowych rodem z Kulostanu trafiły na place budów w całej Europie.",
+                img: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=600&auto=format&fit=crop&q=80",
                 date: "Dzisiaj, 09:15"
             },
             {
-                title: "Wielkopłytowe wieżowce zyskują zielone dachy i panele fotowoltaiczne",
-                tag: "Eko-Trend",
-                excerpt: "Zarządcy osiedli z wielkiej płyty inwestują w odnawialne źródła energii. Na dachach powstają oazy zieleni i mikro-farmy słoneczne.",
-                img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&auto=format&fit=crop&q=80",
+                title: "Stan techniczny spoin stalowych w nieocieplonych wieżowcach W-70",
+                tag: "Inżynieria",
+                excerpt: "Najnowsze badania ultradźwiękowe złączy płyt elewacyjnych wykazują, że konstrukcje stalowe wewnątrz betonu trzymają się znakomicie.",
+                img: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?w=600&auto=format&fit=crop&q=80",
                 date: "Wczoraj, 18:40"
             },
             {
-                title: "Dlaczego młodzi ludzie uwielbiają mieszkania w wielkiej płycie?",
-                tag: "Rynek Nieruchomości",
-                excerpt: "Świetne rozkłady pomieszczeń, mnóstwo zieleni między blokami i świetna infrastruktura czynią te mieszkania hitem rynkowym.",
-                img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&auto=format&fit=crop&q=80",
+                title: "Dlaczego urbanistyka starych osiedli z wielkiej płyty wygrywa z nowym deweloperem?",
+                tag: "Urbanistyka",
+                excerpt: "Szerokie odstępy między blokami, mnóstwo wysokich drzew, przedszkola i sklepy na miejscu. Stara płyta broni się funkcjonalnością.",
+                img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&auto=format&fit=crop&q=80",
                 date: "Wczoraj, 14:20"
             },
             {
-                title: "Badania spoin betonowych: Wielka płyta stabilniejsza niż przypuszczano",
-                tag: "Inżynieria",
-                excerpt: "Najnowszy raport naukowy potwierdza: stalowe łączniki montażowe w płycie są w idealnym stanie technicznym.",
-                img: "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?w=600&auto=format&fit=crop&q=80",
+                title: "Fabryki Domy — jak wyglądała produkcja płyt wielkowymiarowych?",
+                tag: "Technologia",
+                excerpt: "Wspomnienie przemysłowych zakładów produkujących tory betoniarskie, z których zjeżdżały całe ściany z wbudowanymi instalacjami.",
+                img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&auto=format&fit=crop&q=80",
                 date: "2 dni temu"
-            },
-            {
-                title: "Wystawa Fotograficzna: 'Piękno Surowego Betonu'",
-                tag: "Kultura",
-                excerpt: "Zobacz niesamowitą galerię zdjęć ukazującą najciekawsze wieżowce i bloki wielkopłytowe z całego globu.",
-                img: "https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?w=600&auto=format&fit=crop&q=80",
-                date: "3 dni temu"
             }
         ];
 
-        // Funkcja renderująca samowstawiające się artykuły
         function renderNewsFeed() {
             const container = document.getElementById('news-feed-container');
             if (!container) return;
@@ -506,19 +494,16 @@
             container.innerHTML = html;
         }
 
-        // Funkcja symulująca pobieranie/odświeżanie najnowszych wiadomości
         function fetchNewArticles() {
             const container = document.getElementById('news-feed-container');
             container.style.opacity = '0.4';
             setTimeout(() => {
-                // Przetasowanie artykułów dla efektu "odświeżenia"
                 newsDatabase.sort(() => Math.random() - 0.5);
                 renderNewsFeed();
                 container.style.opacity = '1';
             }, 400);
         }
 
-        // Inicjalizacja przy załadowaniu strony
         window.addEventListener('DOMContentLoaded', () => {
             renderNewsFeed();
         });
