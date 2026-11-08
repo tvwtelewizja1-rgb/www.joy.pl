@@ -10,6 +10,7 @@
             --card-bg: rgba(15, 23, 42, 0.85);
             --text-color: #ffffff;
             --text-muted: #cbd5e1;
+            --accent-yellow: #ffeb3b;
         }
         * { 
             box-sizing: border-box; 
@@ -158,16 +159,16 @@
             height: 45px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #ffeb3b;
+            border: 2px solid var(--accent-yellow);
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
 
         nav { display: flex; gap: 1.5rem; align-items: center; }
-        nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; }
-        nav a:hover, nav a.active { color: #ffeb3b; }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; transition: color 0.2s; }
+        nav a:hover, nav a.active { color: var(--accent-yellow); }
         .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
         
-        /* Ultra płynny i nowoczesny Pasek Informacyjny */
+        /* Pasek Informacyjny */
         .news-ticker {
             background-color: #b71c1c;
             color: white;
@@ -176,12 +177,12 @@
             align-items: center;
             overflow: hidden;
             white-space: nowrap;
-            border-bottom: 2px solid #ffeb3b;
+            border-bottom: 2px solid var(--accent-yellow);
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             position: relative;
         }
         .ticker-badge {
-            background-color: #ffeb3b;
+            background-color: var(--accent-yellow);
             color: #b71c1c;
             padding: 0.3rem 0.8rem;
             border-radius: 4px;
@@ -212,7 +213,7 @@
             align-items: center;
         }
         .ticker-content span i {
-            color: #ffeb3b;
+            color: var(--accent-yellow);
             margin-right: 0.6rem;
         }
 
@@ -234,14 +235,14 @@
             text-align: center;
         }
         .nn-item h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; color: #fff; }
-        .nn-item p { font-size: 1.4rem; font-weight: bold; color: #ffeb3b; }
+        .nn-item p { font-size: 1.4rem; font-weight: bold; color: var(--accent-yellow); }
 
         .player-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; background-color: #000; margin-bottom: 4rem; }
         .fallback-box { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #0f172a; padding: 2rem; text-align: center; }
         .watch-link-btn { background-color: #ff0000; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
 
         .section-title { font-size: 2rem; margin-bottom: 2rem; font-weight: 700; display: flex; align-items: center; gap: 1rem; }
-        .section-title i { color: #ffeb3b; }
+        .section-title i { color: var(--accent-yellow); }
 
         /* Widget Pogodowy IMGW z Wbudowaną Mapą Wektorową */
         .weather-section {
@@ -283,9 +284,9 @@
             transition: all 0.2s;
         }
         .weather-tab:hover, .weather-tab.active {
-            background-color: #ffeb3b;
+            background-color: var(--accent-yellow);
             color: #0d47a1;
-            border-color: #ffeb3b;
+            border-color: var(--accent-yellow);
         }
         .weather-grid {
             display: grid;
@@ -315,7 +316,7 @@
         }
         .weather-location {
             font-size: 1.3rem;
-            color: #ffeb3b;
+            color: var(--accent-yellow);
         }
         .weather-source {
             font-size: 0.8rem;
@@ -337,7 +338,7 @@
         }
         .weather-icon-lg {
             font-size: 3.5rem;
-            color: #ffeb3b;
+            color: var(--accent-yellow);
         }
         .weather-temp {
             font-size: 2.8rem;
@@ -369,7 +370,7 @@
         }
         .weather-detail-item strong {
             font-size: 1.05rem;
-            color: #ffeb3b;
+            color: var(--accent-yellow);
         }
 
         .weather-map-container {
@@ -386,7 +387,7 @@
             justify-content: space-between;
             align-items: center;
             font-size: 0.9rem;
-            color: #ffeb3b;
+            color: var(--accent-yellow);
         }
         .tv-map-screen {
             position: relative;
@@ -409,7 +410,7 @@
         .map-station-node {
             position: absolute;
             background: rgba(13, 71, 161, 0.95);
-            border: 2px solid #ffeb3b;
+            border: 2px solid var(--accent-yellow);
             color: white;
             padding: 3px 8px;
             border-radius: 16px;
@@ -424,7 +425,7 @@
         }
         .map-station-node:hover {
             transform: translate(-50%, -50%) scale(1.18);
-            background: #ffeb3b;
+            background: var(--accent-yellow);
             color: #0d47a1;
             z-index: 30;
         }
@@ -436,7 +437,6 @@
             padding-top: 0.3rem;
         }
 
-        /* Wygląd okienka ramówki */
         .schedule-box { 
             background-color: var(--card-bg); 
             border-radius: 16px; 
@@ -466,11 +466,11 @@
         
         .schedule-item.active-now {
             background-color: rgba(255, 235, 59, 0.15);
-            border-left: 5px solid #ffeb3b;
+            border-left: 5px solid var(--accent-yellow);
             border-radius: 8px;
         }
 
-        .schedule-time { font-weight: bold; color: #ffeb3b; min-width: 70px; font-size: 1.1rem; }
+        .schedule-time { font-weight: bold; color: var(--accent-yellow); min-width: 70px; font-size: 1.1rem; }
         .schedule-img { width: 60px; height: 40px; border-radius: 6px; object-fit: cover; background: #334155; display: flex; align-items: center; justify-content: center; color: #cbd5e1; font-size: 1.2rem; }
         .schedule-title { flex-grow: 1; font-size: 1.05rem; }
 
@@ -479,7 +479,6 @@
 </head>
 <body>
 
-    <!-- Okno ostrzegawcze w stylu Windows XP -->
     <div class="ai-warning-overlay" id="warningModal" style="display: none;">
         <div class="winxp-window">
             <div class="winxp-titlebar">
@@ -511,13 +510,13 @@
             <a href="index.html" class="active">Home</a>
             <a href="joy24.html">Joy 24</a>
             <a href="joybox.html">Joy Box</a>
+            <a href="blokizwielkiejplyty.html" style="color: var(--accent-yellow);"><i class="fa-solid fa-city"></i> Wielka Płyta News</a>
             <a href="https://www.youtube.com/@joy_twoja_u%C5%9Bmiechni%C4%99ta_tv" target="_blank" class="yt-btn">
                 <i class="fa-brands fa-youtube"></i> Subskrybuj
             </a>
         </nav>
     </header>
 
-    <!-- Pasek Informacyjny z RSS -->
     <div class="news-ticker">
         <div class="ticker-badge"><i class="fa-solid fa-newspaper"></i> WIEŚCI Z KRAJU</div>
         <div class="ticker-wrap">
@@ -543,10 +542,9 @@
             </div>
         </section>
 
-        <!-- Pasek Co teraz / Następnie -->
         <div class="now-next-box">
             <div class="nn-item">
-                <h3><i class="fa-solid fa-circle-dot" style="color: #ffeb3b;"></i> Teraz na antenie</h3>
+                <h3><i class="fa-solid fa-circle-dot" style="color: var(--accent-yellow);"></i> Teraz na antenie</h3>
                 <p id="current-show">Ładowanie...</p>
             </div>
             <div class="nn-item">
@@ -555,7 +553,6 @@
             </div>
         </div>
 
-        <!-- Serwis Pogodowy IMGW-PIB z Live API -->
         <section class="weather-section">
             <h2 class="section-title"><i class="fa-solid fa-cloud-sun"></i> Serwis Pogodowy IMGW-PIB (Dane Na Żywo)</h2>
             <div class="weather-box">
@@ -624,7 +621,7 @@
                                 <path d="M 124 100 L 150 95 L 180 102 L 210 90 L 235 60 L 260 48 L 275 62 L 290 75 L 305 60 L 320 68 L 335 88 L 350 92 L 375 80 L 415 88 L 435 70 L 465 82 L 490 100 L 520 125 L 535 155 L 515 185 L 530 220 L 555 245 L 540 280 L 525 315 L 535 365 L 510 405 L 520 440 L 495 470 L 450 495 L 420 478 L 390 515 L 365 525 L 340 500 L 305 510 L 275 490 L 245 505 L 215 480 L 185 490 L 155 450 L 125 440 L 105 455 L 80 435 L 70 400 L 52 360 L 68 320 L 58 275 L 75 235 L 60 195 L 85 160 L 105 168 L 115 135 Z" 
                                       fill="rgba(30, 136, 229, 0.12)" stroke="#38bdf8" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
                                 <path d="M 124 100 Q 110 70 105 50 Q 112 40 120 48 Q 128 75 135 98" 
-                                      fill="rgba(56, 189, 248, 0.2)" stroke="#ffeb3b" stroke-width="2.5" stroke-linecap="round"/>
+                                      fill="rgba(56, 189, 248, 0.2)" stroke="var(--accent-yellow)" stroke-width="2.5" stroke-linecap="round"/>
                             </svg>
 
                             <div class="map-station-node" style="top: 24%; left: 22%;" onclick="changeWeather('Szczecin', 'zachodniopomorskie', document.querySelectorAll('.weather-tab')[8])">Szczecin</div>
@@ -640,14 +637,13 @@
                         </div>
                         <div class="map-legend">
                             <span>Kliknij miasto na mapie, aby pobrać pomiar IMGW</span>
-                            <span style="color: #ffeb3b;"><i class="fa-solid fa-circle-dot"></i> API IMGW-PIB</span>
+                            <span style="color: var(--accent-yellow);"><i class="fa-solid fa-circle-dot"></i> API IMGW-PIB</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Ramówka -->
         <section id="ramowka">
             <h2 class="section-title"><i class="fa-solid fa-calendar-days"></i> Całodobowa Ramówka TV Joy</h2>
             <div class="schedule-box" id="schedule-list">
@@ -696,7 +692,6 @@
             document.getElementById('warningModal').style.display = 'none';
         }
 
-        // --- PŁYNNY TICKER RSS ---
         async function initLiveNewsTicker() {
             const container = document.getElementById('ticker-content');
             const rssFeeds = [
@@ -740,18 +735,15 @@
             requestAnimationFrame(step);
         }
 
-        // --- POBIERANIE POGODY Z OFICJALNEGO API IMGW-PIB ---
         let imgwCache = {};
 
         async function fetchImgwWeather() {
             try {
                 const response = await fetch('https://danepubliczne.imgw.pl/api/data/synop');
                 const data = await response.json();
-                // Tworzenie słownika po nazwie stacji (zamiana na małe litery)
                 data.forEach(station => {
                     imgwCache[station.stacja.toLowerCase().trim()] = station;
                 });
-                // Domyślnie załaduj Mikołajki (najbliższa stacja dla Mazur/Ełku)
                 changeWeather('Mikołajki', 'warminsko_mazurskie', document.querySelector('.weather-tab'));
             } catch (error) {
                 console.error("Błąd pobierania danych IMGW:", error);
@@ -767,7 +759,6 @@
             const stationData = imgwCache[stationKey];
 
             if (stationData) {
-                // Jeśli stacja istnieje w bazie IMGW
                 document.getElementById('w-location').innerText = `${cityName} (${regionKey})`;
                 document.getElementById('w-temp').innerText = `${stationData.temperatura}°C`;
                 document.getElementById('w-wind').innerText = `${stationData.predkosc_wiatru} km/h`;
@@ -775,7 +766,6 @@
                 document.getElementById('w-humidity').innerText = `${stationData.wilgotnosc_wzgledna}%`;
                 document.getElementById('w-station').innerText = stationData.stacja;
 
-                // Dobór ikony i opisu na podstawie warunków
                 let cond = "Dane synoptyczne IMGW";
                 let icon = "fa-cloud-sun";
                 const tempVal = parseFloat(stationData.temperatura);
@@ -796,7 +786,6 @@
                 document.getElementById('w-condition').innerText = cond;
                 document.getElementById('w-icon').innerHTML = `<i class="fa-solid ${icon}"></i>`;
             } else {
-                // Awaryjny fallback gdyby konkretna stacja nie odpowiedziała
                 document.getElementById('w-location').innerText = cityName;
                 document.getElementById('w-temp').innerText = "6°C";
                 document.getElementById('w-condition').innerText = "Aktualizacja IMGW";
@@ -808,7 +797,6 @@
             }
         }
 
-        // --- Logika ramówki telewizyjnej z czasem warszawskim i dobą startującą o 06:00 ---
         const scheduleItems = [
             { time: "06:00", title: "Poranek z uśmiechem — nowy program śniadaniowy" },
             { time: "06:30", title: "Muminki" },
@@ -850,7 +838,7 @@
             let m = parseInt(parts[1], 10);
             let total = h * 60 + m;
             if (total < 360) {
-                total += 1440; // Przesunięcie po północy (00:00 do 05:59)
+                total += 1440;
             }
             return total;
         }
