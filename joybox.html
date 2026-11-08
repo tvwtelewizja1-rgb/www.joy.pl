@@ -143,7 +143,6 @@
 
         .user-dashboard { display: none; }
         
-        /* STYL VECTRA EPG / VOD */
         .tvp-epg-wrapper {
             background: var(--vod-bg);
             border: 1px solid var(--vod-border);
@@ -192,7 +191,6 @@
             opacity: 0.55;
         }
 
-        /* SPECJALNY STYL VECTRA VOD DLA KANAŁÓW VOD */
         .tvp-epg-row.vod-channel-row {
             background: linear-gradient(90deg, rgba(229, 9, 20, 0.08), var(--vod-card));
             border-left: 4px solid var(--vectra-red);
@@ -801,37 +799,17 @@
             { time: "23:00", title: "Pacu Łacu – w kupie raźniej!", desc: "Wieczorny show rozrywkowy.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" }
         ];
 
+        // WYMYŚLNA RAMÓWKA DLA FOTEL TV: "Fotelowe Laboratorium Absurdu"
         const fotelSched = [
-            { time: "23:45", title: "Kuchenne Rewolucje", desc: "Magda Gessler ratuje restauracje.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
-            { time: "00:45", title: "Kuchenne Rewolucje", desc: "Kolejny odcinek kulminacyjny.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
-            { time: "01:45", title: "Na dobre i na złe", desc: "Dramaty medyczne w Leśnej Górze.", zap: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=900&auto=format&fit=crop&q=80" },
-            { time: "02:45", title: "Zakończenie programu", desc: "Przerwa nocna w stacji Fotel TV.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
-            { time: "05:45", title: "Rodzinka.pl", desc: "Perypetie rodziny Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "06:15", title: "Ranczo", desc: "Wizyta w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "07:15", title: "Telewpadki x2 odc.", desc: "Zabawne wpadki telewizyjne.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
-            { time: "07:30", title: "Co polak potrafi na drodze?", desc: "Magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "08:30", title: "Ranczo", desc: "Poranne pasmo serialu Ranczo.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "09:30", title: "Ranczo", desc: "Kolejne odcinki Rancza.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "10:30", title: "Ranczo", desc: "Wizyta w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "11:30", title: "Ranczo", desc: "Kolejny odcinek Rancza.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "12:30", title: "Co polak potrafi na drodze?", desc: "Magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "13:30", title: "Co polak potrafi na drodze?", desc: "Magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "14:30", title: "Niania", desc: "Frania Maj w rezydencji Skalskiego.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:00", title: "Fineasz i Ferb", desc: "Przygody braci w wakacje.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:30", title: "Niesamowity Świat Gumballa", desc: "Animowane szaleństwo.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
-            { time: "15:45", title: "Cudownie dziwny świat Gumballa", desc: "Kolejna porcja animacji.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
-            { time: "16:00", title: "Rodzinka.pl", desc: "Codzienne perypetie Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "16:30", title: "Świat Według Kiepskich", desc: "Ferdynand i spółka na Kamiennej.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
-            { time: "17:00", title: "77 TV", desc: "Program autorski stacji.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
-            { time: "18:00", title: "Co polak potrafi na drodze?", desc: "Wieczorny magazyn motoryzacyjny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
-            { time: "19:00", title: "Fineasz i Ferb", desc: "Przygody braci.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "19:30", title: "Fineasz i Ferb", desc: "Kolejne przygody.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:00", title: "Niania", desc: "Frania Maj.", zap: "https://images.unsplash.com/photo-1548625361-167a126a267b?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:30", title: "Miodowe lata", desc: "Krawczyk i Norek.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
-            { time: "21:00", title: "Ranczo", desc: "Wieczorne losy w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "22:00", title: "Ranczo", desc: "Kolejne odcinki serialu.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
-            { time: "23:00", title: "Włatcy Móch", desc: "Kultowa polska kreskówka.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "23:30", title: "Telewpadki x2 odc.", desc: "Przegląd wpadek telewizyjnych.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" }
+            { time: "00:00", title: "Nocne Przemeblowanie Salonu", desc: "Eksperymenty z kanapą w ciemnościach.", zap: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:30", title: "Symfonia Chrapania w HD", desc: "Relaksacyjny dźwięk i obraz poduszek.", zap: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:00", title: "Poranne Wstawanie z Poduch", desc: "Gimnastyka leniwego widza.", zap: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:00", title: "Test Wytrzymałości Sprężyn", desc: "Ile kilogramów zdoła wytrzymać kultowy fotel?", zap: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:00", title: "Akademik Session: Gotowanie z Czajnika", desc: "Kulinarne cuda na kacu i w biegu.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:00", title: "Mistrzostwa Świata w Pilocie", desc: "Kto pierwszy przełączy kanał bez wstawiania się?", zap: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:00", title: "Kroniki Zaginionego Popcornu", desc: "Gdzie podziewają się okruchy wpadające w szczeliny?", zap: "https://images.unsplash.com/photo-1578849278619-e73505e9610f?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:00", title: "Wielki Seans na Siedząco", desc: "Premiera autorskiego filmu stacji Fotel TV.", zap: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:00", title: "Nocne Polaków Rozmowy o Niczym", desc: "Filozoficzne rozkminy przy zgaszonym świetle.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" }
         ];
 
         const nex1Sched = [
@@ -872,7 +850,7 @@
             { time: "02:15", title: "Radio Metronomia (przerwa w transmisji Nex1)", desc: "Przerwa techniczna i audycja radiowa.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" }
         ];
 
-        // SPECJALNE RAMÓWKI W STYLU VOD VECTRA
+        // SPECJALNE RAMÓWKI VOD (Vectra Style)
         const infoVodSched = [
             { time: "00:00", title: "[VOD] Jak korzystać z katalogu wideo?", desc: "Wprowadzenie do usługi VOD Vectra Style w JoyBox.", zap: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=900&auto=format&fit=crop&q=80" },
             { time: "06:00", title: "[VOD] Nowości Tygodnia w JoyBox", desc: "Prezentacja premierowych filmów i seriali.", zap: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=900&auto=format&fit=crop&q=80" },
