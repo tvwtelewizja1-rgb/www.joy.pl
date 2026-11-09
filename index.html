@@ -178,7 +178,7 @@
             box-shadow: 0 4px 12px rgba(0, 240, 255, 0.5), inset 0 2px 4px rgba(255,255,255,0.8);
         }
 
-        nav { display: flex; gap: 1.2px; align-items: center; flex-wrap: wrap; z-index: 2; }
+        nav { display: flex; gap: 1.2rem; align-items: center; flex-wrap: wrap; z-index: 2; }
         nav a { 
             color: #ffffff; 
             text-decoration: none; 
@@ -259,10 +259,97 @@
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; position: relative; z-index: 1; }
-        .hero { text-align: center; margin-bottom: 3rem; }
-        .hero h1 { font-size: 3.2rem; margin-bottom: 0.5rem; text-shadow: 0 3px 10px rgba(0,30,80,0.4); }
-        .hero p { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem; text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
         
+        /* Sekcja Góry Strony z Zegarem Analogowym */
+        .hero-top-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+        @media(max-width: 768px) {
+            .hero-top-grid { grid-template-columns: 1fr; justify-items: center; }
+        }
+
+        .hero { text-align: left; }
+        @media(max-width: 768px) { .hero { text-align: center; } }
+        .hero h1 { font-size: 3rem; margin-bottom: 0.5rem; text-shadow: 0 3px 10px rgba(0,30,80,0.4); }
+        .hero p { color: var(--text-muted); font-size: 1.2rem; text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+
+        /* Zegar Analogowy Frutiger Aero / Liquid Glass */
+        .analog-clock-box {
+            background: var(--glass-bg);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            width: 160px;
+            height: 160px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 30, 80, 0.3), inset 0 2px 6px rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .clock-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        .clock-marker {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            left: 50%;
+            top: 6px;
+            transform-origin: 0 74px;
+        }
+        /* Cyfrowe godziny wewnątrz zegara */
+        .clock-num {
+            position: absolute;
+            font-size: 0.75rem;
+            color: #ffffff;
+            font-weight: 800;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+        }
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom;
+            border-radius: 4px;
+            z-index: 5;
+        }
+        .hour-hand { width: 4px; height: 35px; background: #ffffff; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        .min-hand { width: 3px; height: 50px; background: #00f0ff; box-shadow: 0 0 6px rgba(0, 240, 255, 0.6); }
+        .sec-hand { width: 2px; height: 58px; background: var(--accent-yellow); z-index: 6; }
+        .clock-center-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border: 2px solid #0055ea;
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+        /* Cyfrowa godzina na środku zegara */
+        .clock-digital-center {
+            position: absolute;
+            bottom: 22px;
+            background: rgba(0, 20, 45, 0.65);
+            border: 1px solid rgba(0, 240, 255, 0.6);
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            color: var(--accent-yellow);
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            z-index: 8;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+        }
+
         .now-next-box {
             background: linear-gradient(135deg, rgba(255, 152, 0, 0.85), rgba(244, 67, 54, 0.85));
             border-radius: 20px;
@@ -589,20 +676,38 @@
     </div>
 
     <div class="container">
-        <section id="live" class="hero">
-            <h1>Twoja Uśmiechnięta TV</h1>
-            <p>Oglądaj naszą telewizję na żywo i ciesz się uśmiechem każdego dnia!</p>
-            <div class="player-container">
-                <div class="fallback-box">
-                    <i class="fa-brands fa-youtube" style="font-size: 3rem; color: #ff0000; margin-bottom: 1rem;"></i>
-                    <h3>Oglądaj bezpośrednio na YouTube</h3>
-                    <p style="color: var(--text-muted);">Kliknij poniżej, aby przejść do oficjalnego kanału TV Joy:</p>
-                    <a href="https://www.youtube.com/@joy_twoja_u%C5%9Bmiechni%C4%99ta_tv" target="_blank" class="watch-link-btn">
-                        <i class="fa-solid fa-play"></i> Otwórz kanał TV Joy
-                    </a>
+        <section id="live" class="hero-top-grid">
+            <div class="hero">
+                <h1>Twoja Uśmiechnięta TV</h1>
+                <p>Oglądaj naszą telewizję na żywo i ciesz się uśmiechem każdego dnia!</p>
+            </div>
+            
+            <!-- ZEGAR ANALOGOWY Z CYFROWĄ GODZINĄ W ŚRODKU -->
+            <div class="analog-clock-box">
+                <div class="clock-face">
+                    <span class="clock-num" style="top: 8px; left: 73px;">12</span>
+                    <span class="clock-num" style="top: 38px; right: 20px;">3</span>
+                    <span class="clock-num" style="bottom: 12px; left: 76px;">6</span>
+                    <span class="clock-num" style="top: 38px; left: 20px;">9</span>
                 </div>
+                <div class="hand hour-hand" id="clock-hour"></div>
+                <div class="hand min-hand" id="clock-min"></div>
+                <div class="hand sec-hand" id="clock-sec"></div>
+                <div class="clock-center-dot"></div>
+                <div class="clock-digital-center" id="clock-digital">00:00</div>
             </div>
         </section>
+
+        <div class="player-container">
+            <div class="fallback-box">
+                <i class="fa-brands fa-youtube" style="font-size: 3rem; color: #ff0000; margin-bottom: 1rem;"></i>
+                <h3>Oglądaj bezpośrednio na YouTube</h3>
+                <p style="color: var(--text-muted);">Kliknij poniżej, aby przejść do oficjalnego kanału TV Joy:</p>
+                <a href="https://www.youtube.com/@joy_twoja_u%C5%9Bmiechni%C4%99ta_tv" target="_blank" class="watch-link-btn">
+                    <i class="fa-solid fa-play"></i> Otwórz kanał TV Joy
+                </a>
+            </div>
+        </div>
 
         <div class="now-next-box">
             <div class="nn-item">
@@ -752,6 +857,45 @@
     <script>
         function closeWarning() {
             document.getElementById('warningModal').style.display = 'none';
+        }
+
+        // Zegar analogowy + cyfrowy na środku
+        function updateAnalogClock() {
+            const now = new Date();
+            const formatter = new Intl.DateTimeFormat('pl-PL', {
+                timeZone: 'Europe/Warsaw',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            
+            const parts = formatter.formatToParts(now);
+            let h = 0, m = 0, s = 0;
+            parts.forEach(p => {
+                if (p.type === 'hour') h = parseInt(p.value, 10);
+                if (p.type === 'minute') m = parseInt(p.value, 10);
+                if (p.type === 'second') s = parseInt(p.value, 10);
+            });
+
+            const secDeg = (s / 60) * 360;
+            const minDeg = ((m + s / 60) / 60) * 360;
+            const hourDeg = (((h % 12) + m / 60) / 12) * 360;
+
+            const secHand = document.getElementById('clock-sec');
+            const minHand = document.getElementById('clock-min');
+            const hourHand = document.getElementById('clock-hour');
+            const digitalLabel = document.getElementById('clock-digital');
+
+            if (secHand) secHand.style.transform = `rotate(${secDeg}deg)`;
+            if (minHand) minHand.style.transform = `rotate(${minDeg}deg)`;
+            if (hourHand) hourHand.style.transform = `rotate(${hourDeg}deg)`;
+            
+            if (digitalLabel) {
+                const hh = String(h).padStart(2, '0');
+                const mm = String(m).padStart(2, '0');
+                digitalLabel.innerText = `${hh}:${mm}`;
+            }
         }
 
         async function initLiveNewsTicker() {
@@ -950,6 +1094,8 @@
             initLiveNewsTicker();
             fetchImgwWeather();
             updateScheduleAndNowNext();
+            updateAnalogClock();
+            setInterval(updateAnalogClock, 1000);
             setInterval(updateScheduleAndNowNext, 15000);
         });
     </script>
