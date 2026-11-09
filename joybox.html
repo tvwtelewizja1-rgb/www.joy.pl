@@ -24,7 +24,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Udostępniamy funkcje chmury globalnie w skrypcie strony
         window.db = db;
         window.collection = collection;
         window.getDocs = getDocs;
@@ -32,7 +31,6 @@
         window.doc = doc;
         window.getDoc = getDoc;
 
-        // Sygnalizujemy gotowość aplikacji
         window.dispatchEvent(new Event('firebase-ready'));
     </script>
 
@@ -742,7 +740,6 @@
             const expiryTime = (days === 9999) ? null : new Date().getTime() + (days * 24 * 60 * 60 * 1000);
 
             try {
-                // Zapisujemy kod w chmurze Firebase w kolekcji "codes"
                 await window.setDoc(window.doc(window.db, "codes", code), {
                     code: code,
                     package: selectedPkg,
@@ -773,7 +770,6 @@
             const codeInput = document.getElementById('reg-code').value.trim();
 
             try {
-                // Sprawdzamy czy użytkownik już istnieje w chmurze
                 const userRef = window.doc(window.db, "users", email);
                 const userSnap = await window.getDoc(userRef);
                 if (userSnap.exists()) {
@@ -797,7 +793,6 @@
                     assignedPackage = codeData.package;
                     assignedExpiry = codeData.expiry;
 
-                    // Oznaczamy kod jako użyty w chmurze
                     await window.setDoc(codeRef, { used: true }, { merge: true });
                 } else {
                     assignedPackage = 'VIP+ (25,99 zł) [Admin]';
@@ -813,7 +808,6 @@
                     packageExpiry: assignedExpiry
                 };
 
-                // Zapisujemy użytkownika w bazie Firebase
                 await window.setDoc(userRef, newUser);
 
                 showAlert('Konto utworzone pomyślnie z pakietem: ' + assignedPackage, 'success');
@@ -845,7 +839,6 @@
                 activeUser.packageExpiry = codeData.expiry;
                 localStorage.setItem('tvJoyActiveUser', JSON.stringify(activeUser));
 
-                // Aktualizujemy dane użytkownika w bazie Firebase
                 const userRef = window.doc(window.db, "users", activeUser.email);
                 await window.setDoc(userRef, { package: codeData.package, packageExpiry: codeData.expiry }, { merge: true });
 
@@ -864,7 +857,6 @@
             const password = document.getElementById('login-password').value;
             const hashedPassword = btoa(password);
 
-            // Specjalne konto admina
             if (emailOrUsername.toLowerCase() === 'artutmaz' && password === 'admin123') {
                 const adminUser = {
                     username: 'Artutmaz',
@@ -896,99 +888,191 @@
             }
         }
 
-        // --- KANAŁY I RAMÓWKI ---
+        // --- PEŁNA LISTA KANAŁÓW Z TWOJEJ LISTY (OD 100 DO 160) ---
         const rawChannels = [
             { num: 100, name: "Joy", tag: "JOY", key: "joy", isVod: false },
-            { num: 101, name: "Olixer", tag: "OLX", key: null, isVod: false },
-            { num: 102, name: "Olixer Music", tag: "MUS", key: null, isVod: false },
+            { num: 101, name: "Olixer", tag: "OLX", key: "testcard", isVod: false },
+            { num: 102, name: "Olixer Music", tag: "MUS", key: "testcard", isVod: false },
             { num: 103, name: "Infiniti", tag: "INF", key: "infiniti", isVod: false },
-            { num: 104, name: "Infiniti 2", tag: "INF2", key: null, isVod: false },
-            { num: 105, name: "TV94", tag: "TV94", key: null, isVod: false },
-            { num: 106, name: "Vilion", tag: "VIL", key: null, isVod: false },
-            { num: 107, name: "ITR", tag: "ITR", key: null, isVod: false },
-            { num: 108, name: "ITR >>1", tag: "ITR1", key: null, isVod: false },
-            { num: 109, name: "ITR Hits", tag: "ITRH", key: null, isVod: false },
-            { num: 110, name: "ITR Action", tag: "ITRA", key: null, isVod: false },
-            { num: 111, name: "NetWave", tag: "NET", key: null, isVod: false },
-            { num: 112, name: "Olixer News", tag: "NEWS", key: null, isVod: false },
+            { num: 104, name: "Infiniti 2", tag: "INF2", key: "testcard", isVod: false },
+            { num: 105, name: "TV94", tag: "TV94", key: "testcard", isVod: false },
+            { num: 106, name: "Vilion", tag: "VIL", key: "testcard", isVod: false },
+            { num: 107, name: "ITR", tag: "ITR", key: "testcard", isVod: false },
+            { num: 108, name: "ITR >>1", tag: "ITR1", key: "testcard", isVod: false },
+            { num: 109, name: "ITR Hits", tag: "ITRH", key: "testcard", isVod: false },
+            { num: 110, name: "ITR Action", tag: "ITRA", key: "testcard", isVod: false },
+            { num: 111, name: "NetWave", tag: "NET", key: "testcard", isVod: false },
+            { num: 112, name: "Olixer News", tag: "NEWS", key: "testcard", isVod: false },
             { num: 113, name: "Nex1", tag: "NEX1", key: "nex1", isVod: false },
-            { num: 114, name: "Nex2", tag: "NEX2", key: null, isVod: false },
-            { num: 115, name: "NexSPT", tag: "SPT", key: null, isVod: false },
-            { num: 116, name: "snap hd", tag: "SNAP", key: null, isVod: false },
-            { num: 117, name: "In Vibe", tag: "VIBE", key: null, isVod: false },
-            { num: 118, name: "Tptv", tag: "TPTV", key: null, isVod: false },
-            { num: 119, name: "tptv extra", tag: "TPEX", key: null, isVod: false },
-            { num: 120, name: "TWP1", tag: "TWP1", key: null, isVod: false },
-            { num: 121, name: "TWP2", tag: "TWP2", key: null, isVod: false },
-            { num: 122, name: "Tptv music", tag: "TPM", key: null, isVod: false },
-            { num: 123, name: "camTV", tag: "CAM", key: null, isVod: false },
-            { num: 124, name: "ITR festival", tag: "FEST", key: null, isVod: false },
-            { num: 125, name: "ITR comedy", tag: "COM", key: null, isVod: false },
-            { num: 126, name: "ITR emotion", tag: "EMO", key: null, isVod: false },
-            { num: 127, name: "Option!", tag: "OPT", key: null, isVod: false },
-            { num: 128, name: "Infiniti Music", tag: "INFM", key: null, isVod: false },
-            { num: 129, name: "quartz", tag: "QRZ", key: null, isVod: false },
+            { num: 114, name: "Nex2", tag: "NEX2", key: "testcard", isVod: false },
+            { num: 115, name: "NexSPT", tag: "SPT", key: "testcard", isVod: false },
+            { num: 116, name: "snap hd", tag: "SNAP", key: "testcard", isVod: false },
+            { num: 117, name: "In Vibe", tag: "VIBE", key: "testcard", isVod: false },
+            { num: 118, name: "Tptv", tag: "TPTV", key: "testcard", isVod: false },
+            { num: 119, name: "tptv extra", tag: "TPEX", key: "testcard", isVod: false },
+            { num: 120, name: "TWP1", tag: "TWP1", key: "testcard", isVod: false },
+            { num: 121, name: "TWP2", tag: "TWP2", key: "testcard", isVod: false },
+            { num: 122, name: "Tptv music", tag: "TPM", key: "testcard", isVod: false },
+            { num: 123, name: "camTV", tag: "CAM", key: "testcard", isVod: false },
+            { num: 124, name: "ITR festival", tag: "FEST", key: "testcard", isVod: false },
+            { num: 125, name: "ITR comedy", tag: "COM", key: "testcard", isVod: false },
+            { num: 126, name: "ITR emotion", tag: "EMO", key: "testcard", isVod: false },
+            { num: 127, name: "Option!", tag: "OPT", key: "testcard", isVod: false },
+            { num: 128, name: "Infiniti Music", tag: "INFM", key: "testcard", isVod: false },
+            { num: 129, name: "quartz", tag: "QRZ", key: "testcard", isVod: false },
             { num: 130, name: "INFO VOD", tag: "VOD", key: "infovod", isVod: true },
             { num: 131, name: "Fotel TV", tag: "FTL", key: "fotel", isVod: false },
-            { num: 132, name: "Fotel 2", tag: "FTL2", key: null, isVod: false },
-            { num: 133, name: "KTA:TV", tag: "KTA", key: null, isVod: false },
-            { num: 134, name: "KTA:TV 2", tag: "KTA2", key: null, isVod: false },
-            { num: 135, name: "KTA:TV Music", tag: "KTAM", key: null, isVod: false },
-            { num: 136, name: "KTA:TV Dance", tag: "KTAD", key: null, isVod: false },
-            { num: 137, name: "KTA:TV Hits", tag: "KTAH", key: null, isVod: false },
-            { num: 138, name: "1.TV", tag: "1TV", key: null, isVod: false },
-            { num: 139, name: "MAX", tag: "MAX", key: null, isVod: false },
-            { num: 140, name: "Star", tag: "STAR", key: null, isVod: false },
-            { num: 141, name: "KTA:PUNKT", tag: "PNKT", key: null, isVod: false },
-            { num: 142, name: "Słoneczna", tag: "SLN", key: null, isVod: false },
-            { num: 143, name: "Rytmiczny Wymiar", tag: "RYT", key: null, isVod: false },
-            { num: 144, name: "Fotel :3", tag: "FTL3", key: null, isVod: false },
-            { num: 145, name: "Ktoś TV", tag: "KTOS", key: null, isVod: false },
-            { num: 146, name: "Ktoś Inter", tag: "KINT", key: null, isVod: false },
-            { num: 147, name: "ATM 1", tag: "ATM1", key: null, isVod: false },
-            { num: 148, name: "ananta hd", tag: "ANA", key: null, isVod: false },
-            { num: 149, name: "tv17", tag: "TV17", key: null, isVod: false },
-            { num: 150, name: "fotel tv 4k", tag: "FT4K", key: null, isVod: false },
-            { num: 151, name: "ryż biały", tag: "RYZ", key: null, isVod: false },
-            { num: 152, name: "astra", tag: "AST", key: null, isVod: false },
-            { num: 153, name: "Snap", tag: "SNP", key: null, isVod: false },
-            { num: 154, name: "kosmos", tag: "KOSM", key: null, isVod: false },
-            { num: 155, name: "VOD Katalog Główny", tag: "VOD1", key: "vodcatalog", isVod: true },
-            { num: 156, name: "VOD Seriale Hit", tag: "VOD2", key: "vodseries", isVod: true },
-            { num: 157, name: "VOD Kino Familijne", tag: "VOD3", key: "vodfamily", isVod: true },
+            { num: 132, name: "Fotel 2", tag: "FTL2", key: "testcard", isVod: false },
+            { num: 133, name: "KTA:TV", tag: "KTA", key: "testcard", isVod: false },
+            { num: 134, name: "KTA:TV 2", tag: "KTA2", key: "testcard", isVod: false },
+            { num: 135, name: "KTA:TV Music", tag: "KTAM", key: "testcard", isVod: false },
+            { num: 136, name: "KTA:TV Dance", tag: "KTAD", key: "testcard", isVod: false },
+            { num: 137, name: "KTA:TV Hits", tag: "KTAH", key: "testcard", isVod: false },
+            { num: 138, name: "1.TV", tag: "1TV", key: "testcard", isVod: false },
+            { num: 139, name: "MAX", tag: "MAX", key: "testcard", isVod: false },
+            { num: 140, name: "Star", tag: "STAR", key: "testcard", isVod: false },
+            { num: 141, name: "KTA:PUNKT", tag: "PNKT", key: "testcard", isVod: false },
+            { num: 142, name: "Słoneczna", tag: "SLN", key: "testcard", isVod: false },
+            { num: 143, name: "Rytmiczny Wymiar", tag: "RYT", key: "testcard", isVod: false },
+            { num: 144, name: "Fotel :3", tag: "FTL3", key: "testcard", isVod: false },
+            { num: 145, name: "Ktoś TV", tag: "KTOS", key: "testcard", isVod: false },
+            { num: 146, name: "Ktoś Inter", tag: "KINT", key: "testcard", isVod: false },
+            { num: 147, name: "ATM 1", tag: "ATM1", key: "testcard", isVod: false },
+            { num: 148, name: "ananta hd", tag: "ANA", key: "testcard", isVod: false },
+            { num: 149, name: "tv17", tag: "TV17", key: "testcard", isVod: false },
+            { num: 150, name: "fotel tv 4k", tag: "FT4K", key: "testcard", isVod: false },
+            { num: 151, name: "ryż biały", tag: "RYZ", key: "testcard", isVod: false },
+            { num: 152, name: "astra", tag: "AST", key: "testcard", isVod: false },
+            { num: 153, name: "Snap", tag: "SNP", key: "testcard", isVod: false },
+            { num: 154, name: "kosmos", tag: "KOSM", key: "testcard", isVod: false },
+            { num: 155, name: "Pusty Kanał", tag: "EMP", key: null, isVod: false },
+            { num: 156, name: "Pusty Kanał", tag: "EMP", key: null, isVod: false },
+            { num: 157, name: "Pusty Kanał", tag: "EMP", key: null, isVod: false },
             { num: 158, name: "Pusty Kanał", tag: "EMP", key: null, isVod: false },
             { num: 159, name: "Pusty Kanał", tag: "EMP", key: null, isVod: false },
-            { num: 160, name: "Co w Telewizji?", tag: "GUIDE", key: null, isVod: false }
+            { num: 160, name: "Co w Telewizji?", tag: "GUIDE", key: "infovod", isVod: true }
         ];
 
+        // --- RAMÓWKI ---
         const joySched = [
             { time: "06:00", title: "Poranek z uśmiechem", desc: "Nowy program śniadaniowy.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
             { time: "06:30", title: "Muminki", desc: "Kultowa animacja.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:55", title: "Muminki", desc: "Kolejny odcinek.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:20", title: "Mały odkrywca", desc: "Nowy program edukacyjny.", zap: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:40", title: "Kuchnia na start", desc: "Nowy program kulinarny.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:10", title: "Teleranek Jaruzelskiego", desc: "Magazyn historyczno-rozrywkowy.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:20", title: "Muzyczna pobudka", desc: "Teledyski i hity.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:00", title: "Hity XX wieku", desc: "Największe przeboje dawnych lat.", zap: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:25", title: "Podróże bez biletu", desc: "Magazyn podróżniczy.", zap: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&auto=format&fit=crop&q=80" },
+            { time: "10:00", title: "Czterdziestolatek", desc: "Kultowy serial.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "10:50", title: "Stare, ale jare", desc: "Magazyn rozrywkowy.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:10", title: "Świat zwierząt", desc: "Film przyrodniczy.", zap: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:40", title: "Dziecięce Hity", desc: "Piosenki i animacje dla najmłodszych.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
             { time: "12:00", title: "Muminki", desc: "Przygody w Dolinie Muminków.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:25", title: "Dziecięce Hity", desc: "Kolejna porcja muzyki.", zap: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:45", title: "Bajkowa kraina", desc: "Nowe pasmo animacji.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:10", title: "Prawda czy Fałsz", desc: "Teleturniej.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:45", title: "Rodzinka.pl — 2 odcinki", desc: "Serial komediowy.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "14:35", title: "Sami Swoi", desc: "Kultowa komedia.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
             { time: "15:00", title: "Informacje", desc: "Serwis informacyjny.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:15", title: "Kiler", desc: "Kultowa komedia sensacyjna.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" }
+            { time: "15:15", title: "Moda na sukces", desc: "Serial obyczajowy.", zap: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:45", title: "Plebania", desc: "Serial obyczajowy.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
+            { time: "16:30", title: "M jak Miłość", desc: "Serial obyczajowy.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:20", title: "Trudne Sprawy", desc: "Docudrama.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:10", title: "Ukryta prawda", desc: "Docudrama.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:00", title: "Wydarzenia dnia", desc: "Główny serwis informacyjny.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:25", title: "Trudne Sprawy", desc: "Docudrama.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:15", title: "Kiler", desc: "Kultowa komedia sensacyjna.", zap: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:00", title: "Rejs", desc: "Klasyka polskiego kina.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "23:15", title: "997", desc: "Magazyn kryminalny.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
+            { time: "00:00", title: "Seksmisja", desc: "Kultowa komedia SF.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:40", title: "Miś Uszatek", desc: "Dobranocka na zakończenie dnia.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" }
         ];
 
         const infinitiSched = [
             { time: "00:00", title: "South Park", desc: "Serial animowany dla dorosłych.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:00", title: "Milionerzy", desc: "Walka o wielkie pieniądze.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" }
+            { time: "00:30", title: "Rick and Morty", desc: "Przygody szalonego naukowca.", zap: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:00", title: "Włatcy Móch", desc: "Kultowa polska kreskówka.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:30", title: "Family Guy", desc: "Perypetie rodziny Griffinów.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:00", title: "American Dad!", desc: "Agent CIA i jego niezwykła rodzina.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:30", title: "Futurama", desc: "Przygody w przyszłości.", zap: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900&auto=format&fit=crop&q=80" },
+            { time: "03:00", title: "Robot Chicken", desc: "Szkicowa animacja poklatkowa.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "03:30", title: "Invincible", desc: "Serial superbohaterski.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "04:00", title: "Blok Ekipa", desc: "Życie blokersów.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "04:30", title: "Simpsonowie", desc: "Kultowa rodzina ze Springfield.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "05:00", title: "Smiling Friends", desc: "Animowana komedia.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "05:30", title: "South Park", desc: "Poranna dawka humoru.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:00", title: "Pobudka", desc: "Poranny start na kanale Infiniti.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:00", title: "Rodzinka.pl", desc: "Perypetie rodziny Boskich.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:30", title: "Klan", desc: "Najpopularniejsza telenowela.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:30", title: "(Nowa) Rodzina Zmieszanych", desc: "Serial komediowy.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:00", title: "Rodzina Wierzbickich (planowane)", desc: "Zapowiedzi i nowy serial.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
+            { time: "09:30", title: "BrzydUla", desc: "Losy Uli Cieplak.", zap: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&auto=format&fit=crop&q=80" },
+            { time: "10:30", title: "Awantura o kasę", desc: "Legendarny teleturniej.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:30", title: "infinews", desc: "Serwis informacyjny stacji.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:00", title: "Ojciec Mateusz", desc: "Kryminalne zagadki w Sandomierzu.", zap: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:00", title: "krok po kroku do nikąd", desc: "Magazyn obyczajowy.", zap: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:30", title: "Daleko od noszy", desc: "Kultowy serial komediowy.", zap: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=900&auto=format&fit=crop&q=80" },
+            { time: "14:00", title: "19+", desc: "Serial paradokumentalny.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:00", title: "Gliniarze", desc: "Serial kryminalny.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
+            { time: "16:00", title: "Ranczo", desc: "Wizyta w Wilkowyjach.", zap: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:00", title: "Historia Loga Fikcji", desc: "Program dokumentalny.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:30", title: "Graphic Vis!ON", desc: "Magazyn graficzny.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:00", title: "Poczuj Vibe Muzyki!", desc: "Pasmo muzyczne.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:30", title: "Geometry Dash Na Modach", desc: "Magazyn gamingowy.", zap: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:00", title: "Hotel Paradise", desc: "Reality show pełne emocji.", zap: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:00", title: "Milionerzy", desc: "Walka o główne i wielkie pieniądze.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "21:00", title: "Świat według Kiepskich", desc: "Ferdynand i spółka na Kamiennej.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "21:30", title: "13 Posterunek", desc: "Kultowy serial komediowy.", zap: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:00", title: "Tajemniczy Fabian", desc: "Pasmo wieczorne.", zap: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:30", title: "N Jak Nienawinność", desc: "Serial fabularny.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "23:00", title: "Pacu Łacu – w kupie raźniej!", desc: "Wieczorny show rozrywkowy.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" }
         ];
 
-        const fotelSched = [
-            { time: "00:00", title: "Nocne Przemeblowanie Salonu", desc: "Eksperymenty z kanapą w ciemnościach.", zap: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&auto=format&fit=crop&q=80" },
-            { time: "12:00", title: "Akademik Session: Gotowanie z Czajnika", desc: "Kulinarne cuda na kacu i w biegu.", zap: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&auto=format&fit=crop&q=80" },
-            { time: "20:00", title: "Wielki Seans na Siedząco", desc: "Premiera autorskiego filmu stacji Fotel TV.", zap: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=900&auto=format&fit=crop&q=80" }
-        ];
-
+        // --- ZAKTUALIZOWANA RAMÓWKA NEX1 (ZGODNA Z TWOIM NOWYM WPISEM) ---
         const nex1Sched = [
-            { time: "06:00", title: "Pokemon Horyzonty", desc: "Przygody w świecie Pokemon.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
-            { time: "18:30", title: "Główne wydanie NexNews", desc: "Serwis informacyjny stacji.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" }
+            { time: "06:00", title: "Pokemon Horyzonty (AT!)", desc: "Przygody w świecie Pokemon.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "06:30", title: "Yu-Gi-Oh Duel Monsters (AT!)", desc: "Pojedynki karciane.", zap: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&auto=format&fit=crop&q=80" },
+            { time: "07:00", title: "Godzina metronomii", desc: "Muzyczny relaks.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" },
+            { time: "08:00", title: "Poranny Nex", desc: "Poranne pasmo publicystyczne i rozrywkowe.", zap: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:00", title: "Gliniarze", desc: "Akcja policyjna.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:30", title: "NHL Highlights", desc: "Skróty meczów hokejowych.", zap: "https://images.unsplash.com/photo-1517649763962-0c623266cf10?w=900&auto=format&fit=crop&q=80" },
+            { time: "11:45", title: "Dziennik Poranny", desc: "Wiadomości dnia.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:00", title: "Moda na sukces", desc: "Słynny serial obyczajowy.", zap: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=900&auto=format&fit=crop&q=80" },
+            { time: "12:30", title: "Muppet Show, czyli rewia gwiazd", desc: "Kultowy program rozrywkowy.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:00", title: "Inazuma Eleven GO", desc: "Piłkarskie anime.", zap: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&auto=format&fit=crop&q=80" },
+            { time: "13:30", title: "Pokemon Horyzonty (AT!)", desc: "Kolejne przygody Pokemon.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" },
+            { time: "14:00", title: "Śmiechu warte", desc: "Zabawne nagrania wideo.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
+            { time: "14:30", title: "Idź na całość", desc: "Legendarny teleturniej z Zygmuntem.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:00", title: "Moment Prawdy", desc: "Teleturniej emocji.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "15:30", title: "Kocham cię, Polsko", desc: "Rozrywkowy teleturniej narodowy.", zap: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:00", title: "Neksikowo Telewizyjne Historie", desc: "Autorskie opowieści.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "17:30", title: "Świat Według Kiepskich", desc: "Ferdek i spółka.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:00", title: "Świat Według Kiepskich", desc: "Kolejny odcinek serialu.", zap: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=900&auto=format&fit=crop&q=80" },
+            { time: "18:30", title: "Główne wydanie NexNews", desc: "Serwis informacyjny stacji.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:00", title: "Sport", desc: "Wiadomości sportowe.", zap: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:05", title: "Pogoda", desc: "Prognoza meteorologiczna.", zap: "https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:10", title: "NHL Highlights", desc: "Skróty hokejowe.", zap: "https://images.unsplash.com/photo-1517649763962-0c623266cf10?w=900&auto=format&fit=crop&q=80" },
+            { time: "19:15", title: "Przegląd tygodnia: Wieczór z Johnem Oliverem", desc: "Satynowy magazyn publicystyczny.", zap: "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:00", title: "Moda na sukces", desc: "Wieczorne losy bohaterów.", zap: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=900&auto=format&fit=crop&q=80" },
+            { time: "20:30", title: "Yu-Gi-Oh Duel Monsters (AT!)", desc: "Turniej karciany.", zap: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&auto=format&fit=crop&q=80" },
+            { time: "21:00", title: "Soul Eater (AT!)", desc: "Mroczne anime akcji.", zap: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&auto=format&fit=crop&q=80" },
+            { time: "21:30", title: "Sonda", desc: "Kultowy program popularnonaukowy.", zap: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:00", title: "Dziennik Nocny", desc: "Podsumowanie najważniejszych wydarzeń.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:15", title: "Doktor Who", desc: "Podróże w czasie i przestrzeni w TARDIS.", zap: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&auto=format&fit=crop&q=80" },
+            { time: "22:45", title: "Lekarstwo na miłość (FILM)", desc: "Wieczorny seans filmowy.", zap: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop&q=80" },
+            { time: "00:30", title: "Magazyn Kryminalny 997", desc: "Archiwalne zagadki i śledztwa.", zap: "https://images.unsplash.com/photo-1453733190371-0abedbed0829?w=900&auto=format&fit=crop&q=80" },
+            { time: "01:00", title: "Zap Media 5", desc: "Blok zapowiedzi i materiałów.", zap: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:00", title: "Sekcja Grafiki", desc: "Prezentacja oprawy stacji.", zap: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:10", title: "Taki Był Dzień", desc: "Podsumowanie minionej doby.", zap: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80" },
+            { time: "02:15", title: "Radio Metronomia", desc: "Nocny program muzyczny na falach stacji.", zap: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=900&auto=format&fit=crop&q=80" }
+        ];
+
+        const testCardSched = [
+            { time: "00:00", title: "Test Card / Brak Sygnału", desc: "Plansza testowa stacji.", zap: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=900&auto=format&fit=crop&q=80" }
         ];
 
         const infoVodSched = [{ time: "00:00", title: "[VOD] Jak korzystać z katalogu wideo?", desc: "Wprowadzenie do usługi VOD.", zap: "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=900&auto=format&fit=crop&q=80" }];
-        const vodCatalogSched = [{ time: "00:00", title: "Katalog Główny VOD", desc: "Pełna baza VOD.", zap: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=900&auto=format&fit=crop&q=80" }];
-        const vodSeriesSched = [{ time: "00:00", title: "Maraton Serialowy VOD", desc: "Ulubione sezony.", zap: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=900&auto=format&fit=crop&q=80" }];
-        const vodFamilySched = [{ time: "00:00", title: "Kino Bajkowe i Rodzinne VOD", desc: "Animacje.", zap: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=900&auto=format&fit=crop&q=80" }];
 
         function getMinutes(timeStr) {
             const parts = timeStr.split(":");
@@ -1034,17 +1118,14 @@
                 let s = null;
                 if (ch.key === 'joy') s = joySched;
                 else if (ch.key === 'infiniti') s = infinitiSched;
-                else if (ch.key === 'fotel') s = fotelSched;
                 else if (ch.key === 'nex1') s = nex1Sched;
                 else if (ch.key === 'infovod') s = infoVodSched;
-                else if (ch.key === 'vodcatalog') s = vodCatalogSched;
-                else if (ch.key === 'vodseries') s = vodSeriesSched;
-                else if (ch.key === 'vodfamily') s = vodFamilySched;
+                else if (ch.key === 'testcard') s = testCardSched;
 
                 const data = getTvScheduleData(s);
                 const rowClass = ch.isVod ? 'tvp-epg-row vod-channel-row' : 'tvp-epg-row';
                 const badgeClass = ch.isVod ? 'tvp-ch-badge vod-badge' : 'tvp-ch-badge';
-                const timeLabel = ch.isVod ? 'DOSTĘPNE W VOD' : `${data ? data.timeLeft : 0} MIN DO KOŃCA`;
+                const timeLabel = ch.isVod ? 'DOSTĘPNE W VOD' : (s === testCardSched ? 'TEST CARD' : `${data ? data.timeLeft : 0} MIN DO KOŃCA`);
 
                 if (data) {
                     html += `
@@ -1059,8 +1140,26 @@
                                 <div class="tvp-progress-line" style="width: ${data.progress}%;"></div>
                             </div>
                             <div class="tvp-next-col">
-                                <div class="tvp-next-time">${ch.isVod ? 'KOLEJNA POZYCJA' : 'DZIŚ, ' + data.nextTime}</div>
+                                <div class="tvp-next-time">${ch.isVod ? 'KOLEJNA POZYCJA' : (s === testCardSched ? 'CIĄGŁY SYGNAŁ' : 'DZIŚ, ' + data.nextTime)}</div>
                                 <div class="tvp-next-title">${data.nextTitle}</div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="tvp-epg-row offline-row" onclick="alert('Kanał ${ch.num}. ${ch.name}: Pusty kanał / Brak nadawania.')">
+                            <div class="tvp-ch-col">
+                                <span class="tvp-ch-badge" style="background: #475569;">${ch.tag}</span>
+                                <span class="tvp-ch-name"><strong>${ch.num}.</strong> ${ch.name}</span>
+                            </div>
+                            <div class="tvp-now-col">
+                                <div class="tvp-time-left" style="color: #64748b;">PUSTY KANAŁ</div>
+                                <div class="tvp-show-title" style="color: #94a3b8;"><em>Brak emisji</em></div>
+                                <div class="tvp-progress-line" style="width: 0%;"></div>
+                            </div>
+                            <div class="tvp-next-col">
+                                <div class="tvp-next-time">OCZEKIWANIE</div>
+                                <div class="tvp-next-title" style="color: #64748b;">Brak programu</div>
                             </div>
                         </div>
                     `;
@@ -1127,24 +1226,6 @@
             closeJoyPlayer();
             localStorage.removeItem('tvJoyActiveUser');
             checkAuthSession();
-        }
-
-        function initAvatarPickers() {
-            const regContainer = document.getElementById('avatar-picker-container');
-            const modalContainer = document.getElementById('modal-avatar-picker-container');
-            let html = '';
-            defaultAvatars.forEach((url, idx) => {
-                const isSel = (idx === 0) ? 'selected' : '';
-                html += `<img src="${url}" class="avatar-option ${isSel}" onclick="selectAvatar('${url}')">`;
-            });
-            if(regContainer) regContainer.innerHTML = html;
-            if(modalContainer) modalContainer.innerHTML = html;
-        }
-
-        function selectAvatar(url) {
-            selectedAvatarUrl = url;
-            document.querySelectorAll('.avatar-option').forEach(img => img.classList.remove('selected'));
-            document.querySelectorAll(`.avatar-option[src="${url}"]`).forEach(img => img.classList.add('selected'));
         }
 
         window.addEventListener('firebase-ready', () => {
