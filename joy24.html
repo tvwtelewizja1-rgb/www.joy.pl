@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joy 24 – TV Joy (Frutiger Aero Edition)</title>
+    <title>Joy 24 – Zamknięte Testy (Frutiger Aero Edition)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -50,15 +50,15 @@
             z-index: 0;
         }
 
-        /* Okienko informacyjne testowe w stylu Windows XP (Liquid Glass) */
+        /* Ekran logowania/ostrzeżenia zamkniętych testów w stylu Windows XP */
         .ai-warning-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 20, 40, 0.5);
-            backdrop-filter: blur(6px);
+            background-color: rgba(0, 20, 40, 0.55);
+            backdrop-filter: blur(8px);
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -71,7 +71,7 @@
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             font-family: 'Tahoma', 'Segoe UI', sans-serif;
             overflow: hidden;
@@ -117,7 +117,7 @@
         }
         .winxp-icon {
             font-size: 2.5rem;
-            color: #0055ea;
+            color: #d32f2f;
             flex-shrink: 0;
             margin-top: 5px;
         }
@@ -132,18 +132,33 @@
             line-height: 1.5;
             color: #222222;
             font-weight: normal;
+            margin-bottom: 12px;
+        }
+        .pass-input-box {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .pass-input-box input {
+            padding: 6px 10px;
+            border: 2px solid #0055ea;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            outline: none;
+            width: 100%;
         }
         .winxp-footer {
             background-color: #f5f4ef;
             padding: 12px 20px;
             border-top: 1px solid #d4d0c8;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
         }
         .winxp-button {
             background: linear-gradient(to bottom, #f3f2ee, #d4d0c8);
             border: 1px solid #003c74;
-            padding: 6px 20px;
+            padding: 6px 18px;
             font-size: 0.9rem;
             font-weight: bold;
             color: #000;
@@ -290,8 +305,8 @@
             white-space: nowrap;
         }
 
-        /* Test Zone Panel */
-        .test-zone-panel {
+        /* Panel Zamkniętej Bety */
+        .closed-beta-panel {
             background: var(--glass-bg);
             border-radius: 24px;
             padding: 3rem 2rem;
@@ -303,47 +318,62 @@
             position: relative;
             overflow: hidden;
         }
-        .test-zone-panel h2 {
-            font-size: 2rem;
+        .closed-badge {
+            background: linear-gradient(135deg, #ff1744, #ff5252);
+            color: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(255, 23, 68, 0.4);
+        }
+        .closed-beta-panel h2 {
+            font-size: 2.2rem;
             color: #ffffff;
             margin-bottom: 1rem;
             text-shadow: 0 2px 6px rgba(0,30,80,0.4);
         }
-        .test-zone-panel p {
+        .closed-beta-panel p {
             color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 700px;
+            font-size: 1.15rem;
+            max-width: 650px;
             margin: 0 auto 2rem auto;
             line-height: 1.6;
         }
-        .test-features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        .test-card {
-            background: rgba(255, 255, 255, 0.12);
+        .beta-status-card {
+            background: rgba(10, 25, 47, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.25);
             border-radius: 16px;
             padding: 1.5rem;
+            max-width: 500px;
+            margin: 0 auto;
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
-        .test-card i {
-            font-size: 2.5rem;
-            color: var(--accent-yellow);
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-        }
-        .test-card h3 {
-            font-size: 1.2rem;
+        .beta-status-card p {
+            font-size: 0.95rem;
             color: #ffffff;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
-        .test-card span {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+        .preview-btn {
+            background: linear-gradient(135deg, #00f0ff, #0072ff);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.6);
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0, 240, 255, 0.4);
+            transition: all 0.3s;
+        }
+        .preview-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.6);
         }
 
         footer { 
@@ -360,26 +390,30 @@
 </head>
 <body>
 
-    <!-- Okienko testów w stylu XP -->
+    <!-- Okienko logowania do zamkniętych testów w stylu Windows XP -->
     <div class="ai-warning-overlay" id="warningModal" style="display: flex;">
         <div class="winxp-window">
             <div class="winxp-titlebar">
                 <div class="winxp-title-left">
-                    <i class="fa-solid fa-flask"></i> Joy 24 – Strefa Testowa
+                    <i class="fa-solid fa-lock"></i> Joy 24 – Wymagana Autoryzacja
                 </div>
                 <div class="winxp-close-btn" onclick="closeWarning()">✕</div>
             </div>
             <div class="winxp-body">
                 <div class="winxp-icon">
-                    <i class="fa-solid fa-gears"></i>
+                    <i class="fa-solid fa-user-lock"></i>
                 </div>
                 <div class="winxp-text">
-                    <h3>Moduł Joy 24 jest w fazie testów</h3>
-                    <p>Strona Joy 24 znajduje się obecnie w trakcie wdrażania nowatorskich rozwiązań streamingowych i interfejsu w stylu Frutiger Aero. Funkcje live oraz całodobowy przekaz strumieniowy będą wkrótce w pełni aktywne. Dziękujemy za cierpliwość!</p>
+                    <h3>Dostęp Ograniczony (Closed Beta)</h3>
+                    <p>Serwis informacyjny Joy 24 znajduje się obecnie w <strong>zamkniętych testach beta</strong>. Aby uzyskac dostęp podglądowy, podaj klucz dostępny dla testerów lub przejdź w tryb podglądu publicznego.</p>
+                    <div class="pass-input-box">
+                        <input type="password" id="beta-key" placeholder="Wpisz kod dostępu beta...">
+                    </div>
                 </div>
             </div>
             <div class="winxp-footer">
-                <button class="winxp-button" onclick="closeWarning()">Przejdź do testów</button>
+                <button class="winxp-button" onclick="goHome()">Wróć na Home</button>
+                <button class="winxp-button" onclick="closeWarning()">Podgląd Bety</button>
             </div>
         </div>
     </div>
@@ -403,7 +437,7 @@
         <section class="hero-top-grid">
             <div class="hero">
                 <h1>Joy 24 – Serwis Informacyjny</h1>
-                <p>Całodobowy kanał informacyjny TV Joy. Zobacz co przygotowujemy w strefie testowej!</p>
+                <p>Całodobowa stacja informacyjna TV Joy. Obecnie dostępna wyłącznie w zamkniętych testach.</p>
             </div>
             
             <!-- Zegar Analogowy Frutiger Aero -->
@@ -422,26 +456,16 @@
             </div>
         </section>
 
-        <div class="test-zone-panel">
-            <h2><i class="fa-solid fa-satellite-dish" style="color: var(--accent-cyan);"></i> Stacja Nadawcza w Budowie</h2>
-            <p>Joy 24 to projekt nowoczesnego, całodobowego serwisu informacyjnego nowej generacji. Poniżej przedstawiamy funkcje, które zostaną wdrożone w najbliższej aktualizacji.</p>
+        <div class="closed-beta-panel">
+            <div class="closed-badge"><i class="fa-solid fa-key"></i> Zamknięte Testy Alfa / Beta</div>
+            <h2>Moduł Joy 24 jest niedostępny publicznie</h2>
+            <p>Trwają pracę nad infrastrukturą nadawczą oraz dynamicznym wyświetlaniem wiadomości w czasie rzeczywistym. Pełna premiera stacji odbędzie się po zakończeniu fazy testowej.</p>
             
-            <div class="test-features-grid">
-                <div class="test-card">
-                    <i class="fa-solid fa-tower-broadcast"></i>
-                    <h3>Streaming HD</h3>
-                    <span>Wysokiej jakości transmisja strumieniowa z bezpośrednim podglądem ze studia.</span>
-                </div>
-                <div class="test-card">
-                    <i class="fa-solid fa-bolt"></i>
-                    <h3>Paski Breaking News</h3>
-                    <span>Dynamiczne paski z najświeższymi wiadomościami z kraju i ze świata w czasie rzeczywistym.</span>
-                </div>
-                <div class="test-card">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h3>Stabilność Wpisu</h3>
-                    <span>Bezpieczna integracja z nowymi serwerami oraz autorskim interfejsem Liquid Glass.</span>
-                </div>
+            <div class="beta-status-card">
+                <p><i class="fa-solid fa-circle-notch fa-spin" style="color: var(--accent-cyan);"></i> Status serwera: <strong>Trwa konfiguracja strumienia Live</strong></p>
+                <button class="preview-btn" onclick="document.getElementById('warningModal').style.display='flex'">
+                    <i class="fa-solid fa-right-to-bracket"></i> Zaloguj do Zamkniętych Testów
+                </button>
             </div>
         </div>
     </div>
@@ -453,6 +477,10 @@
     <script>
         function closeWarning() {
             document.getElementById('warningModal').style.display = 'none';
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';
         }
 
         function updateAnalogClock() {
