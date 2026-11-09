@@ -3,38 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TV Joy – Twoja Uśmiechnięta TV</title>
+    <title>TV Joy – Twoja Uśmiechnięta TV (Frutiger Aero Edition)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --card-bg: rgba(15, 23, 42, 0.85);
-            --text-color: #ffffff;
-            --text-muted: #cbd5e1;
-            --accent-yellow: #ffeb3b;
+            /* Frutiger Aero / Liquid Glass Paleta */
+            --glass-bg: rgba(255, 255, 255, 0.18);
+            --glass-border: rgba(255, 255, 255, 0.45);
+            --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+            --text-color: #0d2c54;
+            --text-muted: #e0f7fa;
+            --accent-yellow: #fff83b;
+            --accent-cyan: #00f0ff;
+            --accent-green: #00e676;
         }
         * { 
             box-sizing: border-box; 
             margin: 0; 
             padding: 0; 
-            font-family: 'Gotham Bold', 'Gotham', 'Segoe UI', sans-serif; 
+            font-family: 'Segoe UI', 'Ubuntu', 'Helvetica Neue', sans-serif; 
             font-weight: 700;
         }
         body {
-            background: linear-gradient(to bottom, #1e88e5, #0d47a1);
+            background: radial-gradient(circle at 20% 20%, rgba(0, 240, 255, 0.4), transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 230, 118, 0.4), transparent 40%),
+                        linear-gradient(135deg, #0072ff, #00c6ff, #0575e6, #00f666);
             background-attachment: fixed;
-            color: var(--text-color);
+            color: #ffffff;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Ekran ostrzegawczy w stylu Windows XP */
+        /* Tło Aurora Glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.25) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Ekran ostrzegawczy w stylu Windows XP (Liquid Glass) */
         .ai-warning-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
+            background-color: rgba(0, 20, 40, 0.5);
+            backdrop-filter: blur(6px);
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -42,27 +64,26 @@
             padding: 1.5rem;
         }
         .winxp-window {
-            background-color: #ece9d8;
+            background: rgba(236, 233, 216, 0.95);
             border: 3px solid #0055ea;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
             width: 100%;
             max-width: 480px;
-            box-shadow: 4px 4px 20px rgba(0,0,0,0.6);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             font-family: 'Tahoma', 'Segoe UI', sans-serif;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
         .winxp-titlebar {
             background: linear-gradient(to right, #0055ea, #2680eb);
-            padding: 6px 10px;
+            padding: 8px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: white;
             font-size: 0.95rem;
             font-weight: bold;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
         }
         .winxp-title-left {
             display: flex;
@@ -73,8 +94,8 @@
             background: #d4d0c8;
             border: 1px solid #ffffff;
             color: #000;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             font-size: 0.8rem;
             font-weight: bold;
             display: flex;
@@ -83,9 +104,6 @@
             border-radius: 3px;
             cursor: pointer;
             box-shadow: inset 1px 1px #fff, inset -1px -1px #808080;
-        }
-        .winxp-close-btn:active {
-            box-shadow: inset 1px 1px #808080, inset -1px -1px #fff;
         }
         .winxp-body {
             padding: 20px;
@@ -130,19 +148,15 @@
             border-radius: 3px;
             cursor: pointer;
             box-shadow: inset 1px 1px #fff, inset -1px -1px #b5b3a8;
-            transition: background 0.1s;
         }
         .winxp-button:hover {
             background: linear-gradient(to bottom, #e5f1fb, #bcdbfa);
-            border-color: #002d65;
-        }
-        .winxp-button:active {
-            background: linear-gradient(to bottom, #b8d4f8, #9cc2f6);
-            box-shadow: inset 1px 1px #808080, inset -1px -1px #fff;
         }
 
         header {
-            background-color: rgba(13, 71, 161, 0.95);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             padding: 1rem 2rem;
             position: sticky;
             top: 0;
@@ -150,27 +164,51 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 50, 120, 0.2), inset 0 1px 0 rgba(255,255,255,0.6);
         }
         .logo { text-decoration: none; display: flex; align-items: center; gap: 12px; }
         
         .logo-img {
-            width: 45px;
-            height: 45px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent-yellow);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 240, 255, 0.5), inset 0 2px 4px rgba(255,255,255,0.8);
         }
 
-        nav { display: flex; gap: 1.5rem; align-items: center; }
-        nav a { color: var(--text-muted); text-decoration: none; font-weight: 700; transition: color 0.2s; }
-        nav a:hover, nav a.active { color: var(--accent-yellow); }
-        .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
+        nav { display: flex; gap: 1.2px; align-items: center; flex-wrap: wrap; z-index: 2; }
+        nav a { 
+            color: #ffffff; 
+            text-decoration: none; 
+            font-weight: 700; 
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0,20,60,0.5);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+        }
+        nav a:hover, nav a.active { 
+            background: rgba(255, 255, 255, 0.3);
+            color: #ffffff; 
+            box-shadow: 0 4px 15px rgba(255,255,255,0.3), inset 0 1px 1px rgba(255,255,255,0.8);
+        }
+        .yt-btn { 
+            background: linear-gradient(135deg, #ff4e50, #f9d423); 
+            color: white !important; 
+            padding: 0.5rem 1.2rem; 
+            border-radius: 50px; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            box-shadow: 0 4px 15px rgba(255, 78, 80, 0.4), inset 0 1px 1px rgba(255,255,255,0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
         
         /* Pasek Informacyjny */
         .news-ticker {
-            background-color: #b71c1c;
+            background: rgba(183, 28, 28, 0.85);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 0.7rem 1rem;
             display: flex;
@@ -178,14 +216,15 @@
             overflow: hidden;
             white-space: nowrap;
             border-bottom: 2px solid var(--accent-yellow);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             position: relative;
+            z-index: 10;
         }
         .ticker-badge {
-            background-color: var(--accent-yellow);
+            background: var(--accent-yellow);
             color: #b71c1c;
             padding: 0.3rem 0.8rem;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 0.9rem;
             text-transform: uppercase;
             font-weight: 900;
@@ -195,6 +234,7 @@
             align-items: center;
             gap: 0.4rem;
             z-index: 10;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
         .ticker-wrap {
             overflow: hidden;
@@ -211,60 +251,65 @@
             font-size: 1rem;
             display: inline-flex;
             align-items: center;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
         .ticker-content span i {
             color: var(--accent-yellow);
             margin-right: 0.6rem;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; position: relative; z-index: 1; }
         .hero { text-align: center; margin-bottom: 3rem; }
-        .hero h1 { font-size: 3rem; margin-bottom: 0.5rem; }
-        .hero p { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem; }
+        .hero h1 { font-size: 3.2rem; margin-bottom: 0.5rem; text-shadow: 0 3px 10px rgba(0,30,80,0.4); }
+        .hero p { color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem; text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
         
         .now-next-box {
-            background: linear-gradient(135deg, rgba(255, 152, 0, 0.9), rgba(244, 67, 54, 0.9));
-            border-radius: 12px;
-            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.85), rgba(244, 67, 54, 0.85));
+            border-radius: 20px;
+            padding: 1.8rem;
             margin-bottom: 3rem;
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             gap: 1.5rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.4);
             text-align: center;
         }
-        .nn-item h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; color: #fff; }
-        .nn-item p { font-size: 1.4rem; font-weight: bold; color: var(--accent-yellow); }
+        .nn-item h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.3rem; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .nn-item p { font-size: 1.4rem; font-weight: bold; color: var(--accent-yellow); text-shadow: 0 1px 4px rgba(0,0,0,0.5); }
 
-        .player-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; background-color: #000; margin-bottom: 4rem; }
-        .fallback-box { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #0f172a; padding: 2rem; text-align: center; }
-        .watch-link-btn { background-color: #ff0000; color: white; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .player-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 24px; background-color: #000; margin-bottom: 4rem; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 2px solid rgba(255,255,255,0.4); }
+        .fallback-box { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(10, 25, 47, 0.85); padding: 2rem; text-align: center; backdrop-filter: blur(10px); }
+        .watch-link-btn { background: linear-gradient(135deg, #ff0000, #ff4e50); color: white; padding: 0.9rem 1.8rem; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.5); }
 
-        .section-title { font-size: 2rem; margin-bottom: 2rem; font-weight: 700; display: flex; align-items: center; gap: 1rem; }
+        .section-title { font-size: 2.2rem; margin-bottom: 2rem; font-weight: 700; display: flex; align-items: center; gap: 1rem; text-shadow: 0 2px 6px rgba(0,30,80,0.4); }
         .section-title i { color: var(--accent-yellow); }
 
-        /* Widget Pogodowy IMGW z Wbudowaną Mapą Wektorową */
+        /* Widget Pogodowy IMGW z Wbudowaną Mapą Wektorową (Liquid Glass) */
         .weather-section {
             margin-bottom: 4rem;
         }
         .weather-box {
-            background-color: var(--card-bg);
-            border-radius: 16px;
+            background: var(--glass-bg);
+            border-radius: 24px;
             padding: 2rem;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0, 30, 80, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
         }
         .weather-tabs-container {
             max-height: 120px;
             overflow-y: auto;
             margin-bottom: 1.5rem;
             padding-right: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
         .weather-tabs-container::-webkit-scrollbar { width: 6px; }
-        .weather-tabs-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 6px; }
+        .weather-tabs-container::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.4); border-radius: 6px; }
         
         .weather-tabs {
             display: flex;
@@ -273,20 +318,22 @@
             padding-bottom: 1rem;
         }
         .weather-tab {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-muted);
-            padding: 0.5rem 0.9rem;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
             font-size: 0.85rem;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         .weather-tab:hover, .weather-tab.active {
-            background-color: var(--accent-yellow);
-            color: #0d47a1;
-            border-color: var(--accent-yellow);
+            background: linear-gradient(135deg, #00f0ff, #0072ff);
+            color: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.6);
         }
         .weather-grid {
             display: grid;
@@ -302,10 +349,11 @@
             flex-direction: column;
             justify-content: space-between;
             gap: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.12);
             padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
         }
         .weather-header-info {
             display: flex;
@@ -315,16 +363,17 @@
             gap: 0.5rem;
         }
         .weather-location {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--accent-yellow);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
         }
         .weather-source {
             font-size: 0.8rem;
-            background: rgba(30, 136, 229, 0.3);
-            border: 1px solid rgba(30, 136, 229, 0.5);
-            color: #90caf9;
-            padding: 0.3rem 0.6rem;
-            border-radius: 6px;
+            background: rgba(0, 240, 255, 0.25);
+            border: 1px solid rgba(0, 240, 255, 0.5);
+            color: #e0f7fa;
+            padding: 0.3rem 0.7rem;
+            border-radius: 10px;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
@@ -337,39 +386,42 @@
             margin: 0.5rem 0;
         }
         .weather-icon-lg {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             color: var(--accent-yellow);
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
         }
         .weather-temp {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 900;
             color: #fff;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.4);
         }
         .weather-desc {
-            font-size: 1.1rem;
-            color: var(--text-muted);
+            font-size: 1.15rem;
+            color: #e0f7fa;
         }
         
         .weather-details {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
             gap: 0.8rem;
         }
         .weather-detail-item {
-            background: rgba(15, 23, 42, 0.6);
-            padding: 0.8rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(10, 25, 47, 0.4);
+            padding: 0.9rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             text-align: center;
+            backdrop-filter: blur(5px);
         }
         .weather-detail-item span {
             display: block;
             font-size: 0.75rem;
-            color: var(--text-muted);
+            color: #b0bec5;
             margin-bottom: 0.2rem;
         }
         .weather-detail-item strong {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--accent-yellow);
         }
 
@@ -377,25 +429,27 @@
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
-            background: rgba(10, 15, 30, 0.9);
-            padding: 1rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 25, 47, 0.75);
+            padding: 1.2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(12px);
         }
         .tv-map-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--accent-yellow);
         }
         .tv-map-screen {
             position: relative;
-            background: radial-gradient(circle at center, #1b2a4a 0%, #070d19 100%);
-            border-radius: 8px;
+            background: radial-gradient(circle at center, #1b3a6b 0%, #050b18 100%);
+            border-radius: 12px;
             height: 350px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             overflow: hidden;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.6);
         }
 
         .poland-svg-bg {
@@ -409,14 +463,14 @@
 
         .map-station-node {
             position: absolute;
-            background: rgba(13, 71, 161, 0.95);
+            background: rgba(0, 114, 255, 0.9);
             border: 2px solid var(--accent-yellow);
             color: white;
-            padding: 3px 8px;
-            border-radius: 16px;
-            font-size: 0.72rem;
+            padding: 3px 9px;
+            border-radius: 20px;
+            font-size: 0.75rem;
             font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.8);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.6);
             cursor: pointer;
             transition: transform 0.2s, background-color 0.2s, z-index 0.2s;
             transform: translate(-50%, -50%);
@@ -426,60 +480,68 @@
         .map-station-node:hover {
             transform: translate(-50%, -50%) scale(1.18);
             background: var(--accent-yellow);
-            color: #0d47a1;
+            color: #0d2c54;
             z-index: 30;
         }
         .map-legend {
             display: flex;
             justify-content: space-between;
             font-size: 0.75rem;
-            color: var(--text-muted);
+            color: #e0f7fa;
             padding-top: 0.3rem;
         }
 
         .schedule-box { 
-            background-color: var(--card-bg); 
-            border-radius: 16px; 
+            background: var(--glass-bg); 
+            border-radius: 24px; 
             padding: 1rem 1.5rem; 
             max-height: 600px; 
             overflow-y: auto; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0, 30, 80, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.7); 
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
         }
         .schedule-box::-webkit-scrollbar { width: 8px; }
-        .schedule-box::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); border-radius: 8px; }
-        .schedule-box::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 8px; }
-        .schedule-box::-webkit-scrollbar-thumb:hover { background: rgba(255, 235, 59, 0.5); }
+        .schedule-box::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.4); border-radius: 8px; }
 
         .schedule-item { 
             display: flex; 
             align-items: center; 
             padding: 1rem 1.2rem; 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15); 
             gap: 1.2rem; 
             transition: background 0.2s, transform 0.1s; 
-            border-radius: 8px;
+            border-radius: 12px;
             margin: 4px 0;
         }
-        .schedule-item:hover { background-color: rgba(255, 255, 255, 0.06); }
+        .schedule-item:hover { background: rgba(255, 255, 255, 0.2); }
         
         .schedule-item.active-now {
-            background-color: rgba(255, 235, 59, 0.15);
-            border-left: 5px solid var(--accent-yellow);
-            border-radius: 8px;
+            background: rgba(0, 240, 255, 0.25);
+            border-left: 6px solid var(--accent-yellow);
+            border-radius: 12px;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.5);
         }
 
-        .schedule-time { font-weight: bold; color: var(--accent-yellow); min-width: 70px; font-size: 1.1rem; }
-        .schedule-img { width: 60px; height: 40px; border-radius: 6px; object-fit: cover; background: #334155; display: flex; align-items: center; justify-content: center; color: #cbd5e1; font-size: 1.2rem; }
-        .schedule-title { flex-grow: 1; font-size: 1.05rem; }
+        .schedule-time { font-weight: bold; color: var(--accent-yellow); min-width: 70px; font-size: 1.1rem; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+        .schedule-img { width: 60px; height: 40px; border-radius: 8px; object-fit: cover; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: #e0f7fa; font-size: 1.2rem; border: 1px solid rgba(255,255,255,0.3); }
+        .schedule-title { flex-grow: 1; font-size: 1.05rem; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
 
-        footer { background-color: rgba(13, 71, 161, 0.95); text-align: center; padding: 2rem; color: var(--text-muted); margin-top: 3rem; }
+        footer { 
+            background: rgba(255, 255, 255, 0.25); 
+            backdrop-filter: blur(12px); 
+            text-align: center; 
+            padding: 2rem; 
+            color: #ffffff; 
+            margin-top: 3rem; 
+            border-top: 1px solid var(--glass-border);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body>
 
-    <div class="ai-warning-overlay" id="warningModal" style="display: none;">
+    <div class="ai-warning-overlay" id="warningModal" style="display: flex;">
         <div class="winxp-window">
             <div class="winxp-titlebar">
                 <div class="winxp-title-left">
@@ -614,14 +676,14 @@
                     <div class="weather-map-container">
                         <div class="tv-map-header">
                             <span><i class="fa-solid fa-map-location-dot"></i> Synoptyczna Mapa Polski IMGW</span>
-                            <span style="font-size: 0.75rem; color: #90caf9;">Wizualizacja TV Joy</span>
+                            <span style="font-size: 0.75rem; color: #00f0ff;">Wizualizacja TV Joy</span>
                         </div>
                         <div class="tv-map-screen">
                             <svg class="poland-svg-bg" viewBox="0 0 600 550" fill="none">
                                 <path d="M 124 100 L 150 95 L 180 102 L 210 90 L 235 60 L 260 48 L 275 62 L 290 75 L 305 60 L 320 68 L 335 88 L 350 92 L 375 80 L 415 88 L 435 70 L 465 82 L 490 100 L 520 125 L 535 155 L 515 185 L 530 220 L 555 245 L 540 280 L 525 315 L 535 365 L 510 405 L 520 440 L 495 470 L 450 495 L 420 478 L 390 515 L 365 525 L 340 500 L 305 510 L 275 490 L 245 505 L 215 480 L 185 490 L 155 450 L 125 440 L 105 455 L 80 435 L 70 400 L 52 360 L 68 320 L 58 275 L 75 235 L 60 195 L 85 160 L 105 168 L 115 135 Z" 
-                                      fill="rgba(30, 136, 229, 0.12)" stroke="#38bdf8" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+                                      fill="rgba(0, 240, 255, 0.15)" stroke="#00f0ff" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
                                 <path d="M 124 100 Q 110 70 105 50 Q 112 40 120 48 Q 128 75 135 98" 
-                                      fill="rgba(56, 189, 248, 0.2)" stroke="var(--accent-yellow)" stroke-width="2.5" stroke-linecap="round"/>
+                                      fill="rgba(0, 240, 255, 0.2)" stroke="var(--accent-yellow)" stroke-width="2.5" stroke-linecap="round"/>
                             </svg>
 
                             <div class="map-station-node" style="top: 24%; left: 22%;" onclick="changeWeather('Szczecin', 'zachodniopomorskie', document.querySelectorAll('.weather-tab')[8])">Szczecin</div>
