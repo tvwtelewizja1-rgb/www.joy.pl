@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joy Box & JoyBoxGO! – TV Joy</title>
+    <title>Joy Box & JoyBoxGO! – TV Joy (Frutiger Aero Edition)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Wczytujemy bibliotekę Firebase i inicjalizujemy ją Twoją konfiguracją -->
@@ -36,36 +36,58 @@
 
     <style>
         :root {
-            --card-bg: rgba(15, 23, 42, 0.85);
-            --card-hover-bg: rgba(30, 41, 59, 0.95);
+            /* Frutiger Aero / Liquid Glass Paleta */
+            --glass-bg: rgba(255, 255, 255, 0.18);
+            --glass-border: rgba(255, 255, 255, 0.45);
+            --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
             --text-color: #ffffff;
-            --text-muted: #94a3b8;
-            --accent-yellow: #ffeb3b;
+            --text-muted: #e0f7fa;
+            --accent-yellow: #fff83b;
             --accent-orange: #ff9800;
-            --vod-bg: #0b0f19;
-            --vod-card: #131c2e;
-            --vod-card-hover: #1e293b;
-            --vod-border: #1e293b;
-            --vectra-red: #e50914;
+            --accent-cyan: #00f0ff;
+            --vod-bg: rgba(5, 15, 35, 0.7);
+            --vod-card: rgba(15, 30, 60, 0.65);
+            --vod-card-hover: rgba(0, 114, 255, 0.45);
+            --vod-border: rgba(255, 255, 255, 0.25);
+            --vectra-red: #ff1744;
         }
         * { 
             box-sizing: border-box; 
             margin: 0; 
             padding: 0; 
-            font-family: 'Gotham Bold', 'Gotham', 'Segoe UI', sans-serif; 
+            font-family: 'Segoe UI', 'Ubuntu', 'Helvetica Neue', sans-serif; 
             font-weight: 700;
         }
         body {
-            background: linear-gradient(135deg, #1e88e5, #0d47a1);
+            background: radial-gradient(circle at 20% 20%, rgba(0, 240, 255, 0.4), transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 230, 118, 0.4), transparent 40%),
+                        linear-gradient(135deg, #0072ff, #00c6ff, #0575e6, #00f666);
             background-attachment: fixed;
             color: var(--text-color);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Tło Aurora Glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.25) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         header {
-            background-color: rgba(13, 71, 161, 0.95);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             padding: 1rem 2rem;
             position: sticky;
             top: 0;
@@ -73,7 +95,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 50, 120, 0.2), inset 0 1px 0 rgba(255,255,255,0.6);
         }
         .logo { text-decoration: none; display: flex; align-items: center; gap: 12px; }
         
@@ -82,57 +105,88 @@
             height: 45px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent-yellow);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 240, 255, 0.5), inset 0 2px 4px rgba(255,255,255,0.8);
         }
 
-        nav { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
-        nav a { color: #cbd5e1; text-decoration: none; font-weight: 700; transition: color 0.2s; }
-        nav a:hover, nav a.active { color: var(--accent-yellow); }
-        .yt-btn { background-color: #ff0000; color: white !important; padding: 0.5rem 1rem; border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; }
+        nav { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; z-index: 2; }
+        nav a { 
+            color: #ffffff; 
+            text-decoration: none; 
+            font-weight: 700; 
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 4px rgba(0,20,60,0.5);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+        }
+        nav a:hover, nav a.active { 
+            background: rgba(255, 255, 255, 0.3);
+            color: #ffffff; 
+            box-shadow: 0 4px 15px rgba(255,255,255,0.3), inset 0 1px 1px rgba(255,255,255,0.8);
+        }
+        .yt-btn { 
+            background: linear-gradient(135deg, #ff4e50, #f9d423); 
+            color: white !important; 
+            padding: 0.5rem 1rem; 
+            border-radius: 50px; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            box-shadow: 0 4px 15px rgba(255, 78, 80, 0.4), inset 0 1px 1px rgba(255,255,255,0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
 
-        .container { max-width: 1150px; margin: 2rem auto; padding: 0 1.5rem; flex-grow: 1; width: 100%; }
+        .container { max-width: 1150px; margin: 2rem auto; padding: 0 1.5rem; flex-grow: 1; width: 100%; position: relative; z-index: 1; }
 
         .box-panel {
-            background-color: var(--card-bg);
-            border-radius: 16px;
+            background: var(--glass-bg);
+            border-radius: 24px;
             padding: 2rem;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0, 30, 80, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             margin-bottom: 3rem;
         }
 
         .panel-header { text-align: center; margin-bottom: 1.5rem; }
-        .panel-header h1 { font-size: 2rem; color: var(--accent-yellow); margin-bottom: 0.3rem; }
-        .panel-header p { color: #cbd5e1; font-size: 0.95rem; }
+        .panel-header h1 { font-size: 2.2rem; color: var(--accent-yellow); margin-bottom: 0.3rem; text-shadow: 0 2px 6px rgba(0,30,80,0.4); }
+        .panel-header p { color: var(--text-muted); font-size: 1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
 
         .tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
         .tab-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #cbd5e1;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            padding: 0.6rem 1.4rem;
+            border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
-        .tab-btn.active, .tab-btn:hover { background-color: var(--accent-yellow); color: #0d47a1; border-color: var(--accent-yellow); }
+        .tab-btn.active, .tab-btn:hover { 
+            background: linear-gradient(135deg, #00f0ff, #0072ff); 
+            color: #ffffff; 
+            border-color: #ffffff; 
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.6);
+        }
 
         .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--accent-yellow); }
+        .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.85rem; color: var(--accent-yellow); text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
         .form-control {
             width: 100%;
-            padding: 0.7rem 1rem;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            background: rgba(10, 25, 47, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
             color: #fff;
             font-size: 0.95rem;
             outline: none;
+            backdrop-filter: blur(5px);
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
-        .form-control:focus { border-color: var(--accent-yellow); }
+        .form-control:focus { border-color: var(--accent-cyan); box-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
 
         .avatar-picker-grid {
             display: grid;
@@ -148,38 +202,42 @@
             border: 3px solid transparent;
             cursor: pointer;
             transition: transform 0.2s, border-color 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .avatar-option:hover { transform: scale(1.08); }
-        .avatar-option.selected { border-color: var(--accent-yellow); box-shadow: 0 0 10px rgba(255,235,59,0.5); }
+        .avatar-option.selected { border-color: var(--accent-yellow); box-shadow: 0 0 15px rgba(255,248,59,0.7); }
 
         .submit-btn {
             width: 100%;
             background: linear-gradient(135deg, #ff9800, #f44336);
             color: white;
-            border: none;
-            padding: 0.8rem;
-            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 0.85rem;
+            border-radius: 25px;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             margin-top: 0.8rem;
-            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4), inset 0 1px 1px rgba(255,255,255,0.6);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244, 67, 54, 0.6); }
 
-        .alert-msg { padding: 0.7rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.85rem; display: none; text-align: center; }
-        .alert-success { background: rgba(76, 175, 80, 0.2); border: 1px solid #4caf50; color: #a5d6a7; }
-        .alert-error { background: rgba(244, 67, 54, 0.2); border: 1px solid #f44336; color: #ef9a9a; }
+        .alert-msg { padding: 0.7rem; border-radius: 12px; margin-bottom: 1rem; font-size: 0.85rem; display: none; text-align: center; backdrop-filter: blur(8px); }
+        .alert-success { background: rgba(76, 175, 80, 0.3); border: 1px solid #4caf50; color: #e8f5e9; }
+        .alert-error { background: rgba(244, 67, 54, 0.3); border: 1px solid #f44336; color: #ffebee; }
 
         .user-dashboard { display: none; }
         
         .admin-panel {
-            background: rgba(13, 148, 136, 0.15);
-            border: 2px dashed #14b8a6;
-            border-radius: 12px;
+            background: rgba(0, 240, 255, 0.15);
+            border: 2px dashed var(--accent-cyan);
+            border-radius: 16px;
             padding: 1.5rem;
             margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
         }
-        .admin-header { color: #14b8a6; font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+        .admin-header { color: var(--accent-cyan); font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
 
         .packages-preview-grid {
             display: grid;
@@ -188,31 +246,34 @@
             margin-bottom: 1.5rem;
         }
         .pkg-badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
             padding: 0.7rem;
             text-align: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
-        .pkg-badge strong { display: block; color: var(--accent-yellow); font-size: 0.95rem; }
-        .pkg-badge span { font-size: 0.8rem; color: #cbd5e1; }
+        .pkg-badge strong { display: block; color: var(--accent-yellow); font-size: 0.95rem; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+        .pkg-badge span { font-size: 0.8rem; color: var(--text-muted); }
 
         .tvp-epg-wrapper {
             background: var(--vod-bg);
             border: 1px solid var(--vod-border);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             margin-top: 1.5rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 35px rgba(0,30,80,0.4);
+            backdrop-filter: blur(15px);
         }
         
         .tvp-epg-header {
             display: grid;
             grid-template-columns: 200px 1fr 1fr;
-            background: #070a10;
+            background: rgba(10, 25, 50, 0.9);
             padding: 0.85rem 1rem;
             border-bottom: 1px solid var(--vod-border);
-            color: #94a3b8;
+            color: #b0bec5;
             font-size: 0.75rem;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -225,7 +286,7 @@
             overflow-y: auto;
         }
         .tvp-epg-list::-webkit-scrollbar { width: 6px; }
-        .tvp-epg-list::-webkit-scrollbar-thumb { background: #334155; border-radius: 6px; }
+        .tvp-epg-list::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.4); border-radius: 6px; }
 
         .tvp-epg-row {
             display: grid;
@@ -244,7 +305,7 @@
         .tvp-epg-row.offline-row { opacity: 0.55; }
 
         .tvp-epg-row.vod-channel-row {
-            background: linear-gradient(90deg, rgba(229, 9, 20, 0.08), var(--vod-card));
+            background: linear-gradient(90deg, rgba(255, 23, 68, 0.18), var(--vod-card));
             border-left: 4px solid var(--vectra-red);
         }
 
@@ -254,19 +315,20 @@
             align-items: center;
             gap: 12px;
             border-right: 1px solid var(--vod-border);
-            background: #0e1420;
+            background: rgba(10, 20, 40, 0.8);
         }
         .tvp-ch-badge {
-            background: #2563eb;
+            background: linear-gradient(135deg, #0072ff, #00c6ff);
             color: #fff;
             padding: 4px 8px;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 0.75rem;
             font-weight: 800;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
         .tvp-ch-badge.vod-badge {
-            background: var(--vectra-red);
-            box-shadow: 0 0 8px rgba(229, 9, 20, 0.6);
+            background: linear-gradient(135deg, #ff1744, #ff5252);
+            box-shadow: 0 0 10px rgba(255, 23, 68, 0.6);
         }
         .tvp-ch-name {
             font-size: 0.95rem;
@@ -274,6 +336,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
         .tvp-now-col {
@@ -283,28 +346,32 @@
             flex-direction: column;
             justify-content: center;
             border-right: 1px solid var(--vod-border);
-            background: rgba(30, 41, 59, 0.15);
+            background: rgba(255, 255, 255, 0.03);
         }
         .tvp-time-left {
             font-size: 0.7rem;
-            color: #38bdf8;
+            color: var(--accent-cyan);
             margin-bottom: 4px;
             letter-spacing: 0.5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
         }
         .tvp-show-title {
             font-size: 0.9rem;
             color: #f8fafc;
             line-height: 1.3;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
         .tvp-progress-line {
             position: absolute;
             bottom: 0;
             left: 0;
             height: 3px;
-            background: #38bdf8;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
         }
         .vod-channel-row .tvp-progress-line {
             background: var(--vectra-red);
+            box-shadow: 0 0 8px rgba(255, 23, 68, 0.8);
         }
 
         .tvp-next-col {
@@ -315,24 +382,25 @@
         }
         .tvp-next-time {
             font-size: 0.7rem;
-            color: #64748b;
+            color: #b0bec5;
             margin-bottom: 4px;
         }
         .tvp-next-title {
             font-size: 0.85rem;
-            color: #94a3b8;
+            color: #e0f7fa;
             line-height: 1.3;
         }
 
         .player-modal {
             display: none;
-            background: rgba(5, 10, 20, 0.95);
+            background: rgba(10, 25, 50, 0.95);
             border: 2px solid var(--accent-yellow);
-            border-radius: 12px;
+            border-radius: 20px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
             position: relative;
+            backdrop-filter: blur(15px);
         }
         .player-modal-header {
             display: flex;
@@ -346,11 +414,12 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
         }
         .close-player {
-            background: #b71c1c;
+            background: linear-gradient(135deg, #ff1744, #d50000);
             color: white;
-            border: none;
+            border: 1px solid rgba(255,255,255,0.5);
             width: 28px;
             height: 28px;
             border-radius: 50%;
@@ -359,18 +428,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
         .tv-screen-box {
             position: relative;
             width: 100%;
             height: 420px;
             background: #000;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
         .zap-image {
             position: absolute;
@@ -415,7 +486,7 @@
             background: #d32f2f;
             color: white;
             padding: 3px 8px;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 0.75rem;
             font-weight: bold;
             display: flex;
@@ -425,7 +496,16 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.5);
         }
 
-        footer { background-color: rgba(13, 71, 161, 0.95); text-align: center; padding: 2rem; color: #cbd5e1; margin-top: auto; }
+        footer { 
+            background: rgba(255, 255, 255, 0.25); 
+            backdrop-filter: blur(12px); 
+            text-align: center; 
+            padding: 2rem; 
+            color: #ffffff; 
+            margin-top: auto; 
+            border-top: 1px solid var(--glass-border);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body>
@@ -514,18 +594,18 @@
             </div>
 
             <div class="user-dashboard" id="dashboard-container">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 1rem;">
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <div style="position: relative; display: inline-block; cursor: pointer;" onclick="openPfpModal()" title="Kliknij, aby zmienić awatar">
-                            <img id="user-header-avatar" src="" alt="Awatar" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-yellow);">
-                            <span style="position: absolute; bottom: -2px; right: -2px; background: var(--accent-yellow); color: #0d47a1; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-pen"></i></span>
+                            <img id="user-header-avatar" src="" alt="Awatar" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-yellow); box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                            <span style="position: absolute; bottom: -2px; right: -2px; background: var(--accent-yellow); color: #0d47a1; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"><i class="fa-solid fa-pen"></i></span>
                         </div>
                         <div>
                             <h2>Witaj, <span id="user-display-name" style="color: var(--accent-yellow);"></span>! 🎉</h2>
-                            <p style="color: #cbd5e1; font-size: 0.9rem;">Pakiet: <strong id="user-active-package" style="color: var(--accent-orange);">Brak</strong> (Ważny do: <span id="user-package-expiry">-</span>)</p>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Pakiet: <strong id="user-active-package" style="color: var(--accent-orange);">Brak</strong> (Ważny do: <span id="user-package-expiry">-</span>)</p>
                         </div>
                     </div>
-                    <button onclick="handleLogout()" style="background: #b71c1c; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: bold;">
+                    <button onclick="handleLogout()" style="background: linear-gradient(135deg, #ff1744, #d50000); color: white; border: 1px solid rgba(255,255,255,0.4); padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
                         <i class="fa-solid fa-right-from-bracket"></i> Wyloguj
                     </button>
                 </div>
@@ -533,7 +613,7 @@
                 <!-- PANEL ADMINA CLOUD -->
                 <div id="admin-panel" class="admin-panel" style="display: none;">
                     <div class="admin-header"><i class="fa-solid fa-user-shield"></i> Panel Administratora (Cloud DB)</div>
-                    <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 1rem;">Wygeneruj kod w chmurze dostępny dla wszystkich urządzeń:</p>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">Wygeneruj kod w chmurze dostępny dla wszystkich urządzeń:</p>
                     
                     <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; align-items: end;">
                         <div class="form-group" style="margin: 0;">
@@ -556,31 +636,31 @@
                                 <option value="9999">Bezterminowy</option>
                             </select>
                         </div>
-                        <button class="submit-btn" style="margin: 0; height: 42px; background: #14b8a6;" onclick="generateAdminCode()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generuj</button>
+                        <button class="submit-btn" style="margin: 0; height: 42px; background: linear-gradient(135deg, #00f0ff, #0072ff);" onclick="generateAdminCode()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generuj</button>
                     </div>
 
-                    <div id="generated-code-box" style="display: none; background: rgba(0,0,0,0.4); padding: 1rem; border-radius: 8px; border: 1px solid #14b8a6; margin-top: 1rem;">
+                    <div id="generated-code-box" style="display: none; background: rgba(0,0,0,0.4); padding: 1rem; border-radius: 12px; border: 1px solid var(--accent-cyan); margin-top: 1rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
-                                Pakiet: <strong id="generated-pkg-name" style="color: #14b8a6;"></strong><br>
+                                Pakiet: <strong id="generated-pkg-name" style="color: var(--accent-cyan);"></strong><br>
                                 Kod: <strong id="generated-code-text" style="color: var(--accent-yellow); font-size: 1.2rem; font-family: monospace;"></strong>
                             </div>
-                            <button onclick="copyAdminCode()" style="background: #14b8a6; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;">Kopiuj</button>
+                            <button onclick="copyAdminCode()" style="background: var(--accent-cyan); color: #0d2c54; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: bold;">Kopiuj</button>
                         </div>
                     </div>
                 </div>
 
-                <div style="background: rgba(15, 23, 42, 0.6); padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem;">
+                <div style="background: rgba(255, 255, 255, 0.1); padding: 1.2rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.25); margin-bottom: 2rem; backdrop-filter: blur(10px);">
                     <h4 style="color: var(--accent-yellow); margin-bottom: 0.5rem;"><i class="fa-solid fa-ticket"></i> Aktywuj lub Zmień Pakiet Kodem</h4>
-                    <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 0.8rem;">Wpisz kod z chmury, aby zaktualizować swój pakiet:</p>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.8rem;">Wpisz kod z chmury, aby zaktualizować swój pakiet:</p>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                         <input type="text" id="user-redeem-code" class="form-control" placeholder="Wpisz kod..." style="max-width: 350px; margin: 0;">
                         <button class="submit-btn" style="margin: 0; width: auto; padding: 0.7rem 1.5rem;" onclick="redeemCodeByUser()">Aktywuj kod</button>
                     </div>
                 </div>
 
-                <div id="pfp-modal" style="display: none; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000; justify-content: center; align-items: center;">
-                    <div style="background: #0f172a; border: 2px solid var(--accent-yellow); border-radius: 16px; padding: 2rem; max-width: 450px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.8); text-align: center;">
+                <div id="pfp-modal" style="display: none; background: rgba(0,20,40,0.7); backdrop-filter: blur(8px); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000; justify-content: center; align-items: center;">
+                    <div style="background: rgba(10, 25, 47, 0.95); border: 2px solid var(--accent-yellow); border-radius: 20px; padding: 2rem; max-width: 450px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.8); text-align: center; backdrop-filter: blur(20px);">
                         <h3 style="color: var(--accent-yellow); margin-bottom: 1rem;">Zmień awatar PFP</h3>
                         <div class="avatar-picker-grid" id="modal-avatar-picker-container" style="margin-bottom: 1rem;"></div>
                         <div class="form-group" style="text-align: left;">
@@ -1149,17 +1229,17 @@
                     html += `
                         <div class="tvp-epg-row offline-row" onclick="alert('Kanał ${ch.num}. ${ch.name}: Pusty kanał / Brak nadawania.')">
                             <div class="tvp-ch-col">
-                                <span class="tvp-ch-badge" style="background: #475569;">${ch.tag}</span>
+                                <span class="tvp-ch-badge" style="background: rgba(255,255,255,0.2);">${ch.tag}</span>
                                 <span class="tvp-ch-name"><strong>${ch.num}.</strong> ${ch.name}</span>
                             </div>
                             <div class="tvp-now-col">
-                                <div class="tvp-time-left" style="color: #64748b;">PUSTY KANAŁ</div>
-                                <div class="tvp-show-title" style="color: #94a3b8;"><em>Brak emisji</em></div>
+                                <div class="tvp-time-left" style="color: #b0bec5;">PUSTY KANAŁ</div>
+                                <div class="tvp-show-title" style="color: #e0f7fa;"><em>Brak emisji</em></div>
                                 <div class="tvp-progress-line" style="width: 0%;"></div>
                             </div>
                             <div class="tvp-next-col">
                                 <div class="tvp-next-time">OCZEKIWANIE</div>
-                                <div class="tvp-next-title" style="color: #64748b;">Brak programu</div>
+                                <div class="tvp-next-title" style="color: #b0bec5;">Brak programu</div>
                             </div>
                         </div>
                     `;
